@@ -287,6 +287,7 @@ export const BlurImage = ({
   alt,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   blurDataURL: _blurDataURL,
+  fill, // Extract fill so it does not get appended to the standard img tag
   ...rest
 }: ImageProps) => {
   const [isLoading, setLoading] = useState(true);
