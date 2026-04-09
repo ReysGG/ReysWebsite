@@ -4,6 +4,7 @@ import { StatsSection } from "@/components/sections/stats";
 import { ServicesSection } from "@/components/sections/services";
 import { PortfolioSection } from "@/components/sections/portfolio";
 import { WorkflowSection } from "@/components/sections/workflow";
+import { PricingSection } from "@/components/sections/pricing";
 import { TestimonialsSection } from "@/components/sections/testimonials";
 import { CtaSection } from "@/components/sections/cta";
 import { FaqSection } from "@/components/sections/faq";
@@ -22,6 +23,8 @@ export default function Home() {
       <WorkflowSection />
       <SectionDivider />
       <PortfolioSection />
+      <SectionDivider />
+      <PricingSection />
       <SectionDivider />
       <TestimonialsSection />
       <SectionDivider />

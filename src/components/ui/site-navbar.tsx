@@ -18,6 +18,7 @@ const NAV_ITEMS = [
   { name: "Layanan", link: "#services" },
   { name: "Portofolio", link: "#portfolio" },
   { name: "Proses Kerja", link: "#workflow" },
+  { name: "Harga", link: "#pricing" },
   { name: "Testimoni", link: "#testimonials" },
   { name: "FAQ", link: "#faq" },
 ];
@@ -31,8 +32,8 @@ export const SiteNavbar = () => {
         {/* Desktop */}
         <NavBody>
           {/* Logo */}
-          <a href="#" className="relative z-20 flex items-center gap-2 px-2 py-1">
-            <MonitorSmartphone className="w-6 h-6 text-indigo-400" />
+          <a href="#" className="relative z-20 flex items-center gap-2 px-2 py-1 group">
+            <MonitorSmartphone className="w-6 h-6 text-amber-400 transition-transform group-hover:scale-110" />
             <span className="text-lg font-bold text-white tracking-tight">
               WebServices
             </span>
@@ -50,7 +51,7 @@ export const SiteNavbar = () => {
             <NavbarButton
               href="#cta"
               variant="dark"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white border-0 text-xs px-5 py-2 rounded-full"
+              className="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-black font-semibold border-0 text-xs px-5 py-2 rounded-full transition-all"
             >
               Hubungi Kami
             </NavbarButton>
@@ -61,7 +62,7 @@ export const SiteNavbar = () => {
         <MobileNav>
           <MobileNavHeader>
             <a href="#" className="flex items-center gap-2">
-              <MonitorSmartphone className="w-5 h-5 text-indigo-400" />
+              <MonitorSmartphone className="w-5 h-5 text-amber-400" />
               <span className="font-bold text-white text-sm">WebServices</span>
             </a>
             <MobileNavToggle
@@ -92,7 +93,7 @@ export const SiteNavbar = () => {
               <NavbarButton
                 href="#cta"
                 variant="dark"
-                className="flex-1 text-center bg-indigo-600 text-white border-0 rounded-full"
+                className="flex-1 text-center bg-gradient-to-r from-amber-400 to-amber-600 text-black font-semibold border-0 rounded-full"
                 onClick={() => setIsOpen(false)}
               >
                 Hubungi Kami

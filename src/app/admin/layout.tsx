@@ -1,4 +1,6 @@
 import React from "react";
+import { AdminSidebar } from "@/components/admin/admin-sidebar";
+import { cn } from "@/lib/utils";
 
 export default function AdminLayout({
   children,
@@ -6,23 +8,17 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative w-full h-screen bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 flex">
-      {/* Nanti kita letakkan Sidebar Admin di sini */}
-      <aside className="w-64 bg-white dark:bg-black border-r border-neutral-200 dark:border-neutral-800 p-4">
-        <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500">
-          Admin Panel
-        </h2>
-        <nav className="mt-8 flex flex-col gap-2">
-          {/* Menu Dummy */}
-          <a href="/admin" className="px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-md">Dashboard</a>
-          <a href="/admin/portfolio" className="px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-md">Portfolio</a>
-          <a href="/admin/services" className="px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-md">Services</a>
-          <a href="/" className="px-4 py-2 text-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 rounded-md mt-auto">Back to Site</a>
-        </nav>
-      </aside>
-      
-      <main className="flex-1 p-8 overflow-y-auto">
-        {children}
+    <div
+      className={cn(
+        "rounded-md flex flex-col md:flex-row bg-neutral-50 dark:bg-neutral-950 w-full flex-1 mx-auto overflow-hidden",
+        "h-screen" // for your use case, use `h-screen` instead of `h-[60vh]`
+      )}
+    >
+      <AdminSidebar />
+      <main className="flex-1 overflow-y-auto w-full">
+        <div className="max-w-6xl mx-auto p-8">
+          {children}
+        </div>
       </main>
     </div>
   );
