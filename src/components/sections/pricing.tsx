@@ -54,7 +54,12 @@ const pricingTiers = [
 
 export const PricingSection = () => {
   return (
-    <section id="pricing" className="relative w-full py-24 md:py-32 bg-black overflow-hidden flex flex-col items-center justify-center">
+    <section id="pricing" className="relative w-full py-24 md:py-32 overflow-hidden flex flex-col items-center justify-center">
+      {/* Top fade — blends with section above */}
+      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
+
       {/* Background Spotlight for premium feeling */}
       <Spotlight
         className="-top-40 right-0 md:right-[-20%] md:-top-20"

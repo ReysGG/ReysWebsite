@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
+import { motion } from "framer-motion";
 import { FlipWords } from "@/components/ui/flip-words";
-
 const steps = [
   {
     step: "01",
@@ -27,20 +27,29 @@ const steps = [
 
 export const WorkflowSection = () => {
   return (
-    <section className="w-full py-24 md:py-32 bg-black relative overflow-hidden">
+    <section className="w-full py-24 md:py-32 relative overflow-hidden">
+      {/* Top/Bottom fade blend */}
+      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-indigo-500/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
-        <div className="flex flex-col items-center text-center mb-16 md:mb-20 relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="flex flex-col items-center text-center mb-16 md:mb-20 relative z-10"
+        >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
             Dari Ide ke <FlipWords words={["Realisasi", "Kenyataan", "Kesuksesan", "Laba"]} className="text-indigo-400 font-extrabold" />
           </h2>
           <p className="text-base md:text-lg text-neutral-400 max-w-2xl leading-relaxed">
             Metodologi transparan dan terukur untuk menjamin keberhasilan setiap produk digital.
           </p>
-        </div>
+        </motion.div>
 
         {/* Timeline representation - Glossy Grid Hybrid */}
         <div className="relative mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 max-w-5xl mx-auto z-10">
@@ -48,7 +57,14 @@ export const WorkflowSection = () => {
           <div className="hidden lg:block absolute top-[40px] left-[12%] w-[76%] h-[1px] bg-linear-to-r from-transparent via-indigo-500/30 to-transparent z-0" />
           
           {steps.map((item, idx) => (
-            <div key={idx} className="relative group flex flex-col items-center lg:items-start text-center lg:text-left z-10">
+            <motion.div 
+              key={idx} 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: idx * 0.15 }}
+              className="relative group flex flex-col items-center lg:items-start text-center lg:text-left z-10"
+            >
               
               {/* Glossy Node */}
               <div className="w-20 h-20 rounded-2xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl flex items-center justify-center mb-8 relative shadow-[0_0_30px_rgba(99,102,241,0.0)] group-hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] group-hover:bg-white/[0.05] group-hover:border-indigo-500/30 transition-all duration-500 ease-out z-10">
@@ -66,7 +82,7 @@ export const WorkflowSection = () => {
               <p className="text-sm text-neutral-400 leading-relaxed max-w-[250px] mx-auto lg:mx-0">
                 {item.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

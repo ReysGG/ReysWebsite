@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 const PORTFOLIO_DATA = [
   {
@@ -82,21 +84,40 @@ export const PortfolioSection = () => {
   ));
 
   return (
-    <section id="portfolio" className="w-full py-24 md:py-32 bg-black overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-10">
-        <div className="flex flex-col mb-4">
+    <section id="portfolio" className="relative w-full py-24 md:py-32 overflow-hidden">
+      {/* Bottom fade — blends into next section */}
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="flex flex-col mb-4"
+        >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
             Karya Terbaik Kami
           </h2>
-          <p className="text-base md:text-lg text-neutral-400 max-w-2xl leading-relaxed">
-            Eksplorasi mahakarya digital yang telah kami kembangkan untuk membedakan klien di industrinya.
-          </p>
-        </div>
+          <div className="max-w-2xl">
+            <TextGenerateEffect
+              words="Eksplorasi mahakarya digital yang telah kami kembangkan untuk membedakan klien di industrinya."
+              className="text-base md:text-lg text-neutral-400 font-normal leading-relaxed"
+            />
+          </div>
+        </motion.div>
       </div>
       
-      <div className="w-full">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+        className="w-full"
+      >
         <Carousel items={cards} />
-      </div>
+      </motion.div>
     </section>
+
   );
 };

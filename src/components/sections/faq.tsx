@@ -44,23 +44,36 @@ export const FaqSection = () => {
   };
 
   return (
-    <section className="w-full bg-black py-24 md:py-32">
+    <section className="relative w-full py-24 md:py-32 overflow-hidden">
+      {/* Top/Bottom fade blend */}
+      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-16 lg:gap-24">
         
         {/* Left Side: Title */}
-        <div className="w-full md:w-1/3 flex flex-col">
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="w-full md:w-1/3 flex flex-col"
+        >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight mb-6">
             Frequently <br className="hidden md:block" /> asked <br className="hidden md:block" /> questions
           </h2>
-        </div>
+        </motion.div>
 
         {/* Right Side: Accordion */}
         <div className="w-full md:w-7/12 lg:w-2/3 flex flex-col">
           {FAQ_DATA.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div 
+              <motion.div 
                 key={index} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
                 className={`flex flex-col border-b border-neutral-800/80 py-6 cursor-pointer group ${index === 0 ? 'border-t' : ''}`}
                 onClick={() => toggleFAQ(index)}
               >
@@ -88,7 +101,7 @@ export const FaqSection = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             );
           })}
         </div>

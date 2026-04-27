@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { Layout, Server, ShoppingBag, LineChart } from "lucide-react";
 
 const SERVICES_CONTENT = [
@@ -42,25 +43,38 @@ export const ServicesSection = () => {
   return (
     <section
       id="services"
-      className="w-full py-24 md:py-32 bg-black relative overflow-hidden"
+      className="w-full py-24 md:py-32 relative overflow-hidden"
     >
+      {/* Top/Bottom fade blend */}
+      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
       {/* Background flare */}
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Header */}
-        <div className="flex flex-col mb-16 md:mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="flex flex-col mb-16 md:mb-20"
+        >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
             Infrastruktur Teknis
           </h2>
           <p className="text-base md:text-lg text-neutral-400 max-w-2xl leading-relaxed">
             Layanan teknologikal ujung-ke-ujung yang dirancang untuk skala, keamanan, dan performa nyata.
           </p>
-        </div>
+        </motion.div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {SERVICES_CONTENT.map((service, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group relative flex flex-col p-8 rounded-2xl bg-[#0a0a0a] border border-neutral-900 hover:border-neutral-800 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden cursor-pointer"
             >
               {/* Hover gradient */}
@@ -93,7 +107,7 @@ export const ServicesSection = () => {
                   </span>
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

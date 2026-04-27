@@ -4,24 +4,33 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { IconArrowRight, IconBrandWhatsapp } from "@tabler/icons-react";
+import { Spotlight } from "@/components/ui/spotlight";
 
 export const CtaSection = () => {
   return (
     <section
       id="cta"
-      className="w-full relative py-32 md:py-48 bg-black overflow-hidden"
+      className="w-full relative py-32 md:py-48 overflow-hidden"
     >
-      {/* Glow orb center */}
+      {/* Top/Bottom fade blend */}
+      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
+
+      {/* Gold Spotlight — sama style dengan pricing */}
+      <Spotlight className="-top-40 left-1/2 -translate-x-1/2 md:-top-20" fill="gold" />
+      <Spotlight className="top-60 right-0 md:right-[-10%]" fill="#f59e0b" />
+
+      {/* Gold glow orb center */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[600px] h-[600px] rounded-full bg-indigo-600/20 blur-[120px]" />
+        <div className="w-[700px] h-[400px] rounded-full bg-amber-500/10 blur-[120px]" />
       </div>
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[300px] h-[300px] rounded-full bg-violet-500/20 blur-[80px]" />
+        <div className="w-[300px] h-[300px] rounded-full bg-yellow-400/10 blur-[80px]" />
       </div>
 
       {/* Subtle grid */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.025]"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
@@ -30,15 +39,15 @@ export const CtaSection = () => {
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 flex flex-col items-center text-center">
 
-        {/* Badge */}
+        {/* Badge — gold style */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold tracking-widest uppercase mb-8"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-yellow-500/30 bg-amber-500/10 text-amber-300 text-xs font-semibold tracking-widest uppercase mb-8"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
           Konsultasi Gratis — Tanpa Komitmen
         </motion.div>
 
@@ -52,7 +61,7 @@ export const CtaSection = () => {
         >
           <span className="text-white">Siap memulai</span>
           <br />
-          <span className="bg-linear-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
             proyek Anda?
           </span>
         </motion.h2>
@@ -77,18 +86,20 @@ export const CtaSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center gap-4 mb-16"
         >
+          {/* Primary — Gold gradient button */}
           <Link
             href="https://wa.me/6281234567890"
             target="_blank"
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-base transition-all duration-200 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105"
+            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600 text-black font-bold text-base transition-all duration-300 shadow-[0_0_20px_rgba(250,204,21,0.35)] hover:shadow-[0_0_35px_rgba(250,204,21,0.55)] hover:scale-105"
           >
             <IconBrandWhatsapp className="w-5 h-5" />
             Chat WhatsApp Sekarang
             <IconArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
+          {/* Secondary — bordered */}
           <Link
             href="#portfolio"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-neutral-700 hover:border-neutral-500 text-white font-semibold text-base hover:bg-white/5 transition-all duration-200"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-yellow-500/30 hover:border-yellow-400/60 text-neutral-300 hover:text-white font-semibold text-base hover:bg-amber-500/5 transition-all duration-200"
           >
             Lihat Portfolio
           </Link>
@@ -108,7 +119,7 @@ export const CtaSection = () => {
               {["DB", "AR", "SK", "MY"].map((init, i) => (
                 <div
                   key={i}
-                  className="w-8 h-8 rounded-full bg-linear-to-br from-indigo-500 to-violet-600 border-2 border-black flex items-center justify-center text-[10px] font-bold text-white"
+                  className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-yellow-600 border-2 border-black flex items-center justify-center text-[10px] font-bold text-black"
                 >
                   {init}
                 </div>

@@ -82,8 +82,11 @@ export const StatsSection = () => {
   return (
     <section
       ref={ref}
-      className="w-full py-16 bg-black"
+      className="relative w-full py-16 overflow-hidden"
     >
+      {/* Top/Bottom fade blend */}
+      <div className="absolute top-0 inset-x-0 h-20 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
+      <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-neutral-800">
           {STATS.map((stat, i) => (

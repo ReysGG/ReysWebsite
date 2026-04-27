@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 const DUMMY_TESTIMONIALS = [
@@ -31,23 +32,38 @@ const DUMMY_TESTIMONIALS = [
 
 export const TestimonialsSection = () => {
   return (
-    <section id="testimonials" className="w-full py-24 md:py-32 bg-black overflow-hidden">
+    <section id="testimonials" className="relative w-full py-24 md:py-32 overflow-hidden">
+      {/* Top/Bottom fade blend */}
+      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="flex flex-col items-center justify-center mb-16 md:mb-20 text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="flex flex-col items-center justify-center mb-16 md:mb-20 text-center"
+        >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
             Dipercaya Oleh Inovator
           </h2>
           <p className="text-base md:text-lg text-neutral-400 max-w-2xl mx-auto leading-relaxed">
             Jangan hanya percaya kata-kata kami. Dengarkan langsung dari para visioner yang telah bekerja sama dengan kami.
           </p>
-        </div>
-        <div className="h-[20rem] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="h-[20rem] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden"
+        >
           <InfiniteMovingCards
             items={DUMMY_TESTIMONIALS}
             direction="left"
             speed="normal"
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

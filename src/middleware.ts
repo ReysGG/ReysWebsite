@@ -3,8 +3,9 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 const isProtectedRoute = createRouteMatcher(['/admin(.*)'])
 
 export default clerkMiddleware(async (auth, req) => {
-  // if (isProtectedRoute(req)) await auth.protect()
-  // Di-suspend sementara agar development UI admin tidak diblokir halaman Sign In
+  if (isProtectedRoute(req)) {
+    await auth.protect();
+  }
 })
 
 export const config = {
