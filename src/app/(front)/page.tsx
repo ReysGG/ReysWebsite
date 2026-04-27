@@ -13,9 +13,10 @@ import { SectionDivider } from "@/components/ui/section-divider";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between font-sans bg-black text-white selection:bg-indigo-500/30">
-      <HeroSection />
-      <SectionDivider />
+    <main className="flex min-h-screen flex-col items-center justify-between font-sans bg-white text-neutral-900 selection:bg-neutral-200">
+      <div className="w-full bg-neutral-50">
+        <HeroSection />
+      </div>
       <StatsSection />
       <SectionDivider />
       <ServicesSection />

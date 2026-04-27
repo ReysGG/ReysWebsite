@@ -54,27 +54,12 @@ const pricingTiers = [
 
 export const PricingSection = () => {
   return (
-    <section id="pricing" className="relative w-full py-24 md:py-32 overflow-hidden flex flex-col items-center justify-center">
-      {/* Top fade — blends with section above */}
-      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
-
-      {/* Background Spotlight for premium feeling */}
-      <Spotlight
-        className="-top-40 right-0 md:right-[-20%] md:-top-20"
-        fill="gold"
-      />
-      <Spotlight
-        className="top-40 left-0 md:left-[-20%] md:top-20"
-        fill="white"
-      />
-
+    <section id="pricing" className="relative w-full py-24 md:py-32 overflow-hidden flex flex-col items-center justify-center bg-white border-t border-neutral-200">
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full mb-16 items-center text-center">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
-          Investasi <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500">Berkelas</span>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
+          Investasi <span className="text-neutral-900">Berkelas</span>
         </h2>
-        <p className="text-base md:text-lg text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-base md:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
           Harga yang transparan untuk hasil karya digital yang tidak murahan. Pilih paket yang sesuai dengan visi besar bisnis Anda.
         </p>
       </div>
@@ -84,34 +69,25 @@ export const PricingSection = () => {
           <div
             key={idx}
             className={cn(
-              "relative flex flex-col rounded-3xl p-8 shadow-2xl backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02]",
+              "relative flex flex-col rounded-3xl p-8 shadow-sm transition-transform duration-300 hover:scale-[1.02]",
               tier.popular
-                ? "bg-neutral-900 border border-yellow-500/30 overflow-hidden"
-                : "bg-neutral-900/50 border border-neutral-800"
+                ? "bg-white border-2 border-black overflow-hidden shadow-md"
+                : "bg-neutral-50 border border-neutral-200"
             )}
           >
-            {/* Aceternity Background Gradient emulation for the popular tier */}
-            {tier.popular && (
-              <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
-            )}
-            
-            {tier.popular && (
-              <div className="absolute top-0 right-0 -mr-4 -mt-4 w-32 h-32 rounded-full bg-yellow-500/20 blur-3xl"></div>
-            )}
-
             <div className="relative z-10 flex flex-col h-full">
               <div className="mb-8">
                 {tier.popular && (
-                  <span className="inline-block px-4 py-1 mb-6 text-xs font-semibold tracking-wider text-black uppercase bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 rounded-full shadow-[0_0_15px_rgba(250,204,21,0.3)]">
+                  <span className="inline-block px-4 py-1 mb-6 text-xs font-semibold tracking-wider text-white uppercase bg-black rounded-full">
                     Most Popular
                   </span>
                 )}
-                <h3 className="text-2xl font-semibold text-white">{tier.title}</h3>
-                <div className="mt-4 flex items-baseline text-4xl font-extrabold text-white">
-                  {tier.price !== "Custom" && <span className="text-2xl font-medium text-neutral-400 mr-1">Rp</span>}
+                <h3 className="text-2xl font-semibold text-neutral-900">{tier.title}</h3>
+                <div className="mt-4 flex items-baseline text-4xl font-extrabold text-neutral-900">
+                  {tier.price !== "Custom" && <span className="text-2xl font-medium text-neutral-500 mr-1">Rp</span>}
                   {tier.price}
                 </div>
-                <p className="mt-4 text-sm text-neutral-400 line-clamp-2">
+                <p className="mt-4 text-sm text-neutral-600 line-clamp-2">
                   {tier.description}
                 </p>
               </div>
@@ -121,21 +97,21 @@ export const PricingSection = () => {
                   <li key={featureIdx} className="flex items-start">
                     <div className={cn(
                       "flex-shrink-0 flex items-center justify-center p-1 rounded-full mr-3 mt-0.5",
-                      tier.popular ? "bg-amber-500/20 text-yellow-500" : "bg-neutral-800 text-neutral-300"
+                      tier.popular ? "bg-black text-white" : "bg-neutral-200 text-neutral-600"
                     )}>
                       <IconCheck className="w-4 h-4" stroke={3} />
                     </div>
-                    <span className="text-sm text-neutral-300">{feature}</span>
+                    <span className="text-sm text-neutral-600">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <button
                 className={cn(
-                  "mt-auto w-full py-4 px-8 rounded-xl font-bold tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black",
+                  "mt-auto w-full py-4 px-8 rounded-xl font-bold tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2",
                   tier.popular
-                    ? "bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600 text-black shadow-[0_0_20px_rgba(250,204,21,0.4)] hover:shadow-[0_0_30px_rgba(250,204,21,0.6)] focus:ring-yellow-500"
-                    : "bg-white text-black hover:bg-neutral-200 focus:ring-white"
+                    ? "bg-black text-white hover:bg-neutral-800 focus:ring-black"
+                    : "bg-white border border-neutral-300 text-neutral-900 hover:bg-neutral-100 focus:ring-neutral-200"
                 )}
               >
                 {tier.buttonText}

@@ -32,10 +32,7 @@ const DUMMY_TESTIMONIALS = [
 
 export const TestimonialsSection = () => {
   return (
-    <section id="testimonials" className="relative w-full py-24 md:py-32 overflow-hidden">
-      {/* Top/Bottom fade blend */}
-      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
+    <section id="testimonials" className="relative w-full py-24 md:py-32 overflow-hidden bg-white border-t border-neutral-200">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
@@ -44,10 +41,10 @@ export const TestimonialsSection = () => {
           transition={{ duration: 0.7 }}
           className="flex flex-col items-center justify-center mb-16 md:mb-20 text-center"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
             Dipercaya Oleh Inovator
           </h2>
-          <p className="text-base md:text-lg text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
             Jangan hanya percaya kata-kata kami. Dengarkan langsung dari para visioner yang telah bekerja sama dengan kami.
           </p>
         </motion.div>

@@ -10,44 +10,28 @@ export const CtaSection = () => {
   return (
     <section
       id="cta"
-      className="w-full relative py-32 md:py-48 overflow-hidden"
+      className="w-full relative py-32 md:py-48 overflow-hidden bg-white"
     >
-      {/* Top/Bottom fade blend */}
-      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
-
-      {/* Gold Spotlight — sama style dengan pricing */}
-      <Spotlight className="-top-40 left-1/2 -translate-x-1/2 md:-top-20" fill="gold" />
-      <Spotlight className="top-60 right-0 md:right-[-10%]" fill="#f59e0b" />
-
-      {/* Gold glow orb center */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[700px] h-[400px] rounded-full bg-amber-500/10 blur-[120px]" />
-      </div>
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[300px] h-[300px] rounded-full bg-yellow-400/10 blur-[80px]" />
-      </div>
-
       {/* Subtle grid */}
       <div
-        className="absolute inset-0 opacity-[0.025]"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.8) 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
         }}
       />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 flex flex-col items-center text-center">
 
-        {/* Badge — gold style */}
+        {/* Badge — black style */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-yellow-500/30 bg-amber-500/10 text-amber-300 text-xs font-semibold tracking-widest uppercase mb-8"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neutral-300 bg-neutral-100 text-neutral-800 text-xs font-semibold tracking-widest uppercase mb-8"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
           Konsultasi Gratis — Tanpa Komitmen
         </motion.div>
 
@@ -59,9 +43,9 @@ export const CtaSection = () => {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-8"
         >
-          <span className="text-white">Siap memulai</span>
+          <span className="text-neutral-900">Siap memulai</span>
           <br />
-          <span className="bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-neutral-600 to-black bg-clip-text text-transparent">
             proyek Anda?
           </span>
         </motion.h2>
@@ -72,7 +56,7 @@ export const CtaSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto mb-12 leading-relaxed"
         >
           Ceritakan kebutuhan Anda. Kami akan bantu rancang solusi terbaik —
           dari landing page hingga sistem enterprise skala penuh.
@@ -86,11 +70,11 @@ export const CtaSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center gap-4 mb-16"
         >
-          {/* Primary — Gold gradient button */}
+          {/* Primary — Black solid button */}
           <Link
             href="https://wa.me/6281234567890"
             target="_blank"
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600 text-black font-bold text-base transition-all duration-300 shadow-[0_0_20px_rgba(250,204,21,0.35)] hover:shadow-[0_0_35px_rgba(250,204,21,0.55)] hover:scale-105"
+            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-black text-white font-bold text-base transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105"
           >
             <IconBrandWhatsapp className="w-5 h-5" />
             Chat WhatsApp Sekarang
@@ -99,7 +83,7 @@ export const CtaSection = () => {
           {/* Secondary — bordered */}
           <Link
             href="#portfolio"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-yellow-500/30 hover:border-yellow-400/60 text-neutral-300 hover:text-white font-semibold text-base hover:bg-amber-500/5 transition-all duration-200"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-neutral-300 hover:border-neutral-500 text-neutral-700 hover:text-black font-semibold text-base hover:bg-neutral-50 transition-all duration-200"
           >
             Lihat Portfolio
           </Link>
@@ -111,7 +95,7 @@ export const CtaSection = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center gap-6 text-neutral-500 text-sm"
+          className="flex flex-col sm:flex-row items-center gap-6 text-neutral-600 text-sm"
         >
           {/* Avatars */}
           <div className="flex items-center gap-3">
@@ -119,7 +103,7 @@ export const CtaSection = () => {
               {["DB", "AR", "SK", "MY"].map((init, i) => (
                 <div
                   key={i}
-                  className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-yellow-600 border-2 border-black flex items-center justify-center text-[10px] font-bold text-black"
+                  className="w-8 h-8 rounded-full bg-neutral-200 border-2 border-white flex items-center justify-center text-[10px] font-bold text-neutral-800"
                 >
                   {init}
                 </div>
@@ -127,7 +111,7 @@ export const CtaSection = () => {
             </div>
             <span>50+ klien puas</span>
           </div>
-          <div className="hidden sm:block w-px h-4 bg-neutral-800" />
+          <div className="hidden sm:block w-px h-4 bg-neutral-300" />
           <div className="flex items-center gap-1">
             {[1,2,3,4,5].map(i => (
               <svg key={i} className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">

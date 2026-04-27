@@ -84,11 +84,8 @@ export const PortfolioSection = () => {
   ));
 
   return (
-    <section id="portfolio" className="relative w-full py-24 md:py-32 overflow-hidden">
-      {/* Bottom fade — blends into next section */}
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
-
-      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8">
+    <section id="portfolio" className="relative w-full py-24 md:py-32 overflow-hidden bg-white">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8 border-t border-neutral-200 pt-24">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -96,13 +93,13 @@ export const PortfolioSection = () => {
           transition={{ duration: 0.7 }}
           className="flex flex-col mb-4"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
             Karya Terbaik Kami
           </h2>
           <div className="max-w-2xl">
             <TextGenerateEffect
               words="Eksplorasi mahakarya digital yang telah kami kembangkan untuk membedakan klien di industrinya."
-              className="text-base md:text-lg text-neutral-400 font-normal leading-relaxed"
+              className="text-base md:text-lg text-neutral-600 font-normal leading-relaxed"
             />
           </div>
         </motion.div>

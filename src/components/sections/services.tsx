@@ -43,12 +43,8 @@ export const ServicesSection = () => {
   return (
     <section
       id="services"
-      className="w-full py-24 md:py-32 relative overflow-hidden"
+      className="w-full py-24 md:py-32 relative overflow-hidden bg-white"
     >
-      {/* Top/Bottom fade blend */}
-      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-20" />
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
-      {/* Background flare */}
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Header */}
         <motion.div 
@@ -58,16 +54,16 @@ export const ServicesSection = () => {
           transition={{ duration: 0.7 }}
           className="flex flex-col mb-16 md:mb-20"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
-            Infrastruktur Teknis
-          </h2>
-          <p className="text-base md:text-lg text-neutral-400 max-w-2xl leading-relaxed">
-            Layanan teknologikal ujung-ke-ujung yang dirancang untuk skala, keamanan, dan performa nyata.
+          <p className="text-xs font-bold tracking-widest text-neutral-400 uppercase mb-4">
+            Core Competencies
           </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
+            Precision Engineering for Modern Scale.
+          </h2>
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {SERVICES_CONTENT.map((service, index) => (
             <motion.div
               key={index}
@@ -75,37 +71,23 @@ export const ServicesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative flex flex-col p-8 rounded-2xl bg-[#0a0a0a] border border-neutral-900 hover:border-neutral-800 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden cursor-pointer"
+              className="group relative flex flex-col p-8 rounded-none bg-white border border-neutral-200 hover:border-neutral-400 transition-all duration-300 overflow-hidden cursor-pointer shadow-sm hover:shadow-md"
             >
-              {/* Hover gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.06] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-              {/* Top row: icon + number */}
+              {/* Top row: icon */}
               <div className="relative z-10 flex items-start justify-between mb-8">
-                <div
-                  className={`w-12 h-12 rounded-xl border flex items-center justify-center transition-transform duration-300 group-hover:scale-105 ${service.iconBg}`}
-                >
+                <div className="text-neutral-900">
                   {service.icon}
                 </div>
-                <span className="text-xs font-semibold text-neutral-700 tracking-wide">
-                  {service.number}
-                </span>
               </div>
 
               {/* Body */}
               <div className="relative z-10 flex flex-col flex-1">
-                <h3 className="text-lg font-bold text-neutral-200 tracking-tight leading-snug mb-3">
+                <h3 className="text-lg font-bold text-neutral-900 tracking-tight leading-snug mb-3">
                   {service.title}
                 </h3>
-                <p className="text-sm text-neutral-500 leading-relaxed flex-1 mb-6">
+                <p className="text-sm text-neutral-600 leading-relaxed flex-1">
                   {service.description}
                 </p>
-                <button className="inline-flex items-center gap-1.5 text-[13px] font-medium text-neutral-600 group-hover:text-neutral-400 transition-colors duration-200 w-fit">
-                  Selengkapnya
-                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">
-                    →
-                  </span>
-                </button>
               </div>
             </motion.div>
           ))}

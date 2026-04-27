@@ -1,154 +1,110 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
+import React, { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-type ShowcaseSlide = {
-  id: string;
-  imageSrc: string;
-  alt: string;
-};
+type ShowcaseSlide = { id: string; imageSrc: string; alt: string };
 
+// Replace with your actual portfolio screenshots
 const SHOWCASE_SLIDES: ShowcaseSlide[] = [
-  {
-    id: "young-hoop-1",
-    imageSrc: "/images/homepage-slider-reference.png",
-    alt: "Homepage showcase slide 1",
-  },
-  {
-    id: "product-story-2",
-    imageSrc: "/images/homepage-slider-reference.png",
-    alt: "Homepage showcase slide 2",
-  },
-  {
-    id: "editorial-landing-3",
-    imageSrc: "/images/homepage-slider-reference.png",
-    alt: "Homepage showcase slide 3",
-  },
-  {
-    id: "young-hoop-4",
-    imageSrc: "/images/homepage-slider-reference.png",
-    alt: "Homepage showcase slide 4",
-  },
-  {
-    id: "product-story-5",
-    imageSrc: "/images/homepage-slider-reference.png",
-    alt: "Homepage showcase slide 5",
-  },
+  { id: "slide-1", imageSrc: "/images/homepage-slider-reference.png", alt: "Portfolio 1" },
+  { id: "slide-2", imageSrc: "/images/homepage-slider-reference.png", alt: "Portfolio 2" },
+  { id: "slide-3", imageSrc: "/images/homepage-slider-reference.png", alt: "Portfolio 3" },
 ];
 
-type SlidePosition = "left" | "center" | "right" | "hidden";
+// ─── White screen area inside macbook-mockup.png (1024×1024 source) ───────
+// Measured from the generated image: the white screen occupies this region.
+// Values are % of the PNG's width/height.
+const SCREEN = { left: "10%", top: "8%", width: "82%", height: "57%" };
 
-const SWIPE_THRESHOLD = 80;
+type Props = { className?: string };
 
-const getSlidePosition = (
-  index: number,
-  activeIndex: number,
-  totalSlides: number,
-): SlidePosition => {
-  const relative = (index - activeIndex + totalSlides) % totalSlides;
-
-  if (relative === 0) return "center";
-  if (relative === 1) return "right";
-  if (relative === totalSlides - 1) return "left";
-  return "hidden";
-};
-
-type HomepageShowcaseSectionProps = {
-  className?: string;
-};
-
-export const HomepageShowcaseSection = ({
-  className,
-}: HomepageShowcaseSectionProps) => {
+export const HomepageShowcaseSection = ({ className }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const totalSlides = SHOWCASE_SLIDES.length;
-  const isDraggingRef = useRef(false);
+  const [dir, setDir] = useState<1 | -1>(1);
 
-  const nextSlide = useCallback(() => {
-    setActiveIndex((previous) => (previous + 1) % totalSlides);
-  }, [totalSlides]);
+  const goTo = useCallback((i: number) => {
+    setDir(i > activeIndex ? 1 : -1);
+    setActiveIndex(i);
+  }, [activeIndex]);
 
-  const previousSlide = useCallback(() => {
-    setActiveIndex((previous) => (previous - 1 + totalSlides) % totalSlides);
-  }, [totalSlides]);
+  const next = useCallback(() => {
+    setDir(1);
+    setActiveIndex(p => (p + 1) % SHOWCASE_SLIDES.length);
+  }, []);
 
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowRight") nextSlide();
-      if (event.key === "ArrowLeft") previousSlide();
-    };
+    const id = setInterval(next, 4000);
+    return () => clearInterval(id);
+  }, [next]);
 
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [nextSlide, previousSlide]);
+  const variants = {
+    enter: (d: number) => ({ x: d > 0 ? "100%" : "-100%", opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit:  (d: number) => ({ x: d > 0 ? "-100%" : "100%", opacity: 0 }),
+  };
 
   return (
-    <div className={cn("w-full", className)}>
-      <div className="relative mx-auto h-[14rem] sm:h-[18rem] w-full max-w-6xl md:h-[24rem] lg:h-[32rem]">
-        {SHOWCASE_SLIDES.map((slide, index) => {
-          const position = getSlidePosition(index, activeIndex, totalSlides);
-          const isActive = position === "center";
+    <div className={cn("relative w-full select-none", className)}>
+      {/* Outer: fixed aspect ratio matching macbook-mockup.png (1:1 square) */}
+      <div className="relative w-full" style={{ paddingBottom: "100%" }}>
 
-          return (
-            <motion.article
-              key={slide.id}
-              initial={false}
-              animate={{
-                x:
-                  position === "left"
-                    ? "-96%"
-                    : position === "right"
-                      ? "96%"
-                      : 0,
-                scale: position === "center" ? 1 : position === "hidden" ? 0.74 : 0.85,
-                opacity: position === "hidden" ? 0 : 1,
-                filter: "blur(0px)",
-                zIndex:
-                  position === "center" ? 30 : position === "hidden" ? 10 : 20,
-              }}
-              transition={{ type: "spring", stiffness: 260, damping: 28 }}
-              drag="x"
-              dragListener={isActive}
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.15}
-              onDragStart={() => {
-                isDraggingRef.current = true;
-              }}
-              onDragEnd={(_, info) => {
-                if (info.offset.x > SWIPE_THRESHOLD) previousSlide();
-                if (info.offset.x < -SWIPE_THRESHOLD) nextSlide();
+        {/* MacBook PNG frame — on top (z-10) so it overlaps the screen edges */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/macbook-mockup.png"
+          alt="MacBook mockup"
+          className="absolute inset-0 w-full h-full object-contain z-10 pointer-events-none"
+          draggable={false}
+        />
 
-                window.setTimeout(() => {
-                  isDraggingRef.current = false;
-                }, 0);
-              }}
-              onClick={() => {
-                if (isDraggingRef.current) return;
-                if (position === "left") previousSlide();
-                if (position === "right") nextSlide();
-              }}
-              className={cn(
-                "absolute left-1/2 top-0 h-full w-[90%] sm:w-[85%] md:w-[80%] lg:w-[75%] -translate-x-1/2 overflow-hidden rounded-xl border border-white/10 bg-neutral-900 shadow-2xl",
-                isActive ? "cursor-grab active:cursor-grabbing" : "cursor-pointer",
-                position === "hidden" && "pointer-events-none",
-              )}
+        {/* Slider — behind the PNG (z-0) but visible through the white screen */}
+        <div
+          className="absolute z-0 overflow-hidden"
+          style={{
+            left:   SCREEN.left,
+            top:    SCREEN.top,
+            width:  SCREEN.width,
+            height: SCREEN.height,
+          }}
+        >
+          <AnimatePresence custom={dir} initial={false} mode="popLayout">
+            <motion.div
+              key={SHOWCASE_SLIDES[activeIndex].id}
+              custom={dir}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ type: "spring", stiffness: 300, damping: 32 }}
+              className="absolute inset-0"
             >
-              <Image
-                src={slide.imageSrc}
-                alt={slide.alt}
-                fill
-                priority={index === 0}
-                sizes="(max-width: 768px) 80vw, 64vw"
-                className="object-cover"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={SHOWCASE_SLIDES[activeIndex].imageSrc}
+                alt={SHOWCASE_SLIDES[activeIndex].alt}
+                className="w-full h-full object-cover object-top"
+                draggable={false}
               />
-            </motion.article>
-          );
-        })}
+            </motion.div>
+          </AnimatePresence>
 
+          {/* Dot indicators */}
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 bg-black/20 backdrop-blur-sm px-2.5 py-1 rounded-full">
+            {SHOWCASE_SLIDES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Slide ${i + 1}`}
+                className={cn(
+                  "h-1 rounded-full transition-all duration-300",
+                  activeIndex === i ? "w-4 bg-white" : "w-1 bg-white/50 hover:bg-white/70"
+                )}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
