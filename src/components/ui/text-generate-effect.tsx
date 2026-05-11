@@ -15,9 +15,9 @@ export const TextGenerateEffect = ({
   duration?: number;
 }) => {
   const [scope, animate] = useAnimate();
-  const { ref, inView } = useInView({ rootMargin: "-100px", triggerOnce: true });
+  const inView = useInView(scope, { margin: "-100px", once: true });
   
-  let wordsArray = words.split(" ");
+  const wordsArray = words.split(" ");
   useEffect(() => {
     if (inView) {
       animate(
@@ -55,7 +55,7 @@ export const TextGenerateEffect = ({
   };
 
   return (
-    <div ref={ref} className={cn("font-bold", className)}>
+    <div className={cn("font-bold", className)}>
       <div className="mt-4">
         <div className="text-inherit text-2xl leading-snug tracking-wide">
           {renderWords()}

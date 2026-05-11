@@ -13,14 +13,27 @@ import {
   IconEdit,
   IconPhoto
 } from "@tabler/icons-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+
+type SidebarLinkItem = {
+  label: string;
+  href: string;
+  icon: React.ReactNode;
+};
+
+type SidebarDropdownItem = {
+  isDropdown: true;
+  label: string;
+  icon: React.ReactNode;
+  subLinks: SidebarLinkItem[];
+};
+
+type SidebarItem = SidebarLinkItem | SidebarDropdownItem;
 
 export const AdminSidebar = () => {
   const [open, setOpen] = useState(false);
   
-  const linkGroups = [
+  const linkGroups: { title: string; links: SidebarItem[] }[] = [
     {
       title: "Overview",
       links: [
@@ -122,10 +135,10 @@ export const AdminSidebar = () => {
                   </span>
                 )}
                 {group.links.map((link, idx) => {
-                  if (link.isDropdown) {
-                    return <SidebarDropdown key={idx} group={link as any} />;
+                  if ("isDropdown" in link) {
+                    return <SidebarDropdown key={idx} group={link} />;
                   }
-                  return <SidebarLink key={idx} link={link as any} className="hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-lg px-2" />;
+                  return <SidebarLink key={idx} link={link} className="hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-lg px-2" />;
                 })}
               </div>
             ))}

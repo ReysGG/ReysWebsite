@@ -8,13 +8,13 @@ import { createPost, createDraft } from "@/features/blog/actions/create-post";
 import { PostMainEditor } from "./post-main-editor";
 import { PostPublishSidebar } from "./post-publish-sidebar";
 import { SharePostModal } from "./share-post-modal";
-import { toast } from "sonner";
 
 export function CreatePostForm() {
   const [content, setContent] = useState("");
   const [isPending, startTransition] = useTransition();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createdSlug, setCreatedSlug] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -29,6 +29,7 @@ export function CreatePostForm() {
     const formData = new FormData(formRef.current);
     
     startTransition(async () => {
+      setErrorMessage(null);
       let result;
       if (isDraft) {
         result = await createDraft(formData);
@@ -40,7 +41,7 @@ export function CreatePostForm() {
         setCreatedSlug(result.slug);
         setIsModalOpen(true);
       } else {
-        toast.error(result.error || "Terjadi kesalahan saat memproses data.");
+        setErrorMessage(result.error || "Terjadi kesalahan saat memproses data.");
       }
     });
   };
@@ -62,6 +63,11 @@ export function CreatePostForm() {
 
       <form ref={formRef} onSubmit={handleSubmit} className="w-full flex flex-col xl:flex-row gap-6">
         <div className="flex-1 min-w-0">
+          {errorMessage && (
+            <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+              {errorMessage}
+            </div>
+          )}
           <PostMainEditor content={content} setContent={setContent} />
         </div>
         

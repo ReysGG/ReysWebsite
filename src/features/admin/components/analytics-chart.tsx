@@ -1,6 +1,5 @@
 "use client";
 
-import { TrendingUp, Calendar } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   Card,

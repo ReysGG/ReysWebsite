@@ -10,13 +10,12 @@ export default function AdminLayout({
   return (
     <div
       className={cn(
-        "rounded-md flex flex-col md:flex-row bg-neutral-50 dark:bg-neutral-950 w-full flex-1 mx-auto overflow-hidden",
-        "h-screen" // for your use case, use `h-screen` instead of `h-[60vh]`
+        "flex h-screen w-full flex-col overflow-hidden bg-neutral-100 text-neutral-950 md:flex-row dark:bg-neutral-950 dark:text-neutral-50"
       )}
     >
       <AdminSidebar />
       <main className="flex-1 overflow-y-auto w-full">
-        <div className="w-full p-8 md:p-12">
+        <div className="mx-auto w-full max-w-7xl p-6 md:p-10">
           {children}
         </div>
       </main>

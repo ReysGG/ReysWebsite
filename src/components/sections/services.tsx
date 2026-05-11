@@ -7,33 +7,33 @@ import { Layout, Server, ShoppingBag, LineChart } from "lucide-react";
 const SERVICES_CONTENT = [
   {
     number: "01",
-    title: "Company Profile Profesional",
+    title: "Website yang membangun trust",
     description:
-      "Bangun kredibilitas pelanggan dengan desain website modern, elegan, dan responsif. Dirancang untuk menonjolkan nilai bisnis Anda.",
+      "Company profile modern untuk membuat bisnis terlihat kredibel, jelas, dan mudah dihubungi calon pelanggan.",
     icon: <Layout className="w-5 h-5 text-cyan-400" />,
     iconBg: "bg-cyan-400/8 border-cyan-400/15",
   },
   {
     number: "02",
-    title: "Sistem Kustom & Web App",
+    title: "Dashboard operasional",
     description:
-      "Sederhanakan proses bisnis dengan aplikasi web kustom. POS, Inventory, hingga CRM dengan arsitektur yang scalable.",
+      "Web app kustom untuk POS, inventory, booking, CRM, atau workflow internal yang masih berantakan di spreadsheet.",
     icon: <Server className="w-5 h-5 text-indigo-400" />,
     iconBg: "bg-indigo-400/8 border-indigo-400/15",
   },
   {
     number: "03",
-    title: "E-Commerce Integrasi Penuh",
+    title: "Toko online siap transaksi",
     description:
-      "Platform e-commerce cepat terintegrasi langsung dengan payment gateway lokal (GoPay, VA) dan layanan ekspedisi otomatis.",
+      "E-commerce cepat dengan katalog produk, checkout, pembayaran, dan integrasi WhatsApp agar proses jualan lebih praktis.",
     icon: <ShoppingBag className="w-5 h-5 text-rose-400" />,
     iconBg: "bg-rose-400/8 border-rose-400/15",
   },
   {
     number: "04",
-    title: "Technical SEO & Performa",
+    title: "SEO dan performa loading",
     description:
-      "Kode yang sangat teroptimasi untuk mesin pencari. Dapatkan peringkat Google lebih baik dengan loading super cepat.",
+      "Struktur halaman, metadata, dan optimasi teknis supaya website lebih cepat, mudah dibaca Google, dan nyaman dibuka mobile.",
     icon: <LineChart className="w-5 h-5 text-emerald-400" />,
     iconBg: "bg-emerald-400/8 border-emerald-400/15",
   },
@@ -55,10 +55,10 @@ export const ServicesSection = () => {
           className="flex flex-col mb-16 md:mb-20"
         >
           <p className="text-xs font-bold tracking-widest text-neutral-400 uppercase mb-4">
-            Core Competencies
+            Layanan Utama
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
-            Precision Engineering for Modern Scale.
+            Bukan cuma tampil bagus. Website harus membantu bisnis bergerak.
           </h2>
         </motion.div>
 

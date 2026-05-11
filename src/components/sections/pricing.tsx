@@ -1,14 +1,15 @@
 "use client";
 
 import React from "react";
-import { Spotlight } from "@/components/ui/spotlight";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { IconCheck } from "@tabler/icons-react";
 
 const pricingTiers = [
   {
     title: "Starter",
-    price: "5.000k",
+    price: "5 juta",
+    timeline: "7-10 hari",
     description: "Sempurna untuk personal branding & bisnis pemula.",
     features: [
       "Landing Page Profesional",
@@ -22,7 +23,8 @@ const pricingTiers = [
   },
   {
     title: "Professional",
-    price: "15.000k",
+    price: "15 juta",
+    timeline: "14-21 hari",
     description: "Untuk bisnis yang siap berskala dengan fitur tingkat lanjut.",
     features: [
       "Semua fitur Starter",
@@ -38,6 +40,7 @@ const pricingTiers = [
   {
     title: "Enterprise",
     price: "Custom",
+    timeline: "Sesuai scope",
     description: "Solusi eksklusif untuk korporat / kebutuhan kompleks.",
     features: [
       "Semua fitur Professional",
@@ -57,10 +60,10 @@ export const PricingSection = () => {
     <section id="pricing" className="relative w-full py-24 md:py-32 overflow-hidden flex flex-col items-center justify-center bg-white border-t border-neutral-200">
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full mb-16 items-center text-center">
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
-          Investasi <span className="text-neutral-900">Berkelas</span>
+          Paket yang jelas sejak awal
         </h2>
         <p className="text-base md:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
-          Harga yang transparan untuk hasil karya digital yang tidak murahan. Pilih paket yang sesuai dengan visi besar bisnis Anda.
+          Pilih paket sesuai kebutuhan bisnis. Scope, estimasi waktu, dan deliverable dibuat transparan sebelum mulai.
         </p>
       </div>
 
@@ -87,6 +90,9 @@ export const PricingSection = () => {
                   {tier.price !== "Custom" && <span className="text-2xl font-medium text-neutral-500 mr-1">Rp</span>}
                   {tier.price}
                 </div>
+                <div className="mt-3 inline-flex rounded-full bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-600">
+                  Estimasi {tier.timeline}
+                </div>
                 <p className="mt-4 text-sm text-neutral-600 line-clamp-2">
                   {tier.description}
                 </p>
@@ -106,16 +112,17 @@ export const PricingSection = () => {
                 ))}
               </ul>
 
-              <button
+              <Link
+                href="#cta"
                 className={cn(
-                  "mt-auto w-full py-4 px-8 rounded-xl font-bold tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2",
+                  "mt-auto inline-flex w-full items-center justify-center py-4 px-8 rounded-xl font-bold tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2",
                   tier.popular
                     ? "bg-black text-white hover:bg-neutral-800 focus:ring-black"
                     : "bg-white border border-neutral-300 text-neutral-900 hover:bg-neutral-100 focus:ring-neutral-200"
                 )}
               >
                 {tier.buttonText}
-              </button>
+              </Link>
             </div>
           </div>
         ))}

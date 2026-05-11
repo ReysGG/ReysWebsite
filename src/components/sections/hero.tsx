@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { FlipWords } from "@/components/ui/flip-words";
 import { HomepageShowcaseSection } from "@/components/sections/homepage-showcase";
 
@@ -26,10 +27,10 @@ export const HeroSection = () => {
       </div>
 
       {/* ── Main layout ───────────────────────────────────────────────── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col lg:flex-row items-center gap-8 lg:gap-4 pt-24 pb-16 lg:pt-0 lg:pb-0">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col lg:flex-row items-center gap-10 lg:gap-0 pt-24 pb-16 lg:pt-0 lg:pb-0">
 
         {/* LEFT: Text */}
-        <div className="flex-1 w-full flex flex-col">
+        <div className="flex-1 lg:flex-[0.95] w-full flex flex-col">
 
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -38,12 +39,13 @@ export const HeroSection = () => {
           >
             <div className="flex -space-x-2">
               {[33,47,12,11].map((n,i)=>(
+                // eslint-disable-next-line @next/next/no-img-element
                 <img key={n} src={`https://i.pravatar.cc/100?img=${n}`} alt=""
                   className="w-6 h-6 md:w-7 md:h-7 rounded-full border-2 border-[#EFECE6]"
                   style={{ zIndex: 40-i*10, position:"relative" }} />
               ))}
             </div>
-            <span className="tracking-tight">Trusted by 50+ Visionary Brands</span>
+            <span className="tracking-tight">Dipercaya 50+ bisnis dan founder</span>
           </motion.div>
 
           <motion.h1
@@ -51,9 +53,9 @@ export const HeroSection = () => {
             transition={{ duration: 1, delay: 0.1, ease: "easeOut" }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#1A1A1A] tracking-tighter leading-[1.05]"
           >
-            Architecting <br className="hidden sm:block" />
+            Website cepat, rapi, <br className="hidden sm:block" />
             <FlipWords className="text-[#1A1A1A] px-0 font-bold"
-              words={["Web Platforms.", "Digital Futures.", "Modern UI/UX."]} />
+              words={["siap jualan.", "mudah dikelola.", "terlihat profesional."]} />
           </motion.h1>
 
           <motion.p
@@ -61,9 +63,9 @@ export const HeroSection = () => {
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
             className="mt-4 md:mt-6 font-medium text-sm md:text-base lg:text-lg text-neutral-600 max-w-md leading-relaxed"
           >
-            We engineer high-performance web platforms for visionary UMKM and
-            fast-scaling startups. Precision development meets sophisticated
-            minimalist design.
+            Kami bantu UMKM dan startup membangun website yang terlihat
+            profesional, loading cepat, responsif, dan siap dipakai untuk
+            menerima calon pelanggan.
           </motion.p>
 
           <motion.div
@@ -71,21 +73,21 @@ export const HeroSection = () => {
             transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
             className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 md:gap-4"
           >
-            <button className="px-6 md:px-8 py-3 md:py-3.5 rounded-xl bg-[#111] text-white text-sm md:text-base font-medium hover:bg-black transition-colors shadow-lg shadow-black/10">
-              Start Consultation
-            </button>
-            <button className="px-6 md:px-8 py-3 md:py-3.5 rounded-xl bg-white/60 backdrop-blur-sm border border-black/10 text-[#111] text-sm md:text-base font-medium hover:bg-white/80 transition-colors">
-              View Portfolio
-            </button>
+            <Link href="#cta" className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-3.5 rounded-xl bg-[#111] text-white text-sm md:text-base font-medium hover:bg-black transition-colors shadow-lg shadow-black/10">
+              Konsultasi Gratis
+            </Link>
+            <Link href="#portfolio" className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-3.5 rounded-xl bg-white/60 backdrop-blur-sm border border-black/10 text-[#111] text-sm md:text-base font-medium hover:bg-white/80 transition-colors">
+              Lihat Portfolio
+            </Link>
           </motion.div>
         </div>
 
-        {/* RIGHT: MacBook 3D Mockup + Slider */}
+        {/* RIGHT: Delivery dashboard */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-          className="flex-1 w-full max-w-[560px] lg:max-w-none"
+          className="flex-1 lg:flex-[1.05] w-full max-w-[620px] lg:max-w-[700px]"
         >
           <HomepageShowcaseSection />
         </motion.div>

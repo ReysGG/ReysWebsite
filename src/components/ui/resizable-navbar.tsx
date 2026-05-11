@@ -205,6 +205,11 @@ export const MobileNavMenu = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              onClose();
+            }
+          }}
           className={cn(
             "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg bg-white px-4 py-8 shadow-[0_4px_10px_rgba(0,0,0,0.05),_0_0_1px_rgba(0,0,0,0.1)]",
             className,
@@ -237,6 +242,7 @@ export const NavbarLogo = () => {
       href="#"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="https://assets.aceternity.com/logo-dark.png"
         alt="logo"

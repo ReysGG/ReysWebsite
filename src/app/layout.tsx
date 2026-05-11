@@ -27,12 +27,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background font-sans`}
-          suppressHydrationWarning
-        >
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background font-sans`}
+        suppressHydrationWarning
+      >
+        <ClerkProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -43,8 +43,8 @@ export default function RootLayout({
             {children}
             <BackToTop />
           </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

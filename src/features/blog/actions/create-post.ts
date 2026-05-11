@@ -28,7 +28,7 @@ export async function createPost(formData: FormData) {
     });
 
     return { success: true, slug: post.slug };
-  } catch (error) {
+  } catch {
     return { success: false, error: 'Database error while creating post' };
   }
 }

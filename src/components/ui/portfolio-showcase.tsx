@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export type PortfolioItem = {
@@ -27,6 +27,7 @@ export const PortfolioCard = ({ item }: { item: PortfolioItem }) => {
           isHovered ? "opacity-0" : "opacity-100"
         )}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={item.imageUrl}
           alt={item.title}
@@ -41,6 +42,7 @@ export const PortfolioCard = ({ item }: { item: PortfolioItem }) => {
         )}
       >
         {item.gifUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={item.gifUrl}
             alt={`${item.title} animated preview`}

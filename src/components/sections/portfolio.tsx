@@ -8,52 +8,47 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 const PORTFOLIO_DATA = [
   {
     category: "E-Commerce",
-    title: "Premium Fashion Retail",
-    src: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop",
-    gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjRzYWRmc2Fmc2Rmc2FmZHNhZmRzZmRzZnNmZHNmc2Rm/giphy.gif", // placeholder
+    title: "UMKM Storefront",
+    src: "/images/homepage-slider-reference.png",
     content: (
       <div className="text-neutral-600 dark:text-neutral-400">
         <p className="mb-4">
-          Platform e-commerce high-end dengan integrasi pembayaran multi-channel, 
-          manajemen inventori otomatis, dan desain yang mengutamakan visual produk resolusi tinggi.
+          Storefront cepat untuk katalog produk, promo, checkout ringan, dan jalur kontak WhatsApp agar calon pembeli tidak berhenti di tengah jalan.
         </p>
         <div className="flex gap-2 mt-4 text-xs font-semibold">
           <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Next.js</span>
-          <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Stripe</span>
+          <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">WhatsApp</span>
         </div>
       </div>
     ),
   },
   {
     category: "Web Application",
-    title: "Sistem Kasir & Inventory",
-    src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-    gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjRzYWRmc2Fmc2Rmc2FmZHNhZmRzZmRzZnNmZHNmc2Rm/giphy.gif", // placeholder
+    title: "Dashboard Operasional",
+    src: "/images/image.png",
     content: (
       <div className="text-neutral-600 dark:text-neutral-400">
         <p className="mb-4">
-          Sistem Point of Sales responsif dengan dashboard monitoring stok secara real-time. 
-          Dirancang khusus untuk operasional F&B dengan tingkat transaksi tinggi.
+          Dashboard internal untuk monitoring stok, transaksi, dan laporan harian agar owner bisa mengambil keputusan lebih cepat.
         </p>
         <div className="flex gap-2 mt-4 text-xs font-semibold">
           <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">React</span>
-          <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Node.js</span>
+          <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Prisma</span>
         </div>
       </div>
     ),
   },
   {
     category: "Company Profile",
-    title: "Konsultan Arsitektur",
-    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop",
-    gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjRzYWRmc2Fmc2Rmc2FmZHNhZmRzZmRzZnNmZHNmc2Rm/giphy.gif", // placeholder
+    title: "Profil Bisnis Profesional",
+    src: "/images/homepage-slider-reference.png",
     content: (
       <div className="text-neutral-600 dark:text-neutral-400">
         <p className="mb-4">
-          Website representasi profesional dengan animasi 3D interaktif untuk menampilkan portofolio bangunan dan proyek arsitektur mewah.
+          Website representasi brand dengan struktur layanan, portfolio, testimoni, dan CTA yang jelas untuk meningkatkan trust pengunjung.
         </p>
         <div className="flex gap-2 mt-4 text-xs font-semibold">
-          <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Three.js</span>
+          <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">SEO</span>
           <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Tailwind</span>
         </div>
       </div>
@@ -61,17 +56,16 @@ const PORTFOLIO_DATA = [
   },
   {
     category: "Landing Page",
-    title: "Startup Digital",
-    src: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
-    gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjRzYWRmc2Fmc2Rmc2FmZHNhZmRzZmRzZnNmZHNmc2Rm/giphy.gif", // placeholder
+    title: "Landing Page Campaign",
+    src: "/images/image.png",
     content: (
       <div className="text-neutral-600 dark:text-neutral-400">
         <p className="mb-4">
-          Landing page dengan konversi tinggi, dilengkapi copywriting SEO-friendly dan A/B testing backend untuk startup teknologi AI.
+          Halaman campaign dengan pesan yang fokus, section benefit, social proof, dan CTA yang disusun untuk mengubah visitor menjadi lead.
         </p>
         <div className="flex gap-2 mt-4 text-xs font-semibold">
           <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Next.js</span>
-          <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Framer</span>
+          <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Copywriting</span>
         </div>
       </div>
     ),
@@ -86,7 +80,7 @@ export const PortfolioSection = () => {
   return (
     <section id="portfolio" className="relative w-full py-24 md:py-32 overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8 border-t border-neutral-200 pt-24">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -94,18 +88,18 @@ export const PortfolioSection = () => {
           className="flex flex-col mb-4"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
-            Karya Terbaik Kami
+            Contoh solusi yang bisa dibangun
           </h2>
           <div className="max-w-2xl">
             <TextGenerateEffect
-              words="Eksplorasi mahakarya digital yang telah kami kembangkan untuk membedakan klien di industrinya."
+              words="Beberapa bentuk website dan sistem yang paling sering dibutuhkan bisnis lokal untuk tampil rapi, menjual, dan mudah dikelola."
               className="text-base md:text-lg text-neutral-600 font-normal leading-relaxed"
             />
           </div>
         </motion.div>
       </div>
-      
-      <motion.div 
+
+      <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -115,6 +109,5 @@ export const PortfolioSection = () => {
         <Carousel items={cards} />
       </motion.div>
     </section>
-
   );
 };

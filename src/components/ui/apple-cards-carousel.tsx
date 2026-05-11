@@ -1,5 +1,6 @@
 "use client";
 import React, {
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -13,11 +14,11 @@ import {
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import Image, { ImageProps } from "next/image";
+import type { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
 interface CarouselProps {
-  items: JSX.Element[];
+  items: React.JSX.Element[];
   initialScroll?: number;
 }
 
@@ -43,20 +44,20 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   const [canScrollRight, setCanScrollRight] = React.useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollLeft = initialScroll;
-      checkScrollability();
-    }
-  }, [initialScroll]);
-
-  const checkScrollability = () => {
+  const checkScrollability = useCallback(() => {
     if (carouselRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
       setCanScrollLeft(scrollLeft > 0);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollLeft = initialScroll;
+      checkScrollability();
+    }
+  }, [initialScroll, checkScrollability]);
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -85,7 +86,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   };
 
   const isMobile = () => {
-    return window && window.innerWidth < 768;
+    return typeof window !== "undefined" && window.innerWidth < 768;
   };
 
   return (
@@ -100,7 +101,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         >
           <div
             className={cn(
-              "absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l",
+              "absolute right-0 z-1000 h-auto w-[5%] overflow-hidden bg-linear-to-l",
             )}
           ></div>
 
@@ -165,7 +166,12 @@ export const Card = ({
 }) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { onCardClose, currentIndex } = useContext(CarouselContext);
+  const { onCardClose } = useContext(CarouselContext);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+    onCardClose(index);
+  }, [index, onCardClose]);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -182,17 +188,12 @@ export const Card = ({
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, [handleClose, open]);
 
   useOutsideClick(containerRef, () => handleClose());
 
   const handleOpen = () => {
     setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    onCardClose(index);
   };
 
   return (
@@ -212,7 +213,7 @@ export const Card = ({
               exit={{ opacity: 0 }}
               ref={containerRef}
               layoutId={layout ? `card-${card.title}` : undefined}
-              className="relative z-[60] mx-auto my-10 h-fit max-w-5xl rounded-3xl bg-white p-4 font-sans md:p-10 dark:bg-neutral-900"
+              className="relative z-60 mx-auto my-10 h-fit max-w-5xl rounded-3xl bg-white p-4 font-sans md:p-10 dark:bg-neutral-900"
             >
               <button
                 className="sticky top-4 right-0 ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-black hover:bg-neutral-800 transition-colors"
@@ -240,9 +241,9 @@ export const Card = ({
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={handleOpen}
-        className="group relative z-10 flex flex-col items-start justify-start overflow-hidden rounded-3xl bg-neutral-100 shadow-xl border border-neutral-200 transition-all h-[16rem] w-[28.4rem] md:h-[24rem] md:w-[42.6rem]" // Custom ratio approx 16:9
+        className="group relative z-10 flex flex-col items-start justify-start overflow-hidden rounded-3xl bg-neutral-100 shadow-xl border border-neutral-200 transition-all h-64 w-[28.4rem] md:h-96 md:w-[42.6rem]" // Custom ratio approx 16:9
       >
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full bg-gradient-to-b from-black/80 via-black/20 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full bg-linear-to-b from-black/80 via-black/20 to-transparent" />
         <div className="relative z-40 p-6 md:p-8">
           <motion.p
             layoutId={layout ? `category-${card.category}` : undefined}
@@ -252,7 +253,7 @@ export const Card = ({
           </motion.p>
           <motion.p
             layoutId={layout ? `title-${card.title}` : undefined}
-            className="mt-2 max-w-xs text-left font-sans text-xl md:text-4xl font-bold [text-wrap:balance] text-white drop-shadow-[0_4px_8px_rgba(0,0,0,1)]"
+            className="mt-2 max-w-xs text-left font-sans text-xl md:text-4xl font-bold text-balance text-white drop-shadow-[0_4px_8px_rgba(0,0,0,1)]"
           >
             {card.title}
           </motion.p>
@@ -287,11 +288,13 @@ export const BlurImage = ({
   alt,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   blurDataURL: _blurDataURL,
-  fill, // Extract fill so it does not get appended to the standard img tag
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  fill: _fill,
   ...rest
 }: ImageProps) => {
   const [isLoading, setLoading] = useState(true);
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       className={cn(
         "h-full w-full transition duration-300",

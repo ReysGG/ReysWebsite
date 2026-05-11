@@ -4,7 +4,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { IconArrowRight, IconBrandWhatsapp } from "@tabler/icons-react";
-import { Spotlight } from "@/components/ui/spotlight";
+
+const WHATSAPP_LINK =
+  "https://wa.me/6281234567890?text=Halo%20WebServices%2C%20saya%20ingin%20konsultasi%20pembuatan%20website.";
 
 export const CtaSection = () => {
   return (
@@ -32,7 +34,7 @@ export const CtaSection = () => {
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neutral-300 bg-neutral-100 text-neutral-800 text-xs font-semibold tracking-widest uppercase mb-8"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
-          Konsultasi Gratis — Tanpa Komitmen
+          Konsultasi Gratis - Tanpa Komitmen
         </motion.div>
 
         {/* Headline */}
@@ -43,10 +45,10 @@ export const CtaSection = () => {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-8"
         >
-          <span className="text-neutral-900">Siap memulai</span>
+          <span className="text-neutral-900">Punya ide website?</span>
           <br />
           <span className="bg-gradient-to-r from-neutral-600 to-black bg-clip-text text-transparent">
-            proyek Anda?
+            kita rapikan scopenya.
           </span>
         </motion.h2>
 
@@ -58,8 +60,8 @@ export const CtaSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          Ceritakan kebutuhan Anda. Kami akan bantu rancang solusi terbaik —
-          dari landing page hingga sistem enterprise skala penuh.
+          Ceritakan bisnis, target pelanggan, dan fitur yang dibutuhkan. Kami
+          bantu susun scope, estimasi waktu, dan langkah paling realistis.
         </motion.p>
 
         {/* CTAs */}
@@ -72,12 +74,12 @@ export const CtaSection = () => {
         >
           {/* Primary — Black solid button */}
           <Link
-            href="https://wa.me/6281234567890"
+            href={WHATSAPP_LINK}
             target="_blank"
             className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-black text-white font-bold text-base transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105"
           >
             <IconBrandWhatsapp className="w-5 h-5" />
-            Chat WhatsApp Sekarang
+            Konsultasi via WhatsApp
             <IconArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
           {/* Secondary — bordered */}

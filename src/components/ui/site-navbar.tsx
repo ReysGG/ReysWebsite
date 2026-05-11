@@ -13,18 +13,21 @@ import {
 } from "@/components/ui/resizable-navbar";
 import { MonitorSmartphone } from "lucide-react";
 import Link from "next/link";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 
 const NAV_ITEMS = [
-  { name: "Layanan", link: "#services" },
-  { name: "Portofolio", link: "#portfolio" },
-  { name: "Proses Kerja", link: "#workflow" },
-  { name: "Harga", link: "#pricing" },
-  { name: "Testimoni", link: "#testimonials" },
-  { name: "FAQ", link: "#faq" },
+  { name: "Layanan", link: "/#services" },
+  { name: "Portofolio", link: "/#portfolio" },
+  { name: "Proses", link: "/#workflow" },
+  { name: "Harga", link: "/#pricing" },
+  { name: "Testimoni", link: "/#testimonials" },
+  { name: "Blog", link: "/blog" },
 ];
 
 export const SiteNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const closeMenu = () => setIsOpen(false);
 
   return (
     <div className="fixed inset-x-0 top-0 z-50 w-full">
@@ -44,16 +47,37 @@ export const SiteNavbar = () => {
           <div className="flex items-center gap-3">
             <Link
               href="/admin"
-              className="px-4 py-2 text-sm font-semibold text-neutral-900 hover:text-black transition-colors"
+              className="px-3 py-2 text-xs font-semibold text-neutral-500 hover:text-neutral-900 transition-colors"
             >
               Admin
             </Link>
+            <Show when="signed-out">
+              <SignInButton mode="modal">
+                <button
+                  type="button"
+                  className="px-3 py-2 text-xs font-semibold text-neutral-500 hover:text-neutral-900 transition-colors"
+                >
+                  Sign in
+                </button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <button
+                  type="button"
+                  className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-neutral-900 shadow-sm ring-1 ring-neutral-200 transition-colors hover:bg-neutral-50"
+                >
+                  Sign up
+                </button>
+              </SignUpButton>
+            </Show>
+            <Show when="signed-in">
+              <UserButton />
+            </Show>
             <NavbarButton
-              href="#cta"
+              href="/#cta"
               variant="dark"
               className="bg-neutral-900 hover:bg-black text-white font-semibold border-0 text-xs px-5 py-2 rounded-full transition-all"
             >
-              Hire Us
+              Konsultasi
             </NavbarButton>
           </div>
         </NavBody>
@@ -76,7 +100,7 @@ export const SiteNavbar = () => {
               <a
                 key={item.name}
                 href={item.link}
-                onClick={() => setIsOpen(false)}
+                onClick={closeMenu}
                 className="w-full py-2 text-neutral-900 hover:text-black transition-colors text-sm font-semibold"
               >
                 {item.name}
@@ -85,18 +109,41 @@ export const SiteNavbar = () => {
             <div className="flex items-center gap-3 w-full pt-2 border-t border-neutral-200">
               <Link
                 href="/admin"
-                onClick={() => setIsOpen(false)}
-                className="text-sm font-semibold text-neutral-900 hover:text-black transition-colors"
+                onClick={closeMenu}
+                className="text-sm font-semibold text-neutral-500 hover:text-black transition-colors"
               >
                 Admin
               </Link>
+              <Show when="signed-out">
+                <SignInButton mode="modal">
+                  <button
+                    type="button"
+                    onClick={closeMenu}
+                    className="text-sm font-semibold text-neutral-500 transition-colors hover:text-black"
+                  >
+                    Sign in
+                  </button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button
+                    type="button"
+                    onClick={closeMenu}
+                    className="rounded-full bg-neutral-900 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-black"
+                  >
+                    Sign up
+                  </button>
+                </SignUpButton>
+              </Show>
+              <Show when="signed-in">
+                <UserButton />
+              </Show>
               <NavbarButton
-                href="#cta"
+                href="/#cta"
                 variant="dark"
                 className="flex-1 text-center bg-neutral-900 text-white hover:bg-black font-semibold border-0 rounded-full"
-                onClick={() => setIsOpen(false)}
+                onClick={closeMenu}
               >
-                Hire Us
+                Konsultasi
               </NavbarButton>
             </div>
           </MobileNavMenu>
