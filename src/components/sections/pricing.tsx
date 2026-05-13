@@ -57,8 +57,9 @@ const pricingTiers = [
 
 export const PricingSection = () => {
   return (
-    <section id="pricing" className="relative w-full py-24 md:py-32 overflow-hidden flex flex-col items-center justify-center bg-white border-t border-neutral-200">
+    <section id="pricing" className="relative w-full py-24 md:py-32 overflow-hidden flex flex-col items-center justify-center bg-neutral-50">
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full mb-16 items-center text-center">
+        <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">Harga</p>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
           Paket yang jelas sejak awal
         </h2>
@@ -72,16 +73,16 @@ export const PricingSection = () => {
           <div
             key={idx}
             className={cn(
-              "relative flex flex-col rounded-3xl p-8 shadow-sm transition-transform duration-300 hover:scale-[1.02]",
+              "relative flex flex-col rounded-3xl p-8 shadow-sm transition-all duration-300 hover:scale-[1.02]",
               tier.popular
-                ? "bg-white border-2 border-black overflow-hidden shadow-md"
-                : "bg-neutral-50 border border-neutral-200"
+                ? "bg-white border-2 border-indigo-500 overflow-hidden shadow-lg shadow-indigo-100 lg:-translate-y-4 lg:scale-[1.03]"
+                : "bg-white border border-neutral-200"
             )}
           >
             <div className="relative z-10 flex flex-col h-full">
               <div className="mb-8">
                 {tier.popular && (
-                  <span className="inline-block px-4 py-1 mb-6 text-xs font-semibold tracking-wider text-white uppercase bg-black rounded-full">
+                  <span className="inline-block px-4 py-1 mb-6 text-xs font-semibold tracking-wider text-white uppercase bg-indigo-600 rounded-full">
                     Most Popular
                   </span>
                 )}
@@ -103,7 +104,7 @@ export const PricingSection = () => {
                   <li key={featureIdx} className="flex items-start">
                     <div className={cn(
                       "flex-shrink-0 flex items-center justify-center p-1 rounded-full mr-3 mt-0.5",
-                      tier.popular ? "bg-black text-white" : "bg-neutral-200 text-neutral-600"
+                      tier.popular ? "bg-indigo-600 text-white" : "bg-neutral-200 text-neutral-600"
                     )}>
                       <IconCheck className="w-4 h-4" stroke={3} />
                     </div>
@@ -117,8 +118,8 @@ export const PricingSection = () => {
                 className={cn(
                   "mt-auto inline-flex w-full items-center justify-center py-4 px-8 rounded-xl font-bold tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2",
                   tier.popular
-                    ? "bg-black text-white hover:bg-neutral-800 focus:ring-black"
-                    : "bg-white border border-neutral-300 text-neutral-900 hover:bg-neutral-100 focus:ring-neutral-200"
+                    ? "bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500"
+                    : "bg-white border border-neutral-300 text-neutral-900 hover:bg-neutral-100 hover:border-indigo-300 focus:ring-neutral-200"
                 )}
               >
                 {tier.buttonText}

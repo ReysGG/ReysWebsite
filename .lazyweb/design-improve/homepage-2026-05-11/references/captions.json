@@ -1,0 +1,20 @@
+[
+  {
+    "file": "lazyweb-solamber-agency-homepage.png",
+    "company": "solamber",
+    "pageUrl": "https://solambergroupltd.com/",
+    "description": "Corporate agency landing page for a mobile development company featuring a hero section with headline and “Learn More” CTA plus top navigation (Home, About, Services, Contact). Below are an about overview block, a services grid with icon cards, stats counters, a testimonial section, and a “Get in Touch” contact panel with address/phone/email and social links."
+  },
+  {
+    "file": "lazyweb-guidde-pricing-cards.png",
+    "company": "guidde",
+    "pageUrl": "https://www.guidde.com/pricing",
+    "description": "Subscription plan selection screen with three tiers—Free, Pro ($19), and Enterprise (contact us)—displayed as prominent vertical cards highlighting pricing, key benefits, and select/subscribe buttons, followed by a detailed features comparison table listing numerous functionalities with checkmarks or indicators showing availability across each plan."
+  },
+  {
+    "file": "lazyweb-remote-case-studies.png",
+    "company": "remote",
+    "pageUrl": "https://remote.com/resources/case-studies",
+    "description": "Case studies portfolio page with top navigation tabs for Home, Case Studies, and Blog, featuring a scrollable grid of project thumbnails displaying client logos and titles like Usable, Ichosen, and Nauto, followed by a prominent \"Discover Remote\" featured section with descriptive text on powering global teams and an additional grid of related visuals."
+  }
+]

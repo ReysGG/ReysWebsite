@@ -27,9 +27,10 @@ const steps = [
 
 export const WorkflowSection = () => {
   return (
-    <section className="w-full py-24 md:py-32 relative overflow-hidden bg-white">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-neutral-100 blur-[120px] rounded-full pointer-events-none" />
+    <section className="w-full py-24 md:py-32 relative overflow-hidden bg-neutral-50">
+      {/* Gradient orbs */}
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full bg-indigo-100/50 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full bg-violet-100/40 blur-[100px]" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
@@ -40,8 +41,12 @@ export const WorkflowSection = () => {
           transition={{ duration: 0.7 }}
           className="flex flex-col items-center text-center mb-16 md:mb-20 relative z-10"
         >
+          <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">Proses Kerja</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
-            Dari Ide ke <FlipWords words={["Realisasi", "Kenyataan", "Kesuksesan", "Laba"]} className="text-neutral-600 font-extrabold" />
+            Dari Ide ke{" "}
+            <span className="inline-block min-w-[220px] text-left">
+              <FlipWords words={["Realisasi", "Kenyataan", "Kesuksesan", "Laba"]} className="text-neutral-600 font-extrabold" />
+            </span>
           </h2>
           <p className="text-base md:text-lg text-neutral-600 max-w-2xl leading-relaxed">
             Metodologi transparan dan terukur untuk menjamin keberhasilan setiap produk digital.
@@ -51,7 +56,7 @@ export const WorkflowSection = () => {
         {/* Timeline representation */}
         <div className="relative mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 max-w-5xl mx-auto z-10">
           {/* Horizontal connecting line - Desktop */}
-          <div className="hidden lg:block absolute top-[40px] left-[12%] w-[76%] h-[1px] bg-neutral-200 z-0" />
+          <div className="hidden lg:block absolute top-[40px] left-[12%] w-[76%] h-[1px] bg-gradient-to-r from-indigo-200 via-indigo-300 to-indigo-200 z-0" />
           
           {steps.map((item, idx) => (
             <motion.div 
@@ -64,14 +69,14 @@ export const WorkflowSection = () => {
             >
               
               {/* Node */}
-              <div className="w-20 h-20 rounded-2xl bg-white border border-neutral-200 flex items-center justify-center mb-8 relative shadow-sm group-hover:shadow-md group-hover:border-neutral-400 transition-all duration-500 ease-out z-10">
-                <span className="text-2xl font-bold text-neutral-900 transition-colors duration-500">
+              <div className="w-20 h-20 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center mb-8 relative shadow-sm group-hover:shadow-md group-hover:border-indigo-400 transition-all duration-500 ease-out z-10">
+                <span className="text-2xl font-bold text-indigo-600 transition-colors duration-500">
                   {item.step}
                 </span>
               </div>
               
               {/* Content */}
-              <h3 className="text-xl font-semibold text-neutral-900 mb-3 transition-colors duration-500">
+              <h3 className="text-xl font-semibold text-neutral-900 group-hover:text-indigo-600 mb-3 transition-colors duration-500">
                 {item.title}
               </h3>
               <p className="text-sm text-neutral-600 leading-relaxed max-w-[250px] mx-auto lg:mx-0">

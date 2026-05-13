@@ -36,15 +36,11 @@ export const FaqSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
-    if (openIndex === index) {
-      setOpenIndex(null);
-    } else {
-      setOpenIndex(index);
-    }
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section className="relative w-full py-24 md:py-32 overflow-hidden bg-white border-t border-neutral-200">
+    <section className="relative w-full py-24 md:py-32 overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-16 lg:gap-24">
         
         {/* Left Side: Title */}
@@ -55,6 +51,7 @@ export const FaqSection = () => {
           transition={{ duration: 0.7 }}
           className="w-full md:w-1/3 flex flex-col"
         >
+          <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">Pertanyaan</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 leading-tight mb-6">
             Frequently <br className="hidden md:block" /> asked <br className="hidden md:block" /> questions
           </h2>
@@ -71,17 +68,21 @@ export const FaqSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className={`flex flex-col border-b border-neutral-200 py-6 cursor-pointer group ${index === 0 ? 'border-t' : ''}`}
-                onClick={() => toggleFAQ(index)}
+                className={`flex flex-col border-b border-neutral-200 ${index === 0 ? 'border-t' : ''}`}
               >
-                <div className="flex items-center gap-6">
-                  <div className="text-indigo-600 shrink-0">
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={() => toggleFAQ(index)}
+                  className="flex items-center gap-6 py-6 w-full text-left group cursor-pointer"
+                >
+                  <span className="text-indigo-600 shrink-0">
                     {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5 group-hover:scale-125 transition-transform" />}
-                  </div>
-                  <h3 className="text-lg md:text-xl font-medium text-neutral-800 group-hover:text-black transition-colors">
+                  </span>
+                  <h3 className="text-lg md:text-xl font-medium text-neutral-800 group-hover:text-indigo-700 transition-colors">
                     {faq.question}
                   </h3>
-                </div>
+                </button>
                 
                 <AnimatePresence>
                   {isOpen && (
@@ -92,7 +93,7 @@ export const FaqSection = () => {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <p className="pl-11 pt-4 text-neutral-600 text-base leading-relaxed">
+                      <p className="pl-11 pb-6 text-neutral-600 text-base leading-relaxed">
                         {faq.answer}
                       </p>
                     </motion.div>

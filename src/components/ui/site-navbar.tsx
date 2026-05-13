@@ -47,7 +47,7 @@ export const SiteNavbar = () => {
           <div className="flex items-center gap-3">
             <Link
               href="/admin"
-              className="px-3 py-2 text-xs font-semibold text-neutral-500 hover:text-neutral-900 transition-colors"
+              className="px-3 py-2 text-xs font-semibold text-neutral-600 hover:text-neutral-900 transition-colors"
             >
               Admin
             </Link>
@@ -55,7 +55,7 @@ export const SiteNavbar = () => {
               <SignInButton mode="modal">
                 <button
                   type="button"
-                  className="px-3 py-2 text-xs font-semibold text-neutral-500 hover:text-neutral-900 transition-colors"
+                  className="px-3 py-2 text-xs font-semibold text-neutral-600 hover:text-neutral-900 transition-colors"
                 >
                   Sign in
                 </button>
@@ -75,7 +75,7 @@ export const SiteNavbar = () => {
             <NavbarButton
               href="/#cta"
               variant="dark"
-              className="bg-neutral-900 hover:bg-black text-white font-semibold border-0 text-xs px-5 py-2 rounded-full transition-all"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold border-0 text-xs px-5 py-2 rounded-full transition-all"
             >
               Konsultasi
             </NavbarButton>
@@ -110,7 +110,7 @@ export const SiteNavbar = () => {
               <Link
                 href="/admin"
                 onClick={closeMenu}
-                className="text-sm font-semibold text-neutral-500 hover:text-black transition-colors"
+                className="text-sm font-semibold text-neutral-600 hover:text-black transition-colors"
               >
                 Admin
               </Link>
@@ -119,7 +119,7 @@ export const SiteNavbar = () => {
                   <button
                     type="button"
                     onClick={closeMenu}
-                    className="text-sm font-semibold text-neutral-500 transition-colors hover:text-black"
+                    className="text-sm font-semibold text-neutral-600 transition-colors hover:text-black"
                   >
                     Sign in
                   </button>
@@ -128,7 +128,7 @@ export const SiteNavbar = () => {
                   <button
                     type="button"
                     onClick={closeMenu}
-                    className="rounded-full bg-neutral-900 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-black"
+                    className="rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
                   >
                     Sign up
                   </button>
@@ -140,7 +140,7 @@ export const SiteNavbar = () => {
               <NavbarButton
                 href="/#cta"
                 variant="dark"
-                className="flex-1 text-center bg-neutral-900 text-white hover:bg-black font-semibold border-0 rounded-full"
+                className="flex-1 text-center bg-indigo-600 text-white hover:bg-indigo-700 font-semibold border-0 rounded-full"
                 onClick={closeMenu}
               >
                 Konsultasi

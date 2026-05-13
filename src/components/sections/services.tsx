@@ -10,32 +10,32 @@ const SERVICES_CONTENT = [
     title: "Website yang membangun trust",
     description:
       "Company profile modern untuk membuat bisnis terlihat kredibel, jelas, dan mudah dihubungi calon pelanggan.",
-    icon: <Layout className="w-5 h-5 text-cyan-400" />,
-    iconBg: "bg-cyan-400/8 border-cyan-400/15",
+    icon: <Layout className="w-5 h-5 text-cyan-600" />,
+    iconBg: "bg-cyan-50 border-cyan-200",
   },
   {
     number: "02",
     title: "Dashboard operasional",
     description:
       "Web app kustom untuk POS, inventory, booking, CRM, atau workflow internal yang masih berantakan di spreadsheet.",
-    icon: <Server className="w-5 h-5 text-indigo-400" />,
-    iconBg: "bg-indigo-400/8 border-indigo-400/15",
+    icon: <Server className="w-5 h-5 text-indigo-600" />,
+    iconBg: "bg-indigo-50 border-indigo-200",
   },
   {
     number: "03",
     title: "Toko online siap transaksi",
     description:
       "E-commerce cepat dengan katalog produk, checkout, pembayaran, dan integrasi WhatsApp agar proses jualan lebih praktis.",
-    icon: <ShoppingBag className="w-5 h-5 text-rose-400" />,
-    iconBg: "bg-rose-400/8 border-rose-400/15",
+    icon: <ShoppingBag className="w-5 h-5 text-rose-600" />,
+    iconBg: "bg-rose-50 border-rose-200",
   },
   {
     number: "04",
     title: "SEO dan performa loading",
     description:
       "Struktur halaman, metadata, dan optimasi teknis supaya website lebih cepat, mudah dibaca Google, dan nyaman dibuka mobile.",
-    icon: <LineChart className="w-5 h-5 text-emerald-400" />,
-    iconBg: "bg-emerald-400/8 border-emerald-400/15",
+    icon: <LineChart className="w-5 h-5 text-emerald-600" />,
+    iconBg: "bg-emerald-50 border-emerald-200",
   },
 ];
 
@@ -45,6 +45,10 @@ export const ServicesSection = () => {
       id="services"
       className="w-full py-24 md:py-32 relative overflow-hidden bg-white"
     >
+      {/* Gradient orbs */}
+      <div className="pointer-events-none absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-indigo-100/60 blur-[100px]" />
+      <div className="pointer-events-none absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full bg-cyan-100/50 blur-[100px]" />
+
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Header */}
         <motion.div 
@@ -54,7 +58,7 @@ export const ServicesSection = () => {
           transition={{ duration: 0.7 }}
           className="flex flex-col mb-16 md:mb-20"
         >
-          <p className="text-xs font-bold tracking-widest text-neutral-400 uppercase mb-4">
+          <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">
             Layanan Utama
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
@@ -71,18 +75,21 @@ export const ServicesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative flex flex-col p-8 rounded-none bg-white border border-neutral-200 hover:border-neutral-400 transition-all duration-300 overflow-hidden cursor-pointer shadow-sm hover:shadow-md"
+              className="group relative flex flex-col p-8 rounded-2xl bg-white border border-neutral-200 hover:border-indigo-200 transition-all duration-300 overflow-hidden cursor-pointer shadow-sm hover:shadow-md hover:shadow-indigo-50/50"
             >
-              {/* Top row: icon */}
+              {/* Top row: icon + number accent */}
               <div className="relative z-10 flex items-start justify-between mb-8">
-                <div className="text-neutral-900">
+                <div className={`p-2.5 rounded-xl border ${service.iconBg}`}>
                   {service.icon}
                 </div>
+                <span className="text-5xl font-black text-neutral-100 select-none leading-none">
+                  {service.number}
+                </span>
               </div>
 
               {/* Body */}
               <div className="relative z-10 flex flex-col flex-1">
-                <h3 className="text-lg font-bold text-neutral-900 tracking-tight leading-snug mb-3">
+                <h3 className="text-lg font-bold text-neutral-900 group-hover:text-indigo-600 tracking-tight leading-snug mb-3 transition-colors">
                   {service.title}
                 </h3>
                 <p className="text-sm text-neutral-600 leading-relaxed flex-1">

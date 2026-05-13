@@ -16,7 +16,7 @@ export const CtaSection = () => {
     >
       {/* Subtle grid */}
       <div
-        className="absolute inset-0 opacity-[0.05]"
+        className="absolute inset-0 opacity-[0.07]"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.8) 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
@@ -31,9 +31,9 @@ export const CtaSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neutral-300 bg-neutral-100 text-neutral-800 text-xs font-semibold tracking-widest uppercase mb-8"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-600 text-xs font-semibold tracking-widest uppercase mb-8"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
           Konsultasi Gratis - Tanpa Komitmen
         </motion.div>
 
@@ -47,7 +47,7 @@ export const CtaSection = () => {
         >
           <span className="text-neutral-900">Punya ide website?</span>
           <br />
-          <span className="bg-gradient-to-r from-neutral-600 to-black bg-clip-text text-transparent">
+          <span className="text-indigo-600">
             kita rapikan scopenya.
           </span>
         </motion.h2>
@@ -76,7 +76,7 @@ export const CtaSection = () => {
           <Link
             href={WHATSAPP_LINK}
             target="_blank"
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-black text-white font-bold text-base transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105"
+            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-indigo-600 text-white font-bold text-base transition-all duration-300 shadow-md shadow-neutral-900/10 hover:shadow-lg hover:bg-indigo-700 hover:scale-105"
           >
             <IconBrandWhatsapp className="w-5 h-5" />
             Konsultasi via WhatsApp
@@ -85,7 +85,7 @@ export const CtaSection = () => {
           {/* Secondary — bordered */}
           <Link
             href="#portfolio"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-neutral-300 hover:border-neutral-500 text-neutral-700 hover:text-black font-semibold text-base hover:bg-neutral-50 transition-all duration-200"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-neutral-300 hover:border-indigo-400 text-neutral-700 hover:text-indigo-600 font-semibold text-base hover:bg-indigo-50 transition-all duration-200"
           >
             Lihat Portfolio
           </Link>
@@ -105,7 +105,7 @@ export const CtaSection = () => {
               {["DB", "AR", "SK", "MY"].map((init, i) => (
                 <div
                   key={i}
-                  className="w-8 h-8 rounded-full bg-neutral-200 border-2 border-white flex items-center justify-center text-[10px] font-bold text-neutral-800"
+                  className="w-8 h-8 rounded-full bg-indigo-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-indigo-700"
                 >
                   {init}
                 </div>

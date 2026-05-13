@@ -8,7 +8,7 @@ import { HomepageShowcaseSection } from "@/components/sections/homepage-showcase
 
 export const HeroSection = () => {
   return (
-    <section className="relative w-full overflow-hidden antialiased bg-[#EFECE6] min-h-screen flex items-center">
+    <section className="relative w-full overflow-hidden antialiased bg-[#EFECE6] min-h-screen flex items-center justify-center">
 
       {/* ── Decorative SVG lines ───────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block z-0">
@@ -27,7 +27,7 @@ export const HeroSection = () => {
       </div>
 
       {/* ── Main layout ───────────────────────────────────────────────── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col lg:flex-row items-center gap-10 lg:gap-0 pt-24 pb-16 lg:pt-0 lg:pb-0">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col lg:flex-row items-center gap-10 lg:gap-0 pt-20 pb-16 lg:py-0">
 
         {/* LEFT: Text */}
         <div className="flex-1 lg:flex-[0.95] w-full flex flex-col">
@@ -35,14 +35,17 @@ export const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-6 md:mb-8 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/60 bg-white/70 shadow-sm backdrop-blur-md text-xs md:text-sm font-semibold text-neutral-800 w-fit"
+            className="mb-6 md:mb-8 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-indigo-200 bg-indigo-50 shadow-sm backdrop-blur-md text-xs md:text-sm font-semibold text-indigo-700 w-fit"
           >
             <div className="flex -space-x-2">
-              {[33,47,12,11].map((n,i)=>(
-                // eslint-disable-next-line @next/next/no-img-element
-                <img key={n} src={`https://i.pravatar.cc/100?img=${n}`} alt=""
-                  className="w-6 h-6 md:w-7 md:h-7 rounded-full border-2 border-[#EFECE6]"
-                  style={{ zIndex: 40-i*10, position:"relative" }} />
+              {["DB", "AR", "SK", "MY"].map((init, i) => (
+                <div
+                  key={init}
+                  className="w-6 h-6 md:w-7 md:h-7 rounded-full border-2 border-[#EFECE6] bg-indigo-100 flex items-center justify-center text-[9px] font-bold text-indigo-700"
+                  style={{ zIndex: 40 - i * 10, position: "relative" }}
+                >
+                  {init}
+                </div>
               ))}
             </div>
             <span className="tracking-tight">Dipercaya 50+ bisnis dan founder</span>
@@ -54,8 +57,10 @@ export const HeroSection = () => {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#1A1A1A] tracking-tighter leading-[1.05]"
           >
             Website cepat, rapi, <br className="hidden sm:block" />
-            <FlipWords className="text-[#1A1A1A] px-0 font-bold"
-              words={["siap jualan.", "mudah dikelola.", "terlihat profesional."]} />
+            <span className="inline-block min-w-[280px] sm:min-w-[360px]">
+              <FlipWords className="text-indigo-600 px-0 font-bold"
+                words={["siap jualan.", "mudah dikelola.", "terlihat profesional."]} />
+            </span>
           </motion.h1>
 
           <motion.p
@@ -73,10 +78,10 @@ export const HeroSection = () => {
             transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
             className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 md:gap-4"
           >
-            <Link href="#cta" className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-3.5 rounded-xl bg-[#111] text-white text-sm md:text-base font-medium hover:bg-black transition-colors shadow-lg shadow-black/10">
+            <Link href="#cta" className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-3.5 rounded-xl bg-indigo-600 text-white text-sm md:text-base font-medium hover:bg-indigo-700 transition-colors shadow-lg shadow-neutral-900/10">
               Konsultasi Gratis
             </Link>
-            <Link href="#portfolio" className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-3.5 rounded-xl bg-white/60 backdrop-blur-sm border border-black/10 text-[#111] text-sm md:text-base font-medium hover:bg-white/80 transition-colors">
+            <Link href="#portfolio" className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-3.5 rounded-xl bg-white/60 backdrop-blur-sm border border-black/10 text-[#111] text-sm md:text-base font-medium hover:bg-white/80 hover:border-indigo-300 transition-colors">
               Lihat Portfolio
             </Link>
           </motion.div>

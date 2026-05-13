@@ -79,7 +79,7 @@ export const PortfolioSection = () => {
 
   return (
     <section id="portfolio" className="relative w-full py-24 md:py-32 overflow-hidden bg-white">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8 border-t border-neutral-200 pt-24">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8 pt-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -87,6 +87,9 @@ export const PortfolioSection = () => {
           transition={{ duration: 0.7 }}
           className="flex flex-col mb-4"
         >
+          <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">
+            Portfolio
+          </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
             Contoh solusi yang bisa dibangun
           </h2>

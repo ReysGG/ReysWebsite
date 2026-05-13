@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Design Improvement: BuildWebsite Homepage</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f6f7f8;
+        color: #171717;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.65;
+      }
+      main {
+        max-width: 940px;
+        margin: 0 auto;
+        padding: 48px 24px 80px;
+      }
+      h1, h2, h3 {
+        line-height: 1.12;
+      }
+      h1 {
+        font-size: clamp(2rem, 5vw, 4rem);
+        letter-spacing: -0.04em;
+      }
+      h2 {
+        margin-top: 48px;
+        font-size: 1.65rem;
+      }
+      h3 {
+        margin-top: 36px;
+        font-size: 1.25rem;
+      }
+      .callout {
+        border: 1px solid #bfdbfe;
+        border-radius: 12px;
+        background: #eff6ff;
+        padding: 18px 20px;
+      }
+      img {
+        max-width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+        border: 1px solid #e5e7eb;
+        background: white;
+      }
+      figure {
+        margin: 24px 0;
+      }
+      figcaption {
+        margin-top: 10px;
+        color: #525252;
+        font-size: 0.95rem;
+      }
+      pre {
+        overflow-x: auto;
+        border-radius: 10px;
+        background: #111827;
+        color: #f9fafb;
+        padding: 16px;
+      }
+      code {
+        font-family: "SFMono-Regular", Consolas, monospace;
+      }
+      ul {
+        padding-left: 1.25rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Design Improvement: BuildWebsite Homepage</h1>
+      <div class="callout">
+        Homepage sebelumnya rapi, tetapi terlalu banyak ruang kosong di hero, section sekunder terasa sama besar, navbar terlalu padat, dan beberapa bagian memakai copy/visual yang terasa placeholder. Implementasi sekarang memprioritaskan offer UMKM, ritme section yang lebih jelas, nav auth yang lebih natural, portfolio lebih kredibel, dan satu aksen brand emerald.
+      </div>
+
+      <h2>Current State</h2>
+      <figure>
+        <img src="references/current.png" alt="Current homepage screenshot" />
+        <figcaption>Homepage sebelum revisi: hero terlalu turun pada viewport tinggi, nav memuat Admin publik, dan headline belum langsung menjawab target, outcome, dan timeline.</figcaption>
+      </figure>
+
+      <h2>Improvement Ideas Implemented</h2>
+
+      <h3>1. Make the hero answer who, outcome, and timeline</h3>
+      <p>Changed the hero from a broad website promise to a sharper UMKM offer with lead and launch-time framing.</p>
+      <figure>
+        <img src="references/lazyweb-solamber-agency-homepage.png" alt="Solamber agency homepage reference" />
+        <figcaption>Solamber - agency landing page with clear service positioning, simple navigation, service grid, stats, and contact panel. [Lazyweb]</figcaption>
+      </figure>
+      <pre><code>[Badge: UMKM leads]
+Website profesional untuk UMKM
+[siap dapat leads / launch 7-21 hari / mudah dikelola]
+Short proof copy
+[Konsultasi Gratis] [Lihat Portfolio]
+[7-21 hari] [98 score] [CMS]</code></pre>
+
+      <h3>2. Reduce decision load in pricing</h3>
+      <p>Pricing now keeps three tiers, highlights one recommended tier, uses Indonesian copy, and makes the middle plan feel like the guided option.</p>
+      <figure>
+        <img src="references/lazyweb-guidde-pricing-cards.png" alt="Guidde pricing cards reference" />
+        <figcaption>Guidde - three-tier pricing cards with benefits, pricing, and clear plan selection. [Lazyweb]</figcaption>
+      </figure>
+      <pre><code>Starter        Profesional        Enterprise
+Rp 5 juta      Rp 15 juta         Kustom
+basic leads    CMS + SEO          app/API scope
+[CTA]          [Terpopuler CTA]   [CTA]</code></pre>
+
+      <h3>3. Make portfolio feel like case-study evidence</h3>
+      <p>Portfolio images are now distinct by use case instead of repeating the same image, and the labels explain business outcomes.</p>
+      <figure>
+        <img src="references/lazyweb-remote-case-studies.png" alt="Remote case studies reference" />
+        <figcaption>Remote - case-study grid with client/project thumbnails and a featured discovery section. [Lazyweb]</figcaption>
+      </figure>
+      <pre><code>Company Profile   Dashboard   Katalog UMKM   Campaign
+[visual]          [visual]    [visual]       [visual]
+outcome copy      tags        outcome copy   tags</code></pre>
+
+      <h2>What's Working</h2>
+      <ul>
+        <li>The neutral visual direction is already clean and fits a service/agency site.</li>
+        <li>The interactive hero mockup gives the page a custom product feel.</li>
+        <li>Pricing already had a clear three-tier structure, which is a good base.</li>
+        <li>The page has the right conversion sections: hero, services, workflow, portfolio, pricing, proof, CTA, FAQ.</li>
+      </ul>
+    </main>
+  </body>
+</html>

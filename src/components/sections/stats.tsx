@@ -82,11 +82,21 @@ export const StatsSection = () => {
   return (
     <section
       ref={ref}
-      className="relative w-full py-16 overflow-hidden bg-white"
+      className="relative w-full py-16 overflow-hidden bg-indigo-50/40"
     >
-      <div className="w-full border-y border-neutral-200">
+      {/* Large outlined text accent */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden select-none">
+        <span
+          className="text-[160px] md:text-[220px] font-black tracking-tighter leading-none"
+          style={{ WebkitTextStroke: "1.5px rgba(99,102,241,0.08)", color: "transparent" }}
+        >
+          STATS
+        </span>
+      </div>
+
+      <div className="w-full border-y border-indigo-100">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-neutral-200 py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-indigo-100 py-8">
           {STATS.map((stat, i) => (
             <motion.div
               key={i}
@@ -95,13 +105,13 @@ export const StatsSection = () => {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="flex flex-col items-center text-center px-6 py-4 md:px-10 first:pl-0 last:pr-0"
             >
-              <div className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-2">
+              <div className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-2 text-indigo-600">
                 <CountUp target={stat.value} suffix={stat.suffix} inView={inView} />
               </div>
               <div className="text-sm font-semibold text-neutral-900 mb-1">
                 {stat.label}
               </div>
-              <div className="text-xs text-neutral-600 leading-relaxed">
+              <div className="text-sm text-neutral-600 leading-relaxed">
                 {stat.description}
               </div>
             </motion.div>
