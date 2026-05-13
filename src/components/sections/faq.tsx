@@ -3,13 +3,14 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
+import type { SiteConfig } from "@/lib/site-config";
 
 interface FAQItem {
   question: string;
   answer: string;
 }
 
-const FAQ_DATA: FAQItem[] = [
+const FALLBACK_FAQ_DATA: FAQItem[] = [
   {
     question: "Berapa lama waktu pembuatan website?",
     answer: "Untuk Company Profile berkisar 1-2 minggu. Sedangkan untuk Web App kustom atau E-Commerce membutuhkan waktu 3-6 minggu tergantung tingkat kompleksitas fitur."
@@ -32,8 +33,12 @@ const FAQ_DATA: FAQItem[] = [
   }
 ];
 
-export const FaqSection = () => {
+type FaqContent = SiteConfig["faq"];
+
+export const FaqSection = ({ content }: { content: FaqContent }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqItems = content.items.length ? content.items : FALLBACK_FAQ_DATA;
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -51,15 +56,15 @@ export const FaqSection = () => {
           transition={{ duration: 0.7 }}
           className="w-full md:w-1/3 flex flex-col"
         >
-          <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">Pertanyaan</p>
+          <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">{content.eyebrow}</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 leading-tight mb-6">
-            Frequently <br className="hidden md:block" /> asked <br className="hidden md:block" /> questions
+            {content.heading}
           </h2>
         </motion.div>
 
         {/* Right Side: Accordion */}
         <div className="w-full md:w-7/12 lg:w-2/3 flex flex-col">
-          {FAQ_DATA.map((faq, index) => {
+          {faqItems.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <motion.div 

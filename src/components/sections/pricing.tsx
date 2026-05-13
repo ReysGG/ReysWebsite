@@ -4,8 +4,11 @@ import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { IconCheck } from "@tabler/icons-react";
+import type { SiteConfig } from "@/lib/site-config";
 
-const pricingTiers = [
+type PricingContent = SiteConfig["pricing"];
+
+const fallbackPricingTiers = [
   {
     title: "Starter",
     price: "5 juta",
@@ -55,16 +58,18 @@ const pricingTiers = [
   },
 ];
 
-export const PricingSection = () => {
+export const PricingSection = ({ content }: { content: PricingContent }) => {
+  const pricingTiers = content.tiers.length ? content.tiers : fallbackPricingTiers;
+
   return (
-    <section id="pricing" className="relative w-full py-24 md:py-32 overflow-hidden flex flex-col items-center justify-center bg-neutral-50">
+    <section id="pricing" className="relative w-full py-20 md:py-24 overflow-hidden flex flex-col items-center justify-center bg-neutral-50">
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full mb-16 items-center text-center">
-        <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">Harga</p>
+        <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">{content.eyebrow}</p>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
-          Paket yang jelas sejak awal
+          {content.heading}
         </h2>
         <p className="text-base md:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
-          Pilih paket sesuai kebutuhan bisnis. Scope, estimasi waktu, dan deliverable dibuat transparan sebelum mulai.
+          {content.description}
         </p>
       </div>
 
@@ -83,7 +88,7 @@ export const PricingSection = () => {
               <div className="mb-8">
                 {tier.popular && (
                   <span className="inline-block px-4 py-1 mb-6 text-xs font-semibold tracking-wider text-white uppercase bg-indigo-600 rounded-full">
-                    Most Popular
+                    Paling Populer
                   </span>
                 )}
                 <h3 className="text-2xl font-semibold text-neutral-900">{tier.title}</h3>

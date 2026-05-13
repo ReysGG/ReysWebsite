@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import { motion } from "framer-motion";
+import type { StatItemConfig } from "@/lib/site-config";
 
 interface StatItem {
   value: number;
@@ -11,7 +12,7 @@ interface StatItem {
   description: string;
 }
 
-const STATS: StatItem[] = [
+const FALLBACK_STATS: StatItem[] = [
   {
     value: 50,
     suffix: "+",
@@ -47,7 +48,7 @@ const CountUp = ({
   suffix: string;
   inView: boolean;
 }) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(target);
 
   useEffect(() => {
     if (!inView) return;
@@ -75,9 +76,10 @@ const CountUp = ({
   );
 };
 
-export const StatsSection = () => {
+export const StatsSection = ({ stats }: { stats: StatItemConfig[] }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+  const items = stats.length ? stats : FALLBACK_STATS;
 
   return (
     <section
@@ -97,7 +99,7 @@ export const StatsSection = () => {
       <div className="w-full border-y border-indigo-100">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-indigo-100 py-8">
-          {STATS.map((stat, i) => (
+          {items.map((stat, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 16 }}

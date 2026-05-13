@@ -10,33 +10,28 @@ import { CtaSection } from "@/components/sections/cta";
 import { FaqSection } from "@/components/sections/faq";
 import { Footer } from "@/components/ui/footer";
 import { WaveDivider } from "@/components/ui/wave-divider";
+import { getSiteConfig } from "@/lib/site-config";
 
-export default function Home() {
+export default async function Home() {
+  const config = await getSiteConfig();
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between font-sans bg-white text-neutral-900 selection:bg-neutral-200">
-      <HeroSection />
-      {/* cream → indigo-50 */}
+      <HeroSection content={config.hero} />
       <WaveDivider fromColor="#EFECE6" toColor="rgba(238,242,255,0.4)" />
-      <StatsSection />
-      {/* indigo-50 → white */}
+      <StatsSection stats={config.stats} />
       <WaveDivider fromColor="rgba(238,242,255,0.4)" toColor="#ffffff" />
-      <ServicesSection />
-      {/* white → neutral-50 */}
+      <ServicesSection content={config.services} />
       <WaveDivider fromColor="#ffffff" toColor="#fafafa" />
-      <WorkflowSection />
-      {/* neutral-50 → white */}
+      <WorkflowSection content={config.workflow} />
       <WaveDivider fromColor="#fafafa" toColor="#ffffff" />
       <PortfolioSection />
-      {/* white → neutral-50 */}
       <WaveDivider fromColor="#ffffff" toColor="#fafafa" />
-      <PricingSection />
-      {/* neutral-50 → neutral-50 (same, no wave needed) */}
+      <PricingSection content={config.pricing} />
       <TestimonialsSection />
-      {/* neutral-50 → white */}
       <WaveDivider fromColor="#fafafa" toColor="#ffffff" />
-      <CtaSection />
-      <FaqSection />
-      {/* white → black footer */}
+      <CtaSection content={config.cta} />
+      <FaqSection content={config.faq} />
       <WaveDivider fromColor="#ffffff" toColor="#000000" />
       <Footer />
     </main>

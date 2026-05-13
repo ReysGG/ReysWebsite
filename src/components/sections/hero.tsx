@@ -5,8 +5,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { FlipWords } from "@/components/ui/flip-words";
 import { HomepageShowcaseSection } from "@/components/sections/homepage-showcase";
+import type { SiteConfig } from "@/lib/site-config";
 
-export const HeroSection = () => {
+type HeroContent = SiteConfig["hero"];
+
+export const HeroSection = ({ content }: { content: HeroContent }) => {
   return (
     <section className="relative w-full overflow-hidden antialiased bg-[#EFECE6] min-h-screen flex items-center justify-center">
 
@@ -48,7 +51,7 @@ export const HeroSection = () => {
                 </div>
               ))}
             </div>
-            <span className="tracking-tight">Dipercaya 50+ bisnis dan founder</span>
+            <span className="tracking-tight">{content.trustText}</span>
           </motion.div>
 
           <motion.h1
@@ -56,10 +59,10 @@ export const HeroSection = () => {
             transition={{ duration: 1, delay: 0.1, ease: "easeOut" }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#1A1A1A] tracking-tighter leading-[1.05]"
           >
-            Website cepat, rapi, <br className="hidden sm:block" />
+            {content.headlinePrefix} <br className="hidden sm:block" />
             <span className="inline-block min-w-[280px] sm:min-w-[360px]">
               <FlipWords className="text-indigo-600 px-0 font-bold"
-                words={["siap jualan.", "mudah dikelola.", "terlihat profesional."]} />
+                words={content.rotatingWords} />
             </span>
           </motion.h1>
 
@@ -68,9 +71,7 @@ export const HeroSection = () => {
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
             className="mt-4 md:mt-6 font-medium text-sm md:text-base lg:text-lg text-neutral-600 max-w-md leading-relaxed"
           >
-            Kami bantu UMKM dan startup membangun website yang terlihat
-            profesional, loading cepat, responsif, dan siap dipakai untuk
-            menerima calon pelanggan.
+            {content.description}
           </motion.p>
 
           <motion.div
@@ -79,10 +80,10 @@ export const HeroSection = () => {
             className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 md:gap-4"
           >
             <Link href="#cta" className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-3.5 rounded-xl bg-indigo-600 text-white text-sm md:text-base font-medium hover:bg-indigo-700 transition-colors shadow-lg shadow-neutral-900/10">
-              Konsultasi Gratis
+              {content.primaryCta}
             </Link>
             <Link href="#portfolio" className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-3.5 rounded-xl bg-white/60 backdrop-blur-sm border border-black/10 text-[#111] text-sm md:text-base font-medium hover:bg-white/80 hover:border-indigo-300 transition-colors">
-              Lihat Portfolio
+              {content.secondaryCta}
             </Link>
           </motion.div>
         </div>

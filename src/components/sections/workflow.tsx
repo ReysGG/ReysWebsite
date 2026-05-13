@@ -2,7 +2,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FlipWords } from "@/components/ui/flip-words";
-const steps = [
+import type { SiteConfig } from "@/lib/site-config";
+
+type WorkflowContent = SiteConfig["workflow"];
+
+const fallbackSteps = [
   {
     step: "01",
     title: "Discovery",
@@ -25,9 +29,10 @@ const steps = [
   },
 ];
 
-export const WorkflowSection = () => {
+export const WorkflowSection = ({ content }: { content: WorkflowContent }) => {
+  const steps = content.steps.length ? content.steps : fallbackSteps;
   return (
-    <section className="w-full py-24 md:py-32 relative overflow-hidden bg-neutral-50">
+    <section id="workflow" className="w-full py-20 md:py-24 relative overflow-hidden bg-neutral-50">
       {/* Gradient orbs */}
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full bg-indigo-100/50 blur-[120px]" />
       <div className="pointer-events-none absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full bg-violet-100/40 blur-[100px]" />
@@ -41,15 +46,15 @@ export const WorkflowSection = () => {
           transition={{ duration: 0.7 }}
           className="flex flex-col items-center text-center mb-16 md:mb-20 relative z-10"
         >
-          <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">Proses Kerja</p>
+          <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">{content.eyebrow}</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
-            Dari Ide ke{" "}
+            {content.headingPrefix}{" "}
             <span className="inline-block min-w-[220px] text-left">
-              <FlipWords words={["Realisasi", "Kenyataan", "Kesuksesan", "Laba"]} className="text-neutral-600 font-extrabold" />
+              <FlipWords words={content.rotatingWords} className="text-neutral-600 font-extrabold" />
             </span>
           </h2>
           <p className="text-base md:text-lg text-neutral-600 max-w-2xl leading-relaxed">
-            Metodologi transparan dan terukur untuk menjamin keberhasilan setiap produk digital.
+            {content.description}
           </p>
         </motion.div>
 

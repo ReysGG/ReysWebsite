@@ -3,8 +3,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Layout, Server, ShoppingBag, LineChart } from "lucide-react";
+import type { SiteConfig } from "@/lib/site-config";
 
-const SERVICES_CONTENT = [
+const SERVICE_STYLES = [
   {
     number: "01",
     title: "Website yang membangun trust",
@@ -39,11 +40,13 @@ const SERVICES_CONTENT = [
   },
 ];
 
-export const ServicesSection = () => {
+type ServicesContent = SiteConfig["services"];
+
+export const ServicesSection = ({ content }: { content: ServicesContent }) => {
   return (
     <section
       id="services"
-      className="w-full py-24 md:py-32 relative overflow-hidden bg-white"
+      className="w-full py-20 md:py-24 relative overflow-hidden bg-white"
     >
       {/* Gradient orbs */}
       <div className="pointer-events-none absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-indigo-100/60 blur-[100px]" />
@@ -59,16 +62,18 @@ export const ServicesSection = () => {
           className="flex flex-col mb-16 md:mb-20"
         >
           <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">
-            Layanan Utama
+            {content.eyebrow}
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
-            Bukan cuma tampil bagus. Website harus membantu bisnis bergerak.
+            {content.heading}
           </h2>
         </motion.div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {SERVICES_CONTENT.map((service, index) => (
+          {content.items.map((service, index) => {
+            const style = SERVICE_STYLES[index % SERVICE_STYLES.length];
+            return (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -79,8 +84,8 @@ export const ServicesSection = () => {
             >
               {/* Top row: icon + number accent */}
               <div className="relative z-10 flex items-start justify-between mb-8">
-                <div className={`p-2.5 rounded-xl border ${service.iconBg}`}>
-                  {service.icon}
+                <div className={`p-2.5 rounded-xl border ${style.iconBg}`}>
+                  {style.icon}
                 </div>
                 <span className="text-5xl font-black text-neutral-100 select-none leading-none">
                   {service.number}
@@ -97,7 +102,8 @@ export const ServicesSection = () => {
                 </p>
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

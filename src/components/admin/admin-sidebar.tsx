@@ -11,7 +11,8 @@ import {
   IconListDetails,
   IconPlus,
   IconEdit,
-  IconPhoto
+  IconPhoto,
+  IconWorldWww
 } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 
@@ -49,6 +50,13 @@ export const AdminSidebar = () => {
     {
       title: "Content Management",
       links: [
+        {
+          label: "Landing Page",
+          href: "/admin/landing-page",
+          icon: (
+            <IconWorldWww className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+          ),
+        },
         {
           label: "Blog Posts",
           href: "/admin/blog",

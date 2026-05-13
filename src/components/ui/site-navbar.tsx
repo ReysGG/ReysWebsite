@@ -57,7 +57,7 @@ export const SiteNavbar = () => {
                   type="button"
                   className="px-3 py-2 text-xs font-semibold text-neutral-600 hover:text-neutral-900 transition-colors"
                 >
-                  Sign in
+                  Masuk
                 </button>
               </SignInButton>
               <SignUpButton mode="modal">
@@ -65,7 +65,7 @@ export const SiteNavbar = () => {
                   type="button"
                   className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-neutral-900 shadow-sm ring-1 ring-neutral-200 transition-colors hover:bg-neutral-50"
                 >
-                  Sign up
+                  Daftar
                 </button>
               </SignUpButton>
             </Show>
@@ -121,7 +121,7 @@ export const SiteNavbar = () => {
                     onClick={closeMenu}
                     className="text-sm font-semibold text-neutral-600 transition-colors hover:text-black"
                   >
-                    Sign in
+                    Masuk
                   </button>
                 </SignInButton>
                 <SignUpButton mode="modal">
@@ -130,7 +130,7 @@ export const SiteNavbar = () => {
                     onClick={closeMenu}
                     className="rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
                   >
-                    Sign up
+                    Daftar
                   </button>
                 </SignUpButton>
               </Show>
