@@ -4,8 +4,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import type { Project } from "@prisma/client";
+import type { PortfolioIntroConfig } from "@/lib/portfolio-config";
 
-const PORTFOLIO_DATA = [
+const FALLBACK_PORTFOLIO_DATA = [
   {
     category: "E-Commerce",
     title: "UMKM Storefront",
@@ -28,9 +30,7 @@ const PORTFOLIO_DATA = [
     src: "/images/image.png",
     content: (
       <div className="text-neutral-600 dark:text-neutral-400">
-        <p className="mb-4">
-          Dashboard internal untuk monitoring stok, transaksi, dan laporan harian agar owner bisa mengambil keputusan lebih cepat.
-        </p>
+        <p className="mb-4">Dashboard internal untuk monitoring stok, transaksi, dan laporan harian agar owner bisa mengambil keputusan lebih cepat.</p>
         <div className="flex gap-2 mt-4 text-xs font-semibold">
           <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">React</span>
           <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Prisma</span>
@@ -44,9 +44,7 @@ const PORTFOLIO_DATA = [
     src: "/images/homepage-slider-reference.png",
     content: (
       <div className="text-neutral-600 dark:text-neutral-400">
-        <p className="mb-4">
-          Website representasi brand dengan struktur layanan, portfolio, testimoni, dan CTA yang jelas untuk meningkatkan trust pengunjung.
-        </p>
+        <p className="mb-4">Website representasi brand dengan struktur layanan, portfolio, testimoni, dan CTA yang jelas untuk meningkatkan trust pengunjung.</p>
         <div className="flex gap-2 mt-4 text-xs font-semibold">
           <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">SEO</span>
           <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Tailwind</span>
@@ -60,9 +58,7 @@ const PORTFOLIO_DATA = [
     src: "/images/image.png",
     content: (
       <div className="text-neutral-600 dark:text-neutral-400">
-        <p className="mb-4">
-          Halaman campaign dengan pesan yang fokus, section benefit, social proof, dan CTA yang disusun untuk mengubah visitor menjadi lead.
-        </p>
+        <p className="mb-4">Halaman campaign dengan pesan yang fokus, section benefit, social proof, dan CTA yang disusun untuk mengubah visitor menjadi lead.</p>
         <div className="flex gap-2 mt-4 text-xs font-semibold">
           <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Next.js</span>
           <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Copywriting</span>
@@ -72,10 +68,31 @@ const PORTFOLIO_DATA = [
   },
 ];
 
-export const PortfolioSection = () => {
-  const cards = PORTFOLIO_DATA.map((card, index) => (
-    <Card key={card.title} card={card} index={index} />
-  ));
+type PortfolioSectionProps = {
+  intro: PortfolioIntroConfig;
+  projects: Project[];
+};
+
+function projectToCard(project: Project) {
+  return {
+    category: project.link ? "Live Project" : "Project",
+    title: project.title,
+    src: project.imageUrl,
+    content: (
+      <div className="text-neutral-600 dark:text-neutral-400">
+        <p className="mb-4">{project.description}</p>
+        <div className="flex flex-wrap gap-2 mt-4 text-xs font-semibold">
+          <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">{project.link ? "Published" : "Draft"}</span>
+          {project.gifUrl ? <span className="px-3 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">Animated Preview</span> : null}
+        </div>
+      </div>
+    ),
+  };
+}
+
+export const PortfolioSection = ({ intro, projects }: PortfolioSectionProps) => {
+  const data = projects.length ? projects.map(projectToCard) : FALLBACK_PORTFOLIO_DATA;
+  const cards = data.map((card, index) => <Card key={card.title} card={card} index={index} />);
 
   return (
     <section id="portfolio" className="relative w-full py-24 md:py-32 overflow-hidden bg-[#f5f3ff]">
@@ -87,17 +104,10 @@ export const PortfolioSection = () => {
           transition={{ duration: 0.7 }}
           className="flex flex-col mb-4"
         >
-          <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">
-            Portfolio
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
-            Contoh solusi yang bisa dibangun
-          </h2>
+          <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">{intro.eyebrow}</p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">{intro.heading}</h2>
           <div className="max-w-2xl">
-            <TextGenerateEffect
-              words="Beberapa bentuk website dan sistem yang paling sering dibutuhkan bisnis lokal untuk tampil rapi, menjual, dan mudah dikelola."
-              className="text-base md:text-lg text-neutral-600 font-normal leading-relaxed"
-            />
+            <TextGenerateEffect words={intro.description} className="text-base md:text-lg text-neutral-600 font-normal leading-relaxed" />
           </div>
         </motion.div>
       </div>

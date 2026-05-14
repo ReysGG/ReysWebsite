@@ -146,6 +146,43 @@ export async function saveLandingPageField(_prevState: LandingPageFieldState, fo
   }
 }
 
+export async function addLandingPageFaqItem(_prevState: LandingPageFieldState, formData: FormData): Promise<LandingPageFieldState> {
+  try {
+    const question = getString(formData, "question");
+    const answer = getString(formData, "answer");
+
+    if (!question || !answer) {
+      return { success: false, error: "Pertanyaan dan jawaban wajib diisi." };
+    }
+
+    const current = await getSiteConfig();
+    const nextConfig: SiteConfig = {
+      ...current,
+      faq: {
+        ...current.faq,
+        items: [...current.faq.items, { question, answer }],
+      },
+    };
+
+    await db.siteConfig.upsert({
+      where: { key: SITE_CONFIG_KEY },
+      update: { value: nextConfig },
+      create: { key: SITE_CONFIG_KEY, value: nextConfig },
+    });
+
+    revalidatePath("/");
+    revalidatePath("/admin/landing-page");
+    revalidatePath("/admin/landing-page/faq");
+
+    return { success: true, message: "FAQ baru berhasil ditambahkan." };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Gagal menambahkan FAQ.",
+    };
+  }
+}
+
 export async function resetLandingPage() {
   await db.siteConfig.upsert({
     where: { key: SITE_CONFIG_KEY },

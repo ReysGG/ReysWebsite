@@ -103,7 +103,7 @@ const NAV_GROUPS: NavGroup[] = [
         icon: <Briefcase className="h-4 w-4" />,
         subItems: [
           { label: "Semua Project", href: "/admin/portfolio", icon: <List className="h-3.5 w-3.5" /> },
-          { label: "Edit Hero Portfolio", href: "/admin/portfolio/hero", icon: <Image className="h-3.5 w-3.5" /> },
+          { label: "Edit Intro Portfolio", href: "/admin/portfolio/hero", icon: <Image className="h-3.5 w-3.5" /> },
         ],
       },
     ],

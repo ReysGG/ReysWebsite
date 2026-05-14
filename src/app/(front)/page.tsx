@@ -12,9 +12,14 @@ import { Footer } from "@/components/ui/footer";
 import { WaveDivider } from "@/components/ui/wave-divider";
 import { SiteNavbar } from "@/components/ui/site-navbar";
 import { getSiteConfig } from "@/lib/site-config";
+import { getPortfolioIntro, getPortfolioProjects } from "@/lib/portfolio-config";
 
 export default async function Home() {
-  const config = await getSiteConfig();
+  const [config, portfolioIntro, portfolioProjects] = await Promise.all([
+    getSiteConfig(),
+    getPortfolioIntro(),
+    getPortfolioProjects(),
+  ]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between font-sans bg-white text-neutral-900 selection:bg-neutral-200">
@@ -23,7 +28,7 @@ export default async function Home() {
       <StatsSection stats={config.stats} />
       <ServicesSection content={config.services} />
       <WorkflowSection content={config.workflow} />
-      <PortfolioSection />
+      <PortfolioSection intro={portfolioIntro} projects={portfolioProjects} />
       <PricingSection content={config.pricing} />
       <TestimonialsSection />
       <CtaSection content={config.cta} />

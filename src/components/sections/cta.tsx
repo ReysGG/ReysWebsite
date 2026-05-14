@@ -60,8 +60,7 @@ export const CtaSection = ({ content }: { content: CtaContent }) => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          Ceritakan bisnis, target pelanggan, dan fitur yang dibutuhkan. Kami
-          bantu susun scope, estimasi waktu, dan langkah paling realistis.
+          {content.description}
         </motion.p>
 
         {/* CTAs */}

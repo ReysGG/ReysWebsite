@@ -3,7 +3,8 @@
 import { config } from "dotenv";
 import { defineConfig } from "prisma/config";
 
-config({ path: ".env.local" });
+config({ path: ".env", override: true });
+config({ path: ".env.local", override: true });
 
 export default defineConfig({
   schema: "prisma/schema.prisma",
@@ -11,6 +12,8 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    // Prefer Supabase direct connection for Prisma CLI/migrations.
+    // Runtime app code still uses DATABASE_URL through Prisma Client.
+    url: process.env["DIRECT_URL"] || process.env["DATABASE_URL"],
   },
 });
