@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
+  provider = "postgresql"
 }
 
 model Project {
@@ -11,7 +11,7 @@ model Project {
   title       String
   description String
   imageUrl    String
-  gifUrl      String?  // For the GIF hover feature requested
+  gifUrl      String?
   link        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -29,57 +29,54 @@ model Service {
 }
 
 model Testimonial {
-  id          String   @id @default(cuid())
-  name        String
-  role        String
-  content     String
-  avatar      String?
-  createdAt   DateTime @default(now())
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  content   String
+  avatar    String?
+  createdAt DateTime @default(now())
 }
 
 model Post {
-  id          String   @id @default(cuid())
-  title       String
-  slug        String   @unique
-  content     String   @db.Text    // To store Rich Text / HTML
-  excerpt     String?  @db.Text
-  coverImage  String?
-  author      String?
-  published   Boolean  @default(false)
-  metaTitle   String?  // For SEO Optimization
-  metaDesc    String?  // For SEO Optimization
-  tags        String[]
-  views       Int       @default(0)
-  comments    Comment[]
-  likes       Like[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String    @id @default(cuid())
+  title      String
+  slug       String    @unique
+  content    String
+  excerpt    String?
+  coverImage String?
+  author     String?
+  published  Boolean   @default(false)
+  metaTitle  String?
+  metaDesc   String?
+  tags       String[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  views      Int       @default(0)
+  comments   Comment[]
+  likes      Like[]
 }
 
 model Comment {
-  id        String   @id @default(cuid())
-  content   String   @db.Text
-  userId    String   // Clerk User ID
+  id        String    @id @default(cuid())
+  content   String
+  userId    String
   userImg   String?
   userName  String?
-  
   postId    String
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  
-  parentId  String?  // For admin replies / nested comments
-  parent    Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId  String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
   replies   Comment[] @relation("CommentReplies")
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
 
 model Like {
   id        String   @id @default(cuid())
-  userId    String   // Clerk User ID
+  userId    String
   postId    String
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@unique([userId, postId])
 }
@@ -89,5 +86,5 @@ model SiteConfig {
   key       String   @unique
   value     Json
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 }

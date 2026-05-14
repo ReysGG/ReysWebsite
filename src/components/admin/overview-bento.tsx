@@ -1,59 +1,87 @@
 "use client";
 
 import React from "react";
-import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
+import Link from "next/link";
 import {
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
-} from "@tabler/icons-react";
+  Globe,
+  FileText,
+  Briefcase,
+  MessageCircle,
+  Plus,
+  ArrowRight,
+} from "lucide-react";
+
+const QUICK_ACTIONS = [
+  {
+    title: "Edit Landing Page",
+    description: "Update teks hero, layanan, harga, dan FAQ",
+    href: "/admin/landing-page",
+    icon: Globe,
+    color: "bg-indigo-50 text-indigo-600",
+  },
+  {
+    title: "Tulis Artikel Baru",
+    description: "Buat konten blog untuk SEO dan engagement",
+    href: "/admin/blog/create",
+    icon: Plus,
+    color: "bg-indigo-50 text-indigo-600",
+  },
+  {
+    title: "Kelola Portfolio",
+    description: "Tambah atau update project showcase",
+    href: "/admin/portfolio",
+    icon: Briefcase,
+    color: "bg-indigo-50 text-indigo-600",
+  },
+  {
+    title: "Tambah Testimoni",
+    description: "Tambahkan review klien terbaru",
+    href: "/admin/testimonials/add",
+    icon: MessageCircle,
+    color: "bg-indigo-50 text-indigo-600",
+  },
+  {
+    title: "Semua Artikel",
+    description: "Lihat dan kelola semua artikel blog",
+    href: "/admin/blog",
+    icon: FileText,
+    color: "bg-indigo-50 text-indigo-600",
+  },
+  {
+    title: "Daftar Testimoni",
+    description: "Kelola semua review klien yang tampil",
+    href: "/admin/testimonials",
+    icon: MessageCircle,
+    color: "bg-indigo-50 text-indigo-600",
+  },
+];
 
 export const OverviewBento = () => {
   return (
-    <BentoGrid className="max-w-4xl mx-auto">
-      {items.map((item, i) => (
-        <BentoGridItem
-          key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
-          icon={item.icon}
-          className={i === 0 || i === 3 ? "md:col-span-2" : ""}
-        />
-      ))}
-    </BentoGrid>
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {QUICK_ACTIONS.map((action) => {
+        const Icon = action.icon;
+        return (
+          <Link
+            key={action.href}
+            href={action.href}
+            className="group flex items-start gap-4 rounded-md border border-neutral-200 bg-neutral-50 p-4 transition-all hover:border-indigo-200 hover:bg-indigo-50/50 hover:shadow-none"
+          >
+            <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md ${action.color}`}>
+              <Icon className="h-4 w-4" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-neutral-900 group-hover:text-indigo-700 transition-colors">
+                {action.title}
+              </p>
+              <p className="mt-0.5 text-xs text-neutral-500 leading-relaxed">
+                {action.description}
+              </p>
+            </div>
+            <ArrowRight className="h-4 w-4 shrink-0 text-neutral-300 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all mt-0.5" />
+          </Link>
+        );
+      })}
+    </div>
   );
 };
-
-const Skeleton = () => (
-  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 border border-transparent dark:border-neutral-800"></div>
-);
-
-const items = [
-  {
-    title: "The Dawn of Innovation",
-    description: "Explore the birth of groundbreaking ideas and inventions.",
-    header: <Skeleton />,
-    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
-  },
-  {
-    title: "The Digital Revolution",
-    description: "Dive into the transformative power of technology.",
-    header: <Skeleton />,
-    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
-  },
-  {
-    title: "The Art of Design",
-    description: "Discover the beauty of thoughtful and functional design.",
-    header: <Skeleton />,
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
-  },
-  {
-    title: "The Power of Communication",
-    description:
-      "Understand the impact of effective communication in our lives.",
-    header: <Skeleton />,
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
-  },
-];

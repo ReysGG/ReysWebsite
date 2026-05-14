@@ -45,12 +45,6 @@ export const SiteNavbar = () => {
           <NavItems items={NAV_ITEMS} />
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/admin"
-              className="px-3 py-2 text-xs font-semibold text-neutral-600 hover:text-neutral-900 transition-colors"
-            >
-              Admin
-            </Link>
             <Show when="signed-out">
               <SignInButton mode="modal">
                 <button
@@ -107,13 +101,6 @@ export const SiteNavbar = () => {
               </a>
             ))}
             <div className="flex items-center gap-3 w-full pt-2 border-t border-neutral-200">
-              <Link
-                href="/admin"
-                onClick={closeMenu}
-                className="text-sm font-semibold text-neutral-600 hover:text-black transition-colors"
-              >
-                Admin
-              </Link>
               <Show when="signed-out">
                 <SignInButton mode="modal">
                   <button

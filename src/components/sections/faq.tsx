@@ -45,7 +45,7 @@ export const FaqSection = ({ content }: { content: FaqContent }) => {
   };
 
   return (
-    <section className="relative w-full py-24 md:py-32 overflow-hidden bg-white">
+    <section className="relative w-full py-24 md:py-32 overflow-hidden bg-[#f5f3ff]">
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-16 lg:gap-24">
         
         {/* Left Side: Title */}

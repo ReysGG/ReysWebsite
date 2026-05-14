@@ -10,29 +10,29 @@ const fallbackSteps = [
   {
     step: "01",
     title: "Discovery",
-    description: "Analisis mendalam mengenai kebutuhan, target audiens, dan tujuan bisnis esensial Anda.",
+    description: "Sesi 1 jam via WhatsApp/Meet untuk pahami bisnis, target pengguna, dan fitur yang dibutuhkan. Output: scope dokumen + estimasi harga.",
   },
   {
     step: "02",
-    title: "Strategy",
-    description: "Pembuatan arsitektur informasi, wireframe, dan perencanaan teknis yang sangat presisi.",
+    title: "Design",
+    description: "Wireframe dan mockup desain dikirim dalam 2-3 hari. Kamu bisa minta revisi sampai puas sebelum masuk ke tahap coding.",
   },
   {
     step: "03",
-    title: "Execution",
-    description: "Pengembangan visual dan kode interaktif dengan performa super tinggi dan aman.",
+    title: "Build",
+    description: "Development dengan Next.js + Tailwind. Progress bisa dipantau langsung via staging link yang aktif selama proses berlangsung.",
   },
   {
     step: "04",
-    title: "Delivery",
-    description: "Pengujian ekstensif, peluncuran mulus, dan serah terima aset digital secara utuh.",
+    title: "Handover",
+    description: "Deploy ke domain kamu, serah terima akses penuh, dan sesi onboarding singkat supaya kamu bisa kelola konten sendiri.",
   },
 ];
 
 export const WorkflowSection = ({ content }: { content: WorkflowContent }) => {
   const steps = content.steps.length ? content.steps : fallbackSteps;
   return (
-    <section id="workflow" className="w-full py-20 md:py-24 relative overflow-hidden bg-neutral-50">
+    <section id="workflow" className="w-full py-20 md:py-24 relative overflow-hidden bg-white">
       {/* Gradient orbs */}
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full bg-indigo-100/50 blur-[120px]" />
       <div className="pointer-events-none absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full bg-violet-100/40 blur-[100px]" />

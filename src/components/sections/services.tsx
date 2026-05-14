@@ -11,8 +11,9 @@ const SERVICE_STYLES = [
     title: "Website yang membangun trust",
     description:
       "Company profile modern untuk membuat bisnis terlihat kredibel, jelas, dan mudah dihubungi calon pelanggan.",
-    icon: <Layout className="w-5 h-5 text-cyan-600" />,
-    iconBg: "bg-cyan-50 border-cyan-200",
+    icon: <Layout className="w-5 h-5 text-indigo-600" />,
+    iconBg: "bg-indigo-50 border-indigo-200",
+    cta: "Lihat paket Company Profile",
   },
   {
     number: "02",
@@ -21,22 +22,25 @@ const SERVICE_STYLES = [
       "Web app kustom untuk POS, inventory, booking, CRM, atau workflow internal yang masih berantakan di spreadsheet.",
     icon: <Server className="w-5 h-5 text-indigo-600" />,
     iconBg: "bg-indigo-50 border-indigo-200",
+    cta: "Diskusikan kebutuhan sistem",
   },
   {
     number: "03",
     title: "Toko online siap transaksi",
     description:
       "E-commerce cepat dengan katalog produk, checkout, pembayaran, dan integrasi WhatsApp agar proses jualan lebih praktis.",
-    icon: <ShoppingBag className="w-5 h-5 text-rose-600" />,
-    iconBg: "bg-rose-50 border-rose-200",
+    icon: <ShoppingBag className="w-5 h-5 text-indigo-600" />,
+    iconBg: "bg-indigo-50 border-indigo-200",
+    cta: "Mulai toko online",
   },
   {
     number: "04",
     title: "SEO dan performa loading",
     description:
       "Struktur halaman, metadata, dan optimasi teknis supaya website lebih cepat, mudah dibaca Google, dan nyaman dibuka mobile.",
-    icon: <LineChart className="w-5 h-5 text-emerald-600" />,
-    iconBg: "bg-emerald-50 border-emerald-200",
+    icon: <LineChart className="w-5 h-5 text-indigo-600" />,
+    iconBg: "bg-indigo-50 border-indigo-200",
+    cta: "Audit website saya",
   },
 ];
 
@@ -46,7 +50,7 @@ export const ServicesSection = ({ content }: { content: ServicesContent }) => {
   return (
     <section
       id="services"
-      className="w-full py-20 md:py-24 relative overflow-hidden bg-white"
+      className="w-full py-20 md:py-24 relative overflow-hidden bg-[#f5f3ff]"
     >
       {/* Gradient orbs */}
       <div className="pointer-events-none absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-indigo-100/60 blur-[100px]" />
@@ -100,6 +104,15 @@ export const ServicesSection = ({ content }: { content: ServicesContent }) => {
                 <p className="text-sm text-neutral-600 leading-relaxed flex-1">
                   {service.description}
                 </p>
+                <a
+                  href="#cta"
+                  className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-800 transition-colors group/link"
+                >
+                  {style.cta}
+                  <svg className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </a>
               </div>
             </motion.div>
             );

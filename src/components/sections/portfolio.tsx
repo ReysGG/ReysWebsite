@@ -78,7 +78,7 @@ export const PortfolioSection = () => {
   ));
 
   return (
-    <section id="portfolio" className="relative w-full py-24 md:py-32 overflow-hidden bg-white">
+    <section id="portfolio" className="relative w-full py-24 md:py-32 overflow-hidden bg-[#f5f3ff]">
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8 pt-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

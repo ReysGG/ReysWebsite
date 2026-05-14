@@ -11,22 +11,21 @@ export function Field({
   defaultValue: string | number;
   textarea?: boolean;
 }) {
+  const inputClass =
+    "w-full rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100";
+
   return (
-    <label className="block space-y-2">
-      <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">{label}</span>
+    <label className="block space-y-1.5">
+      <span className="text-xs font-semibold text-neutral-700">{label}</span>
       {textarea ? (
         <textarea
           name={name}
           defaultValue={defaultValue}
           rows={4}
-          className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none focus:border-indigo-400 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-100"
+          className={`${inputClass} resize-none`}
         />
       ) : (
-        <input
-          name={name}
-          defaultValue={defaultValue}
-          className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none focus:border-indigo-400 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-100"
-        />
+        <input name={name} defaultValue={defaultValue} className={inputClass} />
       )}
     </label>
   );
@@ -34,13 +33,15 @@ export function Field({
 
 export function AdminFormSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-      <h2 className="mb-5 text-xl font-bold">{title}</h2>
+    <section className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
+      <div className="mb-5 border-b border-neutral-100 pb-3">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-900">{title}</h2>
+      </div>
       <div className="grid gap-4 md:grid-cols-2">{children}</div>
     </section>
   );
 }
 
 export function NestedCard({ children }: { children: React.ReactNode }) {
-  return <div className="rounded-xl border border-neutral-100 p-4 dark:border-neutral-800">{children}</div>;
+  return <div className="rounded-md border border-neutral-200 bg-neutral-50 p-4">{children}</div>;
 }

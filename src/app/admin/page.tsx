@@ -29,9 +29,9 @@ export default async function AdminDashboard() {
       db.service.count(),
       db.testimonial.count(),
       db.post.findMany({
-        orderBy: { views: 'desc' },
+        orderBy: { views: "desc" },
         take: 5,
-        select: { id: true, title: true, slug: true, views: true, createdAt: true }
+        select: { id: true, title: true, slug: true, views: true, createdAt: true },
       }),
     ]);
   } catch {
@@ -42,7 +42,7 @@ export default async function AdminDashboard() {
     {
       title: "Total Artikel",
       value: totalPosts,
-      description: "Artikel blog yang diterbitkan",
+      description: "Artikel blog diterbitkan",
       icon: IconArticle,
     },
     {
@@ -66,53 +66,59 @@ export default async function AdminDashboard() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {databaseError && (
-        <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm font-medium text-amber-800">
-          Database sedang tidak bisa diakses. Dashboard ditampilkan dalam mode fallback sampai koneksi Postgres/Supabase diperbaiki.
+        <div className="rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-medium text-amber-800">
+          Database tidak bisa diakses. Dashboard ditampilkan dalam mode fallback.
         </div>
       )}
 
-      <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 md:p-8">
-        <p className="text-xs font-bold uppercase tracking-[0.22em] text-neutral-500">Admin Overview</p>
-        <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      {/* Header */}
+      <div className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 md:text-4xl">
+            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">
+              Admin Overview
+            </p>
+            <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900 md:text-3xl">
               Dashboard
             </h1>
-            <p className="mt-2 max-w-2xl text-neutral-500">
-              Ringkasan performa, konten, dan shortcut operasional website Anda.
+            <p className="mt-1 text-sm text-neutral-500">
+              Ringkasan performa, konten, dan shortcut operasional website.
             </p>
           </div>
-          <div className="rounded-xl bg-neutral-950 px-4 py-3 text-white dark:bg-white dark:text-neutral-950">
-            <p className="text-xs font-medium opacity-60">Published content</p>
+          <div className="rounded-md bg-indigo-600 px-5 py-3 text-white shrink-0">
+            <p className="text-xs font-medium opacity-70">Published content</p>
             <p className="text-2xl font-bold">{totalPosts + totalProjects}</p>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {/* Stat Cards */}
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {statCards.map((stat) => {
           const Icon = stat.icon;
-
           return (
-            <Card key={stat.title} className="border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+            <Card key={stat.title} className="border-neutral-200 bg-white shadow-none">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-neutral-600 dark:text-neutral-400">{stat.title}</CardTitle>
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-neutral-100 dark:bg-neutral-800">
-                  <Icon className="h-4 w-4 text-neutral-700 dark:text-neutral-200" />
-                </span>
+                <CardTitle className="text-xs font-semibold text-neutral-500">
+                  {stat.title}
+                </CardTitle>
+                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-indigo-50">
+                  <Icon className="h-4 w-4 text-indigo-600" />
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-neutral-950 dark:text-neutral-50">{stat.value}</div>
-                <p className="mt-1 text-xs text-neutral-500">{stat.description}</p>
+                <div className="text-3xl font-bold text-neutral-900">{stat.value}</div>
+                <p className="mt-1 text-xs text-neutral-400">{stat.description}</p>
               </CardContent>
             </Card>
           );
         })}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* Charts */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <AnalyticsChart />
         </div>
@@ -121,9 +127,14 @@ export default async function AdminDashboard() {
         </div>
       </div>
 
-      <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-        <h2 className="text-xl font-bold mb-2">Quick Actions & Shortcuts</h2>
-        <p className="mb-6 text-sm text-neutral-500">Akses cepat ke task yang paling sering dikerjakan.</p>
+      {/* Quick Actions */}
+      <div className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
+        <div className="mb-5">
+          <h2 className="text-base font-semibold text-neutral-900">Quick Actions</h2>
+          <p className="mt-1 text-sm text-neutral-500">
+            Akses cepat ke task yang paling sering dikerjakan.
+          </p>
+        </div>
         <OverviewBento />
       </div>
     </div>

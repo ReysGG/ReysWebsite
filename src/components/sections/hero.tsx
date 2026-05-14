@@ -11,7 +11,7 @@ type HeroContent = SiteConfig["hero"];
 
 export const HeroSection = ({ content }: { content: HeroContent }) => {
   return (
-    <section className="relative w-full overflow-hidden antialiased bg-[#EFECE6] min-h-screen flex items-center justify-center">
+    <section className="relative w-full overflow-hidden antialiased bg-[#f5f3ff] min-h-screen flex items-center justify-center">
 
       {/* ── Decorative SVG lines ───────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block z-0">

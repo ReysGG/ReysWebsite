@@ -62,7 +62,7 @@ export const PricingSection = ({ content }: { content: PricingContent }) => {
   const pricingTiers = content.tiers.length ? content.tiers : fallbackPricingTiers;
 
   return (
-    <section id="pricing" className="relative w-full py-20 md:py-24 overflow-hidden flex flex-col items-center justify-center bg-neutral-50">
+    <section id="pricing" className="relative w-full py-20 md:py-24 overflow-hidden flex flex-col items-center justify-center bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full mb-16 items-center text-center">
         <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">{content.eyebrow}</p>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">

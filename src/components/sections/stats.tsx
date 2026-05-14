@@ -84,13 +84,13 @@ export const StatsSection = ({ stats }: { stats: StatItemConfig[] }) => {
   return (
     <section
       ref={ref}
-      className="relative w-full py-16 overflow-hidden bg-indigo-50/40"
+      className="relative w-full py-16 overflow-hidden bg-white"
     >
       {/* Large outlined text accent */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden select-none">
         <span
           className="text-[160px] md:text-[220px] font-black tracking-tighter leading-none"
-          style={{ WebkitTextStroke: "1.5px rgba(99,102,241,0.08)", color: "transparent" }}
+          style={{ WebkitTextStroke: "1.5px rgba(99,102,241,0.06)", color: "transparent" }}
         >
           STATS
         </span>
@@ -113,7 +113,7 @@ export const StatsSection = ({ stats }: { stats: StatItemConfig[] }) => {
               <div className="text-sm font-semibold text-neutral-900 mb-1">
                 {stat.label}
               </div>
-              <div className="text-sm text-neutral-600 leading-relaxed">
+              <div className="text-xs text-neutral-500 leading-relaxed">
                 {stat.description}
               </div>
             </motion.div>

@@ -45,7 +45,7 @@ export const QuillEditor = ({
 
   return (
     <div className={cn(
-      "w-full bg-white dark:bg-transparent min-h-[400px] border dark:border-neutral-800 rounded-md overflow-hidden text-neutral-900 dark:text-neutral-100 flex flex-col",
+      "w-full bg-white bg-white min-h-[400px] border rounded-md overflow-hidden text-neutral-900 flex flex-col",
       // Important trick for forcing Quill's internal elements to respect full height
       "[&>.quill]:flex-1 [&>.quill]:flex [&>.quill]:flex-col [&_.ql-container]:flex-1 [&_.ql-editor]:min-h-full",
       className

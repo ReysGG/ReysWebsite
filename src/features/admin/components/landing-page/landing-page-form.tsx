@@ -1,112 +1,379 @@
-import React from "react";
+"use client";
+
+import React, { useActionState, useEffect, useState } from "react";
+import Link from "next/link";
 import type { SiteConfig } from "@/lib/site-config";
-import { saveLandingPage } from "@/features/admin/actions/landing-page-actions";
-import { AdminFormSection, Field, NestedCard } from "./form-fields";
+import { saveLandingPageField } from "@/features/admin/actions/landing-page-actions";
+import {
+  getInlineEditFields,
+  isSectionKey,
+  LANDING_PAGE_SECTIONS,
+  type InlineEditField,
+  type SectionKey,
+  type SectionMeta,
+} from "@/features/admin/lib/landing-page-edit";
 
-export function LandingPageForm({ config }: { config: SiteConfig }) {
+import { cn } from "@/lib/utils";
+import { CtaSection } from "@/components/sections/cta";
+import { FaqSection } from "@/components/sections/faq";
+import { HeroSection } from "@/components/sections/hero";
+import { PricingSection } from "@/components/sections/pricing";
+import { ServicesSection } from "@/components/sections/services";
+import { StatsSection } from "@/components/sections/stats";
+import { WorkflowSection } from "@/components/sections/workflow";
+import {
+  BarChart3,
+  CircleHelp,
+  DollarSign,
+  ExternalLink,
+  LayoutTemplate,
+  ListChecks,
+  Megaphone,
+  MousePointerClick,
+  Pencil,
+  Save,
+} from "lucide-react";
+
+const SECTION_ICONS: Record<SectionKey, React.ReactNode> = {
+  hero: <LayoutTemplate className="h-4 w-4" />,
+  stats: <BarChart3 className="h-4 w-4" />,
+  services: <ListChecks className="h-4 w-4" />,
+  workflow: <MousePointerClick className="h-4 w-4" />,
+  pricing: <DollarSign className="h-4 w-4" />,
+  cta: <Megaphone className="h-4 w-4" />,
+  faq: <CircleHelp className="h-4 w-4" />,
+};
+
+function SectionRenderer({
+  section,
+  config,
+  editMode,
+  onQuickEdit,
+}: {
+  section: SectionKey;
+  config: SiteConfig;
+  editMode: boolean;
+  onQuickEdit: (field: InlineEditField) => void;
+}) {
+  switch (section) {
+    case "hero":
+      return <HeroSection content={config.hero} />;
+    case "stats":
+      return editMode ? <StatsEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <StatsSection stats={config.stats} />;
+    case "services":
+      return <ServicesSection content={config.services} />;
+    case "workflow":
+      return <WorkflowSection content={config.workflow} />;
+    case "pricing":
+      return <PricingSection content={config.pricing} />;
+    case "cta":
+      return <CtaSection content={config.cta} />;
+    case "faq":
+      return <FaqSection content={config.faq} />;
+  }
+}
+
+function EditableTextButton({
+  field,
+  onClick,
+  children,
+  className,
+}: {
+  field: InlineEditField;
+  onClick: () => void;
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <form action={saveLandingPage} className="space-y-6">
-      <AdminFormSection title="Hero">
-        <Field label="Trust badge" name="hero.trustText" defaultValue={config.hero.trustText} />
-        <Field label="Headline awal" name="hero.headlinePrefix" defaultValue={config.hero.headlinePrefix} />
-        <Field label="Kata rotasi (1 baris per kata)" name="hero.rotatingWords" defaultValue={config.hero.rotatingWords.join("\n")} textarea />
-        <Field label="Deskripsi" name="hero.description" defaultValue={config.hero.description} textarea />
-        <Field label="CTA utama" name="hero.primaryCta" defaultValue={config.hero.primaryCta} />
-        <Field label="CTA kedua" name="hero.secondaryCta" defaultValue={config.hero.secondaryCta} />
-      </AdminFormSection>
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "group/edit relative rounded-md outline-none transition-colors hover:bg-indigo-50/60 focus:bg-indigo-50/60 focus:ring-2 focus:ring-indigo-100",
+        className
+      )}
+      title={`Edit ${field.label}`}
+    >
+      {children}
+      <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-md border border-indigo-200 bg-white text-indigo-600 opacity-0 shadow-none transition-opacity group-hover/edit:opacity-100 group-focus/edit:opacity-100">
+        <Pencil className="h-3 w-3" />
+      </span>
+    </button>
+  );
+}
 
-      <AdminFormSection title="Statistik">
-        {config.stats.map((stat, index) => (
-          <NestedCard key={index}>
-            <div className="grid gap-3 md:grid-cols-2">
-              <Field label="Angka" name={`stats.${index}.value`} defaultValue={stat.value} />
-              <Field label="Suffix" name={`stats.${index}.suffix`} defaultValue={stat.suffix} />
-              <Field label="Label" name={`stats.${index}.label`} defaultValue={stat.label} />
-              <Field label="Deskripsi" name={`stats.${index}.description`} defaultValue={stat.description} />
-            </div>
-          </NestedCard>
-        ))}
-      </AdminFormSection>
+function StatsEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuickEdit: (field: InlineEditField) => void }) {
+  const fields = getInlineEditFields("stats", config);
+  const fieldByName = new Map(fields.map((field) => [field.name, field]));
 
-      <AdminFormSection title="Layanan">
-        <Field label="Eyebrow" name="services.eyebrow" defaultValue={config.services.eyebrow} />
-        <Field label="Heading" name="services.heading" defaultValue={config.services.heading} textarea />
-        {config.services.items.map((item, index) => (
-          <NestedCard key={index}>
-            <div className="grid gap-3">
-              <Field label="Nomor" name={`services.${index}.number`} defaultValue={item.number} />
-              <Field label="Judul" name={`services.${index}.title`} defaultValue={item.title} />
-              <Field label="Deskripsi" name={`services.${index}.description`} defaultValue={item.description} textarea />
-            </div>
-          </NestedCard>
-        ))}
-      </AdminFormSection>
+  const getField = (name: string) => {
+    const field = fieldByName.get(name);
+    if (!field) throw new Error(`Missing edit field: ${name}`);
+    return field;
+  };
 
-      <AdminFormSection title="Proses Kerja">
-        <Field label="Eyebrow" name="workflow.eyebrow" defaultValue={config.workflow.eyebrow} />
-        <Field label="Heading awal" name="workflow.headingPrefix" defaultValue={config.workflow.headingPrefix} />
-        <Field label="Kata rotasi" name="workflow.rotatingWords" defaultValue={config.workflow.rotatingWords.join("\n")} textarea />
-        <Field label="Deskripsi" name="workflow.description" defaultValue={config.workflow.description} textarea />
-        {config.workflow.steps.map((step, index) => (
-          <NestedCard key={index}>
-            <div className="grid gap-3">
-              <Field label="Nomor" name={`workflow.${index}.step`} defaultValue={step.step} />
-              <Field label="Judul" name={`workflow.${index}.title`} defaultValue={step.title} />
-              <Field label="Deskripsi" name={`workflow.${index}.description`} defaultValue={step.description} textarea />
-            </div>
-          </NestedCard>
-        ))}
-      </AdminFormSection>
-
-      <AdminFormSection title="Harga / Paket">
-        <Field label="Eyebrow" name="pricing.eyebrow" defaultValue={config.pricing.eyebrow} />
-        <Field label="Heading" name="pricing.heading" defaultValue={config.pricing.heading} />
-        <Field label="Deskripsi" name="pricing.description" defaultValue={config.pricing.description} textarea />
-        {config.pricing.tiers.map((tier, index) => (
-          <NestedCard key={index}>
-            <div className="grid gap-3">
-              <Field label="Nama paket" name={`pricing.${index}.title`} defaultValue={tier.title} />
-              <Field label="Harga" name={`pricing.${index}.price`} defaultValue={tier.price} />
-              <Field label="Timeline" name={`pricing.${index}.timeline`} defaultValue={tier.timeline} />
-              <Field label="Deskripsi" name={`pricing.${index}.description`} defaultValue={tier.description} textarea />
-              <Field label="Fitur (1 baris per fitur)" name={`pricing.${index}.features`} defaultValue={tier.features.join("\n")} textarea />
-              <Field label="Tombol" name={`pricing.${index}.buttonText`} defaultValue={tier.buttonText} />
-              <label className="flex items-center gap-2 text-sm font-semibold">
-                <input type="checkbox" name={`pricing.${index}.popular`} defaultChecked={tier.popular} /> Paket paling populer
-              </label>
-            </div>
-          </NestedCard>
-        ))}
-      </AdminFormSection>
-
-      <AdminFormSection title="CTA Akhir">
-        <Field label="Badge" name="cta.badge" defaultValue={config.cta.badge} />
-        <Field label="Heading atas" name="cta.headingTop" defaultValue={config.cta.headingTop} />
-        <Field label="Heading aksen" name="cta.headingAccent" defaultValue={config.cta.headingAccent} />
-        <Field label="WhatsApp URL" name="cta.whatsappUrl" defaultValue={config.cta.whatsappUrl} />
-        <Field label="Deskripsi" name="cta.description" defaultValue={config.cta.description} textarea />
-        <Field label="CTA utama" name="cta.primaryCta" defaultValue={config.cta.primaryCta} />
-        <Field label="CTA kedua" name="cta.secondaryCta" defaultValue={config.cta.secondaryCta} />
-        <Field label="Social proof" name="cta.socialProof" defaultValue={config.cta.socialProof} />
-        <Field label="Rating text" name="cta.ratingText" defaultValue={config.cta.ratingText} />
-      </AdminFormSection>
-
-      <AdminFormSection title="FAQ">
-        <Field label="Eyebrow" name="faq.eyebrow" defaultValue={config.faq.eyebrow} />
-        <Field label="Heading" name="faq.heading" defaultValue={config.faq.heading} />
-        {config.faq.items.map((item, index) => (
-          <NestedCard key={index}>
-            <div className="grid gap-3">
-              <Field label="Pertanyaan" name={`faq.${index}.question`} defaultValue={item.question} />
-              <Field label="Jawaban" name={`faq.${index}.answer`} defaultValue={item.answer} textarea />
-            </div>
-          </NestedCard>
-        ))}
-      </AdminFormSection>
-
-      <div className="sticky bottom-4 z-10 flex justify-end">
-        <button className="rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 hover:bg-indigo-700">Simpan perubahan</button>
+  return (
+    <section className="relative w-full overflow-hidden bg-white py-16">
+      <div className="pointer-events-none absolute inset-0 flex select-none items-center justify-center overflow-hidden">
+        <span
+          className="text-[160px] font-black leading-none tracking-tighter md:text-[220px]"
+          style={{ WebkitTextStroke: "1.5px rgba(99,102,241,0.06)", color: "transparent" }}
+        >
+          STATS
+        </span>
       </div>
-    </form>
+
+      <div className="w-full border-y border-indigo-100">
+        <div className="w-full px-6 md:px-12">
+          <div className="grid grid-cols-2 divide-x divide-indigo-100 py-8 md:grid-cols-4">
+            {config.stats.map((stat, index) => {
+              const valueField = getField(`stats.${index}.value`);
+              const suffixField = getField(`stats.${index}.suffix`);
+              const labelField = getField(`stats.${index}.label`);
+              const descriptionField = getField(`stats.${index}.description`);
+
+              return (
+                <div key={index} className="flex flex-col items-center px-6 py-4 text-center md:px-10 first:pl-0 last:pr-0">
+                  <div className="mb-2 text-4xl font-bold tracking-tight text-indigo-600 md:text-5xl lg:text-6xl">
+                    <EditableTextButton field={valueField} onClick={() => onQuickEdit(valueField)} className="px-1">
+                      {stat.value}
+                    </EditableTextButton>
+                    <EditableTextButton field={suffixField} onClick={() => onQuickEdit(suffixField)} className="px-1">
+                      {stat.suffix}
+                    </EditableTextButton>
+                  </div>
+                  <EditableTextButton field={labelField} onClick={() => onQuickEdit(labelField)} className="mb-1 px-2 text-sm font-semibold text-neutral-900">
+                    {stat.label}
+                  </EditableTextButton>
+                  <EditableTextButton field={descriptionField} onClick={() => onQuickEdit(descriptionField)} className="px-2 text-xs leading-relaxed text-neutral-500">
+                    {stat.description}
+                  </EditableTextButton>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function EditableFrame({
+  section,
+  active,
+  quickFields,
+  editMode,
+  onQuickEdit,
+  children,
+}: {
+  section: SectionMeta;
+  active: boolean;
+  editMode: boolean;
+  quickFields: InlineEditField[];
+  onQuickEdit: (field: InlineEditField) => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <section
+      id={`preview-${section.key}`}
+      className={cn(
+        "group relative overflow-hidden rounded-md border bg-white shadow-none transition-colors",
+        active && editMode ? "border-indigo-500 ring-2 ring-indigo-100" : "border-neutral-200"
+      )}
+    >
+      <div className="sticky top-0 z-20 flex items-center justify-between border-b border-neutral-200 bg-white/95 px-3 py-2 backdrop-blur">
+        <div className="flex items-center gap-2 text-sm font-semibold text-neutral-800">
+          <span className={cn("text-neutral-400", active && "text-indigo-600")}>{SECTION_ICONS[section.key]}</span>
+          <span>{section.label}</span>
+        </div>
+        <p className="text-xs text-neutral-400">
+          {editMode ? "Klik elemen untuk edit" : "Preview mode"}
+        </p>
+      </div>
+      <div className="relative bg-white">
+        <div className={cn(editMode && quickFields.length === 0 ? "" : "pointer-events-none")}>{children}</div>
+        {editMode && quickFields.length ? (
+          quickFields.some((field) => field.hotspotClassName) ? (
+            <div className="absolute inset-0 z-10">
+              {quickFields.map((field) => (
+                <ElementHotspot key={field.name} field={field} onClick={() => onQuickEdit(field)} />
+              ))}
+            </div>
+          ) : (
+            <div className="absolute left-3 top-16 z-10 flex max-w-[calc(100%-1.5rem)] flex-wrap gap-2">
+              {quickFields.map((field) => (
+                <QuickEditButton key={field.name} field={field} onClick={() => onQuickEdit(field)} />
+              ))}
+            </div>
+          )
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+function QuickEditButton({ field, onClick }: { field: InlineEditField; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="inline-flex items-center gap-1.5 rounded-md border border-indigo-200 bg-white/95 px-2.5 py-1.5 text-xs font-semibold text-indigo-700 shadow-none backdrop-blur transition-colors hover:border-indigo-300 hover:bg-indigo-50"
+    >
+      <Pencil className="h-3.5 w-3.5" />
+      {field.label}
+    </button>
+  );
+}
+
+function ElementHotspot({ field, onClick }: { field: InlineEditField; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      title={field.label}
+      className={cn(
+        "absolute rounded-md border border-transparent bg-transparent text-left shadow-none outline-none transition-colors hover:border-indigo-300/70 hover:bg-indigo-50/20 focus:border-indigo-400 focus:bg-indigo-50/20 focus:ring-2 focus:ring-indigo-100",
+        field.hotspotClassName ?? "left-3 top-16 h-9 w-32"
+      )}
+    >
+      <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-md border border-indigo-200 bg-white text-indigo-600 opacity-80 shadow-none transition-opacity hover:opacity-100">
+        <Pencil className="h-3 w-3" />
+      </span>
+      <span className="sr-only">Edit {field.label}</span>
+    </button>
+  );
+}
+
+function InlineEditModal({ field, onClose }: { field: InlineEditField | null; onClose: () => void }) {
+  const [state, formAction, isPending] = useActionState(saveLandingPageField, { success: false });
+
+  if (!field) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-950/40 p-4" role="dialog" aria-modal="true">
+      <div className="w-full max-w-xl rounded-md border border-neutral-200 bg-white p-5 shadow-none">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">Inline Edit</p>
+            <h3 className="mt-2 text-lg font-bold text-neutral-900">{field.label}</h3>
+            <p className="mt-1 text-sm text-neutral-500">Field: {field.name}</p>
+          </div>
+          <button type="button" onClick={onClose} className="rounded-md border border-neutral-200 px-3 py-1.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">
+            Tutup
+          </button>
+        </div>
+
+        <form action={formAction} className="mt-5 space-y-4">
+          <input type="hidden" name="name" value={field.name} />
+          <label className="block text-sm font-semibold text-neutral-700" htmlFor={`inline-${field.name}`}>
+            Konten
+          </label>
+          {field.textarea ? (
+            <textarea
+              id={`inline-${field.name}`}
+              name="value"
+              defaultValue={field.value}
+              rows={6}
+              className="w-full rounded-md border border-neutral-200 px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+            />
+          ) : (
+            <input
+              id={`inline-${field.name}`}
+              name="value"
+              defaultValue={field.value}
+              className="w-full rounded-md border border-neutral-200 px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+            />
+          )}
+          {state.error ? <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">{state.error}</p> : null}
+          {state.success && state.message ? <p className="rounded-md border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-700">{state.message}</p> : null}
+          <div className="flex justify-end gap-2 border-t border-neutral-200 pt-4">
+            <button type="button" onClick={onClose} className="rounded-md border border-neutral-200 px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">
+              Batal
+            </button>
+            <button disabled={isPending} className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-none transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-300">
+              <Save className="h-4 w-4" />
+              {isPending ? "Menyimpan..." : "Simpan"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+export function LandingPageForm({ config, initialSection = "hero" }: { config: SiteConfig; initialSection?: SectionKey }) {
+  const [activeSection, setActiveSection] = useState<SectionKey>(initialSection);
+  const [inlineField, setInlineField] = useState<InlineEditField | null>(null);
+  const [editMode, setEditMode] = useState(false);
+
+  useEffect(() => {
+    const syncHash = () => {
+      const hash = window.location.hash.replace("#", "").replace("preview-", "");
+      if (isSectionKey(hash)) setActiveSection(hash);
+    };
+
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => window.removeEventListener("hashchange", syncHash);
+  }, []);
+
+  const active = LANDING_PAGE_SECTIONS.find((section) => section.key === activeSection) ?? LANDING_PAGE_SECTIONS[0];
+
+  return (
+    <>
+      <div className="space-y-4">
+        <div className="sticky top-0 z-30 rounded-md border border-neutral-200 bg-white/95 p-3 shadow-none backdrop-blur">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">Visual Editor</p>
+              <p className="mt-1 text-sm text-neutral-600">Preview bersih secara default. Aktifkan mode edit untuk klik elemen dan ubah konten.</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-md bg-indigo-50 px-3 py-2 text-sm font-semibold text-indigo-700">Aktif: {active.label}</span>
+              <button
+                type="button"
+                onClick={() => setEditMode((current) => !current)}
+                className={cn(
+                  "inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-colors",
+                  editMode
+                    ? "bg-indigo-600 text-white hover:bg-indigo-700"
+                    : "border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50"
+                )}
+              >
+                <Pencil className="h-4 w-4" />
+                {editMode ? "Mode Preview" : "Mode Edit"}
+              </button>
+              <Link href="/" target="_blank" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">
+                Lihat Website <ExternalLink className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-md border border-neutral-200 bg-neutral-50 p-3 shadow-none">
+          <EditableFrame
+            section={active}
+            active
+            editMode={editMode}
+            quickFields={editMode && activeSection === "stats" ? [] : getInlineEditFields(activeSection, config)}
+            onQuickEdit={(field) => {
+              setActiveSection(field.section);
+              setInlineField(field);
+            }}
+          >
+            <SectionRenderer
+              section={activeSection}
+              config={config}
+              editMode={editMode}
+              onQuickEdit={(field) => {
+                setActiveSection(field.section);
+                setInlineField(field);
+              }}
+            />
+          </EditableFrame>
+        </div>
+      </div>
+      <InlineEditModal field={inlineField} onClose={() => setInlineField(null)} />
+    </>
   );
 }

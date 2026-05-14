@@ -3,6 +3,13 @@
 import { revalidatePath } from "next/cache";
 import db from "@/lib/db";
 import { defaultSiteConfig, getSiteConfig, SITE_CONFIG_KEY, type SiteConfig } from "@/lib/site-config";
+import { setLandingPageField } from "@/features/admin/lib/landing-page-edit";
+
+export type LandingPageFieldState = {
+  success: boolean;
+  error?: string;
+  message?: string;
+};
 
 function lines(value: string) {
   return value.split("\n").map((item) => item.trim()).filter(Boolean);
@@ -68,7 +75,9 @@ export async function saveLandingPage(formData: FormData) {
         description: getString(formData, `pricing.${index}.description`, tier.description),
         features: lines(getString(formData, `pricing.${index}.features`, tier.features.join("\n"))),
         buttonText: getString(formData, `pricing.${index}.buttonText`, tier.buttonText),
-        popular: formData.get(`pricing.${index}.popular`) === "on",
+        popular: formData.has(`pricing.${index}.popular`)
+          ? formData.get(`pricing.${index}.popular`) === "on"
+          : tier.popular,
       })),
     },
     cta: {
@@ -100,6 +109,41 @@ export async function saveLandingPage(formData: FormData) {
 
   revalidatePath("/");
   revalidatePath("/admin/landing-page");
+}
+
+export async function saveLandingPageField(_prevState: LandingPageFieldState, formData: FormData): Promise<LandingPageFieldState> {
+  try {
+    const name = formData.get("name");
+    const value = formData.get("value");
+
+    if (typeof name !== "string" || !name.trim()) {
+      return { success: false, error: "Nama field tidak valid." };
+    }
+
+    if (typeof value !== "string" || !value.trim()) {
+      return { success: false, error: "Konten tidak boleh kosong." };
+    }
+
+    const current = await getSiteConfig();
+    const nextConfig = setLandingPageField(current, name, value);
+
+    await db.siteConfig.upsert({
+      where: { key: SITE_CONFIG_KEY },
+      update: { value: nextConfig },
+      create: { key: SITE_CONFIG_KEY, value: nextConfig },
+    });
+
+    revalidatePath("/");
+    revalidatePath("/admin/landing-page");
+    revalidatePath(`/admin/landing-page/${name.split(".")[0]}`);
+
+    return { success: true, message: "Konten berhasil disimpan." };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Gagal menyimpan konten landing page.",
+    };
+  }
 }
 
 export async function resetLandingPage() {
