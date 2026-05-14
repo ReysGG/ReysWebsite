@@ -21,6 +21,7 @@ import { PricingSection } from "@/components/sections/pricing";
 import { ServicesSection } from "@/components/sections/services";
 import { StatsSection } from "@/components/sections/stats";
 import { WorkflowSection } from "@/components/sections/workflow";
+import { HomepageShowcaseSection } from "@/components/sections/homepage-showcase";
 import {
   BarChart3,
   CircleHelp,
@@ -57,7 +58,7 @@ function SectionRenderer({
 }) {
   switch (section) {
     case "hero":
-      return <HeroSection content={config.hero} />;
+      return editMode ? <HeroEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <HeroSection content={config.hero} />;
     case "stats":
       return editMode ? <StatsEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <StatsSection stats={config.stats} />;
     case "services":
@@ -99,6 +100,70 @@ function EditableTextButton({
         <Pencil className="h-3 w-3" />
       </span>
     </button>
+  );
+}
+
+function HeroEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuickEdit: (field: InlineEditField) => void }) {
+  const fields = getInlineEditFields("hero", config);
+  const fieldByName = new Map(fields.map((field) => [field.name, field]));
+  const field = (name: string) => fieldByName.get(name)!;
+
+  return (
+    <section className="relative flex min-h-[720px] w-full items-center justify-center overflow-hidden bg-[#f5f3ff] antialiased">
+      <div className="pointer-events-none absolute inset-0 hidden overflow-hidden md:block">
+        <svg className="absolute -top-[5%] right-0 h-[500px] w-[500px] text-black opacity-[0.04]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.2">
+          {[10, 20, 30, 40, 50, 60, 70].map((n) => (
+            <polyline key={n} points={`${n},-10 ${n},${100 - n} 110,${100 - n}`} />
+          ))}
+        </svg>
+      </div>
+
+      <div className="relative z-10 flex w-full flex-col items-center gap-10 px-6 py-16 md:px-12 lg:flex-row lg:gap-0">
+        <div className="flex w-full flex-1 flex-col lg:flex-[0.95]">
+          <EditableTextButton field={field("hero.trustText")} onClick={() => onQuickEdit(field("hero.trustText"))} className="mb-6 inline-flex w-fit items-center gap-3 border border-indigo-200 bg-indigo-50 px-4 py-2 text-xs font-semibold text-indigo-700 md:mb-8 md:text-sm">
+            <span className="flex -space-x-2">
+              {["DB", "AR", "SK", "MY"].map((init) => (
+                <span key={init} className="flex h-6 w-6 items-center justify-center rounded-md border-2 border-[#EFECE6] bg-indigo-100 text-[9px] font-bold text-indigo-700 md:h-7 md:w-7">
+                  {init}
+                </span>
+              ))}
+            </span>
+            <span className="tracking-tight">{config.hero.trustText}</span>
+          </EditableTextButton>
+
+          <h1 className="text-4xl font-bold leading-[1.05] tracking-tighter text-[#1A1A1A] sm:text-5xl md:text-6xl lg:text-7xl">
+            <EditableTextButton field={field("hero.headlinePrefix")} onClick={() => onQuickEdit(field("hero.headlinePrefix"))} className="px-1 text-left">
+              {config.hero.headlinePrefix}
+            </EditableTextButton>
+            <br className="hidden sm:block" />
+            <EditableTextButton field={field("hero.rotatingWords")} onClick={() => onQuickEdit(field("hero.rotatingWords"))} className="mt-2 inline-flex flex-wrap gap-2 px-1 text-left text-indigo-600">
+              {config.hero.rotatingWords.map((word) => (
+                <span key={word} className="rounded-md border border-indigo-200 bg-white/60 px-2 py-1">
+                  {word}
+                </span>
+              ))}
+            </EditableTextButton>
+          </h1>
+
+          <EditableTextButton field={field("hero.description")} onClick={() => onQuickEdit(field("hero.description"))} className="mt-6 max-w-md px-2 py-1 text-left text-sm font-medium leading-relaxed text-neutral-600 md:text-base lg:text-lg">
+            {config.hero.description}
+          </EditableTextButton>
+
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row md:gap-4">
+            <EditableTextButton field={field("hero.primaryCta")} onClick={() => onQuickEdit(field("hero.primaryCta"))} className="inline-flex items-center justify-center bg-indigo-600 px-8 py-3.5 text-sm font-medium text-white hover:bg-indigo-700 md:text-base">
+              {config.hero.primaryCta}
+            </EditableTextButton>
+            <EditableTextButton field={field("hero.secondaryCta")} onClick={() => onQuickEdit(field("hero.secondaryCta"))} className="inline-flex items-center justify-center border border-black/10 bg-white/60 px-8 py-3.5 text-sm font-medium text-[#111] backdrop-blur-sm hover:bg-white/80 md:text-base">
+              {config.hero.secondaryCta}
+            </EditableTextButton>
+          </div>
+        </div>
+
+        <div className="pointer-events-none w-full flex-1 lg:flex-[1.05]">
+          <HomepageShowcaseSection />
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -355,7 +420,7 @@ export function LandingPageForm({ config, initialSection = "hero" }: { config: S
             section={active}
             active
             editMode={editMode}
-            quickFields={editMode && activeSection === "stats" ? [] : getInlineEditFields(activeSection, config)}
+            quickFields={editMode && (activeSection === "hero" || activeSection === "stats") ? [] : getInlineEditFields(activeSection, config)}
             onQuickEdit={(field) => {
               setActiveSection(field.section);
               setInlineField(field);
