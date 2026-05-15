@@ -4,8 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useActionState } from "react";
 import type { Post } from "@prisma/client";
-import { Edit3, FileText } from "lucide-react";
+import { Edit3, FileText, Eye } from "lucide-react";
 import { DeletePostButton } from "./delete-post-button";
+import { BlogPreviewModal } from "./blog-preview-modal";
 import { publishPost, unpublishPost, type BlogActionState } from "@/features/admin/actions/blog-actions";
 
 const dateFmt = (d: Date) => new Date(d).toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" });
@@ -80,25 +81,47 @@ export function BlogAdminTable({ posts, page, totalPages }: { posts: Post[]; pag
                 <td className="px-4 py-4 text-neutral-500">{dateFmt(post.updatedAt || post.createdAt)}</td>
                 <td className="px-4 py-4 text-neutral-500">{post.views || 0}</td>
                 <td className="px-4 py-4">
-                  <div className="flex justify-end gap-2">
-                    <Link
-                      href={`/admin/blog/${post.slug}/edit`}
-                      className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-600 hover:bg-neutral-50"
-                      title="Edit"
-                    >
-                      <Edit3 size={14} />
-                    </Link>
-                    <TogglePublishButton id={post.id} published={post.published} />
-                    <a
-                      href={`/blog/${post.slug}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="Preview"
-                      className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-600 hover:bg-neutral-50 text-xs font-bold"
-                    >
-                      ↗
-                    </a>
-                    <DeletePostButton id={post.id} />
+                  <div className="flex justify-end gap-1.5">
+                    {/* Edit */}
+                    <div className="group relative">
+                      <Link
+                        href={`/admin/blog/${post.slug}/edit`}
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-600 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-600 transition-colors"
+                      >
+                        <Edit3 size={14} />
+                      </Link>
+                      <span className="pointer-events-none absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded bg-neutral-900 px-2 py-1 text-[11px] text-white opacity-0 group-hover:opacity-100 transition-opacity z-50">
+                        Edit
+                      </span>
+                    </div>
+
+                    {/* Toggle publish */}
+                    <div className="group relative">
+                      <TogglePublishButton id={post.id} published={post.published} />
+                      <span className="pointer-events-none absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded bg-neutral-900 px-2 py-1 text-[11px] text-white opacity-0 group-hover:opacity-100 transition-opacity z-50">
+                        {post.published ? "Jadikan Draft" : "Publish"}
+                      </span>
+                    </div>
+
+                    {/* Preview */}
+                    <div className="group relative">
+                      <BlogPreviewModal
+                        slug={post.slug}
+                        label={<Eye size={14} />}
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-600 hover:bg-violet-50 hover:border-violet-200 hover:text-violet-600 transition-colors"
+                      />
+                      <span className="pointer-events-none absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded bg-neutral-900 px-2 py-1 text-[11px] text-white opacity-0 group-hover:opacity-100 transition-opacity z-50">
+                        Preview
+                      </span>
+                    </div>
+
+                    {/* Delete */}
+                    <div className="group relative">
+                      <DeletePostButton id={post.id} />
+                      <span className="pointer-events-none absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded bg-neutral-900 px-2 py-1 text-[11px] text-white opacity-0 group-hover:opacity-100 transition-opacity z-50">
+                        Hapus
+                      </span>
+                    </div>
                   </div>
                 </td>
               </tr>

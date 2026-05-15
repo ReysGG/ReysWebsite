@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogEditorForm } from "@/features/admin/components/blog/blog-editor-form";
+import { BlogPreviewModal } from "@/features/admin/components/blog/blog-preview-modal";
 import { PenLine } from "lucide-react";
 import db from "@/lib/db";
 
@@ -21,7 +22,7 @@ export default async function EditBlogPage({ params }: { params: Promise<{ slug:
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-indigo-600 hover:text-indigo-700">↗ Preview</a>
+          <BlogPreviewModal slug={post.slug} />
           <Link href="/admin/blog" className="text-sm font-semibold text-neutral-400 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-700">← Kembali</Link>
         </div>
       </div>
