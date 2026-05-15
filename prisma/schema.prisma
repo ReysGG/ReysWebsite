@@ -87,6 +87,14 @@ model Like {
   @@unique([userId, postId])
 }
 
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  source    String?
+  createdAt DateTime @default(now())
+  active    Boolean  @default(true)
+}
+
 model SiteConfig {
   id        String   @id @default(cuid())
   key       String   @unique

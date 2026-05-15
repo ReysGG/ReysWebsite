@@ -7,9 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed:blog": "node scripts/seed-blog.mjs"
+    "seed:blog": "node scripts/seed-blog.mjs",
+    "seed:blog2": "node scripts/seed-blog-batch2.mjs"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "3.758.0",
     "@clerk/nextjs": "^7.3.3",
     "@prisma/adapter-pg": "^7.7.0",
     "@prisma/client": "^7.6.0",

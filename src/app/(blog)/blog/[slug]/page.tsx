@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
+import db from "@/lib/db";
 import { getPublishedPostBySlug, getRelatedPosts } from "@/features/blog/data/posts";
 import { ArticleHeader } from "@/features/blog/components/article-header";
 import { ArticleContent } from "@/features/blog/components/article-content";
@@ -7,6 +9,7 @@ import { ArticleRelatedPosts } from "@/features/blog/components/article-related-
 import { ArticleCta } from "@/features/blog/components/article-cta";
 import { stripHtml } from "@/features/blog/components/blog-card";
 import { ViewCounter } from "@/features/blog/components/view-counter";
+import { SocialEngagement } from "@/features/blog/components/frontend/social-engagement";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -31,7 +34,47 @@ export default async function BlogPostPage({ params }: PageProps) {
   const post = await getPublishedPostBySlug(slug).catch(() => null);
   if (!post) notFound();
   const related = await getRelatedPosts(post).catch(() => []);
+
+  const { userId } = await auth();
+  const [comments, likesCount, userHasLiked] = await Promise.all([
+    db.comment.findMany({
+      where: { postId: post.id },
+      orderBy: { createdAt: "desc" },
+      take: 50,
+    }).catch(() => []),
+    db.like.count({ where: { postId: post.id } }).catch(() => 0),
+    userId
+      ? db.like.findFirst({ where: { postId: post.id, userId } }).then((r) => !!r).catch(() => false)
+      : Promise.resolve(false),
+  ]);
+
   const jsonLd = [{ "@context": "https://schema.org", "@type": "BlogPosting", headline: post.title, description: post.excerpt || stripHtml(post.content).slice(0, 155), image: (post.ogImage || post.coverImage) ? [post.ogImage || post.coverImage] : undefined, datePublished: (post.publishedAt || post.createdAt).toISOString(), dateModified: post.updatedAt.toISOString(), keywords: post.focusKeyword || undefined, articleSection: post.category || undefined, author: { "@type": "Person", name: post.author || "WebServices" } }, { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "/" }, { "@type": "ListItem", position: 2, name: "Blog", item: "/blog" }, { "@type": "ListItem", position: 3, name: post.title, item: `/blog/${post.slug}` }] }];
 
-  return <main className="relative min-h-screen overflow-hidden bg-[#f5f2ff] dark:bg-[#f5f2ff] pt-32 pb-24 text-neutral-950 dark:text-neutral-950"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.16),transparent_34rem)]" /><article className="relative z-10 mx-auto max-w-4xl px-6 md:px-12"><ArticleHeader post={post} /><ArticleContent content={post.content} /><ArticleCta /></article><div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12"><ArticleRelatedPosts posts={related} /></div><ViewCounter id={post.id} /></main>;
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-[#f5f2ff] dark:bg-[#f5f2ff] pt-32 pb-24 text-neutral-950 dark:text-neutral-950">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.16),transparent_34rem)]" />
+      <article className="relative z-10 mx-auto max-w-4xl px-6 md:px-12">
+        <ArticleHeader post={post} />
+        <ArticleContent content={post.content} />
+        <ArticleCta />
+        <SocialEngagement
+          postId={post.id}
+          initialLikesCount={likesCount}
+          userHasLiked={userHasLiked}
+          comments={comments.map((c) => ({
+            id: c.id,
+            content: c.content,
+            createdAt: c.createdAt,
+            userId: c.userId,
+            parentId: c.parentId,
+          }))}
+        />
+      </article>
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
+        <ArticleRelatedPosts posts={related} />
+      </div>
+      <ViewCounter id={post.id} />
+    </main>
+  );
 }

@@ -1,0 +1,63 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { requireAdmin } from '@/features/admin/lib/auth';
+
+const s3 = new S3Client({
+  endpoint: process.env.SUPABASE_S3_ENDPOINT,
+  region: process.env.SUPABASE_S3_REGION ?? 'ap-southeast-1',
+  credentials: {
+    accessKeyId: process.env.SUPABASE_S3_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.SUPABASE_S3_SECRET_ACCESS_KEY!,
+  },
+  forcePathStyle: true,
+});
+
+const BUCKET = process.env.SUPABASE_S3_BUCKET ?? 'blog-images';
+const SUPABASE_PROJECT = process.env.SUPABASE_PROJECT_REF || 'diqptdnkfcxyvepefypx';
+
+export async function POST(req: NextRequest) {
+  try {
+    await requireAdmin();
+
+    const formData = await req.formData();
+    const file = formData.get('file') as File | null;
+    if (!file) return NextResponse.json({ error: 'No file provided' }, { status: 400 });
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    if (!allowedTypes.includes(file.type)) {
+      return NextResponse.json({ error: 'File type not allowed. Use JPG, PNG, WebP, or GIF.' }, { status: 400 });
+    }
+
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    if (file.size > maxSize) {
+      return NextResponse.json({ error: 'File too large. Max 5MB.' }, { status: 400 });
+    }
+
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    const ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg';
+    const timestamp = Date.now();
+    const random = Math.random().toString(36).slice(2, 8);
+    const filename = `blog/${timestamp}-${random}.${ext}`;
+
+    await s3.send(new PutObjectCommand({
+      Bucket: BUCKET,
+      Key: filename,
+      Body: buffer,
+      ContentType: file.type,
+      CacheControl: 'public, max-age=31536000',
+    }));
+
+    // Public URL via Supabase Storage CDN
+    const url = `https://${SUPABASE_PROJECT}.supabase.co/storage/v1/object/public/${BUCKET}/${filename}`;
+
+    return NextResponse.json({ url });
+  } catch (error) {
+    console.error('[upload]', error);
+    if (error instanceof Error && error.message.includes('Unauthorized')) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+  }
+}

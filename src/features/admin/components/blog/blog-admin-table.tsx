@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useActionState } from "react";
 import type { Post } from "@prisma/client";
-import { Edit3 } from "lucide-react";
+import { Edit3, FileText } from "lucide-react";
 import { DeletePostButton } from "./delete-post-button";
 import { publishPost, unpublishPost, type BlogActionState } from "@/features/admin/actions/blog-actions";
 
@@ -49,12 +50,25 @@ export function BlogAdminTable({ posts, page, totalPages }: { posts: Post[]; pag
             {posts.length ? posts.map((post) => (
               <tr key={post.id} className="hover:bg-neutral-50">
                 <td className="px-4 py-4">
-                  <div className="font-semibold text-neutral-900">{post.title || "Untitled"}</div>
-                  <div className="mt-1 text-xs text-neutral-500">/{post.slug} · {post.author || "Admin"}</div>
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {post.category && <span className="rounded bg-indigo-50 px-2 py-0.5 text-[11px] font-semibold text-indigo-700">{post.category}</span>}
-                    {post.featured && <span className="rounded bg-violet-50 px-2 py-0.5 text-[11px] font-semibold text-violet-700">Featured</span>}
-                    {post.tags?.slice(0, 3).map((t) => <span key={t} className="rounded bg-neutral-100 px-2 py-0.5 text-[11px] text-neutral-600">{t}</span>)}
+                  <div className="flex items-start gap-3">
+                    <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-md bg-indigo-50">
+                      {post.coverImage ? (
+                        <Image src={post.coverImage} alt={post.title || "cover"} fill unoptimized className="object-cover" />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-100 to-violet-100">
+                          <FileText size={18} className="text-indigo-400" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="font-semibold text-neutral-900 line-clamp-2">{post.title || "Untitled"}</div>
+                      <div className="mt-1 text-xs text-neutral-500">/{post.slug} · {post.author || "Admin"}</div>
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {post.category && <span className="rounded bg-indigo-50 px-2 py-0.5 text-[11px] font-semibold text-indigo-700">{post.category}</span>}
+                        {post.featured && <span className="rounded bg-violet-50 px-2 py-0.5 text-[11px] font-semibold text-violet-700">Featured</span>}
+                        {post.tags?.slice(0, 3).map((t) => <span key={t} className="rounded bg-neutral-100 px-2 py-0.5 text-[11px] text-neutral-600">{t}</span>)}
+                      </div>
+                    </div>
                   </div>
                 </td>
                 <td className="px-4 py-4">

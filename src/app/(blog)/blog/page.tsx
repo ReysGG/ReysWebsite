@@ -1,0 +1,116 @@
+import type { Metadata } from 'next';
+import { getBlogFilterOptions, getPublishedPosts } from '@/features/blog/data/posts';
+import { parseBlogSearchParams } from '@/features/blog/lib/filters';
+import { BlogHeroSlider } from '@/features/blog/components/blog-hero-slider';
+import { BlogNewsCard } from '@/features/blog/components/blog-news-card';
+import { BlogSidebar } from '@/features/blog/components/blog-sidebar';
+import { BlogFilterBar } from '@/features/blog/components/blog-filter-bar';
+import { BlogPagination } from '@/features/blog/components/blog-pagination';
+import { BlogEmptyState } from '@/features/blog/components/blog-empty-state';
+import { BlogErrorState } from '@/features/blog/components/blog-error-state';
+
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Blog & Insights | WebServices',
+    description: 'Panduan teknis, studi kasus, dan insight pengembangan website.',
+  };
+}
+
+const single = (v: string | string[] | undefined) =>
+  Array.isArray(v) ? v[0] : v || '';
+
+export default async function PublicBlogPage({ searchParams }: { searchParams: SearchParams }) {
+  const params = await searchParams;
+  const parsed = parseBlogSearchParams(params);
+  const tag = parsed.tag || '';
+  const category = parsed.category || '';
+  const year = parsed.year ? String(parsed.year) : '';
+
+  const [data, filterOptions] = await Promise.all([
+    getPublishedPosts(parsed).catch(() => null),
+    getBlogFilterOptions().catch(() => ({ tags: [], categories: [], years: [] })),
+  ]);
+
+  if (!data) {
+    return (
+      <main className="min-h-screen bg-white dark:bg-white pt-0 text-neutral-950 dark:text-neutral-950">
+        <BlogErrorState />
+      </main>
+    );
+  }
+
+  const { posts, pagination } = data;
+  const isFiltered = !!(parsed.q || tag || category || year);
+
+  // Slider: posts with coverImage first, fallback to any posts
+  const sliderPosts = posts.filter((p) => p.coverImage).slice(0, 5);
+  const fallbackSlider = sliderPosts.length >= 1 ? sliderPosts : posts.slice(0, 5);
+
+  // Trending: sort by views desc
+  const trending = [...posts].sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 5);
+
+  return (
+    <main className="min-h-screen bg-[#f7f7f8] dark:bg-[#f7f7f8] text-neutral-950 dark:text-neutral-950">
+      {/* Hero Slider — full width, no padding, only on page 1 no filter */}
+      {parsed.page === 1 && !isFiltered && fallbackSlider.length > 0 && (
+        <BlogHeroSlider posts={fallbackSlider} />
+      )}
+
+      {/* Main content */}
+      <div className="px-6 py-8 md:px-12 lg:px-20">
+        {/* Filter bar */}
+        <BlogFilterBar
+          q={single(params.q)}
+          tag={tag}
+          category={category}
+          year={year}
+          tags={filterOptions.tags}
+          categories={filterOptions.categories}
+          years={filterOptions.years}
+        />
+
+        {/* 2-column layout: articles + sidebar */}
+        <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_320px]">
+          {/* Left: article list */}
+          <div>
+            <div className="mb-5 flex items-center justify-between">
+              <h2 className="text-lg font-bold text-neutral-900 dark:text-neutral-900">
+                {isFiltered ? 'Hasil Pencarian' : 'Artikel Terbaru'}
+              </h2>
+              <span className="text-sm text-neutral-400 dark:text-neutral-400">
+                {pagination.total} artikel
+              </span>
+            </div>
+
+            {posts.length === 0 ? (
+              <BlogEmptyState />
+            ) : (
+              <div>
+                {posts.map((post, i) => (
+                  <BlogNewsCard key={post.id} post={post} featured={i === 0 && !isFiltered} />
+                ))}
+              </div>
+            )}
+
+            <BlogPagination
+              page={pagination.page}
+              totalPages={pagination.totalPages}
+              query={{ q: single(params.q), tag, category, year }}
+            />
+          </div>
+
+          {/* Right: sidebar */}
+          <aside className="lg:sticky lg:top-20 lg:self-start">
+            <BlogSidebar
+              trending={trending}
+              categories={filterOptions.categories}
+              tags={filterOptions.tags}
+            />
+          </aside>
+        </div>
+      </div>
+    </main>
+  );
+}
