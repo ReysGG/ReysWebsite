@@ -9,12 +9,13 @@
     "lint": "eslint",
     "seed:blog": "node scripts/seed-blog.mjs",
     "seed:blog2": "node scripts/seed-blog-batch2.mjs",
+    "seed:blog-seo": "tsx scripts/seed-blog-articles.ts",
     "seed:blog-short": "tsx scripts/seed-short-blog-posts.ts",
     "seed:blog-expand": "tsx scripts/expand-short-blog-posts.ts",
-    "seed:blog-all": "npm run seed:blog-short && npm run seed:blog-expand"
+    "seed:blog-all": "npm run seed:blog && npm run seed:blog2 && npm run seed:blog-seo && npm run seed:blog-short"
   },
   "prisma": {
-    "seed": "tsx scripts/seed-short-blog-posts.ts && tsx scripts/expand-short-blog-posts.ts"
+    "seed": "npm run seed:blog-all"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.758.0",

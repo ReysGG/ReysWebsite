@@ -11,8 +11,8 @@ type BlogView = "all" | "published" | "draft" | "seo";
 const viewCopy: Record<BlogView, { eyebrow: string; title: string; description: string }> = {
   all: {
     eyebrow: "Publishing Workspace",
-    title: "Semua Artikel",
-    description: "Kelola draft, publikasi, SEO, kategori, dan performa artikel blog.",
+    title: "Artikel Published",
+    description: "Default workspace hanya menampilkan artikel yang tampil publik. Draft tetap ada di tab Draft agar tidak mengganggu review konten.",
   },
   published: {
     eyebrow: "Published Content",
@@ -44,7 +44,7 @@ export async function BlogAdminPageShell({ params, view = "all" }: { params: Blo
   let databaseError = false;
 
   try {
-    const status = view === "published" ? "published" : view === "draft" ? "draft" : params.status === "published" || params.status === "draft" ? params.status : "all";
+    const status = view === "published" ? "published" : view === "draft" ? "draft" : params.status === "published" || params.status === "draft" || params.status === "all" ? params.status : "published";
     const [postsResult, all, published, draft, seoIssuesAgg, viewsAgg] = await Promise.all([
       getAdminPosts({ page: Math.max(1, Number(params.page || 1)), q: params.q, category: params.category, status }),
       db.post.count(),
@@ -61,7 +61,7 @@ export async function BlogAdminPageShell({ params, view = "all" }: { params: Blo
 
   const copy = viewCopy[view];
   const posts = view === "seo" ? result.posts.filter(missingSeo) : result.posts;
-  const status = view === "published" ? "published" : view === "draft" ? "draft" : params.status || "all";
+  const status = view === "published" ? "published" : view === "draft" ? "draft" : params.status || "published";
 
   const stats = [
     { label: "Total Artikel", value: totals.all, icon: FileText, href: "/admin/blog" },
@@ -111,7 +111,7 @@ export async function BlogAdminPageShell({ params, view = "all" }: { params: Blo
       <div className="rounded-md border border-neutral-200 bg-white p-4 shadow-none">
         <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap gap-2">
-            <Link href="/admin/blog" className={`rounded-md px-3 py-2 text-xs font-semibold ${view === "all" ? "bg-indigo-600 text-white" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"}`}>Semua</Link>
+            <Link href="/admin/blog" className={`rounded-md px-3 py-2 text-xs font-semibold ${view === "all" ? "bg-indigo-600 text-white" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"}`}>Workspace</Link>
             <Link href="/admin/blog/published" className={`rounded-md px-3 py-2 text-xs font-semibold ${view === "published" ? "bg-indigo-600 text-white" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"}`}>Published</Link>
             <Link href="/admin/blog/drafts" className={`rounded-md px-3 py-2 text-xs font-semibold ${view === "draft" ? "bg-indigo-600 text-white" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"}`}>Draft</Link>
             <Link href="/admin/blog/seo" className={`rounded-md px-3 py-2 text-xs font-semibold ${view === "seo" ? "bg-indigo-600 text-white" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"}`}>SEO Issues</Link>

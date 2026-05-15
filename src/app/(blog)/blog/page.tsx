@@ -44,9 +44,12 @@ export default async function PublicBlogPage({ searchParams }: { searchParams: S
   const { posts, pagination } = data;
   const isFiltered = !!(parsed.q || tag || category || year);
 
-  // Slider: posts with coverImage first, fallback to any posts
+  // Slider: posts with coverImage first, fallback to any posts.
+  // Only show it when there are enough posts; with 1-3 posts it feels like the
+  // hero is "taking" one article from the list and makes the page look sparse.
   const sliderPosts = posts.filter((p) => p.coverImage).slice(0, 5);
   const fallbackSlider = sliderPosts.length >= 1 ? sliderPosts : posts.slice(0, 5);
+  const shouldShowSlider = fallbackSlider.length >= 4;
 
   // Trending: sort by views desc
   const trending = [...posts].sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 5);
@@ -54,12 +57,12 @@ export default async function PublicBlogPage({ searchParams }: { searchParams: S
   return (
     <main className="min-h-screen bg-[#f7f7f8] dark:bg-[#f7f7f8] text-neutral-950 dark:text-neutral-950">
       {/* Hero Slider — full width, no padding, only on page 1 no filter */}
-      {parsed.page === 1 && !isFiltered && fallbackSlider.length > 0 && (
+      {parsed.page === 1 && !isFiltered && shouldShowSlider && (
         <BlogHeroSlider posts={fallbackSlider} />
       )}
 
       {/* Main content */}
-      <div className="px-6 py-8 md:px-12 lg:px-20">
+      <div className="px-5 py-6 md:px-10 lg:px-16">
         {/* Filter bar */}
         <BlogFilterBar
           q={single(params.q)}
@@ -72,7 +75,7 @@ export default async function PublicBlogPage({ searchParams }: { searchParams: S
         />
 
         {/* 2-column layout: articles + sidebar */}
-        <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_320px]">
+        <div className="mt-5 grid gap-7 lg:grid-cols-[1fr_300px]">
           {/* Left: article list */}
           <div>
             <div className="mb-5 flex items-center justify-between">

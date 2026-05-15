@@ -56,9 +56,9 @@ export function BlogNewsCard({
     return (
       <Link
         href={`/blog/${post.slug}`}
-        className="group mb-6 block border-b border-neutral-200 pb-6"
+        className="group mb-5 block border-b border-neutral-200 pb-5"
       >
-        <div className="relative mb-4 h-56 w-full overflow-hidden rounded-md bg-neutral-100">
+        <div className="relative mb-3 h-44 w-full overflow-hidden rounded-md bg-neutral-100 md:h-52">
           {post.coverImage ? (
             <Image
               src={post.coverImage}
@@ -72,22 +72,22 @@ export function BlogNewsCard({
             </div>
           )}
         </div>
-        <div className="mb-2 flex items-center gap-3">
+        <div className="mb-1.5 flex items-center gap-3">
           {post.category && (
-            <span className="text-xs font-bold uppercase tracking-wide text-indigo-600">
+            <span className="text-[11px] font-bold uppercase tracking-wide text-indigo-600">
               {post.category}
             </span>
           )}
           <span className="text-xs text-neutral-400">{formatBlogDate(getPostDate(post))}</span>
           <span className="text-xs text-neutral-400">{getReadingTime(post.content)}</span>
         </div>
-        <h2 className="text-2xl font-bold leading-snug text-neutral-900 dark:text-neutral-900 transition group-hover:text-indigo-700">
+        <h2 className="text-xl font-bold leading-snug text-neutral-900 dark:text-neutral-900 transition group-hover:text-indigo-700 md:text-2xl">
           {post.title}
         </h2>
-        <p className="mt-2 text-sm leading-relaxed text-neutral-500 dark:text-neutral-500 line-clamp-3">
+        <p className="mt-1.5 text-sm leading-6 text-neutral-500 dark:text-neutral-500 line-clamp-2">
           {post.excerpt || stripHtml(post.content).slice(0, 160)}
         </p>
-        <div className="mt-3 flex flex-wrap gap-1.5">
+        <div className="mt-2.5 flex flex-wrap gap-1.5">
           {post.tags.slice(0, 4).map((t) => (
             <span
               key={t}
@@ -105,9 +105,9 @@ export function BlogNewsCard({
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex gap-4 border-b border-neutral-100 py-4 last:border-0"
+      className="group flex gap-3.5 border-b border-neutral-100 py-3.5 last:border-0"
     >
-      <div className="relative h-28 w-44 shrink-0 overflow-hidden rounded-md bg-neutral-100">
+      <div className="relative h-24 w-36 shrink-0 overflow-hidden rounded-md bg-neutral-100 md:w-40">
         {post.coverImage ? (
           <Image
             src={post.coverImage}
@@ -136,7 +136,7 @@ export function BlogNewsCard({
               </span>
             )}
           </div>
-          <h3 className="text-base font-bold leading-snug text-neutral-900 dark:text-neutral-900 transition line-clamp-2 group-hover:text-indigo-700">
+          <h3 className="text-[15px] font-bold leading-snug text-neutral-900 dark:text-neutral-900 transition line-clamp-2 group-hover:text-indigo-700 md:text-base">
             {post.title}
           </h3>
           <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-500 line-clamp-2">
