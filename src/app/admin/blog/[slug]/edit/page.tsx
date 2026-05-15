@@ -17,13 +17,13 @@ export default async function EditBlogPage({ params }: { params: Promise<{ slug:
             <PenLine size={16} className="text-indigo-600" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-neutral-900 dark:text-neutral-900">Edit Artikel</h1>
-            <p className="text-xs text-neutral-500 dark:text-neutral-500 max-w-xs truncate">{post.title}</p>
+            <h1 className="text-base font-bold text-neutral-900">Edit Artikel</h1>
+            <p className="text-xs text-neutral-500 max-w-xs truncate">{post.title}</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
           <BlogPreviewModal slug={post.slug} />
-          <Link href="/admin/blog" className="text-sm font-semibold text-neutral-400 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-700">← Kembali</Link>
+          <Link href="/admin/blog" className="text-sm font-semibold text-neutral-400 hover:text-neutral-700">← Kembali</Link>
         </div>
       </div>
       <BlogEditorForm initialData={post} />

@@ -4,13 +4,19 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { BackToTop } from "@/components/ui/back-to-top";
+import { getSiteSettings } from "@/lib/site-settings";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
-  title: "Website Services | Your Tech Partner",
-  description: "Dinamis & profesional web services, startups, and personal brands.",
-  icons: { icon: '/favicon.ico' },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+  const siteName = settings.siteName || "WebServices";
+  const tagline = settings.tagline || "Your Tech Partner";
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+    title: `${siteName} | ${tagline}`,
+    description: settings.description || "Dinamis & profesional web services, startups, and personal brands.",
+    icons: { icon: '/favicon.ico' },
+  };
+}
 
 export default function RootLayout({
   children,

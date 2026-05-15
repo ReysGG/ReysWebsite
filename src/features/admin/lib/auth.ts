@@ -24,12 +24,10 @@ export async function requireAdmin(): Promise<AdminUser> {
   const user = await currentUser();
   if (!user) throw new Error("Unauthorized");
 
-  const role = user.publicMetadata?.role || user.privateMetadata?.role;
+  const role = String(user.publicMetadata?.role || user.privateMetadata?.role || "").toLowerCase();
   const isAdmin = role === "admin" || user.publicMetadata?.isAdmin === true || user.privateMetadata?.isAdmin === true;
 
-  // If no explicit role convention has been configured yet, authenticated Clerk users
-  // may manage the current protected admin area. Set metadata role=admin before widening access.
-  if (!isAdmin && (process.env.ADMIN_REQUIRE_ROLE === "true" || process.env.NODE_ENV === "production")) {
+  if (!isAdmin) {
     throw new Error("Forbidden");
   }
 

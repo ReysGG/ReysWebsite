@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/resizable-navbar";
 import { MonitorSmartphone } from "lucide-react";
 import Link from "next/link";
-import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { Show, SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
 
 const NAV_ITEMS = [
   { name: "Layanan", link: "/#services" },
@@ -26,6 +26,8 @@ const NAV_ITEMS = [
 
 export const SiteNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useUser();
+  const isAdmin = String(user?.publicMetadata?.role ?? "").toLowerCase() === "admin";
 
   const closeMenu = () => setIsOpen(false);
 
@@ -35,12 +37,12 @@ export const SiteNavbar = () => {
         {/* Desktop */}
         <NavBody>
           {/* Logo */}
-          <a href="#" className="relative z-20 flex items-center gap-2 px-2 py-1 group">
+          <Link href="/" className="relative z-20 flex items-center gap-2 px-2 py-1 group">
             <MonitorSmartphone className="w-6 h-6 text-neutral-900 transition-transform group-hover:scale-110" />
             <span className="text-lg font-bold text-neutral-900 tracking-tight">
               WebServices
             </span>
-          </a>
+          </Link>
 
           <NavItems items={NAV_ITEMS} />
 
@@ -66,6 +68,14 @@ export const SiteNavbar = () => {
             <Show when="signed-in">
               <UserButton />
             </Show>
+            {isAdmin ? (
+              <Link
+                href="/admin"
+                className="rounded-full border border-indigo-200 bg-indigo-50 px-4 py-2 text-xs font-semibold text-indigo-700 transition-colors hover:bg-indigo-100"
+              >
+                Admin Panel
+              </Link>
+            ) : null}
             <NavbarButton
               href="/#cta"
               variant="dark"
@@ -79,10 +89,10 @@ export const SiteNavbar = () => {
         {/* Mobile */}
         <MobileNav>
           <MobileNavHeader>
-            <a href="#" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <MonitorSmartphone className="w-5 h-5 text-neutral-900" />
               <span className="font-bold text-neutral-900 text-sm">WebServices</span>
-            </a>
+            </Link>
             <MobileNavToggle
               isOpen={isOpen}
               onClick={() => setIsOpen(!isOpen)}
@@ -124,6 +134,15 @@ export const SiteNavbar = () => {
               <Show when="signed-in">
                 <UserButton />
               </Show>
+              {isAdmin ? (
+                <Link
+                  href="/admin"
+                  onClick={closeMenu}
+                  className="rounded-full border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-semibold text-indigo-700 transition-colors hover:bg-indigo-100"
+                >
+                  Admin Panel
+                </Link>
+              ) : null}
               <NavbarButton
                 href="/#cta"
                 variant="dark"

@@ -1,31 +1,47 @@
 import Link from "next/link";
 import {
   IconArrowRight,
-  IconDotsVertical,
   IconEdit,
   IconExternalLink,
   IconEye,
-  IconFilter,
   IconLayoutDashboard,
   IconPhoto,
   IconPlus,
   IconSearch,
   IconSparkles,
-  IconTrash,
 } from "@tabler/icons-react";
 import { getPortfolioProjects } from "@/lib/portfolio-config";
-
-const categories = ["Semua", "Live Project", "Draft"];
+import { DeleteProjectButton } from "@/features/admin/components/portfolio/delete-project-button";
 
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat("id-ID", { day: "2-digit", month: "short", year: "numeric" }).format(date);
 }
 
-export default async function ManagePortfolioPage() {
-  const projects = await getPortfolioProjects();
-  const publishedCount = projects.filter((item) => Boolean(item.link)).length;
-  const draftCount = projects.length - publishedCount;
-  const featuredCount = projects.filter((item) => Boolean(item.gifUrl)).length;
+export default async function ManagePortfolioPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const params = await searchParams;
+  const q = typeof params.q === "string" ? params.q.trim().toLowerCase() : "";
+  const category = typeof params.category === "string" ? params.category : "all";
+
+  const allProjects = await getPortfolioProjects();
+
+  // Filter
+  let projects = allProjects;
+  if (category === "live") {
+    projects = projects.filter((p) => Boolean(p.link));
+  } else if (category === "draft") {
+    projects = projects.filter((p) => !p.link);
+  }
+  if (q) {
+    projects = projects.filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q)
+    );
+  }
+
+  const publishedCount = allProjects.filter((item) => Boolean(item.link)).length;
+  const draftCount = allProjects.length - publishedCount;
+  const featuredCount = allProjects.filter((item) => Boolean(item.gifUrl)).length;
   const selectedProject = projects[0];
 
   return (
@@ -46,17 +62,17 @@ export default async function ManagePortfolioPage() {
               <IconExternalLink size={16} />
               Preview Website
             </Link>
-            <button className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700">
+            <Link href="/admin/portfolio/add" className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700">
               <IconPlus size={16} />
               Tambah Project
-            </button>
+            </Link>
           </div>
         </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {[
-          { label: "Total Project", value: projects.length, icon: IconPhoto, tone: "text-neutral-700", hint: "Data real dari Project" },
+          { label: "Total Project", value: allProjects.length, icon: IconPhoto, tone: "text-neutral-700", hint: "Data real dari Project" },
           { label: "Published", value: publishedCount, icon: IconEye, tone: "text-indigo-700", hint: "Project punya link" },
           { label: "Draft", value: draftCount, icon: IconEdit, tone: "text-amber-700", hint: "Project tanpa link" },
           { label: "Animated", value: featuredCount, icon: IconSparkles, tone: "text-violet-700", hint: "Punya GIF preview" },
@@ -79,24 +95,47 @@ export default async function ManagePortfolioPage() {
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
         <section className="overflow-hidden rounded-md border border-neutral-200 bg-white shadow-none">
           <div className="border-b border-neutral-200 p-4">
-            <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+            <form className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
               <div className="relative flex-1">
                 <IconSearch className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" size={16} />
-                <input placeholder="Cari project..." className="w-full rounded-md border border-neutral-200 bg-neutral-50 py-2 pl-9 pr-3 text-sm outline-none transition-colors focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100" />
+                <input
+                  name="q"
+                  defaultValue={q}
+                  placeholder="Cari project..."
+                  className="w-full rounded-md border border-neutral-200 bg-neutral-50 py-2 pl-9 pr-3 text-sm outline-none transition-colors focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+                />
               </div>
               <div className="flex flex-wrap items-center gap-2">
-                <button className="inline-flex items-center gap-2 rounded-md border border-neutral-200 px-3 py-2 text-sm font-semibold text-neutral-600 hover:bg-neutral-50">
-                  <IconFilter size={15} />
-                  Filter
-                </button>
-                {categories.map((category) => (
-                  <button key={category} className={category === "Semua" ? "rounded-md bg-indigo-600 px-3 py-2 text-xs font-semibold text-white" : "rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-600 hover:bg-neutral-50"}>
-                    {category}
+                {[
+                  { key: "all", label: "Semua" },
+                  { key: "live", label: "Live Project" },
+                  { key: "draft", label: "Draft" },
+                ].map((cat) => (
+                  <button
+                    key={cat.key}
+                    type="submit"
+                    name="category"
+                    value={cat.key}
+                    className={category === cat.key
+                      ? "rounded-md bg-indigo-600 px-3 py-2 text-xs font-semibold text-white"
+                      : "rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-600 hover:bg-neutral-50"
+                    }
+                  >
+                    {cat.label}
                   </button>
                 ))}
               </div>
-            </div>
+            </form>
           </div>
+
+          {projects.length > 0 && (
+            <div className="border-b border-neutral-100 px-4 py-3">
+              <p className="text-xs text-neutral-500">
+                Menampilkan {projects.length} dari {allProjects.length} project
+                {q && <span> · Pencarian: &quot;{q}&quot;</span>}
+              </p>
+            </div>
+          )}
 
           <div className="divide-y divide-neutral-100">
             {projects.length ? projects.map((item) => {
@@ -124,17 +163,20 @@ export default async function ManagePortfolioPage() {
 
                   <div className="flex items-center justify-end gap-2">
                     {item.link ? <Link href={item.link} target="_blank" className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-500 transition-colors hover:bg-neutral-50 hover:text-neutral-900" title="Preview"><IconExternalLink size={15} /></Link> : null}
-                    <button className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-500 transition-colors hover:bg-neutral-50 hover:text-neutral-900" title="Edit"><IconEdit size={15} /></button>
-                    <button className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-red-200 bg-red-50 text-red-500 transition-colors hover:bg-red-100" title="Hapus"><IconTrash size={15} /></button>
-                    <button className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-400 transition-colors hover:bg-neutral-50 hover:text-neutral-900" title="More"><IconDotsVertical size={15} /></button>
+                    <Link href={`/admin/portfolio/${item.id}/edit`} className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"><IconEdit size={14} /> Edit</Link>
+                    <DeleteProjectButton id={item.id} />
                   </div>
                 </article>
               );
             }) : (
               <div className="p-10 text-center">
                 <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 text-indigo-600"><IconPhoto size={22} /></div>
-                <h2 className="mt-4 text-lg font-bold text-neutral-900">Belum ada project portfolio</h2>
-                <p className="mt-1 text-sm text-neutral-500">Tambahkan data ke tabel Project untuk menampilkannya di sini dan di landing page.</p>
+                <h2 className="mt-4 text-lg font-bold text-neutral-900">
+                  {q || category !== "all" ? "Tidak ada project ditemukan" : "Belum ada project portfolio"}
+                </h2>
+                <p className="mt-1 text-sm text-neutral-500">
+                  {q || category !== "all" ? "Coba ubah filter atau kata kunci pencarian." : "Tambahkan data ke tabel Project untuk menampilkannya di sini dan di landing page."}
+                </p>
               </div>
             )}
           </div>

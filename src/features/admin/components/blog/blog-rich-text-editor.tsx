@@ -31,14 +31,12 @@ export function BlogRichTextEditor({ defaultValue = "", error }: { defaultValue?
   return (
     <div className="space-y-1.5">
       <div
-        className="overflow-hidden rounded-md border border-neutral-200 bg-white dark:bg-white dark:border-neutral-200
+        className="overflow-hidden rounded-md border border-neutral-200 bg-white
           [&_.ql-toolbar]:sticky [&_.ql-toolbar]:top-0 [&_.ql-toolbar]:z-10
           [&_.ql-toolbar]:border-b [&_.ql-toolbar]:border-neutral-200 [&_.ql-toolbar]:bg-white
-          [&_.ql-toolbar]:dark:bg-white [&_.ql-toolbar]:dark:border-neutral-200
           [&_.ql-container]:border-0
           [&_.ql-editor]:min-h-[600px] [&_.ql-editor]:text-base [&_.ql-editor]:leading-relaxed
           [&_.ql-editor]:text-neutral-900 [&_.ql-editor]:bg-white
-          [&_.ql-editor]:dark:text-neutral-900 [&_.ql-editor]:dark:bg-white
           [&_.ql-editor]:px-6 [&_.ql-editor]:py-5
           [&_.ql-editor_h1]:text-3xl [&_.ql-editor_h1]:font-bold [&_.ql-editor_h1]:mb-4
           [&_.ql-editor_h2]:text-2xl [&_.ql-editor_h2]:font-bold [&_.ql-editor_h2]:mb-3

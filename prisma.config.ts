@@ -10,6 +10,7 @@ export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
+    seed: "tsx scripts/seed-short-blog-posts.ts && tsx scripts/expand-short-blog-posts.ts",
   },
   datasource: {
     // Prefer Supabase direct connection for Prisma CLI/migrations.

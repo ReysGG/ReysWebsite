@@ -1,8 +1,11 @@
 import React from "react";
+import Link from "next/link";
 import { OverviewBento } from "@/components/admin/overview-bento";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { IconArticle, IconBriefcase, IconMessageCircle, IconLayoutList } from "@tabler/icons-react";
+import { ArrowRight, CheckCircle2, ExternalLink, FilePlus2, Globe2, LayoutTemplate, Plus, TriangleAlert } from "lucide-react";
 import db from "@/lib/db";
+import { getDailyViewsChart } from "@/features/admin/lib/analytics";
 import { AnalyticsChart } from "@/features/admin/components/analytics-chart";
 import { TrendingPosts } from "@/features/admin/components/trending-posts";
 
@@ -14,41 +17,93 @@ type TrendingPost = {
   createdAt: Date;
 };
 
+type HealthItem = {
+  label: string;
+  description: string;
+  href: string;
+  ready: boolean;
+  value: string;
+};
+
+const headerActions = [
+  { label: "Edit Landing Page", href: "/admin/landing-page", icon: LayoutTemplate, primary: true },
+  { label: "Artikel Baru", href: "/admin/blog/create", icon: FilePlus2 },
+  { label: "Tambah Portfolio", href: "/admin/portfolio", icon: Plus },
+  { label: "Lihat Website", href: "/", icon: ExternalLink, external: true },
+];
+
 export default async function AdminDashboard() {
   let databaseError = false;
   let totalPosts = 0;
+  let publishedPosts = 0;
+  let draftPosts = 0;
+  let postsWithoutSeo = 0;
   let totalProjects = 0;
+  let projectsWithoutImage = 0;
   let totalServices = 0;
   let totalTestimonials = 0;
+  let testimonialsWithoutAvatar = 0;
+  let totalFaqItems = 0;
   let trendingPosts: TrendingPost[] = [];
 
   try {
-    [totalPosts, totalProjects, totalServices, totalTestimonials, trendingPosts] = await Promise.all([
+    [
+      totalPosts,
+      publishedPosts,
+      draftPosts,
+      postsWithoutSeo,
+      totalProjects,
+      projectsWithoutImage,
+      totalServices,
+      totalTestimonials,
+      testimonialsWithoutAvatar,
+      trendingPosts,
+    ] = await Promise.all([
       db.post.count(),
+      db.post.count({ where: { published: true } }),
+      db.post.count({ where: { published: false } }),
+      db.post.count({
+        where: {
+          OR: [
+            { metaTitle: null },
+            { metaTitle: "" },
+            { metaDesc: null },
+            { metaDesc: "" },
+          ],
+        },
+      }),
       db.project.count(),
+      db.project.count({ where: { OR: [{ imageUrl: "" }] } }),
       db.service.count(),
       db.testimonial.count(),
+      db.testimonial.count({ where: { OR: [{ avatar: null }, { avatar: "" }] } }),
       db.post.findMany({
         orderBy: { views: "desc" },
         take: 5,
         select: { id: true, title: true, slug: true, views: true, createdAt: true },
       }),
     ]);
+
+    const landingConfig = await db.siteConfig.findUnique({ where: { key: "landing-page" }, select: { value: true } });
+    const landingValue = landingConfig?.value as { faq?: { items?: unknown[] } } | null;
+    totalFaqItems = Array.isArray(landingValue?.faq?.items) ? landingValue.faq.items.length : 0;
   } catch {
     databaseError = true;
   }
 
+  const chartData = await getDailyViewsChart(7);
+
   const statCards = [
     {
-      title: "Total Artikel",
+      title: "Artikel",
       value: totalPosts,
-      description: "Artikel blog diterbitkan",
+      description: `${publishedPosts} published · ${draftPosts} draft`,
       icon: IconArticle,
     },
     {
       title: "Portfolio",
       value: totalProjects,
-      description: "Project di showcase",
+      description: `${Math.max(totalProjects - projectsWithoutImage, 0)} dengan cover image`,
       icon: IconBriefcase,
     },
     {
@@ -60,10 +115,51 @@ export default async function AdminDashboard() {
     {
       title: "Testimoni",
       value: totalTestimonials,
-      description: "Ulasan klien aktif",
+      description: `${Math.max(totalTestimonials - testimonialsWithoutAvatar, 0)} dengan avatar`,
       icon: IconMessageCircle,
     },
   ];
+
+  const healthItems: HealthItem[] = [
+    {
+      label: "Minimal 3 artikel published",
+      description: "Blog terlihat aktif dan cukup kuat untuk SEO awal.",
+      href: "/admin/blog",
+      ready: publishedPosts >= 3,
+      value: `${publishedPosts}/3`,
+    },
+    {
+      label: "Minimal 3 portfolio",
+      description: "Calon klien bisa melihat bukti kerja yang cukup.",
+      href: "/admin/portfolio",
+      ready: totalProjects >= 3,
+      value: `${totalProjects}/3`,
+    },
+    {
+      label: "Minimal 3 testimoni",
+      description: "Social proof cukup kuat sebelum campaign.",
+      href: "/admin/testimonials",
+      ready: totalTestimonials >= 3,
+      value: `${totalTestimonials}/3`,
+    },
+    {
+      label: "FAQ minimal 4 item",
+      description: "Kurangi pertanyaan berulang sebelum konsultasi.",
+      href: "/admin/landing-page/faq",
+      ready: totalFaqItems >= 4,
+      value: `${totalFaqItems}/4`,
+    },
+    {
+      label: "SEO blog lengkap",
+      description: "Artikel sebaiknya punya meta title dan meta description.",
+      href: "/admin/blog",
+      ready: postsWithoutSeo === 0,
+      value: postsWithoutSeo === 0 ? "OK" : `${postsWithoutSeo} perlu dicek`,
+    },
+  ];
+
+  const readyCount = healthItems.filter((item) => item.ready).length;
+  const readinessPercent = Math.round((readyCount / healthItems.length) * 100);
 
   return (
     <div className="space-y-6">
@@ -73,37 +169,105 @@ export default async function AdminDashboard() {
         </div>
       )}
 
-      {/* Header */}
       <div className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">
-              Admin Overview
-            </p>
-            <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900 md:text-3xl">
-              Dashboard
-            </h1>
-            <p className="mt-1 text-sm text-neutral-500">
-              Ringkasan performa, konten, dan shortcut operasional website.
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">Admin Overview</p>
+            <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900 md:text-3xl">Dashboard</h1>
+            <p className="mt-1 text-sm text-neutral-500">Control center untuk konten, readiness launch, dan performa website.</p>
           </div>
-          <div className="rounded-md bg-indigo-600 px-5 py-3 text-white shrink-0">
-            <p className="text-xs font-medium opacity-70">Published content</p>
-            <p className="text-2xl font-bold">{totalPosts + totalProjects}</p>
+          <div className="flex flex-wrap items-center gap-2">
+            {headerActions.map((action) => {
+              const Icon = action.icon;
+              return (
+                <Link
+                  key={action.href + action.label}
+                  href={action.href}
+                  target={action.external ? "_blank" : undefined}
+                  className={action.primary
+                    ? "inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700"
+                    : "inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50"
+                  }
+                >
+                  <Icon className="h-4 w-4" />
+                  {action.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>
 
-      {/* Stat Cards */}
+      <div className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
+        <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-base font-semibold text-neutral-900">Quick Actions</h2>
+            <p className="mt-1 text-sm text-neutral-500">Akses cepat ke task yang paling sering dikerjakan.</p>
+          </div>
+          <Link href="/admin/landing-page" className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-700">
+            Buka editor visual <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        <OverviewBento />
+      </div>
+
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+        <div className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
+          <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-base font-semibold text-neutral-900">Launch Readiness</h2>
+              <p className="mt-1 text-sm text-neutral-500">Checklist konten penting sebelum website dipromosikan.</p>
+            </div>
+            <div className="rounded-md bg-indigo-50 px-3 py-2 text-sm font-bold text-indigo-700">{readyCount}/{healthItems.length} siap</div>
+          </div>
+          <div className="mb-5 h-2 overflow-hidden rounded-md bg-neutral-100">
+            <div className="h-full rounded-md bg-indigo-600" style={{ width: `${readinessPercent}%` }} />
+          </div>
+          <div className="grid gap-3 lg:grid-cols-2">
+            {healthItems.map((item) => (
+              <Link key={item.label} href={item.href} className="group flex items-start gap-3 rounded-md border border-neutral-200 bg-neutral-50 p-4 transition-colors hover:border-indigo-200 hover:bg-indigo-50/50">
+                <div className={item.ready ? "mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-indigo-50 text-indigo-600" : "mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-amber-50 text-amber-600"}>
+                  {item.ready ? <CheckCircle2 className="h-4 w-4" /> : <TriangleAlert className="h-4 w-4" />}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-sm font-semibold text-neutral-900 group-hover:text-indigo-700">{item.label}</p>
+                    <span className="shrink-0 rounded-md bg-white px-2 py-1 text-xs font-bold text-neutral-500">{item.value}</span>
+                  </div>
+                  <p className="mt-1 text-xs leading-relaxed text-neutral-500">{item.description}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
+          <div className="flex h-full flex-col justify-between gap-6">
+            <div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-indigo-50 text-indigo-600">
+                <Globe2 className="h-5 w-5" />
+              </div>
+              <h2 className="mt-4 text-base font-semibold text-neutral-900">Site Status</h2>
+              <p className="mt-1 text-sm text-neutral-500">Website readiness berdasarkan konten utama.</p>
+            </div>
+            <div>
+              <p className="text-4xl font-bold text-neutral-900">{readinessPercent}%</p>
+              <p className="mt-1 text-sm text-neutral-500">{readyCount === healthItems.length ? "Siap dipromosikan." : "Masih ada konten yang bisa dilengkapi."}</p>
+            </div>
+            <Link href="/" target="_blank" className="inline-flex items-center justify-center gap-2 rounded-md border border-neutral-200 px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">
+              Preview website <ExternalLink className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {statCards.map((stat) => {
           const Icon = stat.icon;
           return (
             <Card key={stat.title} className="border-neutral-200 bg-white shadow-none">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-xs font-semibold text-neutral-500">
-                  {stat.title}
-                </CardTitle>
+                <CardTitle className="text-xs font-semibold text-neutral-500">{stat.title}</CardTitle>
                 <div className="flex h-8 w-8 items-center justify-center rounded-md bg-indigo-50">
                   <Icon className="h-4 w-4 text-indigo-600" />
                 </div>
@@ -117,25 +281,13 @@ export default async function AdminDashboard() {
         })}
       </div>
 
-      {/* Charts */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <AnalyticsChart />
+          <AnalyticsChart data={chartData} />
         </div>
         <div className="lg:col-span-1">
           <TrendingPosts posts={trendingPosts} />
         </div>
-      </div>
-
-      {/* Quick Actions */}
-      <div className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
-        <div className="mb-5">
-          <h2 className="text-base font-semibold text-neutral-900">Quick Actions</h2>
-          <p className="mt-1 text-sm text-neutral-500">
-            Akses cepat ke task yang paling sering dikerjakan.
-          </p>
-        </div>
-        <OverviewBento />
       </div>
     </div>
   );

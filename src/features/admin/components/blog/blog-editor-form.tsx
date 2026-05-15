@@ -23,19 +23,19 @@ export function BlogEditorForm({ initialData }: { initialData?: Post }) {
         <BlogFormMessage message={state.message || state.error} ok={state.success} />
 
         {/* Title + meta area */}
-        <div className="rounded-t-xl border border-neutral-200 bg-white dark:bg-white dark:border-neutral-200 px-8 pt-8 pb-4">
+        <div className="rounded-t-xl border border-neutral-200 bg-white px-8 pt-8 pb-4">
           <input
             name="title"
             defaultValue={initialData?.title || ""}
             placeholder="Judul artikel..."
-            className="w-full border-0 bg-transparent text-4xl font-bold text-neutral-900 dark:text-neutral-900 placeholder:text-neutral-300 outline-none leading-tight"
+            className="w-full border-0 bg-transparent text-4xl font-bold text-neutral-900 placeholder:text-neutral-300 outline-none leading-tight"
           />
           <textarea
             name="excerpt"
             defaultValue={initialData?.excerpt || ""}
             rows={2}
             placeholder="Tulis ringkasan singkat artikel..."
-            className="mt-4 w-full resize-none border-0 bg-transparent text-base italic text-neutral-500 dark:text-neutral-500 placeholder:text-neutral-300 outline-none leading-relaxed"
+            className="mt-4 w-full resize-none border-0 bg-transparent text-base italic text-neutral-500 placeholder:text-neutral-300 outline-none leading-relaxed"
           />
           <div className="mt-3 border-t border-neutral-100 pt-3">
             <BlogSlugField defaultTitle={initialData?.title} defaultSlug={initialData?.slug} />
@@ -43,7 +43,7 @@ export function BlogEditorForm({ initialData }: { initialData?: Post }) {
         </div>
 
         {/* Rich text editor — seamlessly connected */}
-        <div className="rounded-b-xl border-x border-b border-neutral-200 bg-white dark:bg-white dark:border-neutral-200 overflow-hidden">
+        <div className="rounded-b-xl border-x border-b border-neutral-200 bg-white overflow-hidden">
           <BlogRichTextEditor defaultValue={initialData?.content || ""} />
         </div>
       </div>
@@ -59,20 +59,20 @@ export function BlogEditorForm({ initialData }: { initialData?: Post }) {
           slug={initialData?.slug}
         />
 
-        <section className="rounded-xl border border-neutral-200 bg-white dark:bg-white dark:border-neutral-200 p-5 space-y-4">
+        <section className="rounded-xl border border-neutral-200 bg-white p-5 space-y-4">
           <div className="flex items-center gap-2">
             <Settings2 size={14} className="text-indigo-500" />
-            <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-900">Media & Detail</h2>
+            <h2 className="text-sm font-semibold text-neutral-900">Media & Detail</h2>
           </div>
           <BlogCoverImageField defaultValue={initialData?.coverImage} defaultOgImage={initialData?.ogImage} />
           <label className="block space-y-1.5">
-            <span className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-500">Kategori</span>
+            <span className="text-xs font-semibold uppercase tracking-wide text-neutral-500">Kategori</span>
             <input
               name="category"
               defaultValue={initialData?.category || ""}
               list="blog-category-options"
               placeholder="Pilih atau tulis kategori"
-              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm dark:bg-white dark:text-neutral-900 dark:border-neutral-200 outline-none focus:border-indigo-400 transition-colors"
+              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-indigo-400 transition-colors"
             />
             <datalist id="blog-category-options">
               <option value="Web Development" />
@@ -88,11 +88,11 @@ export function BlogEditorForm({ initialData }: { initialData?: Post }) {
             </datalist>
           </label>
           <label className="block space-y-1.5">
-            <span className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-500">Author</span>
+            <span className="text-xs font-semibold uppercase tracking-wide text-neutral-500">Author</span>
             <input
               name="author"
               defaultValue={initialData?.author || "Admin"}
-              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm dark:bg-white dark:text-neutral-900 dark:border-neutral-200 outline-none focus:border-indigo-400 transition-colors"
+              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-indigo-400 transition-colors"
             />
           </label>
           <BlogTagsField defaultValue={initialData?.tags || []} />

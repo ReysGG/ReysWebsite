@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -15,7 +15,7 @@ import {
   ChevronRight,
   Plus,
   List,
-  Image,
+  Image as ImageIcon,
   ArrowLeft,
   Menu,
   X,
@@ -27,6 +27,11 @@ import {
   DollarSign,
   Megaphone,
   CircleHelp,
+  Mail,
+  MessageSquareText,
+  Send,
+  AlertTriangle,
+  CalendarDays,
 } from "lucide-react";
 
 type SubItem = {
@@ -88,7 +93,11 @@ const NAV_GROUPS: NavGroup[] = [
         basePath: "/admin/blog",
         icon: <FileText className="h-4 w-4" />,
         subItems: [
-          { label: "Semua Artikel", href: "/admin/blog", icon: <List className="h-3.5 w-3.5" /> },
+          { label: "Overview Artikel", href: "/admin/blog", icon: <List className="h-3.5 w-3.5" /> },
+          { label: "Published", href: "/admin/blog/published", icon: <Send className="h-3.5 w-3.5" /> },
+          { label: "Draft", href: "/admin/blog/drafts", icon: <PencilLine className="h-3.5 w-3.5" /> },
+          { label: "SEO Issues", href: "/admin/blog/seo", icon: <AlertTriangle className="h-3.5 w-3.5" /> },
+          { label: "Editorial Calendar", href: "/admin/blog/calendar", icon: <CalendarDays className="h-3.5 w-3.5" /> },
           { label: "Tulis Artikel", href: "/admin/blog/create", icon: <Plus className="h-3.5 w-3.5" /> },
         ],
       },
@@ -103,7 +112,7 @@ const NAV_GROUPS: NavGroup[] = [
         icon: <Briefcase className="h-4 w-4" />,
         subItems: [
           { label: "Semua Project", href: "/admin/portfolio", icon: <List className="h-3.5 w-3.5" /> },
-          { label: "Edit Intro Portfolio", href: "/admin/portfolio/hero", icon: <Image className="h-3.5 w-3.5" /> },
+          { label: "Edit Intro Portfolio", href: "/admin/portfolio/hero", icon: <ImageIcon className="h-3.5 w-3.5" /> },
         ],
       },
     ],
@@ -123,8 +132,28 @@ const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
+    title: "Audience",
+    items: [
+      {
+        label: "Subscribers",
+        href: "/admin/subscribers",
+        icon: <Mail className="h-4 w-4" />,
+      },
+      {
+        label: "Comments",
+        href: "/admin/comments",
+        icon: <MessageSquareText className="h-4 w-4" />,
+      },
+    ],
+  },
+  {
     title: "System",
     items: [
+      {
+        label: "Promo Banner",
+        href: "/admin/banner",
+        icon: <Megaphone className="h-4 w-4" />,
+      },
       {
         label: "Settings",
         href: "/admin/settings",
@@ -134,41 +163,41 @@ const NAV_GROUPS: NavGroup[] = [
   },
 ];
 
-const stripHash = (href: string) => href.split("#")[0];
-
 const isRouteActive = (pathname: string, href?: string, basePath?: string) => {
   if (href === "/admin") return pathname === "/admin";
-  if (href) {
-    const cleanHref = stripHash(href);
-    return pathname === cleanHref || pathname.startsWith(`${cleanHref}/`);
-  }
+  if (href) return pathname === href || pathname.startsWith(`${href}/`);
   if (basePath) return pathname === basePath || pathname.startsWith(`${basePath}/`);
   return false;
 };
 
+const getActiveSubHref = (pathname: string, subItems: SubItem[]) => {
+  const exact = subItems.find((sub) => pathname === sub.href);
+  if (exact) return exact.href;
+
+  const nested = subItems
+    .filter((sub) => pathname.startsWith(`${sub.href}/`))
+    .sort((a, b) => b.href.length - a.href.length)[0];
+
+  return nested?.href;
+};
+
 const NavItemRow = ({ item, collapsed }: { item: NavItem; collapsed: boolean }) => {
   const pathname = usePathname();
-  const [hash, setHash] = useState("");
   const parentActive = isRouteActive(pathname, item.href, item.basePath);
-  const [open, setOpen] = useState(parentActive);
-
-  useEffect(() => {
-    const updateHash = () => setHash(window.location.hash);
-    updateHash();
-    window.addEventListener("hashchange", updateHash);
-    return () => window.removeEventListener("hashchange", updateHash);
-  }, []);
+  const activeSubHref = item.subItems ? getActiveSubHref(pathname, item.subItems) : undefined;
+  const [manuallyOpen, setManuallyOpen] = useState(false);
+  const expanded = manuallyOpen || parentActive;
 
   if (item.subItems) {
     return (
       <div className="space-y-1">
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
+          onClick={() => setManuallyOpen((v) => !v)}
+          aria-expanded={expanded}
           className={cn(
             "flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-            parentActive || open
+            expanded
               ? "bg-indigo-50 text-indigo-700"
               : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
           )}
@@ -178,32 +207,28 @@ const NavItemRow = ({ item, collapsed }: { item: NavItem; collapsed: boolean }) 
           {!collapsed && (
             <>
               <span className="flex-1 text-left">{item.label}</span>
-              {open ? <ChevronDown className="h-3.5 w-3.5 opacity-60" /> : <ChevronRight className="h-3.5 w-3.5 opacity-60" />}
+              {expanded ? <ChevronDown className="h-3.5 w-3.5 opacity-60" /> : <ChevronRight className="h-3.5 w-3.5 opacity-60" />}
             </>
           )}
         </button>
 
-        {open && !collapsed && (
-          <div className="ml-4 flex flex-col gap-0.5 border-l border-neutral-200 pl-3">
+        {expanded && !collapsed && (
+          <div className="ml-4 flex min-w-0 flex-col gap-0.5 border-l border-neutral-200 pl-2">
             {item.subItems.map((sub) => {
-              const cleanHref = stripHash(sub.href);
-              const subHash = sub.href.includes("#") ? `#${sub.href.split("#")[1]}` : "";
-              const subActive = subHash
-                ? pathname === cleanHref && (hash === subHash || (!hash && subHash === "#hero"))
-                : pathname === cleanHref;
+              const subActive = activeSubHref === sub.href;
               return (
                 <Link
                   key={sub.href}
                   href={sub.href}
                   className={cn(
-                    "flex items-center gap-2 rounded-md px-2 py-1.5 text-xs font-medium transition-colors",
+                    "flex min-w-0 items-center gap-2 rounded-md px-2 py-1.5 text-xs font-medium transition-colors",
                     subActive
                       ? "bg-white text-indigo-700 ring-1 ring-indigo-100"
                       : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800"
                   )}
                 >
-                  {sub.icon}
-                  <span>{sub.label}</span>
+                  <span className="shrink-0">{sub.icon}</span>
+                  <span className="min-w-0 truncate">{sub.label}</span>
                 </Link>
               );
             })}
@@ -236,7 +261,7 @@ export const AdminSidebar = () => {
   return (
     <aside
       className={cn(
-        "flex h-full flex-col border-r border-neutral-200 bg-white transition-all duration-300",
+        "flex h-full flex-col overflow-x-hidden border-r border-neutral-200 bg-white transition-all duration-300",
         collapsed ? "w-16" : "w-64"
       )}
     >
@@ -262,7 +287,7 @@ export const AdminSidebar = () => {
         </button>
       </div>
 
-      <div className="flex flex-1 flex-col gap-4 overflow-y-auto px-3 py-4">
+      <div className="flex flex-1 flex-col gap-4 overflow-y-auto overflow-x-hidden px-3 py-4">
         {NAV_GROUPS.map((group) => (
           <div key={group.title} className="flex flex-col gap-1">
             {!collapsed && (

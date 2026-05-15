@@ -1,7 +1,7 @@
 'use client';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { MonitorSmartphone, Search, Menu, X, ArrowRight } from 'lucide-react';
 import { Show, UserButton } from '@clerk/nextjs';
 
@@ -23,14 +23,10 @@ const CATEGORIES = [
 ];
 
 function BlogNavbarInner() {
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [mobileOpen, setMobileOpen] = useState(false);
   const activeCategory = searchParams.get('category') || 'Semua';
 
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
 
   return (
     <>

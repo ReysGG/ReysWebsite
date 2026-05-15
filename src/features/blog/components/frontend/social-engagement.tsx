@@ -70,8 +70,8 @@ export function SocialEngagement({
   const getReplies = (parentId: string) => comments.filter(c => c.parentId === parentId);
 
   return (
-    <div className="mt-12 rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-8">
-      <div className="flex items-center gap-6 mb-12">
+    <section className="mt-14 border-t border-neutral-200 pt-10">
+      <div className="flex items-center gap-6 mb-10">
         {isSignedIn ? (
           <button 
             onClick={handleToggleLike}
@@ -84,7 +84,9 @@ export function SocialEngagement({
             )}>
               {optimisticLiked ? <IconHeartFilled size={24} /> : <IconHeart size={24} />}
             </div>
-            <span className="font-mono text-lg text-neutral-900 font-bold">{optimisticLikesCount}</span>
+            {optimisticLikesCount > 0 && (
+              <span className="font-mono text-lg text-neutral-900 font-bold">{optimisticLikesCount}</span>
+            )}
           </button>
         ) : (
           <SignInButton mode="modal" fallbackRedirectUrl={pathname}>
@@ -92,7 +94,9 @@ export function SocialEngagement({
               <div className="p-3 rounded-full bg-neutral-100 text-neutral-500 group-hover:bg-neutral-950 group-hover:text-pink-300 transition-colors flex items-center justify-center">
                 <IconHeart size={24} />
               </div>
-              <span className="font-mono text-lg text-neutral-900 font-bold">{optimisticLikesCount}</span>
+              {optimisticLikesCount > 0 && (
+                <span className="font-mono text-lg text-neutral-900 font-bold">{optimisticLikesCount}</span>
+              )}
             </button>
           </SignInButton>
         )}
@@ -101,7 +105,9 @@ export function SocialEngagement({
           <div className="p-3 rounded-full bg-neutral-100 text-neutral-500 flex items-center justify-center">
             <IconMessageCircle size={24} />
           </div>
-          <span className="font-mono text-lg text-neutral-900 font-bold">{comments.length}</span>
+          {comments.length > 0 && (
+            <span className="font-mono text-lg text-neutral-900 font-bold">{comments.length}</span>
+          )}
         </div>
       </div>
 
@@ -201,6 +207,6 @@ export function SocialEngagement({
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

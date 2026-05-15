@@ -1,0 +1,10 @@
+import { BlogAdminPageShell } from "@/features/admin/components/blog/blog-admin-page-shell";
+
+export default async function PublishedBlogAdminPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ q?: string; category?: string; page?: string }>;
+}) {
+  const params = (await searchParams) || {};
+  return <BlogAdminPageShell params={params} view="published" />;
+}

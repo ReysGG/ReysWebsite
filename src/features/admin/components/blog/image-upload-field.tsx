@@ -8,9 +8,10 @@ interface ImageUploadFieldProps {
   label: string;
   defaultValue?: string | null;
   hint?: string;
+  folder?: string;
 }
 
-export function ImageUploadField({ name, label, defaultValue = '', hint }: ImageUploadFieldProps) {
+export function ImageUploadField({ name, label, defaultValue = '', hint, folder = 'blog' }: ImageUploadFieldProps) {
   const [value, setValue] = useState(defaultValue || '');
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
@@ -24,6 +25,7 @@ export function ImageUploadField({ name, label, defaultValue = '', hint }: Image
     try {
       const fd = new FormData();
       fd.append('file', file);
+      fd.append('folder', folder);
       const res = await fetch('/api/upload', { method: 'POST', body: fd });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Upload failed');
@@ -45,7 +47,7 @@ export function ImageUploadField({ name, label, defaultValue = '', hint }: Image
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-semibold text-neutral-800 dark:text-neutral-800">{label}</span>
+        <span className="text-sm font-semibold text-neutral-800">{label}</span>
         <button
           type="button"
           onClick={() => setShowUrlInput(!showUrlInput)}
@@ -64,7 +66,7 @@ export function ImageUploadField({ name, label, defaultValue = '', hint }: Image
           value={value}
           onChange={e => setValue(e.target.value)}
           placeholder="https://images.unsplash.com/..."
-          className="w-full rounded-md border border-neutral-200 px-3 py-2 text-sm dark:bg-white dark:text-neutral-900 dark:border-neutral-200 outline-none focus:border-indigo-400"
+          className="w-full rounded-md border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-indigo-400"
         />
       ) : (
         <div
@@ -72,7 +74,7 @@ export function ImageUploadField({ name, label, defaultValue = '', hint }: Image
           onDragLeave={() => setDragOver(false)}
           onDrop={handleDrop}
           className={`relative rounded-md border-2 border-dashed transition ${
-            dragOver ? 'border-indigo-400 bg-indigo-50' : 'border-neutral-200 bg-neutral-50 dark:bg-white dark:border-neutral-200'
+            dragOver ? 'border-indigo-400 bg-indigo-50' : 'border-neutral-200 bg-neutral-50'
           }`}
         >
           {value ? (
@@ -113,7 +115,7 @@ export function ImageUploadField({ name, label, defaultValue = '', hint }: Image
       )}
 
       {error && <p className="text-xs font-medium text-red-600">{error}</p>}
-      {hint && !error && <p className="text-xs text-neutral-400 dark:text-neutral-400">{hint}</p>}
+      {hint && !error && <p className="text-xs text-neutral-400">{hint}</p>}
     </div>
   );
 }

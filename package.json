@@ -8,7 +8,13 @@
     "start": "next start",
     "lint": "eslint",
     "seed:blog": "node scripts/seed-blog.mjs",
-    "seed:blog2": "node scripts/seed-blog-batch2.mjs"
+    "seed:blog2": "node scripts/seed-blog-batch2.mjs",
+    "seed:blog-short": "tsx scripts/seed-short-blog-posts.ts",
+    "seed:blog-expand": "tsx scripts/expand-short-blog-posts.ts",
+    "seed:blog-all": "npm run seed:blog-short && npm run seed:blog-expand"
+  },
+  "prisma": {
+    "seed": "tsx scripts/seed-short-blog-posts.ts && tsx scripts/expand-short-blog-posts.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.758.0",
@@ -45,6 +51,7 @@
     "eslint-config-next": "16.2.2",
     "prisma": "^7.6.0",
     "tailwindcss": "^4",
+    "tsx": "^4.22.0",
     "typescript": "^5"
   }
 }

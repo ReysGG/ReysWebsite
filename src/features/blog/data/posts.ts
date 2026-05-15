@@ -89,6 +89,30 @@ export async function getRelatedPosts(post: { id: string; tags: string[]; catego
   });
 }
 
+export async function getAdjacentPosts(post: { publishedAt: Date | null; createdAt: Date }) {
+  const date = post.publishedAt ?? post.createdAt;
+
+  const [prevArr, nextArr] = await Promise.all([
+    db.post.findMany({
+      where: { published: true, publishedAt: { lt: date } },
+      orderBy: { publishedAt: "desc" },
+      take: 1,
+      select: { slug: true, title: true },
+    }),
+    db.post.findMany({
+      where: { published: true, publishedAt: { gt: date } },
+      orderBy: { publishedAt: "asc" },
+      take: 1,
+      select: { slug: true, title: true },
+    }),
+  ]);
+
+  return {
+    prev: prevArr[0] ?? null,
+    next: nextArr[0] ?? null,
+  };
+}
+
 export async function getBlogFilterOptions() {
   const posts = await db.post.findMany({
     where: { published: true },

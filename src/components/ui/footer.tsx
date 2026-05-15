@@ -27,10 +27,10 @@ export const Footer = () => {
           <div className="flex flex-col">
             <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">Layanan</h3>
             <div className="flex flex-col gap-3 text-sm text-neutral-400">
-              <Link href="#" className="hover:text-indigo-300 transition-colors">Company Profile</Link>
-              <Link href="#" className="hover:text-indigo-300 transition-colors">Web Application</Link>
-              <Link href="#" className="hover:text-indigo-300 transition-colors">Sistem E-Commerce</Link>
-              <Link href="#" className="hover:text-indigo-300 transition-colors">SEO &amp; Performa</Link>
+              <Link href="/#services" className="hover:text-indigo-300 transition-colors">Company Profile</Link>
+              <Link href="/#services" className="hover:text-indigo-300 transition-colors">Web Application</Link>
+              <Link href="/#services" className="hover:text-indigo-300 transition-colors">Sistem E-Commerce</Link>
+              <Link href="/#services" className="hover:text-indigo-300 transition-colors">SEO &amp; Performa</Link>
             </div>
           </div>
 
@@ -38,10 +38,10 @@ export const Footer = () => {
           <div className="flex flex-col">
             <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">Perusahaan</h3>
             <div className="flex flex-col gap-3 text-sm text-neutral-400">
-              <Link href="#" className="hover:text-indigo-300 transition-colors">Tentang Kami</Link>
-              <Link href="#" className="hover:text-indigo-300 transition-colors">Portofolio Kerja</Link>
-              <Link href="#" className="hover:text-indigo-300 transition-colors">Testimonial Klien</Link>
-              <Link href="#" className="hover:text-indigo-300 transition-colors">Hubungi Kami</Link>
+              <Link href="/#workflow" className="hover:text-indigo-300 transition-colors">Tentang Kami</Link>
+              <Link href="/#portfolio" className="hover:text-indigo-300 transition-colors">Portofolio Kerja</Link>
+              <Link href="/#testimonials" className="hover:text-indigo-300 transition-colors">Testimonial Klien</Link>
+              <Link href="/#cta" className="hover:text-indigo-300 transition-colors">Hubungi Kami</Link>
             </div>
           </div>
 
@@ -49,8 +49,8 @@ export const Footer = () => {
           <div className="flex flex-col">
             <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">Legal</h3>
             <div className="flex flex-col gap-3 text-sm text-neutral-400">
-              <Link href="#" className="hover:text-indigo-300 transition-colors">Syarat &amp; Ketentuan</Link>
-              <Link href="#" className="hover:text-indigo-300 transition-colors">Kebijakan Privasi</Link>
+              <Link href="/#faq" className="hover:text-indigo-300 transition-colors">Syarat &amp; Ketentuan</Link>
+              <Link href="/#faq" className="hover:text-indigo-300 transition-colors">Kebijakan Privasi</Link>
             </div>
           </div>
           
@@ -62,9 +62,9 @@ export const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-neutral-500 text-sm">
           <p>© {new Date().getFullYear()} WebServices. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="#" className="hover:text-indigo-300 transition-colors">Twitter X</Link>
-            <Link href="#" className="hover:text-indigo-300 transition-colors">LinkedIn</Link>
-            <Link href="#" className="hover:text-indigo-300 transition-colors">Instagram</Link>
+            <Link href="/#cta" className="hover:text-indigo-300 transition-colors">Twitter X</Link>
+            <Link href="/#cta" className="hover:text-indigo-300 transition-colors">LinkedIn</Link>
+            <Link href="/#cta" className="hover:text-indigo-300 transition-colors">Instagram</Link>
           </div>
         </div>
         

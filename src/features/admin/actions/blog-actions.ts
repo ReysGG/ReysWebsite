@@ -83,6 +83,10 @@ async function buildPostInput(formData: FormData, excludePostId?: string) {
 function revalidateBlogPaths(slug?: string | null) {
   revalidatePath("/blog");
   revalidatePath("/admin/blog");
+  revalidatePath("/admin/blog/published");
+  revalidatePath("/admin/blog/drafts");
+  revalidatePath("/admin/blog/seo");
+  revalidatePath("/admin/blog/calendar");
   if (slug) revalidatePath(`/blog/${slug}`);
 }
 
@@ -168,4 +172,36 @@ export async function publishPost(_prevState: BlogActionState, formData: FormDat
 
 export async function unpublishPost(_prevState: BlogActionState, formData: FormData) {
   return setPublished(formData, false);
+}
+
+async function bulkSetPublished(formData: FormData, published: boolean): Promise<BlogActionState> {
+  try {
+    await requireAdmin();
+    const ids = formData.getAll("postIds").filter((value): value is string => typeof value === "string" && value.length > 0);
+    if (ids.length === 0) return { success: false, error: "Pilih minimal satu artikel." };
+
+    const posts = await db.post.findMany({ where: { id: { in: ids } }, select: { slug: true } });
+    await db.post.updateMany({
+      where: { id: { in: ids } },
+      data: { published, publishedAt: published ? new Date() : null },
+    });
+
+    revalidateBlogPaths();
+    posts.forEach((post) => revalidateBlogPaths(post.slug));
+    return {
+      success: true,
+      ok: true,
+      message: published ? `${ids.length} artikel dipublish.` : `${ids.length} artikel dijadikan draft.`,
+    };
+  } catch {
+    return { success: false, error: "Gagal mengubah status publikasi artikel." };
+  }
+}
+
+export async function bulkPublishPosts(_prevState: BlogActionState, formData: FormData) {
+  return bulkSetPublished(formData, true);
+}
+
+export async function bulkUnpublishPosts(_prevState: BlogActionState, formData: FormData) {
+  return bulkSetPublished(formData, false);
 }
