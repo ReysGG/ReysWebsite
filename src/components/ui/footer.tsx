@@ -16,7 +16,7 @@ export const Footer = () => {
           <div className="flex flex-col col-span-1 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Layout className="w-6 h-6 text-indigo-400" />
-              <span className="text-xl font-bold text-white tracking-tight">WebServices</span>
+              <span className="text-xl font-bold text-white tracking-tight">Build With Reys</span>
             </Link>
             <p className="text-neutral-400 text-sm leading-relaxed mb-6">
               Membangun standar baru aplikasi web digital untuk UMKM, Startup, dan Personal Brand Anda.
@@ -60,11 +60,11 @@ export const Footer = () => {
         <div className="w-full h-px bg-neutral-900 mb-8" />
         
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-neutral-500 text-sm">
-          <p>© {new Date().getFullYear()} WebServices. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Build With Reys. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/#cta" className="hover:text-indigo-300 transition-colors">Twitter X</Link>
-            <Link href="/#cta" className="hover:text-indigo-300 transition-colors">LinkedIn</Link>
-            <Link href="/#cta" className="hover:text-indigo-300 transition-colors">Instagram</Link>
+            <Link href="/#cta" className="hover:text-indigo-300 transition-colors">WhatsApp</Link>
+            <Link href="/#cta" className="hover:text-indigo-300 transition-colors">Email</Link>
+            <Link href="/blog" className="hover:text-indigo-300 transition-colors">Blog</Link>
           </div>
         </div>
         

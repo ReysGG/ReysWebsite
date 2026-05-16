@@ -40,7 +40,7 @@ export const SiteNavbar = () => {
           <Link href="/" className="relative z-20 flex items-center gap-2 px-2 py-1 group">
             <MonitorSmartphone className="w-6 h-6 text-neutral-900 transition-transform group-hover:scale-110" />
             <span className="text-lg font-bold text-neutral-900 tracking-tight">
-              WebServices
+              Build With Reys
             </span>
           </Link>
 
@@ -59,7 +59,7 @@ export const SiteNavbar = () => {
               <SignUpButton mode="modal">
                 <button
                   type="button"
-                  className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-neutral-900 shadow-sm ring-1 ring-neutral-200 transition-colors hover:bg-neutral-50"
+                  className="rounded-md bg-white px-4 py-2 text-xs font-semibold text-neutral-900 shadow-sm ring-1 ring-neutral-200 transition-colors hover:bg-neutral-50"
                 >
                   Daftar
                 </button>
@@ -71,7 +71,7 @@ export const SiteNavbar = () => {
             {isAdmin ? (
               <Link
                 href="/admin"
-                className="rounded-full border border-indigo-200 bg-indigo-50 px-4 py-2 text-xs font-semibold text-indigo-700 transition-colors hover:bg-indigo-100"
+                className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-xs font-semibold text-indigo-700 transition-colors hover:bg-indigo-100"
               >
                 Admin Panel
               </Link>
@@ -79,7 +79,7 @@ export const SiteNavbar = () => {
             <NavbarButton
               href="/#cta"
               variant="dark"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold border-0 text-xs px-5 py-2 rounded-full transition-all"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold border-0 text-xs px-5 py-2 rounded-md transition-all"
             >
               Konsultasi
             </NavbarButton>
@@ -91,7 +91,7 @@ export const SiteNavbar = () => {
           <MobileNavHeader>
             <Link href="/" className="flex items-center gap-2">
               <MonitorSmartphone className="w-5 h-5 text-neutral-900" />
-              <span className="font-bold text-neutral-900 text-sm">WebServices</span>
+              <span className="font-bold text-neutral-900 text-sm">Build With Reys</span>
             </Link>
             <MobileNavToggle
               isOpen={isOpen}
@@ -125,7 +125,7 @@ export const SiteNavbar = () => {
                   <button
                     type="button"
                     onClick={closeMenu}
-                    className="rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
+                    className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
                   >
                     Daftar
                   </button>
@@ -138,7 +138,7 @@ export const SiteNavbar = () => {
                 <Link
                   href="/admin"
                   onClick={closeMenu}
-                  className="rounded-full border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-semibold text-indigo-700 transition-colors hover:bg-indigo-100"
+                  className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-semibold text-indigo-700 transition-colors hover:bg-indigo-100"
                 >
                   Admin Panel
                 </Link>
@@ -146,7 +146,7 @@ export const SiteNavbar = () => {
               <NavbarButton
                 href="/#cta"
                 variant="dark"
-                className="flex-1 text-center bg-indigo-600 text-white hover:bg-indigo-700 font-semibold border-0 rounded-full"
+                className="flex-1 text-center bg-indigo-600 text-white hover:bg-indigo-700 font-semibold border-0 rounded-md"
                 onClick={closeMenu}
               >
                 Konsultasi

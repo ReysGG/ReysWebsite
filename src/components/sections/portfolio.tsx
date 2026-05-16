@@ -95,8 +95,8 @@ export const PortfolioSection = ({ intro, projects }: PortfolioSectionProps) => 
   const cards = data.map((card, index) => <Card key={card.title} card={card} index={index} />);
 
   return (
-    <section id="portfolio" className="relative w-full py-24 md:py-32 overflow-hidden bg-[#f5f3ff]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8 pt-4">
+    <section id="portfolio" className="relative w-full py-16 md:py-20 overflow-hidden bg-[#f5f3ff]">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-6 pt-2">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -105,7 +105,7 @@ export const PortfolioSection = ({ intro, projects }: PortfolioSectionProps) => 
           className="flex flex-col mb-4"
         >
           <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">{intro.eyebrow}</p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">{intro.heading}</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-6">{intro.heading}</h2>
           <div className="max-w-2xl">
             <TextGenerateEffect words={intro.description} className="text-base md:text-lg text-neutral-600 font-normal leading-relaxed" />
           </div>

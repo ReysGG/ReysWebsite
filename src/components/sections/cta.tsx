@@ -12,7 +12,7 @@ export const CtaSection = ({ content }: { content: CtaContent }) => {
   return (
     <section
       id="cta"
-      className="w-full relative py-24 md:py-32 overflow-hidden bg-white"
+      className="w-full relative py-16 md:py-20 overflow-hidden bg-white"
     >
       {/* Subtle grid */}
       <div
@@ -23,7 +23,7 @@ export const CtaSection = ({ content }: { content: CtaContent }) => {
         }}
       />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 flex flex-col items-center text-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 flex flex-col items-center text-center">
 
         {/* Badge — black style */}
         <motion.div
@@ -31,7 +31,7 @@ export const CtaSection = ({ content }: { content: CtaContent }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-600 text-xs font-semibold tracking-widest uppercase mb-8"
+          className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-md border border-indigo-200 bg-indigo-50 text-xs font-semibold uppercase tracking-widest text-indigo-600"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
           {content.badge}
@@ -43,7 +43,7 @@ export const CtaSection = ({ content }: { content: CtaContent }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-8"
+          className="mb-6 text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl"
         >
           <span className="text-neutral-900">{content.headingTop}</span>
           <br />
@@ -58,7 +58,7 @@ export const CtaSection = ({ content }: { content: CtaContent }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="mx-auto mb-9 max-w-2xl text-base leading-relaxed text-neutral-600 md:text-lg"
         >
           {content.description}
         </motion.p>
@@ -69,13 +69,14 @@ export const CtaSection = ({ content }: { content: CtaContent }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center gap-4 mb-16"
+          className="mb-10 flex flex-col items-center gap-3 sm:flex-row"
         >
           {/* Primary — Black solid button */}
           <Link
             href={content.whatsappUrl}
             target="_blank"
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-indigo-600 text-white font-bold text-base transition-all duration-300 shadow-md shadow-neutral-900/10 hover:shadow-lg hover:bg-indigo-700 hover:scale-105"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-3 rounded-md bg-indigo-600 px-7 py-3.5 text-base font-bold text-white shadow-none transition-colors duration-300 hover:bg-indigo-700"
           >
             <IconBrandWhatsapp className="w-5 h-5" />
             {content.primaryCta}
@@ -84,7 +85,7 @@ export const CtaSection = ({ content }: { content: CtaContent }) => {
           {/* Secondary — bordered */}
           <Link
             href="#portfolio"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-neutral-300 hover:border-indigo-400 text-neutral-700 hover:text-indigo-600 font-semibold text-base hover:bg-indigo-50 transition-all duration-200"
+            className="inline-flex items-center gap-2 rounded-md border border-neutral-300 px-7 py-3.5 text-base font-semibold text-neutral-700 transition-colors duration-200 hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-600"
           >
             {content.secondaryCta}
           </Link>
@@ -98,18 +99,12 @@ export const CtaSection = ({ content }: { content: CtaContent }) => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center gap-6 text-neutral-600 text-sm"
         >
-          {/* Avatars */}
-          <div className="flex items-center gap-3">
-            <div className="flex -space-x-2">
-              {["DB", "AR", "SK", "MY"].map((init, i) => (
-                <div
-                  key={i}
-                  className="w-8 h-8 rounded-full bg-indigo-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-indigo-700"
-                >
-                  {init}
-                </div>
-              ))}
-            </div>
+          <div className="flex items-center gap-2">
+            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-indigo-50 text-indigo-600">
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+            </span>
             <span>{content.socialProof}</span>
           </div>
           <div className="hidden sm:block w-px h-4 bg-neutral-300" />

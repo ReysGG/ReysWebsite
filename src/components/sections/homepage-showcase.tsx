@@ -1,86 +1,73 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { CheckCircle2, Gauge, Layers3, Rocket, type LucideIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import React from "react";
+import { CheckCircle2, FileCheck2, Rocket } from "lucide-react";
+import type { SiteConfig } from "@/lib/site-config";
 
-type WorkflowStep = { label: string; meta: string; progress: number; accent: string };
-type Metric = { icon: LucideIcon; label: string; value: string; accent: string };
-
-const WORKFLOW_STEPS: WorkflowStep[] = [
-  { label: "Brief", meta: "Tujuan & konten terkunci", progress: 100, accent: "bg-emerald-500" },
-  { label: "Build", meta: "UI dan fitur utama", progress: 72, accent: "bg-blue-500" },
-  { label: "Launch", meta: "QA, SEO, dan deploy", progress: 48, accent: "bg-neutral-900" },
+const WORKFLOW_STEPS = [
+  { label: "Scope Locked", meta: "Fitur, halaman, timeline, dan revisi disepakati", progress: 100, bar: "bg-indigo-400" },
+  { label: "Build", meta: "Preview berjalan di staging link", progress: 72, bar: "bg-indigo-300" },
+  { label: "Launch", meta: "QA, SEO, dan deploy", progress: 48, bar: "bg-indigo-400" },
 ];
 
-const METRICS: Metric[] = [
-  { icon: Gauge, label: "Performance target", value: "98", accent: "text-emerald-600" },
-  { icon: CheckCircle2, label: "Mobile ready", value: "100%", accent: "text-blue-600" },
+const METRICS = [
+  { label: "Scope approved", value: "100%", icon: FileCheck2, accent: "text-indigo-500" },
+  { label: "Website ready", value: "100%", icon: CheckCircle2, accent: "text-indigo-500" },
 ];
 
-type Props = { className?: string };
+type HeroScopePreview = SiteConfig["hero"]["scopePreview"];
 
-export const HomepageShowcaseSection = ({ className }: Props) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+const fallbackScopePreview: HeroScopePreview = {
+  eyebrow: "Before development",
+  title: "Scope dikunci sebelum coding",
+  projectLabel: "Project Brief",
+  pages: "Home, About, Services, Contact",
+  features: "Lead form, WhatsApp CTA, SEO setup",
+  timeline: "14–21 hari kerja",
+  revisions: "2x minor revision",
+  deliverable: "Staging link, source code, handover",
+  status: "Approved — Ready to build",
+};
 
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(useSpring(y), [-0.5, 0.5], ["7deg", "-7deg"]);
-  const rotateY = useTransform(useSpring(x), [-0.5, 0.5], ["-7deg", "7deg"]);
-
-  useEffect(() => {
-    const id = setInterval(() => setActiveIndex(c => (c + 1) % WORKFLOW_STEPS.length), 2400);
-    return () => clearInterval(id);
-  }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
+export const HomepageShowcaseSection = ({ content = fallbackScopePreview }: { content?: HeroScopePreview }) => {
+  const scopeItems = [
+    { label: "Pages", value: content.pages },
+    { label: "Features", value: content.features },
+    { label: "Timeline", value: content.timeline },
+    { label: "Revisions", value: content.revisions },
+    { label: "Deliverable", value: content.deliverable },
+  ];
 
   return (
-    <div
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => { x.set(0); y.set(0); }}
-      className={cn("relative w-full select-none perspective-[1200px]", className)}
-    >
-      <motion.div
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="relative mx-auto w-full max-w-[560px] flex flex-col gap-4"
-      >
-        {/* Top row: launch badge + quality checks */}
-        <div className="flex gap-4">
-          {/* Launch badge */}
-          <div className="flex items-center gap-2 rounded-xl border border-white/70 bg-white/90 px-4 py-3 shadow-lg backdrop-blur-md flex-1">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#111] text-white shrink-0">
-              <Rocket className="h-4 w-4" />
-            </span>
-            <span className="leading-tight">
-              <span className="block text-[11px] font-medium text-neutral-500">Estimasi launch</span>
-              <span className="block text-sm font-bold text-neutral-950">14-21 hari</span>
-            </span>
+    <div className="relative w-full">
+      <div className="absolute -right-8 top-8 h-56 w-56 rounded-full bg-indigo-300/30 blur-3xl" />
+      <div className="absolute -left-8 bottom-8 h-44 w-44 rounded-full bg-indigo-200/35 blur-3xl" />
+
+      <div className="relative mx-auto flex w-full max-w-[580px] flex-col gap-5">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-[0.9fr_1.1fr]">
+          <div className="rounded-2xl border border-white/80 bg-white/90 p-5 shadow-[0_24px_70px_rgba(79,70,229,0.16)] backdrop-blur-xl">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-500/25">
+              <Rocket className="h-5 w-5" />
+            </div>
+            <p className="mt-4 text-sm font-semibold text-neutral-500">Estimasi launch</p>
+            <p className="mt-1 text-2xl font-black tracking-tight text-neutral-950">14–21 hari</p>
+            <p className="mt-1 text-xs font-medium text-neutral-500">Estimasi waktu pengerjaan</p>
           </div>
 
-          {/* Quality checks */}
-          <div className="rounded-xl border border-white/70 bg-white/90 p-3 shadow-lg backdrop-blur-md flex-1">
-            <div className="text-[10px] font-semibold text-neutral-500 mb-2">Quality checks</div>
-            <div className="grid gap-1.5">
+          <div className="rounded-2xl border border-white/80 bg-white/90 p-4 shadow-[0_24px_70px_rgba(79,70,229,0.14)] backdrop-blur-xl">
+            <p className="mb-3 text-sm font-bold text-neutral-900">Quality Checks</p>
+            <div className="space-y-2">
               {METRICS.map((metric) => {
                 const Icon = metric.icon;
                 return (
-                  <div key={metric.label} className="flex items-center justify-between gap-2 rounded-md border border-neutral-200 bg-neutral-50 px-2.5 py-1.5">
+                  <div key={metric.label} className="flex items-center justify-between rounded-xl border border-indigo-100 bg-indigo-50/50 px-4 py-3">
                     <div>
-                      <div className="text-sm font-bold text-neutral-950">{metric.value}</div>
-                      <div className="text-[9px] font-medium text-neutral-500">{metric.label}</div>
+                      <p className="text-2xl font-black leading-none text-neutral-950">{metric.value}</p>
+                      <p className="mt-1 text-xs font-semibold text-neutral-500">{metric.label}</p>
                     </div>
-                    <Icon className={cn("h-4 w-4 shrink-0", metric.accent)} />
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 bg-white">
+                      <Icon className={`h-4 w-4 ${metric.accent}`} />
+                    </span>
                   </div>
                 );
               })}
@@ -88,48 +75,54 @@ export const HomepageShowcaseSection = ({ className }: Props) => {
           </div>
         </div>
 
-        {/* Main project flow card */}
-        <div className="rounded-xl border border-neutral-800 bg-[#111] p-5 text-white shadow-2xl">
-          <div className="flex items-center justify-between mb-5">
+        <div className="rounded-[1.75rem] border border-white/10 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.22),transparent_36%),linear-gradient(135deg,#111827,#050505)] p-5 text-white shadow-[0_30px_90px_rgba(15,23,42,0.35)] md:p-6">
+          <div className="mb-6 flex items-center justify-between">
             <div>
-              <div className="text-xs font-semibold text-white/55">Project flow</div>
-              <div className="mt-0.5 text-xl font-bold tracking-tight">Dari brief ke live</div>
+              <p className="text-xs font-semibold text-indigo-200/80">{content.eyebrow}</p>
+              <h3 className="mt-1 text-2xl font-black tracking-tight">{content.title}</h3>
             </div>
-            <Layers3 className="h-5 w-5 text-white/40" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+              <FileCheck2 className="h-5 w-5 text-white/65" />
+            </div>
+          </div>
+
+          <div className="mb-5 rounded-2xl border border-white/10 bg-white/[0.065] p-4">
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <p className="text-xs font-bold uppercase tracking-widest text-white/45">{content.projectLabel}</p>
+              <span className="rounded-full border border-indigo-300/30 bg-indigo-400/10 px-2.5 py-1 text-[11px] font-bold text-indigo-100">Scope locked</span>
+            </div>
+            <div className="space-y-2.5">
+              {scopeItems.map((item) => (
+                <div key={item.label} className="grid grid-cols-[88px_minmax(0,1fr)] gap-3 text-xs">
+                  <span className="font-semibold text-white/40">{item.label}</span>
+                  <span className="font-semibold text-white/82">{item.value}</span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 flex items-center gap-2 rounded-xl border border-indigo-300/20 bg-indigo-400/10 px-3 py-2 text-xs font-bold text-indigo-50">
+              <CheckCircle2 className="h-4 w-4 shrink-0" />
+              {content.status}
+            </div>
           </div>
 
           <div className="space-y-3">
-            {WORKFLOW_STEPS.map((step, index) => {
-              const isActive = index === activeIndex;
-              return (
-                <div
-                  key={step.label}
-                  className={cn(
-                    "rounded-lg border p-3 transition-colors",
-                    isActive ? "border-white/30 bg-white/10" : "border-white/10 bg-white/[0.04]"
-                  )}
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="min-w-0">
-                      <div className="truncate text-sm font-semibold">{step.label}</div>
-                      <div className="mt-0.5 truncate text-[11px] text-white/50">{step.meta}</div>
-                    </div>
-                    <div className="text-xs font-bold text-white/80">{step.progress}%</div>
+            {WORKFLOW_STEPS.map((step) => (
+              <div key={step.label} className="rounded-2xl border border-white/10 bg-white/[0.055] p-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-bold text-white">{step.label}</p>
+                    <p className="mt-1 text-xs font-medium text-white/45">{step.meta}</p>
                   </div>
-                  <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10">
-                    <motion.div
-                      className={cn("h-full rounded-full", step.accent)}
-                      initial={false}
-                      animate={{ width: `${isActive ? step.progress : Math.max(step.progress - 18, 22)}%` }}
-                      transition={{ duration: 0.45, ease: "easeOut" }}
-                    />
-                  </div>
+                  <p className="text-sm font-black text-white/80">{step.progress}%</p>
                 </div>
-              );
-            })}
+                <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/10">
+                  <div className={`h-full rounded-full ${step.bar}`} style={{ width: `${step.progress}%` }} />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };

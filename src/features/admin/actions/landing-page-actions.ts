@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import db from "@/lib/db";
+import { requireAdmin } from "@/features/admin/lib/auth";
 import { defaultSiteConfig, getSiteConfig, SITE_CONFIG_KEY, type SiteConfig } from "@/lib/site-config";
 import { setLandingPageField } from "@/features/admin/lib/landing-page-edit";
 
@@ -26,6 +27,7 @@ function getNumber(formData: FormData, key: string, fallback = 0) {
 }
 
 export async function saveLandingPage(formData: FormData) {
+  await requireAdmin();
   const current = await getSiteConfig();
 
   const nextConfig: SiteConfig = {
@@ -37,6 +39,18 @@ export async function saveLandingPage(formData: FormData) {
       description: getString(formData, "hero.description", current.hero.description),
       primaryCta: getString(formData, "hero.primaryCta", current.hero.primaryCta),
       secondaryCta: getString(formData, "hero.secondaryCta", current.hero.secondaryCta),
+      visualImage: getString(formData, "hero.visualImage", current.hero.visualImage),
+      scopePreview: {
+        eyebrow: getString(formData, "hero.scopePreview.eyebrow", current.hero.scopePreview.eyebrow),
+        title: getString(formData, "hero.scopePreview.title", current.hero.scopePreview.title),
+        projectLabel: getString(formData, "hero.scopePreview.projectLabel", current.hero.scopePreview.projectLabel),
+        pages: getString(formData, "hero.scopePreview.pages", current.hero.scopePreview.pages),
+        features: getString(formData, "hero.scopePreview.features", current.hero.scopePreview.features),
+        timeline: getString(formData, "hero.scopePreview.timeline", current.hero.scopePreview.timeline),
+        revisions: getString(formData, "hero.scopePreview.revisions", current.hero.scopePreview.revisions),
+        deliverable: getString(formData, "hero.scopePreview.deliverable", current.hero.scopePreview.deliverable),
+        status: getString(formData, "hero.scopePreview.status", current.hero.scopePreview.status),
+      },
     },
     stats: current.stats.map((stat, index) => ({
       value: getNumber(formData, `stats.${index}.value`, stat.value),
@@ -44,6 +58,16 @@ export async function saveLandingPage(formData: FormData) {
       label: getString(formData, `stats.${index}.label`, stat.label),
       description: getString(formData, `stats.${index}.description`, stat.description),
     })),
+    trustStrip: lines(getString(formData, "trustStrip", current.trustStrip.join("\n"))),
+    problems: {
+      eyebrow: getString(formData, "problems.eyebrow", current.problems.eyebrow),
+      heading: getString(formData, "problems.heading", current.problems.heading),
+      description: getString(formData, "problems.description", current.problems.description),
+      items: current.problems.items.map((item, index) => ({
+        title: getString(formData, `problems.items.${index}.title`, item.title),
+        description: getString(formData, `problems.items.${index}.description`, item.description),
+      })),
+    },
     services: {
       eyebrow: getString(formData, "services.eyebrow", current.services.eyebrow),
       heading: getString(formData, "services.heading", current.services.heading),
@@ -80,6 +104,12 @@ export async function saveLandingPage(formData: FormData) {
           : tier.popular,
       })),
     },
+    whatYouGet: {
+      eyebrow: getString(formData, "whatYouGet.eyebrow", current.whatYouGet.eyebrow),
+      heading: getString(formData, "whatYouGet.heading", current.whatYouGet.heading),
+      description: getString(formData, "whatYouGet.description", current.whatYouGet.description),
+      items: lines(getString(formData, "whatYouGet.items", current.whatYouGet.items.join("\n"))),
+    },
     cta: {
       badge: getString(formData, "cta.badge", current.cta.badge),
       headingTop: getString(formData, "cta.headingTop", current.cta.headingTop),
@@ -113,6 +143,7 @@ export async function saveLandingPage(formData: FormData) {
 
 export async function saveLandingPageField(_prevState: LandingPageFieldState, formData: FormData): Promise<LandingPageFieldState> {
   try {
+    await requireAdmin();
     const name = formData.get("name");
     const value = formData.get("value");
 
@@ -148,6 +179,7 @@ export async function saveLandingPageField(_prevState: LandingPageFieldState, fo
 
 export async function addLandingPageFaqItem(_prevState: LandingPageFieldState, formData: FormData): Promise<LandingPageFieldState> {
   try {
+    await requireAdmin();
     const question = getString(formData, "question");
     const answer = getString(formData, "answer");
 
@@ -184,6 +216,11 @@ export async function addLandingPageFaqItem(_prevState: LandingPageFieldState, f
 }
 
 export async function resetLandingPage() {
+  await syncProfessionalLandingPageDefaults();
+}
+
+export async function syncProfessionalLandingPageDefaults() {
+  await requireAdmin();
   await db.siteConfig.upsert({
     where: { key: SITE_CONFIG_KEY },
     update: { value: defaultSiteConfig },
@@ -191,5 +228,7 @@ export async function resetLandingPage() {
   });
 
   revalidatePath("/");
+  revalidatePath("/admin");
   revalidatePath("/admin/landing-page");
+  revalidatePath("/admin/landing-page/sync");
 }

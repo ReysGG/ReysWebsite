@@ -12,6 +12,8 @@ import { SocialEngagement } from "@/features/blog/components/frontend/social-eng
 
 type PageProps = { params: Promise<{ slug: string }> };
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   try {
     const posts = await import("@/features/blog/data/posts").then((m) => m.getPublishedPosts());

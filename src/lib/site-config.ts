@@ -34,6 +34,11 @@ export type FaqItemConfig = {
   answer: string;
 };
 
+export type SimpleTextItemConfig = {
+  title: string;
+  description: string;
+};
+
 export type SiteConfig = {
   hero: {
     trustText: string;
@@ -42,8 +47,27 @@ export type SiteConfig = {
     description: string;
     primaryCta: string;
     secondaryCta: string;
+    visualImage: string;
+    scopePreview: {
+      eyebrow: string;
+      title: string;
+      projectLabel: string;
+      pages: string;
+      features: string;
+      timeline: string;
+      revisions: string;
+      deliverable: string;
+      status: string;
+    };
   };
   stats: StatItemConfig[];
+  trustStrip: string[];
+  problems: {
+    eyebrow: string;
+    heading: string;
+    description: string;
+    items: SimpleTextItemConfig[];
+  };
   services: {
     eyebrow: string;
     heading: string;
@@ -61,6 +85,12 @@ export type SiteConfig = {
     heading: string;
     description: string;
     tiers: PricingTierConfig[];
+  };
+  whatYouGet: {
+    eyebrow: string;
+    heading: string;
+    description: string;
+    items: string[];
   };
   cta: {
     badge: string;
@@ -84,13 +114,25 @@ export const SITE_CONFIG_KEY = "landing-page";
 
 export const defaultSiteConfig: SiteConfig = {
   hero: {
-    trustText: "Dipercaya 50+ bisnis dan founder",
-    headlinePrefix: "Website cepat, rapi,",
-    rotatingWords: ["siap jualan.", "mudah dikelola.", "terlihat profesional."],
+    trustText: "Technical partner untuk website dan sistem bisnis",
+    headlinePrefix: "Website & sistem digital",
+    rotatingWords: ["yang rapi.", "siap dipakai.", "mudah dikelola."],
     description:
-      "Kami bantu UMKM dan startup membangun website yang terlihat profesional, loading cepat, responsif, dan siap dipakai untuk menerima calon pelanggan.",
-    primaryCta: "Konsultasi Gratis",
-    secondaryCta: "Lihat Portofolio",
+      "Build With Reys membantu bisnis membuat company profile, dashboard internal, e-commerce, dan website SEO-ready dengan scope jelas, staging link, dan handover penuh.",
+    primaryCta: "Konsultasi via WhatsApp",
+    secondaryCta: "Lihat Proses Kerja",
+    visualImage: "/Untitled design.png",
+    scopePreview: {
+      eyebrow: "Before development",
+      title: "Scope dikunci sebelum coding",
+      projectLabel: "Project Brief",
+      pages: "Home, About, Services, Contact",
+      features: "Lead form, WhatsApp CTA, SEO setup",
+      timeline: "14–21 hari kerja",
+      revisions: "2x minor revision",
+      deliverable: "Staging link, source code, handover",
+      status: "Approved — Ready to build",
+    },
   },
   stats: [
     { value: 50, suffix: "+", label: "Proyek Selesai", description: "Startup hingga korporat" },
@@ -98,117 +140,149 @@ export const defaultSiteConfig: SiteConfig = {
     { value: 3, suffix: "+", label: "Tahun Pengalaman", description: "Web & software development" },
     { value: 100, suffix: "%", label: "On-Time Delivery", description: "Tidak ada proyek terlambat" },
   ],
+  trustStrip: [
+    "Scope jelas sebelum development",
+    "Progress bisa dicek via staging link",
+    "Mobile-first dan SEO-ready",
+    "Handover akses penuh setelah launch",
+  ],
+  problems: {
+    eyebrow: "Masalah yang sering terjadi",
+    heading: "Biasanya masalahnya bukan cuma belum punya website.",
+    description: "Banyak bisnis butuh partner teknis yang bisa merapikan kebutuhan, bukan sekadar membuat halaman terlihat bagus.",
+    items: [
+      { title: "Website belum meyakinkan", description: "Calon customer sudah tertarik, tapi halaman bisnis belum cukup rapi untuk membangun trust." },
+      { title: "Konten sulit diubah sendiri", description: "Setiap edit teks, gambar, atau artikel harus minta developer lagi karena tidak ada admin panel yang jelas." },
+      { title: "Operasional masih manual", description: "Order, stok, booking, atau follow-up masih tersebar di chat dan spreadsheet sehingga sulit dipantau." },
+      { title: "Scope sering abu-abu", description: "Project dimulai tanpa batas fitur, timeline, dan deliverable yang jelas; akhirnya molor dan banyak asumsi." },
+    ],
+  },
   services: {
-    eyebrow: "Layanan Utama",
-    heading: "Bukan cuma tampil bagus. Website harus membantu bisnis bergerak.",
+    eyebrow: "Layanan berdasarkan kebutuhan bisnis",
+    heading: "Solusi digital yang rapi dari sisi tampilan, konten, dan operasional.",
     items: [
       {
         number: "01",
-        title: "Website yang membangun trust",
+        title: "Bangun trust bisnis",
         description:
-          "Company profile modern untuk membuat bisnis terlihat kredibel, jelas, dan mudah dihubungi calon pelanggan.",
+          "Company profile dan landing page yang menjelaskan layanan, bukti kerja, dan jalur kontak dengan rapi.",
       },
       {
         number: "02",
-        title: "Dashboard operasional",
+        title: "Rapikan operasional",
         description:
-          "Web app kustom untuk POS, inventory, booking, CRM, atau workflow internal yang masih berantakan di spreadsheet.",
+          "Dashboard kustom untuk POS, inventory, booking, CRM, atau workflow internal yang masih tersebar di spreadsheet.",
       },
       {
         number: "03",
-        title: "Toko online siap transaksi",
+        title: "Jualan lebih praktis",
         description:
-          "E-commerce cepat dengan katalog produk, checkout, pembayaran, dan integrasi WhatsApp agar proses jualan lebih praktis.",
+          "Katalog, checkout, payment, dan integrasi WhatsApp agar customer lebih mudah melihat produk dan melakukan order.",
       },
       {
         number: "04",
-        title: "SEO dan performa loading",
+        title: "Siap ditemukan Google",
         description:
-          "Struktur halaman, metadata, dan optimasi teknis supaya website lebih cepat, mudah dibaca Google, dan nyaman dibuka mobile.",
+          "Struktur halaman, metadata, performa, dan content system agar website lebih mudah dibaca customer dan mesin pencari.",
       },
     ],
   },
   workflow: {
     eyebrow: "Proses Kerja",
-    headingPrefix: "Dari Ide ke",
-    rotatingWords: ["Realisasi", "Kenyataan", "Kesuksesan", "Laba"],
-    description: "Metodologi transparan dan terukur untuk menjamin keberhasilan setiap produk digital.",
+    headingPrefix: "Proses kerja",
+    rotatingWords: ["transparan", "terukur", "rapi", "jelas"],
+    description: "Setiap project dimulai dari kebutuhan, scope, dan prioritas yang jelas sebelum masuk development.",
     steps: [
-      { step: "01", title: "Discovery", description: "Analisis kebutuhan, target audiens, dan tujuan bisnis utama Anda." },
-      { step: "02", title: "Strategy", description: "Pembuatan struktur konten, wireframe, dan rencana teknis yang presisi." },
-      { step: "03", title: "Execution", description: "Pengembangan visual dan kode interaktif dengan performa tinggi." },
-      { step: "04", title: "Delivery", description: "Testing, peluncuran, dan serah terima aset digital secara utuh." },
+      { step: "01", title: "Discovery Call", description: "Bahas kebutuhan bisnis, target customer, fitur wajib, dan contoh referensi agar arah project jelas." },
+      { step: "02", title: "Scope & Estimate", description: "Halaman, fitur, timeline, harga, dan batas revisi dirapikan sebelum development dimulai." },
+      { step: "03", title: "Design & Build", description: "Desain dan development berjalan dengan preview staging link agar progress bisa dicek." },
+      { step: "04", title: "Launch & Handover", description: "Deploy ke domain, serah terima akses admin, dokumentasi singkat, dan support awal." },
     ],
   },
   pricing: {
     eyebrow: "Harga",
-    heading: "Paket yang jelas sejak awal",
-    description: "Pilih paket sesuai kebutuhan bisnis. Scope, estimasi waktu, dan deliverable dibuat transparan sebelum mulai.",
+    heading: "Paket project yang jelas sejak awal",
+    description: "Harga final dikunci setelah scope disepakati, supaya tidak ada biaya abu-abu di tengah pengerjaan.",
     tiers: [
       {
-        title: "Starter",
+        title: "Starter Website",
         price: "5 juta",
         timeline: "7-10 hari",
-        description: "Sempurna untuk personal branding & bisnis pemula.",
+        description: "Untuk landing page, personal brand, atau company profile sederhana.",
         features: [
-          "Landing Page Profesional",
-          "Desain Responsif",
-          "Form Kontak & Integrasi WhatsApp",
-          "Setup SEO Dasar",
-          "Gratis Domain & Hosting 1 Tahun",
+          "Landing page / company profile ringkas",
+          "Desain responsif mobile-first",
+          "CTA WhatsApp dan form kontak",
+          "Basic SEO dan metadata",
+          "Setup domain dan hosting",
         ],
         buttonText: "Mulai Sekarang",
         popular: false,
       },
       {
-        title: "Professional",
+        title: "Business Website",
         price: "15 juta",
         timeline: "14-21 hari",
-        description: "Untuk bisnis yang siap berskala dengan fitur tingkat lanjut.",
+        description: "Untuk company profile serius dengan CMS, blog, portfolio, dan struktur SEO lebih lengkap.",
         features: [
           "Semua fitur Starter",
-          "Hingga 10 Halaman",
-          "CMS untuk kelola konten",
-          "Animasi UI/UX Premium",
-          "SEO & Analytics Lanjutan",
-          "Prioritas Support",
+          "Hingga 10 halaman utama",
+          "CMS untuk kelola konten sendiri",
+          "Blog, portfolio, atau testimonial section",
+          "SEO structure dan analytics setup",
+          "Staging preview dan handover",
         ],
         buttonText: "Pilih Professional",
         popular: true,
       },
       {
-        title: "Enterprise",
+        title: "Custom System",
         price: "Custom",
         timeline: "Sesuai scope",
-        description: "Solusi eksklusif untuk korporat / kebutuhan kompleks.",
+        description: "Untuk dashboard internal, e-commerce, automation, atau workflow bisnis yang butuh scope khusus.",
         features: [
           "Semua fitur Professional",
-          "E-Commerce / Web Application",
-          "Micro-interactions kustom",
-          "Custom Backend / API Integration",
-          "Optimasi Konversi",
-          "Dedicated Project Manager",
+          "Dashboard / e-commerce / automation",
+          "Role, data, dan workflow custom",
+          "Custom backend dan API integration",
+          "Deployment, monitoring, dan handover",
+          "Maintenance opsional setelah launch",
         ],
         buttonText: "Hubungi Kami",
         popular: false,
       },
     ],
   },
+  whatYouGet: {
+    eyebrow: "Yang kamu dapat",
+    heading: "Deliverable dibuat jelas, bukan cuma “website jadi”.",
+    description: "Setiap project dimulai dari scope yang rapi agar timeline, fitur, dan hasil akhirnya tidak abu-abu.",
+    items: [
+      "Responsive design untuk desktop dan mobile",
+      "Admin panel/CMS jika konten perlu dikelola sendiri",
+      "Basic technical SEO: struktur heading, metadata, dan performa",
+      "Deployment ke domain dan hosting pilihan",
+      "Staging preview selama proses development",
+      "Handover akses penuh dan dokumentasi singkat",
+      "Support awal setelah website launch",
+      "Scope dan prioritas fitur yang disepakati sebelum coding",
+    ],
+  },
   cta: {
     badge: "Konsultasi Gratis - Tanpa Komitmen",
-    headingTop: "Punya ide website?",
-    headingAccent: "kita rapikan scopenya.",
+    headingTop: "Mulai dari scope call singkat.",
+    headingAccent: "kita rapikan prioritasnya.",
     description:
       "Ceritakan bisnis, target pelanggan, dan fitur yang dibutuhkan. Kami bantu susun scope, estimasi waktu, dan langkah paling realistis.",
-    whatsappUrl: "https://wa.me/6281234567890?text=Halo%20WebServices%2C%20saya%20ingin%20konsultasi%20pembuatan%20website.",
+    whatsappUrl: "https://wa.me/6281234567890?text=Halo%20Build%20With%20Reys%2C%20saya%20ingin%20konsultasi%20pembuatan%20website.",
     primaryCta: "Konsultasi via WhatsApp",
-    secondaryCta: "Lihat Portofolio",
-    socialProof: "50+ klien puas",
-    ratingText: "5.0 rating rata-rata",
+    secondaryCta: "Lihat Proses Kerja",
+    socialProof: "Scope jelas sebelum coding",
+    ratingText: "Staging preview sebelum launch",
   },
   faq: {
     eyebrow: "Pertanyaan",
-    heading: "Frequently asked questions",
+    heading: "Pertanyaan sebelum mulai project",
     items: [
       {
         question: "Berapa lama waktu pembuatan website?",
@@ -217,35 +291,87 @@ export const defaultSiteConfig: SiteConfig = {
       },
       {
         question: "Apakah website sudah termasuk hosting dan domain?",
-        answer: "Ya, paket utama sudah termasuk domain dan hosting selama 1 tahun pertama.",
+        answer: "Bisa termasuk setup domain dan hosting, atau memakai akun hosting/domain milik bisnis kamu sendiri. Detailnya dikunci di scope.",
       },
       {
         question: "Apakah saya bisa mengubah konten website sendiri nantinya?",
-        answer: "Tentu. Konten utama website bisa diedit melalui admin panel.",
+        answer: "Bisa, jika CMS/admin panel masuk scope project. Konten seperti artikel, portfolio, testimonial, dan halaman utama bisa dibuat editable.",
       },
       {
         question: "Apakah ada biaya maintenance tahunan?",
-        answer: "Ada biaya perpanjangan domain, hosting, dan maintenance keamanan opsional mulai tahun kedua.",
+        answer: "Ada biaya perpanjangan domain/hosting jika memakai layanan tersebut. Maintenance teknis bisa dibuat opsional sesuai kebutuhan.",
       },
       {
         question: "Apakah website ini sudah SEO friendly?",
-        answer: "Ya. Struktur heading, metadata, performa, dan halaman responsif dibuat SEO friendly sejak awal.",
+        answer: "Ya. Struktur heading, metadata, performa, dan halaman responsif disiapkan sejak awal. Untuk strategi konten SEO bulanan bisa dibahas terpisah.",
       },
     ],
   },
 };
 
-function isSiteConfig(value: unknown): value is SiteConfig {
-  if (!value || typeof value !== "object") return false;
-  const maybe = value as Partial<SiteConfig>;
-  return Boolean(maybe.hero && maybe.stats && maybe.services && maybe.workflow && maybe.pricing && maybe.cta && maybe.faq);
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value && typeof value === "object" && !Array.isArray(value));
+}
+
+function isSiteConfig(value: unknown): value is Partial<SiteConfig> {
+  if (!isRecord(value)) return false;
+  return Boolean(value.hero || value.stats || value.services || value.workflow || value.pricing || value.cta || value.faq);
+}
+
+function mergeSiteConfig(value: Partial<SiteConfig>): SiteConfig {
+  return {
+    ...defaultSiteConfig,
+    ...value,
+    hero: {
+      ...defaultSiteConfig.hero,
+      ...value.hero,
+      scopePreview: {
+        ...defaultSiteConfig.hero.scopePreview,
+        ...value.hero?.scopePreview,
+      },
+    },
+    stats: Array.isArray(value.stats) ? value.stats : defaultSiteConfig.stats,
+    trustStrip: Array.isArray(value.trustStrip) ? value.trustStrip : defaultSiteConfig.trustStrip,
+    problems: {
+      ...defaultSiteConfig.problems,
+      ...value.problems,
+      items: Array.isArray(value.problems?.items) ? value.problems.items : defaultSiteConfig.problems.items,
+    },
+    services: {
+      ...defaultSiteConfig.services,
+      ...value.services,
+      items: Array.isArray(value.services?.items) ? value.services.items : defaultSiteConfig.services.items,
+    },
+    workflow: {
+      ...defaultSiteConfig.workflow,
+      ...value.workflow,
+      rotatingWords: Array.isArray(value.workflow?.rotatingWords) ? value.workflow.rotatingWords : defaultSiteConfig.workflow.rotatingWords,
+      steps: Array.isArray(value.workflow?.steps) ? value.workflow.steps : defaultSiteConfig.workflow.steps,
+    },
+    pricing: {
+      ...defaultSiteConfig.pricing,
+      ...value.pricing,
+      tiers: Array.isArray(value.pricing?.tiers) ? value.pricing.tiers : defaultSiteConfig.pricing.tiers,
+    },
+    whatYouGet: {
+      ...defaultSiteConfig.whatYouGet,
+      ...value.whatYouGet,
+      items: Array.isArray(value.whatYouGet?.items) ? value.whatYouGet.items : defaultSiteConfig.whatYouGet.items,
+    },
+    cta: { ...defaultSiteConfig.cta, ...value.cta },
+    faq: {
+      ...defaultSiteConfig.faq,
+      ...value.faq,
+      items: Array.isArray(value.faq?.items) ? value.faq.items : defaultSiteConfig.faq.items,
+    },
+  };
 }
 
 export async function getSiteConfig(): Promise<SiteConfig> {
   try {
     const row = await db.siteConfig.findUnique({ where: { key: SITE_CONFIG_KEY } });
     if (row && isSiteConfig(row.value)) {
-      return row.value;
+      return mergeSiteConfig(row.value);
     }
   } catch {
     // Keep the public website usable if the database is unavailable.

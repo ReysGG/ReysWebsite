@@ -1,7 +1,9 @@
 import React from "react";
 import { HeroSection } from "@/components/sections/hero";
-import { StatsSection } from "@/components/sections/stats";
 import { ServicesSection } from "@/components/sections/services";
+import { TrustStripSection } from "@/components/sections/trust-strip";
+import { ProblemSection } from "@/components/sections/problem-section";
+import { WhatYouGetSection } from "@/components/sections/what-you-get";
 import { PortfolioSection } from "@/components/sections/portfolio";
 import { WorkflowSection } from "@/components/sections/workflow";
 import { PricingSection } from "@/components/sections/pricing";
@@ -29,11 +31,13 @@ export default async function Home() {
       <PromoBanner />
       <SiteNavbar />
       <HeroSection content={config.hero} />
-      <StatsSection stats={config.stats} />
-      <ServicesSection content={config.services} />
+      <TrustStripSection items={config.trustStrip} />
+      <ProblemSection content={config.problems} />
+      <ServicesSection content={config.services} whatsappUrl={config.cta.whatsappUrl} />
       <WorkflowSection content={config.workflow} />
       {portfolioProjects.length > 0 && <PortfolioSection intro={portfolioIntro} projects={portfolioProjects} />}
       <PricingSection content={config.pricing} />
+      <WhatYouGetSection content={config.whatYouGet} />
       {testimonials.length > 0 && <TestimonialsSection testimonials={testimonials} />}
       <CtaSection content={config.cta} />
       <FaqSection content={config.faq} />

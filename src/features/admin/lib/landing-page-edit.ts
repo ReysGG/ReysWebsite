@@ -3,11 +3,14 @@ import { getCtaEditFields } from "@/features/admin/components/landing-page/secti
 import { getFaqEditFields } from "@/features/admin/components/landing-page/sections/faq-edit";
 import { getHeroEditFields } from "@/features/admin/components/landing-page/sections/hero-edit";
 import { getPricingEditFields } from "@/features/admin/components/landing-page/sections/pricing-edit";
+import { getProblemsEditFields } from "@/features/admin/components/landing-page/sections/problems-edit";
 import { getServicesEditFields } from "@/features/admin/components/landing-page/sections/services-edit";
 import { getStatsEditFields } from "@/features/admin/components/landing-page/sections/stats-edit";
+import { getTrustStripEditFields } from "@/features/admin/components/landing-page/sections/trust-strip-edit";
+import { getWhatYouGetEditFields } from "@/features/admin/components/landing-page/sections/what-you-get-edit";
 import { getWorkflowEditFields } from "@/features/admin/components/landing-page/sections/workflow-edit";
 
-export type SectionKey = "hero" | "stats" | "services" | "workflow" | "pricing" | "cta" | "faq";
+export type SectionKey = "hero" | "trustStrip" | "problems" | "stats" | "services" | "workflow" | "pricing" | "whatYouGet" | "cta" | "faq";
 
 export type InlineEditField = {
   section: SectionKey;
@@ -26,10 +29,13 @@ export type SectionMeta = {
 
 export const LANDING_PAGE_SECTIONS: SectionMeta[] = [
   { key: "hero", label: "Hero", description: "Headline, trust badge, dan CTA utama." },
+  { key: "trustStrip", label: "Trust Strip", description: "Poin trust singkat setelah hero." },
+  { key: "problems", label: "Problem", description: "Pain points bisnis sebelum layanan." },
   { key: "stats", label: "Statistik", description: "Angka ringkas yang tampil setelah hero." },
   { key: "services", label: "Layanan", description: "Section service cards di homepage." },
   { key: "workflow", label: "Workflow", description: "Step proses kerja dari awal sampai delivery." },
   { key: "pricing", label: "Pricing", description: "Paket harga, fitur, dan popular badge." },
+  { key: "whatYouGet", label: "What You Get", description: "Checklist deliverable project." },
   { key: "cta", label: "CTA Akhir", description: "Section ajakan konsultasi sebelum FAQ." },
   { key: "faq", label: "FAQ", description: "Pertanyaan yang sering muncul." },
 ];
@@ -41,10 +47,13 @@ export function isSectionKey(value: string): value is SectionKey {
 export function getInlineEditFields(section: SectionKey, config: SiteConfig): InlineEditField[] {
   const fieldGetters: Record<SectionKey, (config: SiteConfig) => InlineEditField[]> = {
     hero: getHeroEditFields,
+    trustStrip: getTrustStripEditFields,
+    problems: getProblemsEditFields,
     stats: getStatsEditFields,
     services: getServicesEditFields,
     workflow: getWorkflowEditFields,
     pricing: getPricingEditFields,
+    whatYouGet: getWhatYouGetEditFields,
     cta: getCtaEditFields,
     faq: getFaqEditFields,
   };

@@ -45,8 +45,8 @@ export const FaqSection = ({ content }: { content: FaqContent }) => {
   };
 
   return (
-    <section className="relative w-full py-24 md:py-32 overflow-hidden bg-[#f5f3ff]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-16 lg:gap-24">
+    <section className="relative w-full py-16 md:py-20 overflow-hidden bg-[#f5f3ff]">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-10 lg:gap-16">
         
         {/* Left Side: Title */}
         <motion.div 
@@ -57,7 +57,7 @@ export const FaqSection = ({ content }: { content: FaqContent }) => {
           className="w-full md:w-1/3 flex flex-col"
         >
           <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">{content.eyebrow}</p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 leading-tight mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 leading-tight mb-6">
             {content.heading}
           </h2>
         </motion.div>
@@ -79,12 +79,12 @@ export const FaqSection = ({ content }: { content: FaqContent }) => {
                   type="button"
                   aria-expanded={isOpen}
                   onClick={() => toggleFAQ(index)}
-                  className="flex items-center gap-6 py-6 w-full text-left group cursor-pointer"
+                  className="flex items-center gap-6 py-5 w-full text-left group cursor-pointer"
                 >
                   <span className="text-indigo-600 shrink-0">
                     {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5 group-hover:scale-125 transition-transform" />}
                   </span>
-                  <h3 className="text-lg md:text-xl font-medium text-neutral-800 group-hover:text-indigo-700 transition-colors">
+                  <h3 className="text-base md:text-lg font-medium text-neutral-800 group-hover:text-indigo-700 transition-colors">
                     {faq.question}
                   </h3>
                 </button>

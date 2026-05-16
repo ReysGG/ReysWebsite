@@ -2,9 +2,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { FlipWords } from "@/components/ui/flip-words";
-import { HomepageShowcaseSection } from "@/components/sections/homepage-showcase";
 import type { SiteConfig } from "@/lib/site-config";
 
 type HeroContent = SiteConfig["hero"];
@@ -30,7 +30,7 @@ export const HeroSection = ({ content }: { content: HeroContent }) => {
       </div>
 
       {/* ── Main layout ───────────────────────────────────────────────── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col lg:flex-row items-center gap-10 lg:gap-0 pt-20 pb-16 lg:py-0">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col lg:flex-row items-center gap-10 lg:gap-8 xl:gap-10 pt-20 pb-16 lg:py-0">
 
         {/* LEFT: Text */}
         <div className="flex-1 lg:flex-[0.95] w-full flex flex-col">
@@ -57,10 +57,10 @@ export const HeroSection = ({ content }: { content: HeroContent }) => {
           <motion.h1
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.1, ease: "easeOut" }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#1A1A1A] tracking-tighter leading-[1.05]"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold text-[#1A1A1A] tracking-tighter leading-[1.05]"
           >
             {content.headlinePrefix} <br className="hidden sm:block" />
-            <span className="inline-block min-w-[280px] sm:min-w-[360px]">
+            <span className="inline-block min-w-[250px] sm:min-w-[320px] xl:min-w-[360px]">
               <FlipWords className="text-indigo-600 px-0 font-bold"
                 words={content.rotatingWords} />
             </span>
@@ -88,14 +88,39 @@ export const HeroSection = ({ content }: { content: HeroContent }) => {
           </motion.div>
         </div>
 
-        {/* RIGHT: Delivery dashboard */}
+        {/* RIGHT: Laptop project scope mockup */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-          className="flex-1 lg:flex-[1.05] w-full max-w-[620px] lg:max-w-[700px]"
+          className="flex-1 lg:flex-[0.98] xl:flex-[1.08] w-full max-w-[680px] xl:max-w-[800px]"
         >
-          <HomepageShowcaseSection />
+          <div className="relative flex w-full items-center justify-center [perspective:1200px] lg:justify-end">
+            <div className="absolute inset-x-4 bottom-6 top-10 rounded-full bg-indigo-400/25 blur-3xl lg:translate-x-4 xl:translate-x-8" />
+            <motion.div
+              animate={{
+                y: [-6, 8, -6],
+                rotateX: [0, 1.4, 0],
+                rotateY: [-2.4, 2.4, -2.4],
+              }}
+              transition={{
+                duration: 7.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="relative z-10 origin-center transform-gpu will-change-transform lg:translate-x-2 xl:translate-x-8"
+            >
+              <Image
+                src={content.visualImage}
+                alt="Mockup laptop project scope Build With Reys"
+                width={1672}
+                height={941}
+                priority
+                className="h-auto w-[108%] max-w-none drop-shadow-[0_34px_82px_rgba(49,46,129,0.28)] sm:w-full lg:w-[112%] xl:w-[128%]"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 940px"
+              />
+            </motion.div>
+          </div>
         </motion.div>
 
       </div>

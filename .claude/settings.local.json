@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls src/middleware*)",
+      "Bash(ls src/app/admin/layout.*)",
+      "Bash(ls src/middleware.* src/middleware/)",
+      "Bash(find . -name \"middleware.ts\" -maxdepth 3 -not -path \"./node_modules/*\")",
+      "Bash(npx tsc *)"
+    ]
+  }
+}

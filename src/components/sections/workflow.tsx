@@ -32,10 +32,10 @@ const fallbackSteps = [
 export const WorkflowSection = ({ content }: { content: WorkflowContent }) => {
   const steps = content.steps.length ? content.steps : fallbackSteps;
   return (
-    <section id="workflow" className="w-full py-20 md:py-24 relative overflow-hidden bg-white">
+    <section id="workflow" className="w-full py-16 md:py-20 relative overflow-hidden bg-white">
       {/* Gradient orbs */}
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full bg-indigo-100/50 blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full bg-violet-100/40 blur-[100px]" />
+      <div className="pointer-events-none absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full bg-indigo-100/30 blur-[100px]" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
@@ -44,14 +44,12 @@ export const WorkflowSection = ({ content }: { content: WorkflowContent }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7 }}
-          className="flex flex-col items-center text-center mb-16 md:mb-20 relative z-10"
+          className="flex flex-col items-center text-center mb-10 md:mb-12 relative z-10"
         >
           <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">{content.eyebrow}</p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-6">
             {content.headingPrefix}{" "}
-            <span className="inline-block min-w-[220px] text-left">
-              <FlipWords words={content.rotatingWords} className="text-neutral-600 font-extrabold" />
-            </span>
+            <FlipWords words={content.rotatingWords} className="text-neutral-600 font-extrabold" />
           </h2>
           <p className="text-base md:text-lg text-neutral-600 max-w-2xl leading-relaxed">
             {content.description}
@@ -74,7 +72,7 @@ export const WorkflowSection = ({ content }: { content: WorkflowContent }) => {
             >
               
               {/* Node */}
-              <div className="w-20 h-20 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center mb-8 relative shadow-sm group-hover:shadow-md group-hover:border-indigo-400 transition-all duration-500 ease-out z-10">
+              <div className="relative z-10 mb-6 flex h-16 w-16 items-center justify-center rounded-lg border border-indigo-200 bg-indigo-50 shadow-none group-hover:border-indigo-400 transition-all duration-500 ease-out z-10">
                 <span className="text-2xl font-bold text-indigo-600 transition-colors duration-500">
                   {item.step}
                 </span>

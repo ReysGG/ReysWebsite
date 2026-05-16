@@ -4,24 +4,30 @@ import { getSiteConfig } from "@/lib/site-config";
 import { resetLandingPage } from "@/features/admin/actions/landing-page-actions";
 import { LandingPageForm } from "@/features/admin/components/landing-page/landing-page-form";
 
-type SectionKey = "hero" | "stats" | "services" | "workflow" | "pricing" | "cta" | "faq";
+type SectionKey = "hero" | "trustStrip" | "problems" | "stats" | "services" | "workflow" | "pricing" | "whatYouGet" | "cta" | "faq";
 
 const SECTION_LABELS: Record<SectionKey, string> = {
   hero: "Hero",
+  trustStrip: "Trust Strip",
+  problems: "Problem",
   stats: "Statistik",
   services: "Layanan",
   workflow: "Workflow",
   pricing: "Pricing",
+  whatYouGet: "What You Get",
   cta: "CTA Akhir",
   faq: "FAQ",
 };
 
 const SECTION_DESCRIPTIONS: Record<SectionKey, string> = {
   hero: "Edit headline, trust badge, deskripsi, dan CTA utama di hero section.",
+  trustStrip: "Edit poin trust singkat yang tampil setelah hero.",
+  problems: "Edit problem/pain points bisnis sebelum section layanan.",
   stats: "Edit angka ringkas dan label statistik yang tampil setelah hero.",
   services: "Edit heading layanan dan copy utama section service cards.",
   workflow: "Edit teks proses kerja dari brief sampai delivery.",
   pricing: "Edit heading dan deskripsi paket harga.",
+  whatYouGet: "Edit checklist deliverable yang didapat client.",
   cta: "Edit ajakan konsultasi akhir sebelum FAQ.",
   faq: "Edit heading FAQ dan pertanyaan umum.",
 };

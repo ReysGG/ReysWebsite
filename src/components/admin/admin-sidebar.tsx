@@ -23,6 +23,9 @@ import {
   Type,
   BarChart3,
   ListChecks,
+  DatabaseZap,
+  FileWarning,
+  PackageCheck,
   MousePointerClick,
   DollarSign,
   Megaphone,
@@ -54,11 +57,15 @@ type NavGroup = {
 };
 
 const LANDING_SECTIONS: SubItem[] = [
+  { label: "Sync Copy", href: "/admin/landing-page/sync", icon: <DatabaseZap className="h-3.5 w-3.5" /> },
   { label: "Hero", href: "/admin/landing-page/hero", icon: <Type className="h-3.5 w-3.5" /> },
+  { label: "Trust Strip", href: "/admin/landing-page/trustStrip", icon: <DatabaseZap className="h-3.5 w-3.5" /> },
+  { label: "Problem", href: "/admin/landing-page/problems", icon: <FileWarning className="h-3.5 w-3.5" /> },
   { label: "Statistik", href: "/admin/landing-page/stats", icon: <BarChart3 className="h-3.5 w-3.5" /> },
   { label: "Layanan", href: "/admin/landing-page/services", icon: <ListChecks className="h-3.5 w-3.5" /> },
   { label: "Workflow", href: "/admin/landing-page/workflow", icon: <MousePointerClick className="h-3.5 w-3.5" /> },
   { label: "Pricing", href: "/admin/landing-page/pricing", icon: <DollarSign className="h-3.5 w-3.5" /> },
+  { label: "What You Get", href: "/admin/landing-page/whatYouGet", icon: <PackageCheck className="h-3.5 w-3.5" /> },
   { label: "CTA Akhir", href: "/admin/landing-page/cta", icon: <Megaphone className="h-3.5 w-3.5" /> },
   { label: "FAQ", href: "/admin/landing-page/faq", icon: <CircleHelp className="h-3.5 w-3.5" /> },
 ];

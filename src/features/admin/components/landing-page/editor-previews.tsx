@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useActionState } from "react";
+import Image from "next/image";
 import { Pencil, Layout, LineChart, Server, ShoppingBag, Save } from "lucide-react";
 import { addLandingPageFaqItem } from "@/features/admin/actions/landing-page-actions";
 import type { SiteConfig } from "@/lib/site-config";
@@ -12,7 +13,10 @@ import { PricingSection } from "@/components/sections/pricing";
 import { ServicesSection } from "@/components/sections/services";
 import { StatsSection } from "@/components/sections/stats";
 import { WorkflowSection } from "@/components/sections/workflow";
-import { HomepageShowcaseSection } from "@/components/sections/homepage-showcase";
+import { TrustStripSection } from "@/components/sections/trust-strip";
+import { ProblemSection } from "@/components/sections/problem-section";
+import { WhatYouGetSection } from "@/components/sections/what-you-get";
+
 import { getInlineEditFields, type InlineEditField, type SectionKey } from "@/features/admin/lib/landing-page-edit";
 
 const SERVICE_EDITOR_STYLES = [
@@ -36,14 +40,20 @@ export function SectionRenderer({
   switch (section) {
     case "hero":
       return editMode ? <HeroEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <HeroSection content={config.hero} />;
+    case "trustStrip":
+      return editMode ? <TrustStripEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <TrustStripSection items={config.trustStrip} />;
+    case "problems":
+      return editMode ? <ProblemsEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <ProblemSection content={config.problems} />;
     case "stats":
       return editMode ? <StatsEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <StatsSection stats={config.stats} />;
     case "services":
-      return editMode ? <ServicesEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <ServicesSection content={config.services} />;
+      return editMode ? <ServicesEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <ServicesSection content={config.services} whatsappUrl={config.cta.whatsappUrl} />;
     case "workflow":
       return editMode ? <WorkflowEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <WorkflowSection content={config.workflow} />;
     case "pricing":
       return editMode ? <PricingEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <PricingSection content={config.pricing} />;
+    case "whatYouGet":
+      return editMode ? <WhatYouGetEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <WhatYouGetSection content={config.whatYouGet} />;
     case "cta":
       return editMode ? <CtaEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <CtaSection content={config.cta} />;
     case "faq":
@@ -136,8 +146,129 @@ function HeroEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuic
           </div>
         </div>
 
-        <div className="pointer-events-none w-full flex-1 lg:flex-[1.05]">
-          <HomepageShowcaseSection />
+        <div className="pointer-events-auto w-full flex-1 lg:flex-[1.05]">
+          <HeroScopeEditorPreview config={config} onQuickEdit={onQuickEdit} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HeroScopeEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuickEdit: (field: InlineEditField) => void }) {
+  const visualField = getInlineEditFields("hero", config).find((field) => field.name === "hero.visualImage");
+  if (!visualField) throw new Error("Missing edit field: hero.visualImage");
+
+  return (
+    <div className="relative flex w-full items-center justify-center lg:justify-end">
+      <div className="absolute inset-x-8 bottom-8 top-12 rounded-full bg-indigo-400/20 blur-3xl" />
+      <EditableTextButton
+        field={visualField}
+        onClick={() => onQuickEdit(visualField)}
+        className="relative z-10 block w-full max-w-[860px] p-1"
+      >
+        <Image
+          src={config.hero.visualImage}
+          alt="Mockup laptop project scope Build With Reys"
+          width={1672}
+          height={941}
+          className="h-auto w-[112%] max-w-none drop-shadow-[0_34px_80px_rgba(49,46,129,0.28)] sm:w-full lg:w-[118%]"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 54vw, 860px"
+        />
+      </EditableTextButton>
+    </div>
+  );
+}
+
+function TrustStripEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuickEdit: (field: InlineEditField) => void }) {
+  const field = getInlineEditFields("trustStrip", config)[0];
+  return (
+    <section className="w-full border-y border-indigo-100 bg-white">
+      <div className="grid grid-cols-1 divide-y divide-indigo-100 px-6 md:grid-cols-4 md:divide-x md:divide-y-0 md:px-12">
+        {config.trustStrip.map((point) => (
+          <div key={point} className="flex items-center gap-3 py-5 md:px-5 first:md:pl-0 last:md:pr-0">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-indigo-50 text-indigo-600">✓</span>
+            <EditableTextButton field={field} onClick={() => onQuickEdit(field)} className="px-1 text-left text-sm font-semibold leading-snug text-neutral-800">
+              {point}
+            </EditableTextButton>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ProblemsEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuickEdit: (field: InlineEditField) => void }) {
+  const fields = getInlineEditFields("problems", config);
+  const fieldByName = new Map(fields.map((field) => [field.name, field]));
+  const getField = (name: string) => fieldByName.get(name)!;
+
+  return (
+    <section className="w-full bg-white py-16 md:py-20">
+      <div className="px-6 md:px-12">
+        <div className="mb-10 max-w-3xl">
+          <EditableTextButton field={getField("problems.eyebrow")} onClick={() => onQuickEdit(getField("problems.eyebrow"))} className="mb-4 px-1 text-left text-xs font-bold uppercase tracking-widest text-indigo-600">
+            {config.problems.eyebrow}
+          </EditableTextButton>
+          <EditableTextButton field={getField("problems.heading")} onClick={() => onQuickEdit(getField("problems.heading"))} className="block px-1 text-left text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl lg:text-5xl">
+            {config.problems.heading}
+          </EditableTextButton>
+          <EditableTextButton field={getField("problems.description")} onClick={() => onQuickEdit(getField("problems.description"))} className="mt-5 block px-1 text-left text-base leading-relaxed text-neutral-600 md:text-lg">
+            {config.problems.description}
+          </EditableTextButton>
+        </div>
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {config.problems.items.map((problem, index) => {
+            const titleField = getField(`problems.items.${index}.title`);
+            const descriptionField = getField(`problems.items.${index}.description`);
+            return (
+              <div key={index} className="rounded-lg border border-neutral-200 bg-neutral-50 p-6 shadow-none">
+                <span className="mb-5 flex h-9 w-9 items-center justify-center rounded-md bg-white text-sm font-bold text-indigo-600 ring-1 ring-indigo-100">{String(index + 1).padStart(2, "0")}</span>
+                <EditableTextButton field={titleField} onClick={() => onQuickEdit(titleField)} className="block px-1 text-left text-base font-bold text-neutral-950">
+                  {problem.title}
+                </EditableTextButton>
+                <EditableTextButton field={descriptionField} onClick={() => onQuickEdit(descriptionField)} className="mt-3 block px-1 text-left text-sm leading-relaxed text-neutral-600">
+                  {problem.description}
+                </EditableTextButton>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhatYouGetEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuickEdit: (field: InlineEditField) => void }) {
+  const fields = getInlineEditFields("whatYouGet", config);
+  const fieldByName = new Map(fields.map((field) => [field.name, field]));
+  const getField = (name: string) => fieldByName.get(name)!;
+
+  return (
+    <section className="w-full bg-[#f5f3ff] py-16 md:py-20">
+      <div className="grid gap-10 px-6 md:px-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div>
+          <EditableTextButton field={getField("whatYouGet.eyebrow")} onClick={() => onQuickEdit(getField("whatYouGet.eyebrow"))} className="mb-4 px-1 text-left text-xs font-bold uppercase tracking-widest text-indigo-600">
+            {config.whatYouGet.eyebrow}
+          </EditableTextButton>
+          <EditableTextButton field={getField("whatYouGet.heading")} onClick={() => onQuickEdit(getField("whatYouGet.heading"))} className="block px-1 text-left text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl lg:text-5xl">
+            {config.whatYouGet.heading}
+          </EditableTextButton>
+          <EditableTextButton field={getField("whatYouGet.description")} onClick={() => onQuickEdit(getField("whatYouGet.description"))} className="mt-5 block px-1 text-left text-base leading-relaxed text-neutral-600 md:text-lg">
+            {config.whatYouGet.description}
+          </EditableTextButton>
+        </div>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {config.whatYouGet.items.map((item) => {
+            const itemField = getField("whatYouGet.items");
+            return (
+              <div key={item} className="flex gap-3 rounded-lg border border-indigo-100 bg-white p-4 shadow-none">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-indigo-600 text-white">✓</span>
+                <EditableTextButton field={itemField} onClick={() => onQuickEdit(itemField)} className="px-1 text-left text-sm font-medium leading-relaxed text-neutral-700">
+                  {item}
+                </EditableTextButton>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
