@@ -3,6 +3,9 @@ import db from "@/lib/db";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://buildwithreys.tech";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: siteUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
@@ -25,7 +28,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       })),
     ];
-  } catch {
+  } catch (error) {
+    console.error("Failed to generate blog sitemap entries", error);
     return staticRoutes;
   }
 }
