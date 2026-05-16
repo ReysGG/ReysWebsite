@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const siteName = settings.siteName || "WebServices";
   const tagline = settings.tagline || "Your Tech Partner";
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://buildwithreys.tech"),
     title: `${siteName} | ${tagline}`,
     description: settings.description || "Dinamis & profesional web services, startups, and personal brands.",
     icons: { icon: '/favicon.ico' },
