@@ -4,14 +4,19 @@ import { FileText } from 'lucide-react';
 import type { BlogPost } from '@/features/blog/data/posts';
 import { formatBlogDate, stripHtml, getReadingTime, getPostDate } from './blog-card';
 
+const BLUR_DATA_URL =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDgiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjgiIGZpbGw9IiNlNWU3ZWIiLz48L3N2Zz4=';
+
 export function BlogNewsCard({
   post,
   size = 'default',
   featured = false,
+  priority = false,
 }: {
   post: BlogPost;
   size?: 'default' | 'compact';
   featured?: boolean;
+  priority?: boolean;
 }) {
   // Compact variant — used in sidebar recent posts etc.
   if (size === 'compact') {
@@ -26,7 +31,10 @@ export function BlogNewsCard({
               src={post.coverImage}
               alt={post.title}
               fill
+              sizes="80px"
               className="object-cover"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
             />
           ) : (
             <div className="flex h-full items-center justify-center">
@@ -64,7 +72,11 @@ export function BlogNewsCard({
               src={post.coverImage}
               alt={post.title}
               fill
+              sizes="(min-width: 1024px) 800px, (min-width: 768px) 90vw, 100vw"
               className="object-cover transition duration-500 group-hover:scale-105"
+              priority={priority}
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
             />
           ) : (
             <div className="flex h-full items-center justify-center bg-gradient-to-br from-indigo-100 to-violet-100">
@@ -113,7 +125,11 @@ export function BlogNewsCard({
             src={post.coverImage}
             alt={post.title}
             fill
+            sizes="(min-width: 768px) 160px, 144px"
             className="object-cover transition duration-500 group-hover:scale-105"
+            priority={priority}
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL}
           />
         ) : (
           <div className="flex h-full items-center justify-center">

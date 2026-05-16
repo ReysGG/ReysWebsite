@@ -92,7 +92,12 @@ export default async function PublicBlogPage({ searchParams }: { searchParams: S
             ) : (
               <div>
                 {posts.map((post, i) => (
-                  <BlogNewsCard key={post.id} post={post} featured={i === 0 && !isFiltered} />
+                  <BlogNewsCard
+                    key={post.id}
+                    post={post}
+                    featured={i === 0 && !isFiltered}
+                    priority={i < 3}
+                  />
                 ))}
               </div>
             )}

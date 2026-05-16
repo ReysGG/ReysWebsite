@@ -95,8 +95,8 @@ export const HeroSection = ({ content }: { content: HeroContent }) => {
           transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
           className="flex-1 lg:flex-[0.98] xl:flex-[1.08] w-full max-w-[680px] xl:max-w-[800px]"
         >
-          <div className="relative flex w-full items-center justify-center [perspective:1200px] lg:justify-end">
-            <div className="absolute inset-x-4 bottom-6 top-10 rounded-full bg-indigo-400/25 blur-3xl lg:translate-x-4 xl:translate-x-8" />
+          <div className="relative flex w-full items-center justify-center [perspective:1200px]">
+            <div className="absolute inset-x-4 bottom-6 top-10 rounded-full bg-indigo-400/25 blur-3xl lg:translate-x-1 xl:translate-x-3" />
             <motion.div
               animate={{
                 y: [-6, 8, -6],
@@ -108,7 +108,7 @@ export const HeroSection = ({ content }: { content: HeroContent }) => {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="relative z-10 origin-center transform-gpu will-change-transform lg:translate-x-2 xl:translate-x-8"
+              className="relative z-10 origin-center transform-gpu will-change-transform lg:translate-x-0 xl:translate-x-3"
             >
               <Image
                 src={content.visualImage}
