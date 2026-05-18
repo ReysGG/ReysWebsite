@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PT Inovasi Kerja Digital - Empowering the Future of Work</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#e0e3e5",
+                      "primary-fixed-dim": "#bec6e0",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "background": "#f7f9fb",
+                      "surface-dim": "#d8dadc",
+                      "tertiary-container": "#001e2c",
+                      "surface-container": "#eceef0",
+                      "outline": "#76777d",
+                      "on-secondary-fixed": "#00201d",
+                      "on-surface-variant": "#45464d",
+                      "on-secondary-container": "#006f66",
+                      "on-tertiary-container": "#008ebf",
+                      "outline-variant": "#c6c6cd",
+                      "on-background": "#191c1e",
+                      "secondary-fixed": "#89f5e7",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-secondary-fixed-variant": "#005049",
+                      "primary-fixed": "#dae2fd",
+                      "surface-container-high": "#e6e8ea",
+                      "surface-bright": "#f7f9fb",
+                      "tertiary": "#000000",
+                      "tertiary-fixed": "#c4e7ff",
+                      "surface": "#f7f9fb",
+                      "primary-container": "#131b2e",
+                      "surface-container-low": "#f2f4f6",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#001e2c",
+                      "secondary": "#006a61",
+                      "primary": "#000000",
+                      "surface-tint": "#565e74",
+                      "on-primary-container": "#7c839b",
+                      "error": "#ba1a1a",
+                      "on-tertiary": "#ffffff",
+                      "on-surface": "#191c1e",
+                      "secondary-fixed-dim": "#6bd8cb",
+                      "tertiary-fixed-dim": "#7bd0ff",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#86f2e4",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-primary": "#bec6e0",
+                      "error-container": "#ffdad6",
+                      "on-error-container": "#93000a",
+                      "inverse-surface": "#2d3133",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-tertiary-fixed-variant": "#004c69",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed": "#131b2e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "12px",
+                      "gutter": "24px",
+                      "xs": "4px",
+                      "margin-mobile": "16px",
+                      "md": "24px",
+                      "lg": "48px",
+                      "margin-desktop": "64px",
+                      "xl": "80px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .glass-panel {
+            background: rgba(247, 249, 251, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(198, 198, 205, 0.3);
+        }
+        .btn-primary-gradient {
+            background: linear-gradient(135deg, #006a61 0%, #7bd0ff 100%);
+        }
+        .soft-shadow {
+            box-shadow: 0 20px 40px -10px rgba(0, 30, 44, 0.08);
+        }
+        .soft-shadow-hover:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 30, 44, 0.12);
+        }
+      </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 max-w-[1440px] mx-auto">
+<a class="font-headline-md text-headline-md font-bold text-primary" href="#">
+                Inovasi Kerja Digital
+            </a>
+<div class="hidden md:flex items-center gap-gutter">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#services">Services</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#about">About</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#contact">Contact</a>
+<a class="btn-primary-gradient text-on-primary font-label-md text-label-md px-md py-sm rounded-DEFAULT transition-transform hover:scale-95 flex items-center gap-2" href="#contact">
+                    Get Started
+                </a>
+</div>
+<!-- Mobile Menu Button (Icon only for visual representation, no JS) -->
+<button class="md:hidden text-on-surface p-sm">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</nav>
+<main class="flex-grow pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center justify-center px-margin-mobile md:px-margin-desktop overflow-hidden bg-surface-container-low">
+<!-- Background Image with Overlay -->
+<div class="absolute inset-0 z-0">
+<img alt="Hero Background" class="w-full h-full object-cover opacity-20" data-alt="A sweeping, abstract digital landscape representing the modern corporate cloud ecosystem. The scene features glowing, interconnected nodes and subtle data streams flowing across a clean, minimalist high-tech environment. Soft, ambient lighting creates a bright, light-mode aesthetic, utilizing a sophisticated palette of pristine whites, soft silvers, and precise accents of teal and sky blue. The mood is highly professional, forward-looking, and technologically advanced." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3lKvwAL1FqoULCl_XuJ7wwJ5q2qKur___pGd7nRK_YIyVLyaBouKnawiP57pHQKmGVZm1grIDDR-KchENzRVRVShCYAkJYRXNGGlDVCr1fcvGkTG8freG2R15PcQo_Q5NCj1F7i6iJzavmCnwOXW6GtLPD8T2VOnZCMW-X26URaxKjvgU3_BEJ2jQkRa6nN841Y4WFCTh_L57H06iIEVwDs_k1PF9mzDMSHrZtgrXCEkbZS-BkVZh7_dDWFoPZMwOi13YNJ9Xe_s"/>
+<div class="absolute inset-0 bg-gradient-to-b from-background/50 to-background"></div>
+</div>
+<div class="relative z-10 w-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="col-span-1 md:col-span-8 flex flex-col items-start gap-md">
+<div class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-secondary-fixed/20 border border-secondary/20">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="rocket_launch" data-weight="fill" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+<span class="font-label-sm text-label-sm text-on-secondary-fixed-variant">Empowering the Future of Work</span>
+</div>
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-primary max-w-4xl">
+                        Transformasi Digital untuk <span class="text-transparent bg-clip-text btn-primary-gradient">Ekosistem Kerja</span> Modern
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                        Kami memberdayakan masa depan kerja melalui inovasi digital. Tinggalkan cara konvensional dan masuki era efisiensi tanpa batas dengan solusi teknologi komprehensif kami.
+                    </p>
+<div class="flex flex-wrap items-center gap-sm mt-sm">
+<a class="btn-primary-gradient text-on-primary font-label-md text-label-md px-md py-sm rounded-DEFAULT transition-transform hover:scale-95 flex items-center gap-2" href="#contact">
+                            Consult Now
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md px-md py-sm rounded-DEFAULT hover:bg-surface-variant transition-colors flex items-center gap-2" href="#services">
+                            Explore Services
+                        </a>
+</div>
+</div>
+</div>
+</section>
+<!-- About Us Section -->
+<section class="py-xl px-margin-mobile md:px-margin-desktop bg-background relative z-10" id="about">
+<div class="max-w-[1440px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-xl items-center">
+<div class="col-span-1 md:col-span-5">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-md">
+                            Transisi Menuju Ekosistem Digital Masa Depan
+                        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">
+                            PT Inovasi Kerja Digital hadir sebagai jembatan bagi perusahaan Anda untuk beralih dari operasional konvensional menuju ekosistem digital yang cerdas. Kami berdedikasi untuk menciptakan lingkungan kerja yang adaptif, efisien, dan siap menghadapi tantangan global.
+                        </p>
+<div class="flex flex-col gap-md">
+<div class="flex items-start gap-sm p-sm rounded-lg hover:bg-surface-container-low transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="w-12 h-12 rounded-DEFAULT bg-tertiary-fixed/30 flex items-center justify-center flex-shrink-0 text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined" data-icon="lightbulb" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary text-[18px] mb-xs">Inovasi Berkelanjutan</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Solusi yang terus berkembang mengikuti tren teknologi terkini.</p>
+</div>
+</div>
+<div class="flex items-start gap-sm p-sm rounded-lg hover:bg-surface-container-low transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="w-12 h-12 rounded-DEFAULT bg-secondary-fixed/30 flex items-center justify-center flex-shrink-0 text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined" data-icon="precision_manufacturing" data-weight="fill" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary text-[18px] mb-xs">Otomatisasi Efisien</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Mereduksi tugas manual untuk fokus pada pertumbuhan strategis.</p>
+</div>
+</div>
+<div class="flex items-start gap-sm p-sm rounded-lg hover:bg-surface-container-low transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="w-12 h-12 rounded-DEFAULT bg-primary-fixed/30 flex items-center justify-center flex-shrink-0 text-on-primary-fixed-variant">
+<span class="material-symbols-outlined" data-icon="groups" data-weight="fill" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary text-[18px] mb-xs">Pemberdayaan SDM</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Meningkatkan kapabilitas tim melalui alat digital yang intuitif.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-1 md:col-span-7 relative">
+<div class="aspect-[4/3] rounded-xl overflow-hidden glass-panel soft-shadow relative z-10 p-2">
+<img alt="Team Collaboration" class="w-full h-full object-cover rounded-lg" data-alt="A diverse group of modern corporate professionals collaborating around a sleek, glass-top conference table in a bright, minimalist high-tech office. The room features subtle semi-transparent architectural elements and soft natural lighting. They are interacting with sleek digital tablets and laptops. The aesthetic is clean, light-mode corporate, utilizing a sophisticated palette of whites, light grays, and subtle accents of teal and navy. The mood is collaborative, focused, and innovative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAerEAx9ReQbGMAJL0kMxPI869S1xtyXru7TShLmtHghY_tssZPdqt1p9OlYa4CUMGrUW648zSj42AKt-DKDvV0pnX9Mx0LXRFnlhA0U5ljaMUL7H9Yicq9M-Ezs7ePdgOndqrdIErSQaDod7LdPGdbMfLTPabg3-9JPSU5etbVUBJSzMpmzcpWjlkn1nJUQQniFQd0o4hiahtkyuZE2BQDxvr5_-N9qcloanJJCmL1thZDtqP4oMrUvsDY3Z9xXU42nCCU3DxMx7E"/>
+</div>
+<!-- Decorative background element -->
+<div class="absolute -right-lg -bottom-lg w-full h-full bg-surface-container-high rounded-xl z-0"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Core Services Section -->
+<section class="py-xl px-margin-mobile md:px-margin-desktop bg-surface-container-lowest" id="services">
+<div class="max-w-[1440px] mx-auto">
+<div class="text-center mb-xl max-w-3xl mx-auto">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-md">
+                        Divisi &amp; Layanan Inti
+                    </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Pendekatan holistik kami mencakup setiap aspek fundamental bisnis Anda, memastikan transformasi digital yang menyeluruh dan terintegrasi.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Service Card 1 -->
+<div class="bg-surface rounded-lg p-md border border-surface-variant soft-shadow-hover transition-all duration-300 group hover:border-secondary">
+<div class="w-14 h-14 rounded-DEFAULT bg-tertiary-container text-on-tertiary-container flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]" data-icon="cloud_sync" data-weight="fill" style="font-variation-settings: 'FILL' 1;">cloud_sync</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-[20px] text-primary mb-sm">IT Support &amp; Development</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">
+                            Membangun pondasi digital yang kokoh dengan layanan infrastruktur cloud yang aman, sistem keamanan siber mutakhir, dan pengembangan aplikasi kustom.
+                        </p>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full">Cloud</span>
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full">Security</span>
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full">Dev</span>
+</div>
+</div>
+<!-- Service Card 2 -->
+<div class="bg-surface rounded-lg p-md border border-surface-variant soft-shadow-hover transition-all duration-300 group hover:border-secondary">
+<div class="w-14 h-14 rounded-DEFAULT bg-secondary-container text-on-secondary-container flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]" data-icon="trending_up" data-weight="fill" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-[20px] text-primary mb-sm">Marketing &amp; Business Growth</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">
+                            Mendorong pertumbuhan melalui strategi pemasaran berbasis data, analitik mendalam, dan optimasi konversi digital.
+                        </p>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full">Analytics</span>
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full">Growth</span>
+</div>
+</div>
+<!-- Service Card 3 -->
+<div class="bg-surface rounded-lg p-md border border-surface-variant soft-shadow-hover transition-all duration-300 group hover:border-secondary">
+<div class="w-14 h-14 rounded-DEFAULT bg-primary-fixed text-on-primary-fixed-variant flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]" data-icon="auto_mode" data-weight="fill" style="font-variation-settings: 'FILL' 1;">auto_mode</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-[20px] text-primary mb-sm">Operational &amp; Automation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">
+                            Digitalisasi SOP dan penerapan alur kerja otomatis untuk memastikan operasional harian berjalan tanpa hambatan.
+                        </p>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full">SOP Digital</span>
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full">Workflow</span>
+</div>
+</div>
+<!-- Service Card 4 -->
+<div class="bg-surface rounded-lg p-md border border-surface-variant soft-shadow-hover transition-all duration-300 group hover:border-secondary">
+<div class="w-14 h-14 rounded-DEFAULT bg-tertiary-fixed text-on-tertiary-fixed-variant flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]" data-icon="account_balance" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-[20px] text-primary mb-sm">Finance &amp; Tech-Accounting</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">
+                            Integrasi perangkat lunak akuntansi real-time untuk visibilitas keuangan penuh dan pelaporan yang presisi.
+                        </p>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full">Real-time</span>
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full">Finance</span>
+</div>
+</div>
+<!-- Service Card 5 -->
+<div class="bg-surface rounded-lg p-md border border-surface-variant soft-shadow-hover transition-all duration-300 group hover:border-secondary md:col-span-2 lg:col-span-2">
+<div class="w-14 h-14 rounded-DEFAULT bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]" data-icon="engineering" data-weight="fill" style="font-variation-settings: 'FILL' 1;">engineering</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-[20px] text-primary mb-sm">Human Resource &amp; Culture</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md max-w-2xl">
+                            Sistem HRIS terpadu, solusi kerja jarak jauh (WFA), dan pelacakan kinerja karyawan untuk membangun budaya perusahaan yang unggul di era digital.
+                        </p>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full">HRIS</span>
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full">Remote Work</span>
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full">Performance</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Choose Us Section -->
+<section class="py-xl px-margin-mobile md:px-margin-desktop bg-surface-container-low relative overflow-hidden">
+<!-- Decorative blur -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-secondary-fixed/20 rounded-full blur-[100px] -z-10"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-tertiary-fixed/20 rounded-full blur-[100px] -z-10"></div>
+<div class="max-w-[1440px] mx-auto">
+<div class="text-center mb-xl max-w-3xl mx-auto">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-md">
+                        Mengapa Memilih Kami?
+                    </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Nilai inti yang membedakan kami sebagai mitra transformasi digital Anda.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="glass-panel p-lg rounded-xl flex flex-col items-center text-center soft-shadow relative z-10 border-t-2 border-t-secondary">
+<div class="w-16 h-16 rounded-full bg-surface mb-md flex items-center justify-center border border-outline-variant/30 shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[32px]" data-icon="architecture" data-weight="fill" style="font-variation-settings: 'FILL' 1;">architecture</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-[20px] text-primary mb-sm">Pendekatan Berbasis Inovasi</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                            Kami tidak menawarkan solusi one-size-fits-all. Setiap strategi dikustomisasi untuk memenuhi kebutuhan spesifik industri Anda.
+                        </p>
+</div>
+<div class="glass-panel p-lg rounded-xl flex flex-col items-center text-center soft-shadow relative z-10 border-t-2 border-t-tertiary-container">
+<div class="w-16 h-16 rounded-full bg-surface mb-md flex items-center justify-center border border-outline-variant/30 shadow-sm">
+<span class="material-symbols-outlined text-tertiary-container text-[32px]" data-icon="speed" data-weight="fill" style="font-variation-settings: 'FILL' 1;">speed</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-[20px] text-primary mb-sm">Adaptif &amp; Tangkas</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                            Mendukung lingkungan kerja WFA dengan pemantauan seamless yang memastikan produktivitas tetap optimal di mana pun tim Anda berada.
+                        </p>
+</div>
+<div class="glass-panel p-lg rounded-xl flex flex-col items-center text-center soft-shadow relative z-10 border-t-2 border-t-primary-container">
+<div class="w-16 h-16 rounded-full bg-surface mb-md flex items-center justify-center border border-outline-variant/30 shadow-sm">
+<span class="material-symbols-outlined text-primary-container text-[32px]" data-icon="verified_user" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-[20px] text-primary mb-sm">Keamanan Terjamin</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                            Integritas data adalah prioritas. Arsitektur sistem kami dirancang dengan standar keamanan tingkat enterprise.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-xl px-margin-mobile md:px-margin-desktop bg-surface-bright border-t border-outline-variant/20" id="contact">
+<div class="max-w-[1440px] mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-xl">
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-md">
+                            Mulai Transformasi Anda
+                        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg max-w-md">
+                            Diskusikan kebutuhan perusahaan Anda dengan konsultan ahli kami. Kami siap memandu langkah digitalisasi Anda.
+                        </p>
+<div class="flex flex-col gap-md mb-lg">
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-DEFAULT bg-surface-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="location_on">location_on</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary mb-xs">Kantor Pusat</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Gedung Inovasi Tower, Lt. 12<br/>Jl. Teknologi Maju No. 88, Jakarta</p>
+</div>
+</div>
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-DEFAULT bg-surface-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="mail">mail</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary mb-xs">Email</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">hello@inovasikerjadigital.co.id</p>
+</div>
+</div>
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-DEFAULT bg-surface-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="call">call</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary mb-xs">Telepon</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">(021) 555-8899</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-lg border border-outline-variant/30 soft-shadow">
+<form class="flex flex-col gap-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="name">Nama Lengkap</label>
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-secondary outline-none px-sm py-sm text-on-surface transition-colors rounded-t-DEFAULT" id="name" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="company">Nama Perusahaan</label>
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-secondary outline-none px-sm py-sm text-on-surface transition-colors rounded-t-DEFAULT" id="company" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="email">Email Bisnis</label>
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-secondary outline-none px-sm py-sm text-on-surface transition-colors rounded-t-DEFAULT" id="email" type="email"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="message">Pesan / Kebutuhan</label>
+<textarea class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-secondary outline-none px-sm py-sm text-on-surface transition-colors rounded-t-DEFAULT resize-none" id="message" rows="4"></textarea>
+</div>
+<button class="btn-primary-gradient text-on-primary font-label-md text-label-md px-lg py-sm rounded-DEFAULT transition-transform hover:scale-95 self-start mt-sm" type="button">
+                                Kirim Pesan
+                            </button>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl bg-surface-container-highest dark:bg-tertiary-container flat no shadows">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+<div class="col-span-1 md:col-span-2">
+<a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed block mb-md opacity-80 hover:opacity-100 transition-opacity" href="#">
+                    Inovasi Kerja Digital
+                </a>
+<p class="font-body-sm text-body-sm text-on-surface dark:text-on-tertiary-container max-w-sm">
+                    Empowering the Future of Work Through Digital Innovation.
+                </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-fixed-variant mt-lg">
+                    © 2024 PT Inovasi Kerja Digital. All rights reserved.
+                </p>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-on-surface mb-md">Kontak</h4>
+<ul class="flex flex-col gap-sm">
+<li><a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">Gedung Inovasi Tower, Jakarta</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">hello@inovasikerjadigital.co.id</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">(021) 555-8899</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-on-surface mb-md">Legal</h4>
+<ul class="flex flex-col gap-sm">
+<li><a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy Policy</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

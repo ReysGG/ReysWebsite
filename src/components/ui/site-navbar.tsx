@@ -18,9 +18,9 @@ import { Show, SignInButton, SignUpButton, UserButton, useUser } from "@clerk/ne
 const NAV_ITEMS = [
   { name: "Layanan", link: "/#services" },
   { name: "Portofolio", link: "/#portfolio" },
+  { name: "Showcase", link: "/showcase" },
   { name: "Proses", link: "/#workflow" },
   { name: "Harga", link: "/#pricing" },
-  { name: "Testimoni", link: "/#testimonials" },
   { name: "Blog", link: "/blog" },
 ];
 

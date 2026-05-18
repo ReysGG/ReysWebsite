@@ -29,6 +29,7 @@ import {
   MousePointerClick,
   DollarSign,
   Megaphone,
+  Sparkles,
   CircleHelp,
   Mail,
   MessageSquareText,
@@ -120,6 +121,15 @@ const NAV_GROUPS: NavGroup[] = [
         subItems: [
           { label: "Semua Project", href: "/admin/portfolio", icon: <List className="h-3.5 w-3.5" /> },
           { label: "Edit Intro Portfolio", href: "/admin/portfolio/hero", icon: <ImageIcon className="h-3.5 w-3.5" /> },
+        ],
+      },
+      {
+        label: "Showcase Prototipe",
+        basePath: "/admin/showcase",
+        icon: <Sparkles className="h-4 w-4" />,
+        subItems: [
+          { label: "Daftar Showcase", href: "/admin/showcase", icon: <List className="h-3.5 w-3.5" /> },
+          { label: "Showcase Baru", href: "/admin/showcase/new", icon: <Plus className="h-3.5 w-3.5" /> },
         ],
       },
     ],

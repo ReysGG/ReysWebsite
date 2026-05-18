@@ -39,8 +39,8 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        // Global security headers — block framing everywhere except blog
-        source: "/((?!blog).*)",
+        // Global security headers — block framing everywhere except blog/showcase
+        source: "/((?!blog|showcase).*)",
         headers: [
           { key: "X-Frame-Options", value: "DENY" },
           { key: "X-Content-Type-Options", value: "nosniff" },
@@ -58,6 +58,15 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
           { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+        ],
+      },
+      {
+        // Showcase HTML files served from /public/showcase/*.html — allow same-origin framing
+        source: "/showcase/:path*",
+        headers: [
+          { key: "Content-Security-Policy", value: "frame-ancestors 'self'" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
         ],
       },
     ];

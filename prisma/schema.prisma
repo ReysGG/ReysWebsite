@@ -96,6 +96,23 @@ model Subscriber {
   active    Boolean  @default(true)
 }
 
+model Showcase {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  category    String
+  htmlUrl     String
+  thumbnail   String?
+  tags        String[]
+  published   Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([published, order])
+}
+
 model SiteConfig {
   id        String   @id @default(cuid())
   key       String   @unique

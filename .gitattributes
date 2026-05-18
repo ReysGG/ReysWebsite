@@ -1,0 +1,25 @@
+# Ensure Unix line endings for shell scripts used in Docker
+docker-entrypoint.sh text eol=lf
+
+# Normalize line endings for source files
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.md text eol=lf
+*.sql text eol=lf
+*.prisma text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Binary files — no line ending conversion
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
