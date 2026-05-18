@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { BackToTop } from "@/components/ui/back-to-top";
+import { FloatingConsult } from "@/components/ui/floating-consult";
 import { getSiteSettings } from "@/lib/site-settings";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -18,11 +19,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSiteSettings();
   return (
     <html lang="id" suppressHydrationWarning>
       <body
@@ -39,6 +41,7 @@ export default function RootLayout({
             <ScrollProgress />
             {children}
             <BackToTop />
+            <FloatingConsult whatsappUrl={settings.whatsapp} siteName={settings.siteName} />
           </ThemeProvider>
         </ClerkProvider>
       </body>

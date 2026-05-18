@@ -1,10 +1,15 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import db from "@/lib/db";
 import { requireAdmin } from "@/features/admin/lib/auth";
-import { PORTFOLIO_INTRO_KEY, type PortfolioIntroConfig } from "@/lib/portfolio-config";
+import {
+  PORTFOLIO_INTRO_KEY,
+  PORTFOLIO_INTRO_TAG,
+  PORTFOLIO_PROJECTS_TAG,
+  type PortfolioIntroConfig,
+} from "@/lib/portfolio-config";
 
 export type PortfolioActionState = {
   success: boolean;
@@ -18,6 +23,8 @@ function getString(formData: FormData, key: string) {
 }
 
 function revalidatePortfolio() {
+  revalidateTag(PORTFOLIO_INTRO_TAG, "max");
+  revalidateTag(PORTFOLIO_PROJECTS_TAG, "max");
   revalidatePath("/");
   revalidatePath("/admin");
   revalidatePath("/admin/portfolio");

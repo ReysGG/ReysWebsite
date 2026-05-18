@@ -4,24 +4,23 @@ import { Search } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { requireAdmin } from "@/features/admin/lib/auth";
-import { currentUser } from "@clerk/nextjs/server";
+import { requireAdmin, type AdminUser } from "@/features/admin/lib/auth";
 
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  let user: AdminUser;
   try {
-    await requireAdmin();
+    user = await requireAdmin();
   } catch {
     redirect("/");
   }
 
-  const user = await currentUser().catch(() => null);
-  const displayName = user?.fullName || user?.username || user?.primaryEmailAddress?.emailAddress || "Admin";
+  const displayName = user.name;
   const initial = displayName.charAt(0).toUpperCase();
-  const avatarUrl = user?.imageUrl;
+  const avatarUrl = user.imageUrl;
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-neutral-50">

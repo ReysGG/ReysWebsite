@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Copy, MessageCircle, Share2 } from "lucide-react";
-import { IconBrandX, IconBrandLinkedin } from "@tabler/icons-react";
-
+import { Check, Copy, Share2 } from "lucide-react";
+import { TwitterIcon, LinkedinIcon, WhatsappIcon } from "@/components/ui/brand-icons";
 export function ShareButtons({ title, slug }: { title: string; slug: string }) {
   const [copied, setCopied] = useState(false);
 
@@ -18,19 +17,19 @@ export function ShareButtons({ title, slug }: { title: string; slug: string }) {
     {
       label: "WhatsApp",
       href: `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`,
-      Icon: MessageCircle,
+      Icon: WhatsappIcon,
       color: "hover:bg-emerald-50 hover:text-emerald-700",
     },
     {
       label: "X / Twitter",
       href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
-      Icon: IconBrandX,
+      Icon: TwitterIcon,
       color: "hover:bg-neutral-100 hover:text-neutral-900",
     },
     {
       label: "LinkedIn",
       href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-      Icon: IconBrandLinkedin,
+      Icon: LinkedinIcon,
       color: "hover:bg-blue-50 hover:text-blue-700",
     },
   ];

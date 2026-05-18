@@ -7,11 +7,7 @@ import React, {
   createContext,
   useContext,
 } from "react";
-import {
-  IconArrowNarrowLeft,
-  IconArrowNarrowRight,
-  IconX,
-} from "@tabler/icons-react";
+import { ArrowLeft, ArrowRight, X } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import type { ImageProps } from "next/image";
@@ -140,14 +136,14 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
             onClick={scrollLeft}
             disabled={!canScrollLeft}
           >
-            <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
+            <ArrowLeft className="h-6 w-6 text-gray-500" />
           </button>
           <button
             className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
             onClick={scrollRight}
             disabled={!canScrollRight}
           >
-            <IconArrowNarrowRight className="h-6 w-6 text-gray-500" />
+            <ArrowRight className="h-6 w-6 text-gray-500" />
           </button>
         </div>
       </div>
@@ -219,7 +215,7 @@ export const Card = ({
                 className="sticky top-4 right-0 ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-black hover:bg-neutral-800 transition-colors"
                 onClick={handleClose}
               >
-                <IconX className="h-6 w-6 text-white" />
+                <X className="h-6 w-6 text-white" />
               </button>
               <motion.p
                 layoutId={layout ? `category-${card.title}` : undefined}

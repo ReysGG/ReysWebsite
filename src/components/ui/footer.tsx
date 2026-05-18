@@ -1,13 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Mail } from "lucide-react";
-import {
-  IconBrandGithub,
-  IconBrandInstagram,
-  IconBrandLinkedin,
-  IconBrandWhatsapp,
-  IconBrandX,
-} from "@tabler/icons-react";
+import { GithubIcon, InstagramIcon, LinkedinIcon, TwitterIcon, WhatsappIcon } from "@/components/ui/brand-icons";
 import { normalizeEmailLink } from "@/lib/contact-links";
 import { getSiteSettings, type SiteSettings } from "@/lib/site-settings";
 
@@ -63,7 +57,7 @@ export const Footer = async ({ settings }: FooterProps) => {
       ? {
           label: "WhatsApp",
           href: resolvedSettings.whatsapp,
-          icon: <IconBrandWhatsapp className="h-4 w-4" stroke={1.8} />,
+          icon: <WhatsappIcon className="h-4 w-4" />,
         }
       : null,
     emailHref
@@ -77,28 +71,28 @@ export const Footer = async ({ settings }: FooterProps) => {
       ? {
           label: "Instagram",
           href: resolvedSettings.instagram,
-          icon: <IconBrandInstagram className="h-4 w-4" stroke={1.8} />,
+          icon: <InstagramIcon className="h-4 w-4" />,
         }
       : null,
     resolvedSettings.twitter
       ? {
           label: "X",
           href: resolvedSettings.twitter,
-          icon: <IconBrandX className="h-4 w-4" stroke={1.8} />,
+          icon: <TwitterIcon className="h-4 w-4" />,
         }
       : null,
     resolvedSettings.linkedin
       ? {
           label: "LinkedIn",
           href: resolvedSettings.linkedin,
-          icon: <IconBrandLinkedin className="h-4 w-4" stroke={1.8} />,
+          icon: <LinkedinIcon className="h-4 w-4" />,
         }
       : null,
     resolvedSettings.github
       ? {
           label: "GitHub",
           href: resolvedSettings.github,
-          icon: <IconBrandGithub className="h-4 w-4" stroke={1.8} />,
+          icon: <GithubIcon className="h-4 w-4" />,
         }
       : null,
   ].filter(Boolean) as Array<{ label: string; href: string; icon: React.ReactNode }>;

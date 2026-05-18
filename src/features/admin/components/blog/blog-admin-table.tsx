@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useActionState, useMemo, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import type { Post } from "@prisma/client";
+import type { BlogPost } from "@/features/blog/data/posts";
 import { Edit3, FileText, Eye, CheckCircle2, AlertTriangle, Send, Pencil } from "lucide-react";
 import { DeletePostButton } from "./delete-post-button";
 import { BlogPreviewModal } from "./blog-preview-modal";
@@ -12,7 +12,7 @@ import { bulkPublishPosts, bulkUnpublishPosts, publishPost, unpublishPost, type 
 
 const dateFmt = (d: Date) => new Date(d).toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" });
 
-function getSeoIssues(post: Post) {
+function getSeoIssues(post: BlogPost) {
   const issues: string[] = [];
   if (!post.metaTitle) issues.push("Meta title");
   if (!post.metaDesc) issues.push("Meta desc");
@@ -74,7 +74,7 @@ function BulkActions({ selectedIds }: { selectedIds: string[] }) {
   );
 }
 
-export function BlogAdminTable({ posts, page, totalPages }: { posts: Post[]; page: number; totalPages: number }) {
+export function BlogAdminTable({ posts, page, totalPages }: { posts: BlogPost[]; page: number; totalPages: number }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);

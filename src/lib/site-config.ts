@@ -1,4 +1,7 @@
+import { unstable_cache } from "next/cache";
 import db from "@/lib/db";
+
+export const SITE_CONFIG_TAG = "site-config";
 
 export type StatItemConfig = {
   value: number;
@@ -121,7 +124,7 @@ export const defaultSiteConfig: SiteConfig = {
       "Build With Reys membantu bisnis membuat company profile, dashboard internal, e-commerce, dan website SEO-ready dengan scope jelas, staging link, dan handover penuh.",
     primaryCta: "Konsultasi via WhatsApp",
     secondaryCta: "Lihat Proses Kerja",
-    visualImage: "/Untitled design.png",
+    visualImage: "/hero-visual.webp",
     scopePreview: {
       eyebrow: "Before development",
       title: "Scope dikunci sebelum coding",
@@ -367,15 +370,19 @@ function mergeSiteConfig(value: Partial<SiteConfig>): SiteConfig {
   };
 }
 
-export async function getSiteConfig(): Promise<SiteConfig> {
-  try {
-    const row = await db.siteConfig.findUnique({ where: { key: SITE_CONFIG_KEY } });
-    if (row && isSiteConfig(row.value)) {
-      return mergeSiteConfig(row.value);
+export const getSiteConfig = unstable_cache(
+  async (): Promise<SiteConfig> => {
+    try {
+      const row = await db.siteConfig.findUnique({ where: { key: SITE_CONFIG_KEY } });
+      if (row && isSiteConfig(row.value)) {
+        return mergeSiteConfig(row.value);
+      }
+    } catch {
+      // Keep the public website usable if the database is unavailable.
     }
-  } catch {
-    // Keep the public website usable if the database is unavailable.
-  }
 
-  return defaultSiteConfig;
-}
+    return defaultSiteConfig;
+  },
+  ["site-config"],
+  { tags: [SITE_CONFIG_TAG], revalidate: 3600 },
+);

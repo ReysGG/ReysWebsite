@@ -3,8 +3,7 @@ import db from "@/lib/db";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://buildwithreys.tech";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 3600;
 
 function escapeXml(value: string) {
   return value
@@ -65,7 +64,7 @@ ${routes.map(urlEntry).join("\n")}
   return new NextResponse(xml, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "no-store, no-cache, must-revalidate",
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }

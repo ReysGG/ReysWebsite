@@ -2,14 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { IconArrowUp } from "@tabler/icons-react";
+import { ArrowUp } from 'lucide-react';
+import { usePathname } from "next/navigation";
 
 export const BackToTop = () => {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const visibleRef = useRef(false);
   const frameRef = useRef<number | null>(null);
 
+  const isAdmin = pathname?.startsWith("/admin");
+
   useEffect(() => {
+    if (isAdmin) return;
     const update = () => {
       frameRef.current = null;
       const nextVisible = window.scrollY > 400;
@@ -29,7 +34,9 @@ export const BackToTop = () => {
       window.removeEventListener("scroll", handleScroll);
       if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current);
     };
-  }, []);
+  }, [isAdmin]);
+
+  if (isAdmin) return null;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -45,9 +52,9 @@ export const BackToTop = () => {
           transition={{ duration: 0.2, ease: "easeOut" }}
           onClick={scrollToTop}
           aria-label="Kembali ke atas"
-          className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center bg-linear-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all duration-200 cursor-pointer"
+          className="fixed bottom-24 right-5 z-40 w-11 h-11 rounded-full flex items-center justify-center bg-linear-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all duration-200 cursor-pointer"
         >
-          <IconArrowUp className="w-5 h-5 text-white" />
+          <ArrowUp className="w-5 h-5 text-white" />
         </motion.button>
       )}
     </AnimatePresence>

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { OverviewBento } from "@/components/admin/overview-bento";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { IconArticle, IconBriefcase, IconMessageCircle, IconLayoutList } from "@tabler/icons-react";
+import { FileText, Briefcase, MessageCircle, LayoutList } from 'lucide-react';
 import { ArrowRight, CheckCircle2, ExternalLink, FilePlus2, Globe2, LayoutTemplate, Plus, TriangleAlert } from "lucide-react";
 import db from "@/lib/db";
 import { getDailyViewsChart } from "@/features/admin/lib/analytics";
@@ -98,25 +98,25 @@ export default async function AdminDashboard() {
       title: "Artikel",
       value: totalPosts,
       description: `${publishedPosts} published · ${draftPosts} draft`,
-      icon: IconArticle,
+      icon: FileText,
     },
     {
       title: "Portfolio",
       value: totalProjects,
       description: `${Math.max(totalProjects - projectsWithoutImage, 0)} dengan cover image`,
-      icon: IconBriefcase,
+      icon: Briefcase,
     },
     {
       title: "Layanan",
       value: totalServices,
       description: "Layanan yang ditawarkan",
-      icon: IconLayoutList,
+      icon: LayoutList,
     },
     {
       title: "Testimoni",
       value: totalTestimonials,
       description: `${Math.max(totalTestimonials - testimonialsWithoutAvatar, 0)} dengan avatar`,
-      icon: IconMessageCircle,
+      icon: MessageCircle,
     },
   ];
 

@@ -1,23 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { auth } from "@clerk/nextjs/server";
-import db from "@/lib/db";
-import { getPublishedPostBySlug, getRelatedPosts } from "@/features/blog/data/posts";
+import { getPublishedPostBySlug, getRelatedPosts, getAllPublishedSlugs } from "@/features/blog/data/posts";
 import { ArticleHeader } from "@/features/blog/components/article-header";
 import { ArticleContent } from "@/features/blog/components/article-content";
 import { ArticleRelatedPosts } from "@/features/blog/components/article-related-posts";
-import { stripHtml } from "@/features/blog/components/blog-card";
 import { ViewCounter } from "@/features/blog/components/view-counter";
-import { SocialEngagement } from "@/features/blog/components/frontend/social-engagement";
+import { SocialEngagementLoader } from "@/features/blog/components/frontend/social-engagement-loader";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   try {
-    const posts = await import("@/features/blog/data/posts").then((m) => m.getPublishedPosts());
-    return posts.map((p: { slug: string }) => ({ slug: p.slug }));
+    const posts = await getAllPublishedSlugs();
+    return posts.map((p) => ({ slug: p.slug }));
   } catch {
     return [];
   }
@@ -27,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = await getPublishedPostBySlug(slug).catch(() => null);
   if (!post) return { title: "Artikel Tidak Ditemukan" };
-  const description = post.metaDesc || post.excerpt || stripHtml(post.content).slice(0, 155);
+  const description = post.metaDesc || post.excerpt || "";
   const image = post.ogImage || post.coverImage;
   return {
     title: post.metaTitle || `${post.title} | WebServices Blog`,
@@ -59,30 +56,12 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const related = await getRelatedPosts(post).catch(() => []);
 
-  const { userId } = await auth();
-  const [comments, likesCount, userHasLiked] = await Promise.all([
-    db.comment
-      .findMany({
-        where: { postId: post.id },
-        orderBy: { createdAt: "desc" },
-        take: 50,
-      })
-      .catch(() => []),
-    db.like.count({ where: { postId: post.id } }).catch(() => 0),
-    userId
-      ? db.like
-          .findFirst({ where: { postId: post.id, userId } })
-          .then((r) => !!r)
-          .catch(() => false)
-      : Promise.resolve(false),
-  ]);
-
   const jsonLd = [
     {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       headline: post.title,
-      description: post.excerpt || stripHtml(post.content).slice(0, 155),
+      description: post.excerpt || "",
       image: post.ogImage || post.coverImage ? [post.ogImage || post.coverImage] : undefined,
       datePublished: (post.publishedAt || post.createdAt).toISOString(),
       dateModified: post.updatedAt.toISOString(),
@@ -108,18 +87,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       <article className="mx-auto max-w-5xl rounded-2xl bg-white px-6 py-7 md:px-10 md:py-8 lg:px-14">
         <ArticleHeader post={post} />
         <ArticleContent content={post.content} />
-        <SocialEngagement
-          postId={post.id}
-          initialLikesCount={likesCount}
-          userHasLiked={userHasLiked}
-          comments={comments.map((c) => ({
-            id: c.id,
-            content: c.content,
-            createdAt: c.createdAt,
-            userId: c.userId,
-            parentId: c.parentId,
-          }))}
-        />
+        <SocialEngagementLoader postId={post.id} />
 
         {related.length > 0 && <ArticleRelatedPosts posts={related} />}
       </article>

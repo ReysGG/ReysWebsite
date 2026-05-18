@@ -1,9 +1,9 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import db from "@/lib/db";
 import { requireAdmin } from "@/features/admin/lib/auth";
-import { SITE_SETTINGS_KEY, type SiteSettings } from "@/lib/site-settings";
+import { SITE_SETTINGS_KEY, SITE_SETTINGS_TAG, type SiteSettings } from "@/lib/site-settings";
 import { normalizeSiteSettings } from "@/lib/contact-links";
 
 export async function saveSiteSettings(formData: FormData) {
@@ -27,6 +27,7 @@ export async function saveSiteSettings(formData: FormData) {
     create: { key: SITE_SETTINGS_KEY, value: settings },
   });
 
+  revalidateTag(SITE_SETTINGS_TAG, "max");
   revalidatePath("/");
   revalidatePath("/admin");
   revalidatePath("/admin/settings");

@@ -3,7 +3,7 @@
 import React, { useState, useTransition, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { IconArrowLeft } from "@tabler/icons-react";
+import { ArrowLeft } from 'lucide-react';
 import { createPost, createDraft } from "@/features/blog/actions/create-post";
 import { PostMainEditor } from "./post-main-editor";
 import { PostPublishSidebar } from "./post-publish-sidebar";
@@ -51,7 +51,7 @@ export function CreatePostForm() {
       <div className="flex items-center gap-4 bg-white dark:bg-neutral-950 p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 sticky top-0 z-10 shadow-xs">
         <Link href="/admin/blog">
           <Button variant="ghost" size="icon" className="shrink-0 hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-full">
-            <IconArrowLeft size={18} />
+            <ArrowLeft size={18} />
           </Button>
         </Link>
         <div>

@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { getExcerptFromHtml } from "./reading-time";
 
 type SeoPost = {
   title: string;
   slug: string;
-  content: string;
   excerpt?: string | null;
   coverImage?: string | null;
   ogImage?: string | null;
@@ -22,7 +20,7 @@ type SeoPost = {
 
 export function buildPostMetadata(post: SeoPost): Metadata {
   const title = post.metaTitle || post.title;
-  const description = post.metaDesc || post.excerpt || getExcerptFromHtml(post.content);
+  const description = post.metaDesc || post.excerpt || "";
   const image = post.ogImage || post.coverImage || undefined;
   const keywords = Array.from(new Set([post.focusKeyword, ...(post.tags ?? [])].filter(Boolean) as string[]));
   const publishedTime = (post.publishedAt ?? post.createdAt).toISOString();
@@ -57,7 +55,7 @@ export function buildBlogPostingJsonLd(post: SeoPost, url: string) {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.metaTitle || post.title,
-    description: post.metaDesc || post.excerpt || getExcerptFromHtml(post.content),
+    description: post.metaDesc || post.excerpt || "",
     url,
     image: post.ogImage || post.coverImage ? [post.ogImage || post.coverImage] : undefined,
     datePublished: (post.publishedAt ?? post.createdAt).toISOString(),

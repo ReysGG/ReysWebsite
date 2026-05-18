@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FileText } from 'lucide-react';
 import type { BlogPost } from '@/features/blog/data/posts';
-import { formatBlogDate, stripHtml, getReadingTime, getPostDate } from './blog-card';
+import { formatBlogDate, getReadingTime, getPostDate } from './blog-card';
 
 const BLUR_DATA_URL =
   'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDgiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjgiIGZpbGw9IiNlNWU3ZWIiLz48L3N2Zz4=';
@@ -91,13 +91,13 @@ export function BlogNewsCard({
             </span>
           )}
           <span className="text-xs text-neutral-400">{formatBlogDate(getPostDate(post))}</span>
-          <span className="text-xs text-neutral-400">{getReadingTime(post.content)}</span>
+          <span className="text-xs text-neutral-400">{getReadingTime(post)}</span>
         </div>
         <h2 className="text-xl font-bold leading-snug text-neutral-900 dark:text-neutral-900 transition group-hover:text-indigo-700 md:text-2xl">
           {post.title}
         </h2>
         <p className="mt-1.5 text-sm leading-6 text-neutral-500 dark:text-neutral-500 line-clamp-2">
-          {post.excerpt || stripHtml(post.content).slice(0, 160)}
+          {post.excerpt ?? ''}
         </p>
         <div className="mt-2.5 flex flex-wrap gap-1.5">
           {post.tags.slice(0, 4).map((t) => (
@@ -156,12 +156,12 @@ export function BlogNewsCard({
             {post.title}
           </h3>
           <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-500 line-clamp-2">
-            {post.excerpt || stripHtml(post.content).slice(0, 120)}
+            {post.excerpt ?? ''}
           </p>
         </div>
         <div className="flex items-center gap-3 text-xs text-neutral-400 dark:text-neutral-400">
           <span>{formatBlogDate(getPostDate(post))}</span>
-          <span>{getReadingTime(post.content)}</span>
+          <span>{getReadingTime(post)}</span>
           {post.views > 0 && (
             <span>{post.views.toLocaleString('id-ID')} views</span>
           )}

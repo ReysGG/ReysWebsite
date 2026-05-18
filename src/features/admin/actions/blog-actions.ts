@@ -1,11 +1,12 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import db from "@/lib/db";
 import { requireAdmin } from "@/features/admin/lib/auth";
 import { ensureUniquePostSlug, isValidSlug, buildKeywordSlug, slugifyTitle } from "@/features/blog/lib/slug";
 import { sanitizeRichText } from "@/features/blog/lib/sanitize";
-import { getExcerptFromHtml } from "@/features/blog/lib/reading-time";
+import { getExcerptFromHtml, calculateReadingTime } from "@/features/blog/lib/reading-time";
+import { BLOG_FILTER_OPTIONS_TAG } from "@/features/blog/data/posts";
 
 export type BlogActionState = {
   success?: boolean;
@@ -57,6 +58,7 @@ async function buildPostInput(formData: FormData, excludePostId?: string) {
 
   const slug = await ensureUniquePostSlug(baseSlug, excludePostId);
   const excerpt = getString(formData, "excerpt") || getExcerptFromHtml(content);
+  const readingTime = calculateReadingTime(content);
 
   const published = getBool(formData, "published");
   const requestedPublishedAt = getOptionalDate(formData, "publishedAt");
@@ -66,6 +68,7 @@ async function buildPostInput(formData: FormData, excludePostId?: string) {
     slug,
     content,
     excerpt: optional(excerpt),
+    readingTime,
     coverImage: optional(getString(formData, "coverImage")),
     ogImage: optional(getString(formData, "ogImage")),
     category: optional(getString(formData, "category")),
@@ -81,12 +84,14 @@ async function buildPostInput(formData: FormData, excludePostId?: string) {
 }
 
 function revalidateBlogPaths(slug?: string | null) {
+  revalidateTag(BLOG_FILTER_OPTIONS_TAG, "max");
   revalidatePath("/blog");
   revalidatePath("/admin/blog");
   revalidatePath("/admin/blog/published");
   revalidatePath("/admin/blog/drafts");
   revalidatePath("/admin/blog/seo");
   revalidatePath("/admin/blog/calendar");
+  revalidatePath("/sitemap.xml");
   if (slug) revalidatePath(`/blog/${slug}`);
 }
 

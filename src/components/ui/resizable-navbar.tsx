@@ -1,12 +1,12 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { IconMenu2, IconX } from "@tabler/icons-react";
+import { Menu, X } from 'lucide-react';
 import {
   motion,
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
-} from "motion/react";
+} from "framer-motion";
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
@@ -231,9 +231,9 @@ export const MobileNavToggle = ({
   onClick: () => void;
 }) => {
   return isOpen ? (
-    <IconX className="text-black" onClick={onClick} />
+    <X className="text-black" onClick={onClick} />
   ) : (
-    <IconMenu2 className="text-black" onClick={onClick} />
+    <Menu className="text-black" onClick={onClick} />
   );
 };
 

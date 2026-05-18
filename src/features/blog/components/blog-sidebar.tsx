@@ -100,6 +100,14 @@ export function BlogSidebar({
         </p>
         <form action="/api/newsletter" method="POST" className="space-y-2">
           <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            className="absolute left-[-9999px] h-px w-px opacity-0"
+            aria-hidden="true"
+          />
+          <input
             type="email"
             name="email"
             required

@@ -1,9 +1,10 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import db from "@/lib/db";
 import { requireAdmin } from "@/features/admin/lib/auth";
+import { TESTIMONIALS_TAG } from "@/lib/testimonials";
 
 function getString(formData: FormData, key: string) {
   const value = formData.get(key);
@@ -11,6 +12,7 @@ function getString(formData: FormData, key: string) {
 }
 
 function revalidateTestimonials() {
+  revalidateTag(TESTIMONIALS_TAG, "max");
   revalidatePath("/");
   revalidatePath("/admin");
   revalidatePath("/admin/testimonials");

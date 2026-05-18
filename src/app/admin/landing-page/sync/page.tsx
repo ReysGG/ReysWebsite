@@ -1,14 +1,5 @@
 import Link from "next/link";
-import {
-  IconArrowRight,
-  IconCheck,
-  IconDatabase,
-  IconExternalLink,
-  IconRefresh,
-  IconShieldCheck,
-  IconSparkles,
-  IconAlertTriangle,
-} from "@tabler/icons-react";
+import { ArrowRight, Check, Database, ExternalLink, RefreshCw, ShieldCheck, Sparkles, AlertTriangle } from 'lucide-react';
 import { defaultSiteConfig, getSiteConfig } from "@/lib/site-config";
 import { SyncButton } from "./sync-button";
 
@@ -56,12 +47,12 @@ export default async function LandingPageSyncPage() {
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <Link href="/" target="_blank" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-50">
-              <IconExternalLink size={16} />
+              <ExternalLink size={16} />
               Preview Website
             </Link>
             <Link href="/admin/landing-page/hero" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-50">
               Edit Manual
-              <IconArrowRight size={16} />
+              <ArrowRight size={16} />
             </Link>
             <SyncButton />
           </div>
@@ -77,7 +68,7 @@ export default async function LandingPageSyncPage() {
               <p className="mt-1 text-xs text-neutral-400">Dibandingkan dengan default profesional terbaru.</p>
             </div>
             <div className="rounded-md border border-neutral-200 bg-indigo-50 p-2">
-              <IconDatabase className="text-indigo-600" size={18} />
+              <Database className="text-indigo-600" size={18} />
             </div>
           </div>
         </div>
@@ -91,7 +82,7 @@ export default async function LandingPageSyncPage() {
               <p className="mt-1 text-xs text-neutral-400">Homepage memakai data DB, bukan hanya file default.</p>
             </div>
             <div className="rounded-md border border-neutral-200 bg-neutral-50 p-2">
-              {isFullySynced ? <IconShieldCheck className="text-indigo-600" size={18} /> : <IconAlertTriangle className="text-amber-600" size={18} />}
+              {isFullySynced ? <ShieldCheck className="text-indigo-600" size={18} /> : <AlertTriangle className="text-amber-600" size={18} />}
             </div>
           </div>
         </div>
@@ -103,7 +94,7 @@ export default async function LandingPageSyncPage() {
               <p className="mt-1 text-xs text-neutral-400">Technical partner, scope jelas, staging, handover.</p>
             </div>
             <div className="rounded-md border border-neutral-200 bg-indigo-50 p-2">
-              <IconSparkles className="text-indigo-600" size={18} />
+              <Sparkles className="text-indigo-600" size={18} />
             </div>
           </div>
         </div>
@@ -120,7 +111,7 @@ export default async function LandingPageSyncPage() {
               <Link key={item.label} href={item.href} className="flex items-center justify-between gap-4 p-4 transition-colors hover:bg-neutral-50">
                 <div className="flex min-w-0 items-center gap-3">
                   <span className={item.ready ? "flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-indigo-50 text-indigo-600" : "flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-amber-50 text-amber-600"}>
-                    {item.ready ? <IconCheck size={17} /> : <IconRefresh size={17} />}
+                    {item.ready ? <Check size={17} /> : <RefreshCw size={17} />}
                   </span>
                   <div className="min-w-0">
                     <p className="truncate text-sm font-bold text-neutral-900">{item.label}</p>
@@ -151,7 +142,7 @@ export default async function LandingPageSyncPage() {
 
           <div className="rounded-md border border-amber-200 bg-amber-50 p-5 shadow-none">
             <div className="flex gap-3">
-              <IconAlertTriangle className="mt-0.5 shrink-0 text-amber-700" size={18} />
+              <AlertTriangle className="mt-0.5 shrink-0 text-amber-700" size={18} />
               <div>
                 <p className="text-sm font-bold text-amber-900">Sync akan menimpa konten landing page saat ini.</p>
                 <p className="mt-1 text-xs leading-relaxed text-amber-800">

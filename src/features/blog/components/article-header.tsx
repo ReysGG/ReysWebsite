@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, CalendarDays } from "lucide-react";
-import type { BlogPost } from "@/features/blog/data/posts";
+import type { Post } from "@prisma/client";
 import { formatBlogDate, getPostDate, getReadingTime } from "./blog-card";
 
-export function ArticleHeader({ post }: { post: BlogPost }) {
+export function ArticleHeader({ post }: { post: Post }) {
   const author = post.author || "BuildWebsite Team";
 
   return (
@@ -31,7 +31,7 @@ export function ArticleHeader({ post }: { post: BlogPost }) {
           <CalendarDays className="h-4 w-4" />
           {formatBlogDate(getPostDate(post))}
         </span>
-        <span>{getReadingTime(post.content)}</span>
+        <span>{getReadingTime(post)}</span>
         {post.featured && <span className="text-indigo-600">Featured</span>}
       </div>
 

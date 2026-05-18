@@ -3,8 +3,7 @@ import { cn } from "@/lib/utils";
 import Link, { LinkProps } from "next/link";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { IconMenu2, IconX, IconChevronDown } from "@tabler/icons-react";
-
+import { Menu, X, ChevronDown } from 'lucide-react';
 interface SidebarContextProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -114,7 +113,7 @@ export const MobileSidebar = ({
         {...props}
       >
         <div className="flex justify-end z-20 w-full">
-          <IconMenu2
+          <Menu
             className="text-neutral-800 dark:text-neutral-200"
             onClick={() => setOpen(!open)}
           />
@@ -138,7 +137,7 @@ export const MobileSidebar = ({
                 className="absolute right-10 top-10 z-50 text-neutral-800 dark:text-neutral-200"
                 onClick={() => setOpen(!open)}
               >
-                <IconX />
+                <X />
               </div>
               {children}
             </motion.div>
@@ -230,7 +229,7 @@ export const SidebarDropdown = ({
             }}
             className="text-neutral-500"
         >
-          <IconChevronDown className="w-4 h-4" />
+          <ChevronDown className="w-4 h-4" />
         </motion.div>
       </div>
 

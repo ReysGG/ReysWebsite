@@ -9,7 +9,7 @@ const FALLBACK_PORTFOLIO_DATA = [
   {
     category: "E-Commerce",
     title: "UMKM Storefront",
-    src: "/images/homepage-slider-reference.png",
+    src: "/images/homepage-slider-reference.webp",
     description:
       "Storefront cepat untuk katalog produk, promo, checkout ringan, dan jalur kontak WhatsApp agar calon pembeli tidak berhenti di tengah jalan.",
     tags: ["Next.js", "WhatsApp", "Katalog"],
@@ -17,7 +17,7 @@ const FALLBACK_PORTFOLIO_DATA = [
   {
     category: "Web Application",
     title: "Dashboard Operasional",
-    src: "/images/image.png",
+    src: "/images/image.webp",
     description:
       "Dashboard internal untuk monitoring stok, transaksi, dan laporan harian agar owner bisa mengambil keputusan lebih cepat.",
     tags: ["React", "Prisma", "Dashboard"],
@@ -25,7 +25,7 @@ const FALLBACK_PORTFOLIO_DATA = [
   {
     category: "Company Profile",
     title: "Profil Bisnis Profesional",
-    src: "/images/homepage-slider-reference.png",
+    src: "/images/homepage-slider-reference.webp",
     description:
       "Website representasi brand dengan struktur layanan, portfolio, testimoni, dan CTA yang jelas untuk meningkatkan trust pengunjung.",
     tags: ["SEO", "Tailwind", "CMS"],
@@ -33,7 +33,7 @@ const FALLBACK_PORTFOLIO_DATA = [
   {
     category: "Landing Page",
     title: "Landing Page Campaign",
-    src: "/images/image.png",
+    src: "/images/image.webp",
     description:
       "Halaman campaign dengan pesan yang fokus, section benefit, social proof, dan CTA yang disusun untuk mengubah visitor menjadi lead.",
     tags: ["Copywriting", "Landing", "CTA"],

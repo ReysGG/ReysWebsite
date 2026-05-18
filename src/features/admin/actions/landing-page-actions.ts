@@ -1,9 +1,9 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import db from "@/lib/db";
 import { requireAdmin } from "@/features/admin/lib/auth";
-import { defaultSiteConfig, getSiteConfig, SITE_CONFIG_KEY, type SiteConfig } from "@/lib/site-config";
+import { defaultSiteConfig, getSiteConfig, SITE_CONFIG_KEY, SITE_CONFIG_TAG, type SiteConfig } from "@/lib/site-config";
 import { setLandingPageField } from "@/features/admin/lib/landing-page-edit";
 
 export type LandingPageFieldState = {
@@ -137,6 +137,7 @@ export async function saveLandingPage(formData: FormData) {
     create: { key: SITE_CONFIG_KEY, value: nextConfig },
   });
 
+  revalidateTag(SITE_CONFIG_TAG, "max");
   revalidatePath("/");
   revalidatePath("/admin/landing-page");
 }
@@ -164,6 +165,7 @@ export async function saveLandingPageField(_prevState: LandingPageFieldState, fo
       create: { key: SITE_CONFIG_KEY, value: nextConfig },
     });
 
+    revalidateTag(SITE_CONFIG_TAG, "max");
     revalidatePath("/");
     revalidatePath("/admin/landing-page");
     revalidatePath(`/admin/landing-page/${name.split(".")[0]}`);
@@ -202,6 +204,7 @@ export async function addLandingPageFaqItem(_prevState: LandingPageFieldState, f
       create: { key: SITE_CONFIG_KEY, value: nextConfig },
     });
 
+    revalidateTag(SITE_CONFIG_TAG, "max");
     revalidatePath("/");
     revalidatePath("/admin/landing-page");
     revalidatePath("/admin/landing-page/faq");
@@ -227,6 +230,7 @@ export async function syncProfessionalLandingPageDefaults() {
     create: { key: SITE_CONFIG_KEY, value: defaultSiteConfig },
   });
 
+  revalidateTag(SITE_CONFIG_TAG, "max");
   revalidatePath("/");
   revalidatePath("/admin");
   revalidatePath("/admin/landing-page");

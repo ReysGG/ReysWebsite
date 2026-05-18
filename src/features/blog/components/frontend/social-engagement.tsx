@@ -2,7 +2,7 @@
 
 import React, { useState, useTransition } from "react";
 import { useAuth, SignInButton } from "@clerk/nextjs";
-import { IconHeart, IconHeartFilled, IconMessageCircle, IconSend } from "@tabler/icons-react";
+import { Heart, MessageCircle, Send } from 'lucide-react';
 import { toggleLike, addComment } from "@/features/blog/actions/social-actions";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -82,7 +82,7 @@ export function SocialEngagement({
               "p-3 rounded-full transition-colors flex items-center justify-center",
               optimisticLiked ? "bg-pink-50 text-pink-600" : "bg-neutral-100 text-neutral-500 group-hover:bg-neutral-950 group-hover:text-white"
             )}>
-              {optimisticLiked ? <IconHeartFilled size={24} /> : <IconHeart size={24} />}
+              {optimisticLiked ? <Heart size={24} /> : <Heart size={24} />}
             </div>
             {optimisticLikesCount > 0 && (
               <span className="font-mono text-lg text-neutral-900 font-bold">{optimisticLikesCount}</span>
@@ -92,7 +92,7 @@ export function SocialEngagement({
           <SignInButton mode="modal" fallbackRedirectUrl={pathname}>
             <button className="flex items-center gap-2 group transition-all">
               <div className="p-3 rounded-full bg-neutral-100 text-neutral-500 group-hover:bg-neutral-950 group-hover:text-pink-300 transition-colors flex items-center justify-center">
-                <IconHeart size={24} />
+                <Heart size={24} />
               </div>
               {optimisticLikesCount > 0 && (
                 <span className="font-mono text-lg text-neutral-900 font-bold">{optimisticLikesCount}</span>
@@ -103,7 +103,7 @@ export function SocialEngagement({
 
         <div className="flex items-center gap-2">
           <div className="p-3 rounded-full bg-neutral-100 text-neutral-500 flex items-center justify-center">
-            <IconMessageCircle size={24} />
+            <MessageCircle size={24} />
           </div>
           {comments.length > 0 && (
             <span className="font-mono text-lg text-neutral-900 font-bold">{comments.length}</span>
@@ -129,13 +129,13 @@ export function SocialEngagement({
               </div>
             )}
             <Button type="submit" disabled={isPending || !commentText.trim()} className="bg-neutral-950 hover:bg-black text-white gap-2">
-              <IconSend size={16} />
+              <Send size={16} />
               Kirim Komentar
             </Button>
           </form>
         ) : (
           <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-8 text-center mb-10">
-            <IconMessageCircle size={32} className="mx-auto text-neutral-400 mb-4" />
+            <MessageCircle size={32} className="mx-auto text-neutral-400 mb-4" />
             <h4 className="text-neutral-950 font-semibold mb-2">Ingin ikut berdiskusi?</h4>
             <p className="text-neutral-500 text-sm mb-6">Login untuk meninggalkan jejak di artikel ini.</p>
             <SignInButton mode="modal" fallbackRedirectUrl={pathname}>

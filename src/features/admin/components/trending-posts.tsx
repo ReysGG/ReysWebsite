@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { IconEye, IconTrendingUp } from "@tabler/icons-react";
+import { Eye, TrendingUp } from 'lucide-react';
 import Link from "next/link";
 import { format } from "date-fns";
 
@@ -19,7 +19,7 @@ export function TrendingPosts({ posts }: { posts: TrendingPostProps[] }) {
           <div className="space-y-1">
             <CardTitle className="text-base font-semibold text-neutral-900 flex items-center gap-2">
               Artikel Populer
-              <IconTrendingUp className="text-indigo-500" size={16} />
+              <TrendingUp className="text-indigo-500" size={16} />
             </CardTitle>
             <CardDescription className="text-xs text-neutral-500">
               Postingan dengan views terbanyak
@@ -31,7 +31,7 @@ export function TrendingPosts({ posts }: { posts: TrendingPostProps[] }) {
         {posts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 text-center">
             <div className="flex h-10 w-10 items-center justify-center rounded-md bg-neutral-100 mb-3">
-              <IconTrendingUp size={18} className="text-neutral-400" />
+              <TrendingUp size={18} className="text-neutral-400" />
             </div>
             <p className="text-sm text-neutral-500">Belum ada artikel.</p>
             <Link
@@ -60,7 +60,7 @@ export function TrendingPosts({ posts }: { posts: TrendingPostProps[] }) {
                   </span>
                 </div>
                 <div className="flex items-center gap-1 text-xs font-medium text-neutral-500 bg-neutral-100 px-2 py-1 rounded-md whitespace-nowrap shrink-0">
-                  <IconEye size={12} />
+                  <Eye size={12} />
                   {post.views.toLocaleString()}
                 </div>
               </div>

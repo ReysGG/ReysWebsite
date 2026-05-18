@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { IconDeviceFloppy, IconEye } from "@tabler/icons-react";
+import { Save, Eye } from 'lucide-react';
 import { savePortfolioIntro } from "@/features/admin/actions/portfolio-actions";
 import type { PortfolioIntroConfig } from "@/lib/portfolio-config";
 
@@ -78,11 +78,11 @@ export function PortfolioIntroForm({ intro }: { intro: PortfolioIntroConfig }) {
 
       <div className="mt-6 flex flex-col gap-3 border-t border-neutral-100 pt-5 sm:flex-row sm:justify-end">
         <button type="button" className="inline-flex items-center justify-center gap-2 rounded-md border border-neutral-200 px-5 py-2.5 text-sm font-semibold text-neutral-600 transition-colors hover:bg-neutral-50">
-          <IconEye size={15} />
+          <Eye size={15} />
           Preview
         </button>
         <button disabled={isPending} className="inline-flex items-center justify-center gap-2 rounded-md bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-300">
-          <IconDeviceFloppy size={15} />
+          <Save size={15} />
           {isPending ? "Menyimpan..." : "Simpan Perubahan"}
         </button>
       </div>

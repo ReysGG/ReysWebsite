@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { IconX } from "@tabler/icons-react";
+import { X } from 'lucide-react';
 import { cn } from "@/lib/utils";
 
 type DialogContextValue = {
@@ -55,7 +55,7 @@ export function DialogContent({
         onClick={() => onOpenChange?.(false)}
         className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 text-neutral-500 transition-colors hover:bg-neutral-200 hover:text-neutral-950 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-white"
       >
-        <IconX size={16} />
+        <X size={16} />
       </button>
       {children}
     </div>

@@ -5,7 +5,14 @@
       "Bash(ls src/app/admin/layout.*)",
       "Bash(ls src/middleware.* src/middleware/)",
       "Bash(find . -name \"middleware.ts\" -maxdepth 3 -not -path \"./node_modules/*\")",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(npm uninstall *)",
+      "Bash(npx next *)",
+      "Bash(npm install *)",
+      "Bash(node -e ' *)",
+      "Bash(npx prisma *)",
+      "Bash(node scripts/migrate-icons.cjs)",
+      "Bash(npm view *)"
     ]
   }
 }
