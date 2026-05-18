@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Minus, Plus } from "lucide-react";
 import type { SiteConfig } from "@/lib/site-config";
 
 interface FAQItem {
@@ -13,102 +13,72 @@ interface FAQItem {
 const FALLBACK_FAQ_DATA: FAQItem[] = [
   {
     question: "Berapa lama waktu pembuatan website?",
-    answer: "Untuk Company Profile berkisar 1-2 minggu. Sedangkan untuk Web App kustom atau E-Commerce membutuhkan waktu 3-6 minggu tergantung tingkat kompleksitas fitur."
+    answer: "Untuk Company Profile berkisar 1-2 minggu. Web App kustom atau E-Commerce membutuhkan waktu 3-6 minggu tergantung kompleksitas fitur.",
   },
   {
     question: "Apakah website sudah termasuk hosting dan domain?",
-    answer: "Ya, semua paket utama kami sudah termasuk gratis domain (.com / .id) dan SSD Cloud Hosting selama 1 tahun pertama."
+    answer: "Bisa termasuk setup domain dan hosting, atau memakai akun hosting/domain milik bisnis kamu sendiri. Detailnya dikunci di scope.",
   },
-  {
-    question: "Apakah saya bisa mengubah konten website sendiri nantinya?",
-    answer: "Tentu. Anda akan mendapatkan akses ke Dasbor Admin modern di mana Anda bisa menambah, mengedit, atau menghapus layanan dan portofolio dengan sangat mudah."
-  },
-  {
-    question: "Apakah ada biaya maintenance tahunan?",
-    answer: "Ya, mulai dari tahun kedua akan ada biaya perpanjangan domain, hosting, dan layanan maintenance keamanan (opsional) yang sangat terjangkau."
-  },
-  {
-    question: "Apakah website ini sudah SEO friendly?",
-    answer: "Sangat friendly! Kami menerapkan technical SEO terbaik di industri (Next.js SSR/SSG), struktur heading yang benar, dan meta tags untuk menjamin performa Google yang optimal."
-  }
 ];
 
 type FaqContent = SiteConfig["faq"];
 
 export const FaqSection = ({ content }: { content: FaqContent }) => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   const faqItems = content.items.length ? content.items : FALLBACK_FAQ_DATA;
 
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
-    <section className="relative w-full py-16 md:py-20 overflow-hidden bg-[#f5f3ff]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-10 lg:gap-16">
-        
-        {/* Left Side: Title */}
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
-          className="w-full md:w-1/3 flex flex-col"
-        >
-          <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">{content.eyebrow}</p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 leading-tight mb-6">
+    <section id="faq" className="w-full border-y border-slate-200 bg-[#f7f9fb] py-20 md:py-28">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 md:px-12 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-blue-600">
+            {content.eyebrow}
+          </p>
+          <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
             {content.heading}
           </h2>
-        </motion.div>
+        </div>
 
-        {/* Right Side: Accordion */}
-        <div className="w-full md:w-7/12 lg:w-2/3 flex flex-col">
+        <div className="lg:col-span-8">
           {faqItems.map((faq, index) => {
             const isOpen = openIndex === index;
+
             return (
-              <motion.div 
-                key={index} 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className={`flex flex-col border-b border-neutral-200 ${index === 0 ? 'border-t' : ''}`}
+              <div
+                key={faq.question}
+                className={`border-b border-slate-200 ${index === 0 ? "border-t" : ""}`}
               >
                 <button
                   type="button"
                   aria-expanded={isOpen}
-                  onClick={() => toggleFAQ(index)}
-                  className="flex items-center gap-6 py-5 w-full text-left group cursor-pointer"
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  className="flex w-full items-center gap-5 py-6 text-left"
                 >
-                  <span className="text-indigo-600 shrink-0">
-                    {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5 group-hover:scale-125 transition-transform" />}
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white text-blue-600">
+                    {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                   </span>
-                  <h3 className="text-base md:text-lg font-medium text-neutral-800 group-hover:text-indigo-700 transition-colors">
-                    {faq.question}
-                  </h3>
+                  <span className="text-lg font-bold leading-snug text-slate-950">{faq.question}</span>
                 </button>
-                
-                <AnimatePresence>
-                  {isOpen && (
+
+                <AnimatePresence initial={false}>
+                  {isOpen ? (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <p className="pl-11 pb-6 text-neutral-600 text-base leading-relaxed">
+                      <p className="pb-6 pl-14 text-base leading-relaxed text-slate-600">
                         {faq.answer}
                       </p>
                     </motion.div>
-                  )}
+                  ) : null}
                 </AnimatePresence>
-              </motion.div>
+              </div>
             );
           })}
         </div>
-
       </div>
     </section>
   );

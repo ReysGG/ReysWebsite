@@ -1,4 +1,5 @@
 import db from "@/lib/db";
+import { normalizeSiteSettings } from "@/lib/contact-links";
 
 export const SITE_SETTINGS_KEY = "site-settings";
 
@@ -32,10 +33,10 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     if (!config?.value) return DEFAULT_SITE_SETTINGS;
 
     const value = config.value as Partial<SiteSettings>;
-    return {
+    return normalizeSiteSettings({
       ...DEFAULT_SITE_SETTINGS,
       ...value,
-    };
+    });
   } catch {
     return DEFAULT_SITE_SETTINGS;
   }

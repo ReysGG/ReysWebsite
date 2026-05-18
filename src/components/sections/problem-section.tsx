@@ -13,27 +13,32 @@ export const ProblemSection = ({ content }: { content: SiteConfig["problems"] })
   const columnClass = COLUMN_CLASSES[count] ?? "md:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <section className="w-full bg-white py-16 md:py-20">
+    <section className="w-full bg-white py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
-        <div className="mb-10 max-w-3xl">
-          <p className="mb-4 text-xs font-bold uppercase tracking-widest text-indigo-600">{content.eyebrow}</p>
-          <h2 className="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl lg:text-5xl">
+        <div className="mb-14 max-w-3xl">
+          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-blue-600">
+            {content.eyebrow}
+          </p>
+          <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
             {content.heading}
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-neutral-600 md:text-lg">
+          <p className="mt-5 text-base leading-relaxed text-slate-600 md:text-lg">
             {content.description}
           </p>
         </div>
 
-        <div className={`grid grid-cols-1 gap-5 ${columnClass}`}>
+        <div className={`grid grid-cols-1 gap-6 ${columnClass}`}>
           {content.items.map((problem, index) => (
-            <div key={problem.title} className="rounded-lg border border-neutral-200 bg-neutral-50 p-6 shadow-none">
-              <span className="mb-5 flex h-9 w-9 items-center justify-center rounded-md bg-white text-sm font-bold text-indigo-600 ring-1 ring-indigo-100">
+            <article
+              key={problem.title}
+              className="rounded-lg border border-slate-200 bg-[#f7f9fb] p-7 transition-colors duration-300 hover:border-blue-300"
+            >
+              <span className="mb-7 flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-bold text-blue-600">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="text-base font-bold text-neutral-950">{problem.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-neutral-600">{problem.description}</p>
-            </div>
+              <h3 className="text-lg font-bold leading-snug text-slate-950">{problem.title}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-slate-600">{problem.description}</p>
+            </article>
           ))}
         </div>
       </div>

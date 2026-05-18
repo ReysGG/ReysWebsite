@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { motion } from "framer-motion";
 import { FlipWords } from "@/components/ui/flip-words";
@@ -10,82 +11,71 @@ const fallbackSteps = [
   {
     step: "01",
     title: "Discovery",
-    description: "Sesi 1 jam via WhatsApp/Meet untuk pahami bisnis, target pengguna, dan fitur yang dibutuhkan. Output: scope dokumen + estimasi harga.",
+    description: "Sesi singkat untuk pahami bisnis, target pengguna, dan fitur yang dibutuhkan.",
   },
   {
     step: "02",
-    title: "Design",
-    description: "Wireframe dan mockup desain dikirim dalam 2-3 hari. Kamu bisa minta revisi sampai puas sebelum masuk ke tahap coding.",
+    title: "Scope",
+    description: "Halaman, fitur, timeline, harga, dan deliverable dirapikan sebelum coding.",
   },
   {
     step: "03",
     title: "Build",
-    description: "Development dengan Next.js + Tailwind. Progress bisa dipantau langsung via staging link yang aktif selama proses berlangsung.",
+    description: "Development berjalan dengan staging link agar progress bisa dicek.",
   },
   {
     step: "04",
     title: "Handover",
-    description: "Deploy ke domain kamu, serah terima akses penuh, dan sesi onboarding singkat supaya kamu bisa kelola konten sendiri.",
+    description: "Deploy ke domain, akses penuh, dokumentasi, dan support awal.",
   },
 ];
 
 export const WorkflowSection = ({ content }: { content: WorkflowContent }) => {
   const steps = content.steps.length ? content.steps : fallbackSteps;
-  return (
-    <section id="workflow" className="w-full py-16 md:py-20 relative overflow-hidden bg-white">
-      {/* Gradient orbs */}
-      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full bg-indigo-100/50 blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full bg-indigo-100/30 blur-[100px]" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+  return (
+    <section id="workflow" className="w-full border-y border-slate-200 bg-[#f2f4f6] py-20 md:py-28">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 md:px-12 lg:grid-cols-12 lg:items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7 }}
-          className="flex flex-col items-center text-center mb-10 md:mb-12 relative z-10"
+          className="lg:col-span-4"
         >
-          <p className="text-xs font-bold tracking-widest text-indigo-600 uppercase mb-4">{content.eyebrow}</p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-6">
+          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-blue-600">
+            {content.eyebrow}
+          </p>
+          <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
             {content.headingPrefix}{" "}
-            <FlipWords words={content.rotatingWords} className="text-neutral-600 font-extrabold" />
+            <span className="text-blue-600">
+              <FlipWords words={content.rotatingWords} className="px-0 font-bold text-blue-600" />
+            </span>
           </h2>
-          <p className="text-base md:text-lg text-neutral-600 max-w-2xl leading-relaxed">
+          <p className="mt-5 text-base leading-relaxed text-slate-600">
             {content.description}
           </p>
         </motion.div>
 
-        {/* Timeline representation */}
-        <div className="relative mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 max-w-5xl mx-auto z-10">
-          {/* Horizontal connecting line - Desktop */}
-          <div className="hidden lg:block absolute top-[40px] left-[12%] w-[76%] h-[1px] bg-gradient-to-r from-indigo-200 via-indigo-300 to-indigo-200 z-0" />
-          
-          {steps.map((item, idx) => (
-            <motion.div 
-              key={idx} 
-              initial={{ opacity: 0, y: 30 }}
+        <div className="grid gap-5 lg:col-span-8 lg:grid-cols-2">
+          {steps.map((item, index) => (
+            <motion.article
+              key={`${item.step}-${item.title}`}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: idx * 0.15 }}
-              className="relative group flex flex-col items-center lg:items-start text-center lg:text-left z-10"
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="rounded-lg border border-slate-200 bg-white p-7"
             >
-              
-              {/* Node */}
-              <div className="relative z-10 mb-6 flex h-16 w-16 items-center justify-center rounded-lg border border-indigo-200 bg-indigo-50 shadow-none group-hover:border-indigo-400 transition-all duration-500 ease-out z-10">
-                <span className="text-2xl font-bold text-indigo-600 transition-colors duration-500">
+              <div className="mb-8 flex items-center justify-between gap-6">
+                <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-blue-100 bg-blue-50 text-sm font-bold text-blue-600">
                   {item.step}
                 </span>
+                <span className="h-px flex-1 bg-slate-200" />
               </div>
-              
-              {/* Content */}
-              <h3 className="text-xl font-semibold text-neutral-900 group-hover:text-indigo-600 mb-3 transition-colors duration-500">
-                {item.title}
-              </h3>
-              <p className="text-sm text-neutral-600 leading-relaxed max-w-[250px] mx-auto lg:mx-0">
-                {item.description}
-              </p>
-            </motion.div>
+              <h3 className="text-xl font-bold text-slate-950">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">{item.description}</p>
+            </motion.article>
           ))}
         </div>
       </div>
