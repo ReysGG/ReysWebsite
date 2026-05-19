@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import db from "@/lib/db";
 import { ShowcaseForm } from "@/features/admin/components/showcase/showcase-form";
+import { getShowcaseForEdit, getShowcaseFormOptions } from "@/features/admin/services/showcase-service";
 
 export const metadata = { title: "Edit Showcase | Admin" };
 export const dynamic = "force-dynamic";
@@ -11,7 +11,10 @@ type PageProps = { params: Promise<{ id: string }> };
 
 export default async function EditShowcasePage({ params }: PageProps) {
   const { id } = await params;
-  const item = await db.showcase.findUnique({ where: { id } });
+  const [item, options] = await Promise.all([
+    getShowcaseForEdit(id),
+    getShowcaseFormOptions().catch(() => ({ categories: [], nextOrder: 1 })),
+  ]);
   if (!item) notFound();
 
   return (
@@ -30,6 +33,7 @@ export default async function EditShowcasePage({ params }: PageProps) {
 
       <ShowcaseForm
         mode="edit"
+        options={options}
         defaultValue={{
           id: item.id,
           slug: item.slug,

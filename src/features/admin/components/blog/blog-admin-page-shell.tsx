@@ -2,13 +2,13 @@ import Link from "next/link";
 import { FileText, Plus, Send, Pencil, Eye, AlertTriangle, Sparkles } from "lucide-react";
 import { BlogAdminFilterBar } from "./blog-admin-filter-bar";
 import { BlogAdminTable } from "./blog-admin-table";
-import { getAdminPosts } from "@/features/blog/data/posts";
-import db from "@/lib/db";
+import {
+  getBlogAdminDashboard,
+  type BlogAdminSearchParams,
+  type BlogAdminView,
+} from "@/features/admin/services/blog-admin-service";
 
-type BlogAdminSearchParams = { q?: string; status?: string; category?: string; page?: string };
-type BlogView = "all" | "published" | "draft" | "seo";
-
-const viewCopy: Record<BlogView, { eyebrow: string; title: string; description: string }> = {
+const viewCopy: Record<BlogAdminView, { eyebrow: string; title: string; description: string }> = {
   all: {
     eyebrow: "Publishing Workspace",
     title: "Artikel Published",
@@ -35,33 +35,17 @@ function missingSeo(post: { metaTitle?: string | null; metaDesc?: string | null;
   return !post.metaTitle || !post.metaDesc || !post.coverImage;
 }
 
-export async function BlogAdminPageShell({ params, view = "all" }: { params: BlogAdminSearchParams; view?: BlogView }) {
-  let result: Awaited<ReturnType<typeof getAdminPosts>> = {
-    posts: [],
-    pagination: { page: 1, pageSize: 10, total: 0, totalPages: 1, hasNextPage: false, hasPreviousPage: false, skip: 0, take: 10 },
-  };
-  let totals = { all: 0, published: 0, draft: 0, seoIssues: 0, views: 0 };
-  let databaseError = false;
-
-  try {
-    const status = view === "published" ? "published" : view === "draft" ? "draft" : params.status === "published" || params.status === "draft" || params.status === "all" ? params.status : "published";
-    const [postsResult, all, published, draft, seoIssuesAgg, viewsAgg] = await Promise.all([
-      getAdminPosts({ page: Math.max(1, Number(params.page || 1)), q: params.q, category: params.category, status }),
-      db.post.count(),
-      db.post.count({ where: { published: true } }),
-      db.post.count({ where: { published: false } }),
-      db.post.count({ where: { OR: [{ metaTitle: null }, { metaTitle: "" }, { metaDesc: null }, { metaDesc: "" }, { coverImage: null }, { coverImage: "" }] } }),
-      db.post.aggregate({ _sum: { views: true } }),
-    ]);
-    result = postsResult;
-    totals = { all, published, draft, seoIssues: seoIssuesAgg, views: viewsAgg._sum.views ?? 0 };
-  } catch {
-    databaseError = true;
-  }
+export async function BlogAdminPageShell({
+  params,
+  view = "all",
+}: {
+  params: BlogAdminSearchParams;
+  view?: BlogAdminView;
+}) {
+  const { result, totals, status, databaseError } = await getBlogAdminDashboard(params, view);
 
   const copy = viewCopy[view];
   const posts = view === "seo" ? result.posts.filter(missingSeo) : result.posts;
-  const status = view === "published" ? "published" : view === "draft" ? "draft" : params.status || "published";
 
   const stats = [
     { label: "Total Artikel", value: totals.all, icon: FileText, href: "/admin/blog" },

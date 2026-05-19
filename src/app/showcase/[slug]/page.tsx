@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPublishedShowcaseItem, getAllShowcaseSlugs } from "@/features/showcase/data";
+import { getPublishedShowcaseItem } from "@/features/showcase/data";
 import { ShowcaseFrame } from "@/features/showcase/components/showcase-frame";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
 export const revalidate = 3600;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const slugs = await getAllShowcaseSlugs();
-  return slugs.map((s) => ({ slug: s.slug }));
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -28,5 +28,5 @@ export default async function ShowcaseDetailPage({ params }: PageProps) {
   const item = await getPublishedShowcaseItem(slug);
   if (!item) notFound();
 
-  return <ShowcaseFrame title={item.title} htmlPath={item.htmlPath} category={item.category} />;
+  return <ShowcaseFrame slug={item.slug} title={item.title} htmlPath={item.htmlPath} category={item.category} />;
 }

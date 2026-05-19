@@ -1,10 +1,14 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ShowcaseForm } from "@/features/admin/components/showcase/showcase-form";
+import { getShowcaseFormOptions } from "@/features/admin/services/showcase-service";
 
 export const metadata = { title: "Showcase Baru | Admin" };
+export const dynamic = "force-dynamic";
 
-export default function NewShowcasePage() {
+export default async function NewShowcasePage() {
+  const options = await getShowcaseFormOptions().catch(() => ({ categories: [], nextOrder: 1 }));
+
   return (
     <div className="space-y-6">
       <div>
@@ -19,7 +23,7 @@ export default function NewShowcasePage() {
         <p className="text-sm text-neutral-500">Upload file HTML prototipe dan isi metadatanya.</p>
       </div>
 
-      <ShowcaseForm mode="create" />
+      <ShowcaseForm mode="create" options={options} />
     </div>
   );
 }

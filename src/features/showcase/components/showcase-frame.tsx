@@ -12,21 +12,24 @@ const VIEWPORT_WIDTHS: Record<Viewport, number | null> = {
   mobile: 390,
 };
 
+const VIEWPORT_LABELS: Record<Viewport, string> = {
+  desktop: 'Desktop',
+  tablet: 'Tablet',
+  mobile: 'Mobile',
+};
+
 type ShowcaseFrameProps = {
+  slug: string;
   title: string;
   htmlPath: string;
   category?: string;
 };
 
-export function ShowcaseFrame({ title, htmlPath, category }: ShowcaseFrameProps) {
+export function ShowcaseFrame({ slug, title, htmlPath, category }: ShowcaseFrameProps) {
   const [bannerOpen, setBannerOpen] = useState(true);
   const [viewport, setViewport] = useState<Viewport>('desktop');
   const [loaded, setLoaded] = useState(false);
   const [autoFitMobile, setAutoFitMobile] = useState(false);
-
-  useEffect(() => {
-    setLoaded(false);
-  }, [htmlPath, viewport]);
 
   useEffect(() => {
     const checkSize = () => setAutoFitMobile(window.innerWidth < 768);
@@ -35,123 +38,149 @@ export function ShowcaseFrame({ title, htmlPath, category }: ShowcaseFrameProps)
     return () => window.removeEventListener('resize', checkSize);
   }, []);
 
+  const handleViewportChange = (nextViewport: Viewport) => {
+    if (nextViewport === viewport) return;
+    setLoaded(false);
+    setViewport(nextViewport);
+  };
+
   const effectiveViewport: Viewport = autoFitMobile ? 'mobile' : viewport;
   const maxWidth = VIEWPORT_WIDTHS[effectiveViewport];
+  const previewPath = `/showcase/${slug}/embed`;
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-neutral-100">
+    <div className="relative h-dvh w-screen overflow-hidden bg-slate-950 text-white">
+      <header className="absolute inset-x-0 top-0 z-40 border-b border-white/10 bg-slate-950/95 backdrop-blur">
+        <div className="flex min-h-16 items-center justify-between gap-3 px-3 py-3 md:px-5">
+          <div className="flex min-w-0 items-center gap-2">
+            <Link
+              href="/showcase"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-slate-300 transition hover:bg-white/10 hover:text-white"
+              aria-label="Kembali ke showcase"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </Link>
+            <div className="min-w-0">
+              <div className="flex min-w-0 items-center gap-2">
+                {category && (
+                  <span className="hidden rounded-md bg-emerald-400/10 px-2 py-1 text-[10px] font-bold uppercase text-emerald-300 sm:inline-flex">
+                    {category}
+                  </span>
+                )}
+                <p className="truncate text-sm font-bold text-white md:text-base">{title}</p>
+              </div>
+              <p className="mt-0.5 hidden text-xs font-medium text-slate-400 sm:block">
+                Preview statis untuk review layout dan flow.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2">
+            <div className="hidden items-center gap-1 rounded-md border border-white/10 bg-white/5 p-1 md:flex">
+              {(Object.keys(VIEWPORT_WIDTHS) as Viewport[]).map((v) => {
+                const Icon = v === 'desktop' ? Monitor : v === 'tablet' ? Tablet : Smartphone;
+                const active = effectiveViewport === v;
+                return (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => handleViewportChange(v)}
+                    aria-label={`Tampilan ${VIEWPORT_LABELS[v]}`}
+                    aria-pressed={active}
+                    className={[
+                      'inline-flex h-8 w-8 items-center justify-center rounded-md transition',
+                      active ? 'bg-white text-slate-950' : 'text-slate-400 hover:bg-white/10 hover:text-white',
+                    ].join(' ')}
+                  >
+                    <Icon className="h-4 w-4" />
+                  </button>
+                );
+              })}
+            </div>
+            <a
+              href={previewPath}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-10 items-center gap-2 rounded-md bg-white px-3 text-xs font-bold text-slate-950 transition hover:bg-emerald-100"
+            >
+              <span className="hidden sm:inline">Tab baru</span>
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </header>
+
       <div
         className={[
-          'absolute inset-0 flex items-stretch justify-center bg-neutral-100 transition-all duration-700 ease-out',
+          'absolute inset-x-0 bottom-0 top-16 flex items-stretch justify-center p-2 transition-all duration-700 ease-out md:p-4',
           loaded ? 'opacity-100 blur-0 scale-100' : 'opacity-0 blur-sm scale-[0.98]',
         ].join(' ')}
       >
         <div
-          className="relative h-full w-full bg-white shadow-2xl shadow-neutral-900/10"
+          className="relative flex h-full w-full flex-col overflow-hidden rounded-lg border border-white/10 bg-white shadow-2xl shadow-black/40"
           style={maxWidth ? { maxWidth: `${maxWidth}px` } : undefined}
         >
-          <iframe
-            key={`${htmlPath}-${effectiveViewport}`}
-            src={htmlPath}
-            title={title}
-            loading="eager"
-            sandbox="allow-same-origin allow-forms allow-scripts allow-popups"
-            onLoad={() => setLoaded(true)}
-            className="absolute inset-0 h-full w-full border-0"
-          />
+          <div className="hidden h-10 shrink-0 items-center justify-between border-b border-slate-200 bg-slate-50 px-3 md:flex">
+            <div className="flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
+              <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+            </div>
+            <div className="max-w-[50%] truncate rounded-md border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-500">
+              {VIEWPORT_LABELS[effectiveViewport]} preview
+            </div>
+            <div className="text-[11px] font-semibold text-slate-400">
+              {maxWidth ? `${maxWidth}px` : 'Responsive'}
+            </div>
+          </div>
+          <div className="relative min-h-0 flex-1 bg-white">
+            <iframe
+              key={`${htmlPath}-${effectiveViewport}`}
+              src={previewPath}
+              title={title}
+              loading="eager"
+              sandbox="allow-forms allow-scripts allow-popups"
+              onLoad={() => setLoaded(true)}
+              className="absolute inset-0 h-full w-full border-0"
+            />
+          </div>
         </div>
       </div>
 
       {!loaded && (
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 top-16 z-20 flex items-center justify-center">
           <div className="flex flex-col items-center gap-3">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-neutral-300 border-t-blue-600" />
-            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-500">
-              Memuat prototipe…
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-slate-700 border-t-emerald-300" />
+            <p className="text-xs font-semibold uppercase text-slate-400">
+              Memuat prototype...
             </p>
           </div>
         </div>
       )}
 
-      <div className="pointer-events-none absolute left-0 right-0 top-0 z-30 flex items-start justify-between gap-3 p-3 md:p-5">
-        <div className="pointer-events-auto flex items-center gap-2 rounded-full border border-neutral-200/60 bg-white/95 px-2 py-1.5 shadow-lg shadow-neutral-900/5 backdrop-blur animate-[slideDown_400ms_ease-out_both]">
-          <Link
-            href="/showcase"
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold text-neutral-700 transition hover:bg-neutral-100"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">Showcase</span>
-          </Link>
-          <span className="hidden h-4 w-px bg-neutral-200 sm:block" />
-          <div className="hidden min-w-0 max-w-[240px] flex-col leading-tight sm:flex">
-            {category && (
-              <p className="truncate text-[9px] font-bold uppercase tracking-widest text-blue-600">
-                {category}
-              </p>
-            )}
-            <p className="truncate text-xs font-semibold text-neutral-900">{title}</p>
-          </div>
-        </div>
-
-        <div className="pointer-events-auto flex items-center gap-2 animate-[slideDown_400ms_ease-out_both]" style={{ animationDelay: '80ms' }}>
-          <div className="hidden items-center gap-0.5 rounded-full border border-neutral-200/60 bg-white/95 p-1 shadow-lg shadow-neutral-900/5 backdrop-blur md:flex">
-            {(Object.keys(VIEWPORT_WIDTHS) as Viewport[]).map((v) => {
-              const Icon = v === 'desktop' ? Monitor : v === 'tablet' ? Tablet : Smartphone;
-              const active = viewport === v;
-              return (
-                <button
-                  key={v}
-                  onClick={() => setViewport(v)}
-                  aria-label={`Tampilan ${v}`}
-                  aria-pressed={active}
-                  className={[
-                    'inline-flex items-center justify-center rounded-full p-1.5 transition',
-                    active ? 'bg-blue-600 text-white' : 'text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900',
-                  ].join(' ')}
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                </button>
-              );
-            })}
-          </div>
-          <a
-            href={htmlPath}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950 px-3 py-1.5 text-xs font-semibold text-white shadow-lg transition hover:bg-blue-700"
-          >
-            <span className="hidden sm:inline">Tab baru</span>
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-        </div>
-      </div>
-
       {bannerOpen && (
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-30 flex justify-center p-3 md:p-5">
-          <div className="pointer-events-auto flex max-w-md items-start gap-2.5 rounded-full border border-amber-200/70 bg-amber-50/95 px-3.5 py-2 shadow-lg shadow-amber-900/10 backdrop-blur animate-[slideUp_500ms_ease-out_120ms_both]">
-            <div className="mt-0.5 shrink-0 rounded-full bg-amber-200/70 p-1 text-amber-700">
-              <Info className="h-3 w-3" />
+          <div className="pointer-events-auto flex max-w-lg items-start gap-2.5 rounded-lg border border-amber-300/40 bg-amber-50/95 px-3.5 py-3 text-amber-950 shadow-lg shadow-black/15 backdrop-blur animate-[slideUp_500ms_ease-out_120ms_both]">
+            <div className="mt-0.5 shrink-0 rounded-md bg-amber-200/70 p-1 text-amber-800">
+              <Info className="h-3.5 w-3.5" />
             </div>
-            <p className="flex-1 text-[11px] leading-relaxed text-amber-900 sm:text-xs">
+            <p className="flex-1 text-xs leading-relaxed">
               <span className="font-semibold">Prototipe statis.</span>{' '}
-              <span className="text-amber-900/80">Konten, link, dan form belum aktif.</span>
+              <span className="text-amber-950/80">Konten, link, dan form belum aktif.</span>
             </p>
             <button
+              type="button"
               onClick={() => setBannerOpen(false)}
               aria-label="Tutup"
-              className="shrink-0 rounded-full p-0.5 text-amber-700 transition hover:bg-amber-100"
+              className="shrink-0 rounded-md p-1 text-amber-800 transition hover:bg-amber-100"
             >
-              <X className="h-3 w-3" />
+              <X className="h-3.5 w-3.5" />
             </button>
           </div>
         </div>
       )}
 
       <style jsx global>{`
-        @keyframes slideDown {
-          from { opacity: 0; transform: translateY(-12px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
         @keyframes slideUp {
           from { opacity: 0; transform: translateY(12px); }
           to { opacity: 1; transform: translateY(0); }

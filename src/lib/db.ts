@@ -5,7 +5,13 @@ import { PrismaPg } from '@prisma/adapter-pg';
 
 const prismaClientSingleton = () => {
   const connectionString = process.env.DATABASE_URL;
-  const pool = new Pool({ connectionString });
+  const poolMax = Number.parseInt(process.env.DATABASE_POOL_MAX ?? '1', 10) || 1;
+  const pool = new Pool({
+    connectionString,
+    max: poolMax,
+    idleTimeoutMillis: 10_000,
+    connectionTimeoutMillis: 10_000,
+  });
   const adapter = new PrismaPg(pool);
   
   return new PrismaClient({ adapter });

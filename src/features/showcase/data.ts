@@ -16,6 +16,17 @@ export type ShowcaseItem = {
 
 const FALLBACK_THUMBNAIL = "/images/homepage-slider-reference.webp";
 
+const showcaseItemSelect = {
+  id: true,
+  slug: true,
+  title: true,
+  description: true,
+  category: true,
+  thumbnail: true,
+  htmlUrl: true,
+  tags: true,
+} as const;
+
 function toItem(row: {
   id: string;
   slug: string;
@@ -43,6 +54,7 @@ export const getPublishedShowcaseItems = unstable_cache(
     try {
       const rows = await db.showcase.findMany({
         where: { published: true },
+        select: showcaseItemSelect,
         orderBy: [{ order: "asc" }, { createdAt: "desc" }],
       });
       return rows.map(toItem);
@@ -59,6 +71,7 @@ export const getPublishedShowcaseItem = unstable_cache(
     try {
       const row = await db.showcase.findFirst({
         where: { slug, published: true },
+        select: showcaseItemSelect,
       });
       return row ? toItem(row) : null;
     } catch {
@@ -68,14 +81,3 @@ export const getPublishedShowcaseItem = unstable_cache(
   ["showcase-by-slug"],
   { tags: [SHOWCASE_TAG], revalidate: 3600 },
 );
-
-export async function getAllShowcaseSlugs(): Promise<Array<{ slug: string }>> {
-  try {
-    return await db.showcase.findMany({
-      where: { published: true },
-      select: { slug: true },
-    });
-  } catch {
-    return [];
-  }
-}

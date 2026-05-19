@@ -44,7 +44,8 @@ export async function GET() {
     where: { published: true },
     select: { slug: true, updatedAt: true },
     orderBy: { updatedAt: "desc" },
-  });
+    take: 500,
+  }).catch(() => []);
 
   const routes = [
     ...staticRoutes,
