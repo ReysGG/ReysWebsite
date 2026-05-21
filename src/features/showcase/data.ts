@@ -63,7 +63,7 @@ export const getPublishedShowcaseItems = unstable_cache(
       return [];
     }
   },
-  ["showcase-published"],
+  ["showcase-published-v2"],
   { tags: [SHOWCASE_TAG], revalidate: 3600 },
 );
 
