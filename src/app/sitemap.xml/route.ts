@@ -1,71 +1,54 @@
-import { NextResponse } from "next/server";
-import db from "@/lib/db";
+import { getAllPublishedSlugs } from "@/features/blog/data/posts";
+import { getPublishedShowcaseItems } from "@/features/showcase/data";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://buildwithreys.tech";
-
-export const revalidate = 3600;
-
-function escapeXml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-}
-
-function urlEntry({
-  url,
-  lastModified,
-  changeFrequency,
-  priority,
-}: {
-  url: string;
-  lastModified: Date;
-  changeFrequency: "daily" | "weekly";
-  priority: number;
-}) {
-  return `  <url>
-    <loc>${escapeXml(url)}</loc>
-    <lastmod>${lastModified.toISOString()}</lastmod>
-    <changefreq>${changeFrequency}</changefreq>
-    <priority>${priority}</priority>
-  </url>`;
-}
+const BASE_URL = "https://buildwithreys.tech";
 
 export async function GET() {
-  const now = new Date();
+  const [blogSlugs, showcaseItems] = await Promise.all([
+    getAllPublishedSlugs().catch(() => []),
+    getPublishedShowcaseItems().catch(() => []),
+  ]);
+
   const staticRoutes = [
-    { url: siteUrl, lastModified: now, changeFrequency: "weekly" as const, priority: 1 },
-    { url: `${siteUrl}/blog`, lastModified: now, changeFrequency: "daily" as const, priority: 0.8 },
+    { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
+    { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
+    { url: `${BASE_URL}/showcase`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
   ];
 
-  const posts = await db.post.findMany({
-    where: { published: true },
-    select: { slug: true, updatedAt: true },
-    orderBy: { updatedAt: "desc" },
-    take: 500,
-  }).catch(() => []);
+  const blogRoutes = blogSlugs.map(({ slug }: { slug: string }) => ({
+    url: `${BASE_URL}/blog/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
 
-  const routes = [
-    ...staticRoutes,
-    ...posts.map((post) => ({
-      url: `${siteUrl}/blog/${post.slug}`,
-      lastModified: post.updatedAt,
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    })),
-  ];
+  const showcaseRoutes = showcaseItems.map((item: { slug: string }) => ({
+    url: `${BASE_URL}/showcase/${item.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  const allRoutes = [...staticRoutes, ...blogRoutes, ...showcaseRoutes];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes.map(urlEntry).join("\n")}
+${allRoutes
+  .map(
+    (route) => `  <url>
+    <loc>${route.url}</loc>
+    <lastmod>${new Date(route.lastModified).toISOString()}</lastmod>
+    <changefreq>${route.changeFrequency}</changefreq>
+    <priority>${route.priority}</priority>
+  </url>`
+  )
+  .join("\n")}
 </urlset>`;
 
-  return new NextResponse(xml, {
+  return new Response(xml, {
     headers: {
-      "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+      "Content-Type": "application/xml",
+      "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
     },
   });
 }
