@@ -7,8 +7,8 @@ const BASE_URL = "https://buildwithreys.tech";
 
 export async function GET() {
   const [blogSlugs, showcaseItems] = await Promise.all([
-    getAllPublishedSlugs().catch(() => []),
-    getPublishedShowcaseItems().catch(() => []),
+    getAllPublishedSlugs().catch((e) => { console.error("[sitemap] blog error:", e); return []; }),
+    getPublishedShowcaseItems().catch((e) => { console.error("[sitemap] showcase error:", e); return []; }),
   ]);
 
   const staticRoutes = [
