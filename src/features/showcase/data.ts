@@ -58,7 +58,8 @@ export const getPublishedShowcaseItems = unstable_cache(
         orderBy: [{ order: "asc" }, { createdAt: "desc" }],
       });
       return rows.map(toItem);
-    } catch {
+    } catch (e) {
+      console.error("[showcase] getPublishedShowcaseItems error:", e);
       return [];
     }
   },
