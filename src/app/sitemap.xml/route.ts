@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getAllPublishedSlugs } from "@/features/blog/data/posts";
 import { getPublishedShowcaseItems } from "@/features/showcase/data";
 
