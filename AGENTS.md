@@ -31,3 +31,31 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Client components should receive serializable props and call server actions or API routes for mutations/uploads.
 - Keep presentation components focused on rendering, local interaction state, and form UX. Do not mix dashboard aggregation or Prisma query logic into component files.
 - When a form has live preview state, keep derived values computed during render or via `useMemo`; avoid setting state synchronously inside `useEffect`.
+
+## Deployment Safety Rules
+
+Setiap kali kamu membuat perubahan pada file-file berikut, kamu **wajib** memeriksa apakah perubahan tersebut bisa menyebabkan kegagalan saat deployment ke VPS/Docker. Jika iya, perbaiki sekaligus atau beri peringatan eksplisit ke user.
+
+### File yang wajib dicek dampak deployment-nya
+
+- `prisma/schema.prisma` — perubahan model/datasource bisa break `prisma migrate deploy`
+- `prisma.config.ts` — diload otomatis oleh Prisma 7 CLI; jika import package baru, pastikan package ada di `dependencies` (bukan hanya `devDependencies`)
+- `package.json` — jika menambah/hapus dependency, pastikan tersedia di production image
+- `Dockerfile` — jika ada file baru yang dibutuhkan saat runtime, pastikan di-COPY ke runner stage
+- `docker-entrypoint.sh` — script ini jalan pertama kali di container; pastikan env vars yang dibutuhkan tersedia
+- `next.config.ts` / `next.config.js` — perubahan output mode, headers, atau env vars bisa break build
+- `.env.example` — jika menambah env var baru yang wajib, tambahkan ke sini dan ingatkan user untuk update `.env.docker` di VPS
+
+### Aturan khusus Prisma + Docker
+
+- `prisma.config.ts` menggunakan `dotenv` untuk load `.env` / `.env.local` — file ini **tidak ada** di dalam container. Env vars di container datang dari `env_file: .env.docker`. Jangan andalkan dotenv untuk production.
+- `prisma migrate deploy` di container harus mendapat `DATABASE_URL` atau `DIRECT_URL` langsung dari environment, bukan dari dotenv.
+- `prisma.config.ts` harus di-COPY ke runner stage di Dockerfile agar Prisma 7 bisa menemukannya.
+- Setiap package yang di-import oleh `prisma.config.ts` harus ada di `dependencies`, bukan `devDependencies`.
+- Gunakan `DIRECT_URL` untuk migrate (bypass pgBouncer), `DATABASE_URL` untuk runtime app.
+
+### Checklist sebelum selesai
+
+Jika perubahan yang kamu buat menyentuh salah satu file di atas, tambahkan catatan singkat ke response kamu:
+
+> "Perubahan ini mempengaruhi deployment. Pastikan: [list hal yang perlu dilakukan user di VPS]"
