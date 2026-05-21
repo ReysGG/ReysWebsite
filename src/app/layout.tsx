@@ -16,6 +16,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `${siteName} | ${tagline}`,
     description: settings.description || "Dinamis & profesional web services, startups, and personal brands.",
     icons: { icon: '/favicon.ico' },
+    other: {
+      "facebook-domain-verification": "14p40lig23xo6orqv8qnge0u0qm19q",
+    },
   };
 }
 

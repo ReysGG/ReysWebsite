@@ -9,6 +9,7 @@ import { Footer } from "@/components/ui/footer";
 import { getSiteSettings } from "@/lib/site-settings";
 
 export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Showcase | Build With Reys",

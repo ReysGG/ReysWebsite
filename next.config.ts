@@ -41,6 +41,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // Redirect www to non-www (canonical domain)
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.buildwithreys.tech" }],
+        destination: "https://buildwithreys.tech/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

@@ -44,6 +44,7 @@ Setiap kali kamu membuat perubahan pada file-file berikut, kamu **wajib** memeri
 - `Dockerfile` — jika ada file baru yang dibutuhkan saat runtime, pastikan di-COPY ke runner stage
 - `docker-entrypoint.sh` — script ini jalan pertama kali di container; pastikan env vars yang dibutuhkan tersedia
 - `next.config.ts` / `next.config.js` — perubahan output mode, headers, atau env vars bisa break build
+- `src/proxy.ts` — ini adalah middleware Next.js 16 (bukan `middleware.ts` yang sudah deprecated). Jangan rename atau hapus.
 - `.env.example` — jika menambah env var baru yang wajib, tambahkan ke sini dan ingatkan user untuk update `.env.docker` di VPS
 
 ### Aturan khusus Prisma + Docker
