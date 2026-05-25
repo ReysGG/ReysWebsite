@@ -2,8 +2,9 @@
 import { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { MonitorSmartphone, Search, Menu, X, ArrowRight } from 'lucide-react';
-import { Show, UserButton } from '@clerk/nextjs';
+import Image from 'next/image';
+import { Search, Menu, X, ArrowRight } from 'lucide-react';
+import logoBuildWithReys from '@/app/logo buildwithreys.png';
 
 const NAV_LINKS = [
   { name: 'Beranda', href: '/' },
@@ -38,8 +39,14 @@ function BlogNavbarInner() {
             href="/"
             className="flex shrink-0 items-center gap-2 text-neutral-900 dark:text-neutral-900"
           >
-            <MonitorSmartphone className="h-5 w-5 text-indigo-600" />
-            <span className="text-base font-bold tracking-tight">WebServices</span>
+            <Image
+              src={logoBuildWithReys}
+              alt="Build With Reys"
+              width={120}
+              height={33}
+              priority
+              className="h-8 w-auto"
+            />
             <span className="ml-1 rounded bg-indigo-600 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white">
               Blog
             </span>
@@ -70,9 +77,6 @@ function BlogNavbarInner() {
               />
             </form>
 
-            <Show when="signed-in">
-              <UserButton />
-            </Show>
 
             <Link
               href="/#cta"

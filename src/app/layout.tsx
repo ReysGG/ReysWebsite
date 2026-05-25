@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ClerkProvider } from "@clerk/nextjs";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { BackToTop } from "@/components/ui/back-to-top";
 import { FloatingConsult } from "@/components/ui/floating-consult";
@@ -34,19 +33,17 @@ export default async function RootLayout({
         className="antialiased min-h-screen bg-background font-sans"
         suppressHydrationWarning
       >
-        <ClerkProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <ScrollProgress />
-            {children}
-            <BackToTop />
-            <FloatingConsult whatsappUrl={settings.whatsapp} siteName={settings.siteName} />
-          </ThemeProvider>
-        </ClerkProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ScrollProgress />
+          {children}
+          <BackToTop />
+          <FloatingConsult whatsappUrl={settings.whatsapp} siteName={settings.siteName} />
+        </ThemeProvider>
       </body>
     </html>
   );

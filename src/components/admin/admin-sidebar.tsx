@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import logoBuildWithReys from "@/app/logo buildwithreys.png";
 import {
   LayoutDashboard,
   Globe,
@@ -120,7 +122,8 @@ const NAV_GROUPS: NavGroup[] = [
         icon: <Briefcase className="h-4 w-4" />,
         subItems: [
           { label: "Semua Project", href: "/admin/portfolio", icon: <List className="h-3.5 w-3.5" /> },
-          { label: "Edit Intro Portfolio", href: "/admin/portfolio/hero", icon: <ImageIcon className="h-3.5 w-3.5" /> },
+          { label: "Tambah Project", href: "/admin/portfolio/add", icon: <Plus className="h-3.5 w-3.5" /> },
+          { label: "Edit Intro", href: "/admin/portfolio/hero", icon: <ImageIcon className="h-3.5 w-3.5" /> },
         ],
       },
       {
@@ -128,7 +131,9 @@ const NAV_GROUPS: NavGroup[] = [
         basePath: "/admin/showcase",
         icon: <Sparkles className="h-4 w-4" />,
         subItems: [
-          { label: "Daftar Showcase", href: "/admin/showcase", icon: <List className="h-3.5 w-3.5" /> },
+          { label: "Semua Showcase", href: "/admin/showcase", icon: <List className="h-3.5 w-3.5" /> },
+          { label: "Published", href: "/admin/showcase?status=published", icon: <Send className="h-3.5 w-3.5" /> },
+          { label: "Draft", href: "/admin/showcase?status=draft", icon: <PencilLine className="h-3.5 w-3.5" /> },
           { label: "Showcase Baru", href: "/admin/showcase/new", icon: <Plus className="h-3.5 w-3.5" /> },
         ],
       },
@@ -285,13 +290,17 @@ export const AdminSidebar = () => {
       <div className="flex h-16 items-center justify-between border-b border-neutral-200 px-4">
         {!collapsed && (
           <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-indigo-600">
-              <PencilLine className="h-3.5 w-3.5 text-white" />
-            </div>
-            <div>
-              <span className="block text-sm font-bold leading-none text-neutral-900">Admin Panel</span>
-              <span className="mt-0.5 block text-[10px] font-medium text-neutral-400">Content Manager</span>
-            </div>
+            <Image
+              src={logoBuildWithReys}
+              alt="Build With Reys"
+              width={112}
+              height={31}
+              priority
+              className="h-8 w-auto"
+            />
+            <span className="rounded bg-indigo-50 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-indigo-700">
+              Admin
+            </span>
           </div>
         )}
         <button

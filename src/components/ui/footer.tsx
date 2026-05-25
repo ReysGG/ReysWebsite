@@ -1,9 +1,11 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import { GithubIcon, InstagramIcon, LinkedinIcon, TwitterIcon, WhatsappIcon } from "@/components/ui/brand-icons";
 import { normalizeEmailLink } from "@/lib/contact-links";
 import { getSiteSettings, type SiteSettings } from "@/lib/site-settings";
+import logoBuildWithReys from "@/app/logo buildwithreys.png";
 
 type FooterProps = {
   settings?: SiteSettings;
@@ -44,10 +46,6 @@ function SmartFooterLink({ href, className, children, ariaLabel }: SmartFooterLi
 export const Footer = async ({ settings }: FooterProps) => {
   const resolvedSettings = settings ?? (await getSiteSettings());
   const emailHref = normalizeEmailLink(resolvedSettings.contactEmail);
-  const siteName =
-    resolvedSettings.siteName && resolvedSettings.siteName !== "WebServices"
-      ? resolvedSettings.siteName
-      : "Build With Reys";
   const description =
     resolvedSettings.description ||
     "Membangun standar baru aplikasi web digital untuk UMKM, Startup, dan Personal Brand Anda.";
@@ -102,11 +100,14 @@ export const Footer = async ({ settings }: FooterProps) => {
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-4">
           <div className="col-span-1 flex flex-col md:col-span-1">
-            <Link href="/" className="mb-4 flex items-center gap-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-blue-600 text-sm font-bold text-white">
-                R
-              </span>
-              <span className="text-xl font-bold tracking-tight text-white">{siteName}</span>
+            <Link href="/" className="mb-4 inline-flex items-center">
+              <Image
+                src={logoBuildWithReys}
+                alt="Build With Reys"
+                width={140}
+                height={38}
+                className="h-10 w-auto brightness-0 invert"
+              />
             </Link>
             <p className="mb-6 text-sm leading-relaxed text-neutral-400">{description}</p>
 
@@ -178,7 +179,7 @@ export const Footer = async ({ settings }: FooterProps) => {
         <div className="mb-8 h-px w-full bg-neutral-900" />
 
         <div className="flex flex-col items-center justify-between gap-4 text-sm text-neutral-500 md:flex-row">
-          <p>&copy; {new Date().getFullYear()} {siteName}. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Build With Reys. All rights reserved.</p>
           <div className="flex gap-6">
             <SmartFooterLink
               href={resolvedSettings.whatsapp || "/#cta"}

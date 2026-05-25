@@ -13,7 +13,9 @@
       "Bash(npx prisma *)",
       "Bash(node scripts/migrate-icons.cjs)",
       "Bash(npm view *)",
-      "Bash(grep -v \"^$\")"
+      "Bash(grep -v \"^$\")",
+      "Bash(python *)",
+      "Bash(npm run *)"
     ]
   }
 }

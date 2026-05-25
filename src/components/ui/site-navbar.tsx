@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   Navbar,
   NavBody,
@@ -11,9 +12,8 @@ import {
   MobileNavToggle,
   NavbarButton,
 } from "@/components/ui/resizable-navbar";
-import { MonitorSmartphone } from "lucide-react";
 import Link from "next/link";
-import { Show, SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
+import logoBuildWithReys from "@/app/logo buildwithreys.png";
 
 const NAV_ITEMS = [
   { name: "Layanan", link: "/#services" },
@@ -26,8 +26,6 @@ const NAV_ITEMS = [
 
 export const SiteNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useUser();
-  const isAdmin = String(user?.publicMetadata?.role ?? "").toLowerCase() === "admin";
 
   const closeMenu = () => setIsOpen(false);
 
@@ -38,44 +36,25 @@ export const SiteNavbar = () => {
         <NavBody>
           {/* Logo */}
           <Link href="/" className="relative z-20 flex items-center gap-2 px-2 py-1 group">
-            <MonitorSmartphone className="w-6 h-6 text-neutral-900 transition-transform group-hover:scale-110" />
-            <span className="text-lg font-bold text-neutral-900 tracking-tight">
-              Build With Reys
-            </span>
+            <Image
+              src={logoBuildWithReys}
+              alt="Build With Reys"
+              width={132}
+              height={36}
+              priority
+              className="h-9 w-auto transition-transform group-hover:scale-105"
+            />
           </Link>
 
           <NavItems items={NAV_ITEMS} />
 
           <div className="flex items-center gap-3">
-            <Show when="signed-out">
-              <SignInButton mode="modal">
-                <button
-                  type="button"
-                  className="px-3 py-2 text-xs font-semibold text-neutral-600 hover:text-neutral-900 transition-colors"
-                >
-                  Masuk
-                </button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <button
-                  type="button"
-                  className="rounded-md bg-white px-4 py-2 text-xs font-semibold text-neutral-900 shadow-sm ring-1 ring-neutral-200 transition-colors hover:bg-neutral-50"
-                >
-                  Daftar
-                </button>
-              </SignUpButton>
-            </Show>
-            <Show when="signed-in">
-              <UserButton />
-            </Show>
-            {isAdmin ? (
-              <Link
-                href="/admin"
-                className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-xs font-semibold text-indigo-700 transition-colors hover:bg-indigo-100"
-              >
-                Admin Panel
-              </Link>
-            ) : null}
+            <Link
+              href="/admin"
+              className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-xs font-semibold text-indigo-700 transition-colors hover:bg-indigo-100"
+            >
+              Admin
+            </Link>
             <NavbarButton
               href="/#cta"
               variant="dark"
@@ -90,8 +69,14 @@ export const SiteNavbar = () => {
         <MobileNav>
           <MobileNavHeader>
             <Link href="/" className="flex items-center gap-2">
-              <MonitorSmartphone className="w-5 h-5 text-neutral-900" />
-              <span className="font-bold text-neutral-900 text-sm">Build With Reys</span>
+              <Image
+                src={logoBuildWithReys}
+                alt="Build With Reys"
+                width={112}
+                height={31}
+                priority
+                className="h-8 w-auto"
+              />
             </Link>
             <MobileNavToggle
               isOpen={isOpen}
@@ -111,38 +96,13 @@ export const SiteNavbar = () => {
               </a>
             ))}
             <div className="flex items-center gap-3 w-full pt-2 border-t border-neutral-200">
-              <Show when="signed-out">
-                <SignInButton mode="modal">
-                  <button
-                    type="button"
-                    onClick={closeMenu}
-                    className="text-sm font-semibold text-neutral-600 transition-colors hover:text-black"
-                  >
-                    Masuk
-                  </button>
-                </SignInButton>
-                <SignUpButton mode="modal">
-                  <button
-                    type="button"
-                    onClick={closeMenu}
-                    className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
-                  >
-                    Daftar
-                  </button>
-                </SignUpButton>
-              </Show>
-              <Show when="signed-in">
-                <UserButton />
-              </Show>
-              {isAdmin ? (
-                <Link
-                  href="/admin"
-                  onClick={closeMenu}
-                  className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-semibold text-indigo-700 transition-colors hover:bg-indigo-100"
-                >
-                  Admin Panel
-                </Link>
-              ) : null}
+              <Link
+                href="/admin"
+                onClick={closeMenu}
+                className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-semibold text-indigo-700 transition-colors hover:bg-indigo-100"
+              >
+                Admin
+              </Link>
               <NavbarButton
                 href="/#cta"
                 variant="dark"

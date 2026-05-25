@@ -1,9 +1,10 @@
 import React from "react";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
+import { AdminUserMenu } from "@/components/admin/admin-user-menu";
 import { Search } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { redirect } from "next/navigation";
+import { ClerkProvider } from "@clerk/nextjs";
 import { requireAdmin, type AdminUser } from "@/features/admin/lib/auth";
 
 export default async function AdminLayout({
@@ -23,9 +24,10 @@ export default async function AdminLayout({
   const avatarUrl = user.imageUrl;
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-neutral-50">
-      <AdminSidebar />
-      <div className="flex flex-1 flex-col overflow-hidden">
+    <ClerkProvider>
+      <div className="flex h-screen w-full overflow-hidden bg-neutral-50">
+        <AdminSidebar />
+        <div className="flex flex-1 flex-col overflow-hidden">
         {/* Top Header */}
         <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b border-neutral-200 bg-white px-6">
           <div className="flex items-center gap-4 w-full max-w-md">
@@ -46,25 +48,7 @@ export default async function AdminLayout({
             >
               Lihat Website →
             </Link>
-            <div className="flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-2.5 py-1.5">
-              {avatarUrl ? (
-                <Image
-                  src={avatarUrl}
-                  alt={displayName}
-                  width={28}
-                  height={28}
-                  className="h-7 w-7 rounded-md object-cover"
-                />
-              ) : (
-                <div className="flex h-7 w-7 items-center justify-center rounded-md bg-indigo-600 text-white text-xs font-bold">
-                  {initial}
-                </div>
-              )}
-              <div className="hidden sm:block">
-                <p className="text-xs font-semibold leading-tight text-neutral-900 max-w-[120px] truncate">{displayName}</p>
-                <p className="text-[10px] uppercase tracking-widest text-indigo-600 font-semibold">Admin</p>
-              </div>
-            </div>
+            <AdminUserMenu displayName={displayName} initial={initial} avatarUrl={avatarUrl} />
           </div>
         </header>
 
