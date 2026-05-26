@@ -46,16 +46,12 @@ function AuthControls({
   const pathname = usePathname();
   const { isLoaded, isSignedIn } = useAuth();
   const redirectUrl = pathname || "/";
-  const avatarClass = isMobile ? "h-10 w-10 rounded-md" : "h-9 w-9 rounded-md";
 
   if (!isLoaded) {
-    return (
-      <div
-        aria-hidden="true"
-        className={isMobile ? "h-10 w-full rounded-md bg-neutral-100" : "h-9 w-24 rounded-md bg-neutral-100"}
-      />
-    );
+    return null;
   }
+
+  const avatarClass = isMobile ? "h-10 w-10 rounded-md" : "h-9 w-9 rounded-md";
 
   if (isSignedIn) {
     return (
