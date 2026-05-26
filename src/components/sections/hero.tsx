@@ -10,7 +10,13 @@ import type { SiteConfig } from "@/lib/site-config";
 
 type HeroContent = SiteConfig["hero"];
 
-export const HeroSection = ({ content }: { content: HeroContent }) => {
+export const HeroSection = ({
+  content,
+  secondaryHref = "#workflow",
+}: {
+  content: HeroContent;
+  secondaryHref?: string;
+}) => {
   const scopeItems = [
     content.scopePreview.pages,
     content.scopePreview.features,
@@ -93,7 +99,7 @@ export const HeroSection = ({ content }: { content: HeroContent }) => {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="#workflow"
+              href={secondaryHref}
               className="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-7 py-4 text-sm font-bold text-slate-950 transition-colors duration-200 hover:border-blue-300 hover:bg-slate-50"
             >
               {content.secondaryCta}

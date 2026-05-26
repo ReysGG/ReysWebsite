@@ -1,0 +1,557 @@
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\David Boy\Documents\NextJS\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\David Boy\Documents\NextJS\ReysWebsite\package-lock.json
+
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Image with src "/_next/static/media/logo buildwithreys.04sx19tycdsv9.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Image with src "/_next/static/media/logo buildwithreys.04sx19tycdsv9.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ClerkProviderBase publishableKey="pk_test_Zm..." proxyUrl="" domain="" isSatellite={false} signInUrl="/sign-in" ...>
+      <ClerkContextProvider initialState={undefined} clerk={{clerkjs:null, ...}} clerkStatus="loading">
+        <InitialStateProvider initialState={undefined}>
+          <__experimental_CheckoutProvider value={undefined}>
+            <RouterTelemetry>
+            <ClerkScripts>
+            <html lang="id" suppressHydrationWarning={true}>
+              <body className="antialiase..." suppressHydrationWarning={true}>
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} ...>
+                  <J attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange={true}>
+                    <V attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange={true}>
+                      <script>
+                      <ScrollProgress>
+                      ...
+                        <SegmentViewNode type="page" pagePath="(front)/pa...">
+                          <SegmentTrieNode>
+                          <Home>
+                            <main className="flex min-h...">
+                              <HeroSection>
+                              <section>
+                              <section>
+                              ...
+                                <div className="grid grid-...">
+                                  <article>
+                                  <aside>
+                                  <ServiceCard>
+                                    <article className="group rela...">
+                                      <div
+                                        className="pointer-events-none absolute right-0 top-0 h-40 w-40 -translate-y-1..."
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="relative z-10 mb-8 flex items-start justify-between gap-6"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <div
+                                          className="flex h-12 w-12 items-center justify-center rounded-lg border bord..."
+-                                         bis_skin_checked="1"
+                                        >
+                                        ...
+                                      <div
+                                        className="relative z-10 flex flex-1 flex-col"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <h3>
+                                        <p>
+                                        <div
+                                          className="mt-7 flex flex-wrap gap-2"
+-                                         bis_skin_checked="1"
+                                        >
+                                        ...
+                                  <ServiceCard>
+                                    <article className="group rela...">
+                                      <div
+                                        className="pointer-events-none absolute right-0 top-0 h-40 w-40 -translate-y-1..."
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="relative z-10 mb-8 flex items-start justify-between gap-6"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <div
+                                          className="flex h-12 w-12 items-center justify-center rounded-lg border bord..."
+-                                         bis_skin_checked="1"
+                                        >
+                                        ...
+                                      <div
+                                        className="relative z-10 flex flex-1 flex-col"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <h3>
+                                        <p>
+                                        <div
+                                          className="mt-7 flex flex-wrap gap-2"
+-                                         bis_skin_checked="1"
+                                        >
+                                        ...
+                                  <ServiceCard>
+                                    <article className="group rela...">
+                                      <div
+                                        className="pointer-events-none absolute right-0 top-0 h-40 w-40 -translate-y-1..."
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="relative z-10 mb-8 flex items-start justify-between gap-6"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <div
+                                          className="flex h-12 w-12 items-center justify-center rounded-lg border bord..."
+-                                         bis_skin_checked="1"
+                                        >
+                                        ...
+                                      <div
+                                        className="relative z-10 flex flex-1 flex-col"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <h3>
+                                        <p>
+                                        <div
+                                          className="mt-7 flex flex-wrap gap-2"
+-                                         bis_skin_checked="1"
+                                        >
+                                        ...
+                              <WorkflowSection content={{eyebrow:"P...", ...}}>
+                                <section id="workflow" className="w-full bor...">
+                                  <div
+                                    className="mx-auto grid max-w-7xl gap-12 px-6 md:px-12 lg:grid-cols-12 lg:items-start"
+-                                   bis_skin_checked="1"
+                                  >
+                                    <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} ...>
+                                      <div
+                                        className="lg:col-span-4"
+                                        style={{opacity:0,transform:"translateY..."}}
+                                        ref={function useMotionRef.useCallback}
+-                                       bis_skin_checked="1"
+                                      >
+                                        <p>
+                                        ...
+                                          <PopChildMeasure isPresent={true} childRef={{current:null}} sizeRef={{...}} ...>
+                                            <motion.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} ...>
+                                              <div
+                                                className="z-10 inline-block relative text-left px-0 font-bold text-bl..."
+                                                style={{opacity:0,transform:"translateY..."}}
+                                                ref={function useMotionRef.useCallback}
+-                                               bis_skin_checked="1"
+                                              >
+                                        ...
+                                    <div
+                                      className="grid gap-5 lg:col-span-8 lg:grid-cols-2"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <motion.article initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} ...>
+                                        <article className="rounded-lg..." style={{opacity:0, ...}} ...>
+                                          <div
+                                            className="mb-8 flex items-center justify-between gap-6"
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                                      <motion.article initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} ...>
+                                        <article className="rounded-lg..." style={{opacity:0, ...}} ...>
+                                          <div
+                                            className="mb-8 flex items-center justify-between gap-6"
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                                      <motion.article initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} ...>
+                                        <article className="rounded-lg..." style={{opacity:0, ...}} ...>
+                                          <div
+                                            className="mb-8 flex items-center justify-between gap-6"
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                                      <motion.article initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} ...>
+                                        <article className="rounded-lg..." style={{opacity:0, ...}} ...>
+                                          <div
+                                            className="mb-8 flex items-center justify-between gap-6"
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                              <PortfolioSection>
+                                <section id="portfolio" className="w-full bg-...">
+                                  <div
+                                    className="mx-auto max-w-7xl px-6 md:px-12"
+-                                   bis_skin_checked="1"
+                                  >
+                                    <div
+                                      className="mb-12 max-w-3xl"
+-                                     bis_skin_checked="1"
+                                    >
+                                    <div
+                                      className="mb-10 flex flex-wrap gap-3"
+-                                     bis_skin_checked="1"
+                                    >
+                                    <div
+                                      className="grid grid-cols-1 gap-6 md:grid-cols-2"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <PortfolioCard>
+                                        <article className="group flex...">
+                                          <div
+                                            className="relative mb-7 aspect-video overflow-hidden rounded-lg border bo..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="mb-4 flex flex-wrap gap-2"
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                                      <PortfolioCard>
+                                        <article className="group flex...">
+                                          <div
+                                            className="relative mb-7 aspect-video overflow-hidden rounded-lg border bo..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="mb-4 flex flex-wrap gap-2"
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                                      <PortfolioCard>
+                                        <article className="group flex...">
+                                          <div
+                                            className="relative mb-7 aspect-video overflow-hidden rounded-lg border bo..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="mb-4 flex flex-wrap gap-2"
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                                      <PortfolioCard>
+                                        <article className="group flex...">
+                                          <div
+                                            className="relative mb-7 aspect-video overflow-hidden rounded-lg border bo..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="mb-4 flex flex-wrap gap-2"
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                              <PricingSection>
+                                <section id="pricing" className="w-full bg-...">
+                                  <div
+                                    className="mx-auto max-w-7xl px-6 md:px-12"
+-                                   bis_skin_checked="1"
+                                  >
+                                    <div
+                                      className="mx-auto mb-14 max-w-3xl text-center"
+-                                     bis_skin_checked="1"
+                                    >
+                                    <div
+                                      className="grid grid-cols-1 gap-6 lg:grid-cols-3"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <article className="relative f...">
+                                        <div
+-                                         bis_skin_checked="1"
+                                        >
+                                          <h3>
+                                          <div
+                                            className="mt-5 flex items-end gap-2 text-slate-950"
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="mt-4 w-fit rounded-md border border-slate-200 bg-white px-3 py-..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                                        <div
+                                          className="my-7 h-px bg-slate-200"
+-                                         bis_skin_checked="1"
+                                        >
+                                        ...
+                                      <article className="relative f...">
+                                        <span>
+                                        <div
+-                                         bis_skin_checked="1"
+                                        >
+                                          <h3>
+                                          <div
+                                            className="mt-5 flex items-end gap-2 text-slate-950"
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="mt-4 w-fit rounded-md border border-slate-200 bg-white px-3 py-..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                                        <div
+                                          className="my-7 h-px bg-slate-200"
+-                                         bis_skin_checked="1"
+                                        >
+                                        ...
+                                      <article className="relative f...">
+                                        <div
+-                                         bis_skin_checked="1"
+                                        >
+                                          <h3>
+                                          <div
+                                            className="mt-5 flex items-end gap-2 text-slate-950"
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="mt-4 w-fit rounded-md border border-slate-200 bg-white px-3 py-..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                                        <div
+                                          className="my-7 h-px bg-slate-200"
+-                                         bis_skin_checked="1"
+                                        >
+                                        ...
+                              <WhatYouGetSection>
+                                <section className="w-full bor...">
+                                  <div
+                                    className="mx-auto grid max-w-7xl gap-12 px-6 md:px-12 lg:grid-cols-12 lg:items-start"
+-                                   bis_skin_checked="1"
+                                  >
+                                    <div
+                                      className="lg:col-span-4"
+-                                     bis_skin_checked="1"
+                                    >
+                                    <div
+                                      className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-8"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+                                        className="flex gap-4 rounded-lg border border-slate-200 bg-white p-5"
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="flex gap-4 rounded-lg border border-slate-200 bg-white p-5"
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="flex gap-4 rounded-lg border border-slate-200 bg-white p-5"
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="flex gap-4 rounded-lg border border-slate-200 bg-white p-5"
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="flex gap-4 rounded-lg border border-slate-200 bg-white p-5"
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="flex gap-4 rounded-lg border border-slate-200 bg-white p-5"
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="flex gap-4 rounded-lg border border-slate-200 bg-white p-5"
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="flex gap-4 rounded-lg border border-slate-200 bg-white p-5"
+-                                       bis_skin_checked="1"
+                                      >
+                              <CtaSection>
+                                <section id="cta" className="w-full bg-...">
+                                  <div
+                                    className="mx-auto max-w-7xl px-6 md:px-12"
+-                                   bis_skin_checked="1"
+                                  >
+                                    <div
+                                      className="relative overflow-hidden rounded-lg bg-slate-950 p-8 text-white md:p-14"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+                                        className="pointer-events-none absolute right-0 top-0 h-72 w-72 -translate-y-2..."
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:item..."
+-                                       bis_skin_checked="1"
+                                      >
+                                        <div
+                                          className="max-w-3xl"
+-                                         bis_skin_checked="1"
+                                        >
+                                          <div
+                                            className="mb-6 inline-flex items-center gap-2 rounded-md border border-wh..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <h2>
+                                          <p>
+                                          <div
+                                            className="mt-8 grid gap-3 text-sm text-slate-300 sm:grid-cols-2"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="flex items-center gap-3"
+-                                             bis_skin_checked="1"
+                                            >
+                                            <div
+                                              className="flex items-center gap-3"
+-                                             bis_skin_checked="1"
+                                            >
+                                        <div
+                                          className="flex flex-col gap-3 sm:flex-row lg:flex-col"
+-                                         bis_skin_checked="1"
+                                        >
+                              <FaqSection content={{eyebrow:"P...", ...}}>
+                                <section id="faq" className="w-full bor...">
+                                  <div
+                                    className="mx-auto grid max-w-7xl gap-12 px-6 md:px-12 lg:grid-cols-12"
+-                                   bis_skin_checked="1"
+                                  >
+                                    <div
+                                      className="lg:col-span-4"
+-                                     bis_skin_checked="1"
+                                    >
+                                    <div
+                                      className="lg:col-span-8"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+                                        className="border-b border-slate-200 border-t"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <button>
+                                        ...
+                                          <PopChildMeasure isPresent={true} childRef={{current:null}} sizeRef={{...}} ...>
+                                            <motion.div initial={{height:0,opacity:0}} animate={{height:"auto", ...}} ...>
+                                              <div
+                                                className="overflow-hidden"
+                                                style={{height:"auto",opacity:1}}
+                                                ref={function useMotionRef.useCallback}
+-                                               bis_skin_checked="1"
+                                              >
+                                      <div
+                                        className={"border-b border-slate-200 "}
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className={"border-b border-slate-200 "}
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className={"border-b border-slate-200 "}
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className={"border-b border-slate-200 "}
+-                                       bis_skin_checked="1"
+                                      >
+                              <Footer>
+                                <footer className="w-full bor...">
+                                  <div
+                                    className="mx-auto max-w-7xl px-6 md:px-12"
+-                                   bis_skin_checked="1"
+                                  >
+                                    <div
+                                      className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-4"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+                                        className="col-span-1 flex flex-col md:col-span-1"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <LinkComponent>
+                                        <p>
+                                        <div
+                                          className="flex flex-wrap gap-3"
+-                                         bis_skin_checked="1"
+                                        >
+                                      <div
+                                        className="flex flex-col"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <h3>
+                                        <div
+                                          className="flex flex-col gap-3 text-sm text-neutral-400"
+-                                         bis_skin_checked="1"
+                                        >
+                                      <div
+                                        className="flex flex-col"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <h3>
+                                        <div
+                                          className="flex flex-col gap-3 text-sm text-neutral-400"
+-                                         bis_skin_checked="1"
+                                        >
+                                      <div
+                                        className="flex flex-col"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <h3>
+                                        <div
+                                          className="flex flex-col gap-3 text-sm text-neutral-400"
+-                                         bis_skin_checked="1"
+                                        >
+                                    <div
+                                      className="mb-8 h-px w-full bg-neutral-900"
+-                                     bis_skin_checked="1"
+                                    >
+                                    <div
+                                      className="flex flex-col items-center justify-between gap-4 text-sm text-neutral..."
+-                                     bis_skin_checked="1"
+                                    >
+                                      <p>
+                                      <div
+                                        className="flex gap-6"
+-                                       bis_skin_checked="1"
+                                      >
+                        ...
+                      <BackToTop>
+                      <FloatingConsult whatsappUrl="https://wa..." siteName="Build With...">
+                        <div
+                          className="jsx-8b7137721c335e51 fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3 tr..."
+-                         bis_skin_checked="1"
+                        >
+ 
+    at push.console.error (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/ReysWebsite_src_components_0q2ugqs._.js:21:14)
+    at <unknown> (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_compiled_react-dom_10gjfz.._.js:3439:25)
+    at runWithFiberInDEV (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_compiled_react-dom_10gjfz.._.js:965:74)
+    at emitPendingHydrationWarnings (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_compiled_react-dom_10gjfz.._.js:3438:13)
+    at completeWork (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_compiled_react-dom_10gjfz.._.js:6885:102)
+    at runWithFiberInDEV (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_compiled_react-dom_10gjfz.._.js:965:131)
+    at completeUnitOfWork (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_compiled_react-dom_10gjfz.._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_compiled_react-dom_10gjfz.._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_compiled_react-dom_10gjfz.._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_compiled_react-dom_10gjfz.._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_compiled_react-dom_10gjfz.._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_compiled_react-dom_10gjfz.._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_compiled_0dx.a4~._.js:2647:64) (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/ReysWebsite_src_components_0q2ugqs._.js:21:14)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Image with src "/_next/static/media/logo buildwithreys.04sx19tycdsv9.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Image with src "/_next/static/media/logo buildwithreys.04sx19tycdsv9.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Image with src "/_next/static/media/logo buildwithreys.04sx19tycdsv9.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Image with src "/_next/static/media/logo buildwithreys.04sx19tycdsv9.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)
+[browser] Image with src "/_next/static/media/logo buildwithreys.04sx19tycdsv9.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/David Boy/Documents/NextJS/ReysWebsite/.next/dev/static/chunks/0fng_next_dist_118ou5z._.js:2431:13)

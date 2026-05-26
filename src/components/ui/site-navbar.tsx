@@ -2,6 +2,9 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { SignInButton, SignUpButton, useAuth, UserButton } from "@clerk/nextjs";
+import { LayoutDashboard } from "lucide-react";
+import { usePathname } from "next/navigation";
 import {
   Navbar,
   NavBody,
@@ -23,6 +26,90 @@ const NAV_ITEMS = [
   { name: "Harga", link: "/#pricing" },
   { name: "Blog", link: "/blog" },
 ];
+
+const signInClass =
+  "inline-flex h-9 items-center justify-center rounded-md px-3 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-950";
+
+const signUpClass =
+  "inline-flex h-9 items-center justify-center rounded-md bg-neutral-950 px-4 text-xs font-semibold text-white transition-colors hover:bg-neutral-800";
+
+const dashboardClass =
+  "inline-flex h-9 items-center justify-center rounded-md border border-indigo-200 bg-indigo-50 px-4 text-xs font-semibold text-indigo-700 transition-colors hover:bg-indigo-100";
+
+function AuthControls({
+  isMobile = false,
+  onNavigate,
+}: {
+  isMobile?: boolean;
+  onNavigate?: () => void;
+}) {
+  const pathname = usePathname();
+  const { isLoaded, isSignedIn } = useAuth();
+  const redirectUrl = pathname || "/";
+  const avatarClass = isMobile ? "h-10 w-10 rounded-md" : "h-9 w-9 rounded-md";
+
+  if (!isLoaded) {
+    return (
+      <div
+        aria-hidden="true"
+        className={isMobile ? "h-10 w-full rounded-md bg-neutral-100" : "h-9 w-24 rounded-md bg-neutral-100"}
+      />
+    );
+  }
+
+  if (isSignedIn) {
+    return (
+      <div className={isMobile ? "flex w-full items-center gap-3" : "flex items-center gap-3"}>
+        <Link
+          href="/admin"
+          onClick={onNavigate}
+          className={isMobile ? `${dashboardClass} flex-1 text-sm` : dashboardClass}
+        >
+          Admin
+        </Link>
+        <UserButton
+          fallback={<div className={avatarClass} aria-hidden="true" />}
+          appearance={{
+            elements: {
+              avatarBox: avatarClass,
+            },
+          }}
+        >
+          <UserButton.MenuItems>
+            <UserButton.Link
+              href="/admin"
+              label="Admin"
+              labelIcon={<LayoutDashboard className="h-4 w-4" />}
+            />
+          </UserButton.MenuItems>
+        </UserButton>
+      </div>
+    );
+  }
+
+  return (
+    <div className={isMobile ? "grid w-full grid-cols-2 gap-3" : "flex items-center gap-2"}>
+      <SignInButton mode="modal" fallbackRedirectUrl={redirectUrl}>
+        <button
+          type="button"
+          onClick={onNavigate}
+          className={isMobile ? `${signInClass} h-10 border border-neutral-200 text-sm` : signInClass}
+        >
+          Masuk
+        </button>
+      </SignInButton>
+      <SignUpButton mode="modal" fallbackRedirectUrl={redirectUrl}>
+        <button
+          type="button"
+          onClick={onNavigate}
+          className={isMobile ? `${signUpClass} h-10 text-sm` : signUpClass}
+        >
+          Daftar
+        </button>
+      </SignUpButton>
+    </div>
+  );
+}
 
 export const SiteNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,12 +136,7 @@ export const SiteNavbar = () => {
           <NavItems items={NAV_ITEMS} />
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/admin"
-              className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-xs font-semibold text-indigo-700 transition-colors hover:bg-indigo-100"
-            >
-              Admin
-            </Link>
+            <AuthControls />
             <NavbarButton
               href="/#cta"
               variant="dark"
@@ -95,18 +177,12 @@ export const SiteNavbar = () => {
                 {item.name}
               </a>
             ))}
-            <div className="flex items-center gap-3 w-full pt-2 border-t border-neutral-200">
-              <Link
-                href="/admin"
-                onClick={closeMenu}
-                className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-semibold text-indigo-700 transition-colors hover:bg-indigo-100"
-              >
-                Admin
-              </Link>
+            <div className="flex w-full flex-col gap-3 pt-2 border-t border-neutral-200">
+              <AuthControls isMobile onNavigate={closeMenu} />
               <NavbarButton
                 href="/#cta"
                 variant="dark"
-                className="flex-1 text-center bg-indigo-600 text-white hover:bg-indigo-700 font-semibold border-0 rounded-md"
+                className="w-full text-center bg-indigo-600 text-white hover:bg-indigo-700 font-semibold border-0 rounded-md"
                 onClick={closeMenu}
               >
                 Konsultasi

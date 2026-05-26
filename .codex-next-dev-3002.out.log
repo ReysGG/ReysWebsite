@@ -1,0 +1,26 @@
+
+> buildwebsite@0.1.0 dev
+> next dev --port 3002
+
+▲ Next.js 16.2.2 (Turbopack)
+- Local:         http://localhost:3002
+- Network:       http://192.168.100.207:3002
+- Environments: .env.local
+✓ Ready in 917ms
+- Experiments (use with caution):
+  · serverActions
+
+ GET / 200 in 3.1s (next.js: 511ms, application-code: 2.6s)
+ GET / 200 in 853ms (next.js: 12ms, application-code: 842ms)
+ GET / 200 in 762ms (next.js: 9ms, application-code: 753ms)
+ GET / 200 in 1172ms (next.js: 8ms, application-code: 1165ms)
+ GET / 200 in 860ms (next.js: 8ms, application-code: 852ms)
+ GET / 200 in 922ms (next.js: 8ms, application-code: 913ms)
+✓ Compiled in 1724ms
+ GET / 200 in 3.0s (next.js: 413ms, application-code: 2.5s)
+ GET / 200 in 934ms (next.js: 8ms, application-code: 926ms)
+ GET / 200 in 747ms (next.js: 9ms, application-code: 738ms)
+ GET / 200 in 806ms (next.js: 279ms, application-code: 527ms)
+ GET / 200 in 2.3s (next.js: 9ms, application-code: 2.3s)
+ GET / 200 in 776ms (next.js: 9ms, application-code: 767ms)
+ GET / 200 in 736ms (next.js: 8ms, application-code: 728ms)

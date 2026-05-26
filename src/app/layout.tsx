@@ -5,6 +5,7 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { BackToTop } from "@/components/ui/back-to-top";
 import { FloatingConsult } from "@/components/ui/floating-consult";
 import { getSiteSettings } from "@/lib/site-settings";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
@@ -28,23 +29,25 @@ export default async function RootLayout({
 }>) {
   const settings = await getSiteSettings();
   return (
-    <html lang="id" suppressHydrationWarning>
-      <body
-        className="antialiased min-h-screen bg-background font-sans"
-        suppressHydrationWarning
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    <ClerkProvider>
+      <html lang="id" suppressHydrationWarning>
+        <body
+          className="antialiased min-h-screen bg-background font-sans"
+          suppressHydrationWarning
         >
-          <ScrollProgress />
-          {children}
-          <BackToTop />
-          <FloatingConsult whatsappUrl={settings.whatsapp} siteName={settings.siteName} />
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ScrollProgress />
+            {children}
+            <BackToTop />
+            <FloatingConsult whatsappUrl={settings.whatsapp} siteName={settings.siteName} />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

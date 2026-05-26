@@ -2,7 +2,22 @@
 
 import React, { useActionState } from "react";
 import Image from "next/image";
-import { ArrowRight, Check, CheckCircle2, Layout, LineChart, Pencil, Save, Server, ShoppingBag } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Check,
+  CheckCircle2,
+  ClipboardList,
+  Layout,
+  LineChart,
+  Monitor,
+  Pencil,
+  Save,
+  Server,
+  ShieldCheck,
+  ShoppingBag,
+  Smartphone,
+} from "lucide-react";
 import { addLandingPageFaqItem } from "@/features/admin/actions/landing-page-actions";
 import type { SiteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
@@ -25,6 +40,24 @@ const SERVICE_EDITOR_STYLES = [
   { icon: <ShoppingBag className="h-5 w-5" />, cta: "Mulai toko online" },
   { icon: <LineChart className="h-5 w-5" />, cta: "Audit website saya" },
 ];
+
+const TRUST_EDITOR_STYLES = [
+  { icon: <ClipboardList className="h-7 w-7 stroke-[1.8] md:h-8 md:w-8" />, number: "01" },
+  { icon: <Monitor className="h-7 w-7 stroke-[1.8] md:h-8 md:w-8" />, number: "02" },
+  { icon: <Smartphone className="h-7 w-7 stroke-[1.8] md:h-8 md:w-8" />, number: "03" },
+  { icon: <BookOpen className="h-7 w-7 stroke-[1.8] md:h-8 md:w-8" />, number: "04" },
+];
+
+const TRUST_EDITOR_DESCRIPTIONS: Record<string, string> = {
+  "Scope jelas sebelum development":
+    "Halaman, fitur, timeline, dan kebutuhan project disepakati di awal agar semua terarah dan sesuai tujuan.",
+  "Progress bisa dicek via staging link":
+    "Pantau hasil website secara real-time sebelum masuk tahap launch, jadi lebih transparan dan minim revisi.",
+  "Mobile-first dan SEO-ready":
+    "Website dibuat responsif, cepat, dan lebih mudah dipahami Google untuk performa yang lebih baik.",
+  "Handover akses penuh setelah launch":
+    "Akses, dokumentasi, dan panduan penggunaan diberikan setelah project selesai, jadi kamu bisa kelola sendiri.",
+};
 
 export function SectionRenderer({
   section,
@@ -203,18 +236,61 @@ function HeroScopeEditorPreview({ config, onQuickEdit }: { config: SiteConfig; o
 function TrustStripEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuickEdit: (field: InlineEditField) => void }) {
   const field = getInlineEditFields("trustStrip", config)[0];
   return (
-    <section className="w-full border-y border-slate-200 bg-[#f2f4f6] py-14">
-      <div className="grid grid-cols-1 gap-5 px-6 md:grid-cols-4 md:px-12">
-        {config.trustStrip.map((point) => (
-          <div key={point} className="rounded-lg border border-slate-200 bg-white p-6">
-            <span className="mb-5 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-blue-100 bg-blue-50 text-blue-600">
-              <Check className="h-5 w-5" />
-            </span>
-            <EditableTextButton field={field} onClick={() => onQuickEdit(field)} className="px-1 text-left text-base font-bold leading-snug text-slate-950">
-              {point}
-            </EditableTextButton>
-          </div>
-        ))}
+    <section className="w-full border-y border-slate-200 bg-[#f7faff] py-14 md:py-20">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.34em] text-blue-600 md:text-sm">
+            Kenapa Build With Reys?
+          </p>
+          <h2 className="mt-4 text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
+            Website bukan cuma dibuat bagus, tapi dibangun dengan alur yang jelas.
+          </h2>
+          <p className="mx-auto mt-4 max-w-3xl text-base font-medium leading-relaxed text-slate-600 md:text-lg">
+            Dari perencanaan sampai serah terima, setiap langkah transparan dan terukur.
+          </p>
+        </div>
+
+        <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-4 md:gap-6">
+          {config.trustStrip.slice(0, 4).map((point, index) => {
+            const meta = TRUST_EDITOR_STYLES[index] ?? TRUST_EDITOR_STYLES[0];
+
+            return (
+              <article
+                key={point}
+                className="rounded-lg border border-slate-200 bg-white p-5 shadow-[0_14px_40px_rgba(15,23,42,0.07)] md:min-h-[270px] md:p-6"
+              >
+                <div className="flex gap-4 md:block">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 md:mb-7 md:h-16 md:w-16">
+                    {meta.icon}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="mb-3 flex items-center gap-3 md:mb-5">
+                      <span className="text-sm font-bold text-blue-600">{meta.number}</span>
+                      <span className="h-px w-20 bg-blue-100" />
+                    </div>
+                    <EditableTextButton field={field} onClick={() => onQuickEdit(field)} className="px-1 text-left text-lg font-bold leading-tight text-slate-950 md:text-xl">
+                      {point}
+                    </EditableTextButton>
+                    <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600 md:mt-4 md:text-[15px]">
+                      {TRUST_EDITOR_DESCRIPTIONS[point] ?? "Detail project dibuat jelas, mudah dipantau, dan siap dilanjutkan setelah launch."}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="mx-auto mt-10 flex max-w-xl flex-col items-center gap-5 text-center">
+          <p className="inline-flex items-center gap-3 text-sm font-medium text-slate-600 md:text-base">
+            <ShieldCheck className="h-6 w-6 shrink-0 text-blue-600" />
+            Proses jelas, hasil maksimal, dan support tetap ada.
+          </p>
+          <span className="inline-flex min-h-11 w-full max-w-sm items-center justify-center gap-3 rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-[0_14px_35px_rgba(37,99,235,0.24)] sm:w-auto sm:min-w-72">
+            Mulai konsultasi project
+            <ArrowRight className="h-5 w-5" />
+          </span>
+        </div>
       </div>
     </section>
   );

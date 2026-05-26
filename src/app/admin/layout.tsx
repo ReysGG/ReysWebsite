@@ -4,7 +4,6 @@ import { AdminUserMenu } from "@/components/admin/admin-user-menu";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ClerkProvider } from "@clerk/nextjs";
 import { requireAdmin, type AdminUser } from "@/features/admin/lib/auth";
 
 export default async function AdminLayout({
@@ -20,14 +19,11 @@ export default async function AdminLayout({
   }
 
   const displayName = user.name;
-  const initial = displayName.charAt(0).toUpperCase();
-  const avatarUrl = user.imageUrl;
 
   return (
-    <ClerkProvider>
-      <div className="flex h-screen w-full overflow-hidden bg-neutral-50">
-        <AdminSidebar />
-        <div className="flex flex-1 flex-col overflow-hidden">
+    <div className="flex h-screen w-full overflow-hidden bg-neutral-50">
+      <AdminSidebar />
+      <div className="flex flex-1 flex-col overflow-hidden">
         {/* Top Header */}
         <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b border-neutral-200 bg-white px-6">
           <div className="flex items-center gap-4 w-full max-w-md">
@@ -48,7 +44,7 @@ export default async function AdminLayout({
             >
               Lihat Website →
             </Link>
-            <AdminUserMenu displayName={displayName} initial={initial} avatarUrl={avatarUrl} />
+            <AdminUserMenu displayName={displayName} />
           </div>
         </header>
 
