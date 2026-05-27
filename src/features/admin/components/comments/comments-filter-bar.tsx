@@ -25,7 +25,7 @@ export function CommentsFilterBar({
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Cari komentar..."
-          className="w-full rounded-md border border-neutral-200 bg-white py-2 pl-9 pr-3 text-sm text-neutral-900 outline-none transition-colors focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
+          className="w-full rounded-md border border-neutral-200 bg-white py-2 pl-9 pr-3 text-sm text-neutral-900 outline-none transition-colors focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
         />
       </div>
       <input
@@ -33,13 +33,13 @@ export function CommentsFilterBar({
         value={slug}
         onChange={(e) => setSlug(e.target.value)}
         placeholder="Slug artikel..."
-        className="w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100 md:w-56"
+        className="w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9] md:w-56"
       />
       <select
         name="filter"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
-        className="w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100 md:w-44"
+        className="w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9] md:w-44"
       >
         <option value="all">Semua</option>
         <option value="top">Top-level</option>
@@ -47,7 +47,7 @@ export function CommentsFilterBar({
       </select>
       <button
         type="submit"
-        className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
+        className="rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738]"
       >
         Filter
       </button>

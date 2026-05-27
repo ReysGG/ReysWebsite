@@ -39,7 +39,7 @@ export default async function LandingPageSyncPage() {
       <div className="sticky top-0 z-30 rounded-md border border-neutral-200 bg-white/95 p-4 shadow-none backdrop-blur">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">Landing Page Content</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">Landing Page Content</p>
             <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900">Sync Professional Copy</h1>
             <p className="mt-1 max-w-2xl text-sm text-neutral-500">
               Update data landing page di database supaya copy baru yang lebih profesional tampil di website live.
@@ -67,22 +67,22 @@ export default async function LandingPageSyncPage() {
               <p className="mt-1 text-sm font-semibold text-neutral-700">Section synced</p>
               <p className="mt-1 text-xs text-neutral-400">Dibandingkan dengan default profesional terbaru.</p>
             </div>
-            <div className="rounded-md border border-neutral-200 bg-indigo-50 p-2">
-              <Database className="text-indigo-600" size={18} />
+            <div className="rounded-md border border-neutral-200 bg-[#fffcc9] p-2">
+              <Database className="text-[#ff8a00]" size={18} />
             </div>
           </div>
         </div>
         <div className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className={isFullySynced ? "text-3xl font-bold tracking-tight text-indigo-600" : "text-3xl font-bold tracking-tight text-amber-600"}>
+              <p className={isFullySynced ? "text-3xl font-bold tracking-tight text-[#ff8a00]" : "text-3xl font-bold tracking-tight text-amber-600"}>
                 {isFullySynced ? "Ready" : "Perlu sync"}
               </p>
               <p className="mt-1 text-sm font-semibold text-neutral-700">Database content</p>
               <p className="mt-1 text-xs text-neutral-400">Homepage memakai data DB, bukan hanya file default.</p>
             </div>
             <div className="rounded-md border border-neutral-200 bg-neutral-50 p-2">
-              {isFullySynced ? <ShieldCheck className="text-indigo-600" size={18} /> : <AlertTriangle className="text-amber-600" size={18} />}
+              {isFullySynced ? <ShieldCheck className="text-[#ff8a00]" size={18} /> : <AlertTriangle className="text-amber-600" size={18} />}
             </div>
           </div>
         </div>
@@ -93,8 +93,8 @@ export default async function LandingPageSyncPage() {
               <p className="mt-1 text-sm font-semibold text-neutral-700">Positioning</p>
               <p className="mt-1 text-xs text-neutral-400">Technical partner, scope jelas, staging, handover.</p>
             </div>
-            <div className="rounded-md border border-neutral-200 bg-indigo-50 p-2">
-              <Sparkles className="text-indigo-600" size={18} />
+            <div className="rounded-md border border-neutral-200 bg-[#fffcc9] p-2">
+              <Sparkles className="text-[#ff8a00]" size={18} />
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default async function LandingPageSyncPage() {
             {status.checks.map((item) => (
               <Link key={item.label} href={item.href} className="flex items-center justify-between gap-4 p-4 transition-colors hover:bg-neutral-50">
                 <div className="flex min-w-0 items-center gap-3">
-                  <span className={item.ready ? "flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-indigo-50 text-indigo-600" : "flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-amber-50 text-amber-600"}>
+                  <span className={item.ready ? "flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-[#fffcc9] text-[#ff8a00]" : "flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-amber-50 text-amber-600"}>
                     {item.ready ? <Check size={17} /> : <RefreshCw size={17} />}
                   </span>
                   <div className="min-w-0">
@@ -118,7 +118,7 @@ export default async function LandingPageSyncPage() {
                     <p className="mt-1 text-xs text-neutral-500">{item.ready ? "Sudah sama dengan default profesional." : "Masih berbeda dari default profesional."}</p>
                   </div>
                 </div>
-                <span className={item.ready ? "rounded-md border border-indigo-200 bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-700" : "rounded-md border border-amber-200 bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-700"}>
+                <span className={item.ready ? "rounded-md border border-[#ffcd80] bg-[#fffcc9] px-2 py-1 text-xs font-semibold text-[#ff8a00]" : "rounded-md border border-amber-200 bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-700"}>
                   {item.ready ? "Synced" : "Outdated"}
                 </span>
               </Link>
@@ -128,7 +128,7 @@ export default async function LandingPageSyncPage() {
 
         <aside className="space-y-4">
           <div className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
-            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">Apa yang akan berubah?</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">Apa yang akan berubah?</p>
             <h2 className="mt-2 text-lg font-bold text-neutral-900">Copy homepage jadi lebih profesional</h2>
             <div className="mt-5 space-y-3">
               {SECTIONS.map((section) => (

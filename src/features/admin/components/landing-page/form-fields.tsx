@@ -12,7 +12,7 @@ export function Field({
   textarea?: boolean;
 }) {
   const inputClass =
-    "w-full rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100";
+    "w-full rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]";
 
   return (
     <label className="block space-y-1.5">

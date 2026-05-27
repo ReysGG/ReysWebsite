@@ -77,8 +77,8 @@ export function TableOfContents() {
 
   return (
     <nav aria-label="Daftar Isi" className="sticky top-28">
-      <div className="rounded-2xl border border-indigo-100 bg-white/85 p-5 shadow-sm">
-        <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-indigo-600">
+      <div className="rounded-2xl border border-[#ffcd80] bg-white/85 p-5 shadow-sm">
+        <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
           <ListTree className="h-4 w-4" />
           Daftar Isi
         </div>
@@ -90,8 +90,8 @@ export function TableOfContents() {
                 className={cn(
                   "block border-l-2 py-0.5 pl-3 transition-colors",
                   activeId === h.id
-                    ? "border-indigo-600 font-semibold text-indigo-700"
-                    : "border-neutral-200 text-neutral-600 hover:border-indigo-300 hover:text-indigo-700"
+                    ? "border-[#ff8a00] font-semibold text-[#ff8a00]"
+                    : "border-neutral-200 text-neutral-600 hover:border-[#ffcd80] hover:text-[#ff8a00]"
                 )}
               >
                 {h.text}

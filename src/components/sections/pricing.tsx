@@ -31,7 +31,7 @@ export const PricingSection = ({ content }: { content: PricingContent }) => {
     <section id="pricing" className="w-full bg-white py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mx-auto mb-14 max-w-3xl text-center">
-          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-blue-600">
+          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
             {content.eyebrow}
           </p>
           <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -48,11 +48,11 @@ export const PricingSection = ({ content }: { content: PricingContent }) => {
               key={tier.title}
               className={cn(
                 "relative flex min-h-[620px] flex-col rounded-lg border bg-[#f7f9fb] p-7",
-                tier.popular ? "border-blue-500 bg-white" : "border-slate-200",
+                tier.popular ? "border-[#ff8a00] bg-white" : "border-slate-200",
               )}
             >
               {tier.popular ? (
-                <span className="mb-6 w-fit rounded-md bg-blue-600 px-3 py-2 text-xs font-bold uppercase tracking-wider text-white">
+                <span className="mb-6 w-fit rounded-md bg-[#ff8a00] px-3 py-2 text-xs font-bold uppercase tracking-wider text-white">
                   Paling sesuai
                 </span>
               ) : null}
@@ -77,7 +77,7 @@ export const PricingSection = ({ content }: { content: PricingContent }) => {
                     <span
                       className={cn(
                         "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md",
-                        tier.popular ? "bg-blue-600 text-white" : "bg-slate-200 text-slate-700",
+                        tier.popular ? "bg-[#ff8a00] text-white" : "bg-slate-200 text-slate-700",
                       )}
                     >
                       <Check className="h-3.5 w-3.5" strokeWidth={3} />
@@ -92,8 +92,8 @@ export const PricingSection = ({ content }: { content: PricingContent }) => {
                 className={cn(
                   "mt-8 inline-flex w-full items-center justify-center rounded-md px-6 py-4 text-sm font-bold transition-colors duration-200",
                   tier.popular
-                    ? "bg-blue-600 text-white hover:bg-blue-700"
-                    : "border border-slate-300 bg-white text-slate-950 hover:border-blue-300 hover:bg-slate-50",
+                    ? "bg-[#ff8a00] text-white hover:bg-[#f4b738]"
+                    : "border border-slate-300 bg-white text-slate-950 hover:border-[#ffcd80] hover:bg-slate-50",
                 )}
               >
                 {tier.buttonText}

@@ -90,7 +90,7 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item, idx) => (
           <li
-            className="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-indigo-100 bg-indigo-50/50 px-8 py-6 md:w-[450px]"
+            className="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-[#ffcd80] bg-[#fffcc9]/50 px-8 py-6 md:w-[450px]"
             key={`${item.name}-${idx}`}
           >
             <blockquote>
@@ -99,7 +99,7 @@ export const InfiniteMovingCards = ({
                 className="user-select-none pointer-events-none absolute -top-0.5 -left-0.5 -z-1 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
               ></div>
               {/* Decorative quote mark */}
-              <div className="text-5xl font-serif text-indigo-200 leading-none mb-1 select-none">&ldquo;</div>
+              <div className="text-5xl font-serif text-[#ffcd80] leading-none mb-1 select-none">&ldquo;</div>
               {/* Rating Stars */}
               <div className="flex gap-0.5 mb-3">
                 {Array.from({ length: item.rating ?? 5 }).map((_, i) => (
@@ -117,12 +117,12 @@ export const InfiniteMovingCards = ({
                 {item.quote}
               </span>
               <div className="relative z-20 mt-6 flex flex-row items-center gap-3">
-                <div className="shrink-0 w-10 h-10 rounded-full border border-indigo-100 flex items-center justify-center overflow-hidden">
+                <div className="shrink-0 w-10 h-10 rounded-full border border-[#ffcd80] flex items-center justify-center overflow-hidden">
                   {item.img ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-indigo-100 text-indigo-600 text-xs font-bold">
+                    <div className="w-full h-full flex items-center justify-center bg-[#fffcc9] text-[#ff8a00] text-xs font-bold">
                       {getInitials(item.name)}
                     </div>
                   )}

@@ -60,22 +60,22 @@ export default async function AdminSubscribersPage({ searchParams }: { searchPar
 
   return (
     <div className="space-y-6">
-      <div className="relative overflow-hidden rounded-md border border-indigo-100 bg-gradient-to-br from-white via-indigo-50/60 to-white p-6 shadow-none">
+      <div className="relative overflow-hidden rounded-md border border-[#ffcd80] bg-gradient-to-br from-white via-[#fffcc9]/60 to-white p-6 shadow-none">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">Audience</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">Audience</p>
             <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900">Subscribers</h1>
             <p className="mt-1 text-sm text-neutral-500">Pantau email subscriber dari newsletter, CTA, atau form website.</p>
           </div>
           <div className="flex items-center gap-3">
             <Link
               href="/api/admin/subscribers/export"
-              className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 transition-colors hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"
+              className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9] hover:text-[#ff8a00]"
             >
               <Download className="h-4 w-4" />
               Export CSV
             </Link>
-            <div className="flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-3 text-white">
+            <div className="flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-3 text-white">
               <Mail className="h-4 w-4" />
               <span className="text-sm font-semibold">{activeCount} aktif</span>
             </div>
@@ -111,13 +111,13 @@ export default async function AdminSubscribersPage({ searchParams }: { searchPar
               name="q"
               defaultValue={q}
               placeholder="Cari email atau source..."
-              className="w-full rounded-md border border-neutral-200 bg-white py-2 pl-9 pr-3 text-sm text-neutral-900 outline-none transition-colors focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
+              className="w-full rounded-md border border-neutral-200 bg-white py-2 pl-9 pr-3 text-sm text-neutral-900 outline-none transition-colors focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
             />
           </div>
           <select
             name="status"
             defaultValue={status}
-            className="w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100 md:w-40"
+            className="w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9] md:w-40"
           >
             <option value="all">Semua</option>
             <option value="active">Aktif</option>
@@ -125,7 +125,7 @@ export default async function AdminSubscribersPage({ searchParams }: { searchPar
           </select>
           <button
             type="submit"
-            className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
+            className="rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738]"
           >
             Filter
           </button>
@@ -141,7 +141,7 @@ export default async function AdminSubscribersPage({ searchParams }: { searchPar
 
         {subscribers.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-indigo-50"><Mail className="h-5 w-5 text-indigo-600" /></div>
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-[#fffcc9]"><Mail className="h-5 w-5 text-[#ff8a00]" /></div>
             <p className="text-sm font-semibold text-neutral-700">Tidak ada subscriber ditemukan</p>
             <p className="mt-1 text-xs text-neutral-400">Coba ubah filter atau kata kunci pencarian.</p>
           </div>

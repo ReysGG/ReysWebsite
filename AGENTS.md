@@ -32,6 +32,18 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Keep presentation components focused on rendering, local interaction state, and form UX. Do not mix dashboard aggregation or Prisma query logic into component files.
 - When a form has live preview state, keep derived values computed during render or via `useMemo`; avoid setting state synchronously inside `useEffect`.
 
+### Brand color rules
+
+- Jangan gunakan warna biru atau indigo untuk UI brand, background dekoratif, gradient, border aksen, icon aksen, CTA, badge, dan highlight.
+- Jika menemukan warna biru atau indigo di UI, ganti dengan palet berikut sesuai kebutuhan kontras dan hierarki visual:
+  - `#ffffff` / `rgb(255, 255, 255)`
+  - `#fffcc9` / `rgb(255, 252, 201)`
+  - `#ffcd80` / `rgb(255, 205, 128)`
+  - `#f4b738` / `rgb(244, 183, 56)`
+  - `#ff8a00` / `rgb(255, 138, 0)`
+- Untuk gradient, gunakan kombinasi warna putih, krem, kuning, dan oranye dari palet ini; jangan gunakan `blue-*`, `indigo-*`, atau hex/rgb bernuansa biru/indigo.
+- Warna netral seperti hitam, abu-abu, slate, zinc, dan transparent tetap boleh dipakai untuk teks, shadow, border netral, dan layout selama bukan aksen brand.
+
 ## Deployment Safety Rules
 
 Setiap kali kamu membuat perubahan pada file-file berikut, kamu **wajib** memeriksa apakah perubahan tersebut bisa menyebabkan kegagalan saat deployment ke VPS/Docker. Jika iya, perbaiki sekaligus atau beri peringatan eksplisit ke user.

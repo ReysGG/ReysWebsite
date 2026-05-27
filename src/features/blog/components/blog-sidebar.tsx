@@ -21,16 +21,16 @@ export function BlogSidebar({
           {trending.slice(0, 5).map((post, i) => (
             <li key={post.id}>
               <Link href={`/blog/${post.slug}`} className="group flex gap-3">
-                <span className="w-8 shrink-0 text-2xl font-black leading-none text-neutral-200 dark:text-neutral-200 transition group-hover:text-indigo-400">
+                <span className="w-8 shrink-0 text-2xl font-black leading-none text-neutral-200 dark:text-neutral-200 transition group-hover:bg-gradient-to-r group-hover:from-[#ff8a00] group-hover:via-[#f4b738] group-hover:to-[#ffcd80] group-hover:bg-clip-text group-hover:text-transparent">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold leading-snug text-neutral-900 dark:text-neutral-900 line-clamp-2 transition group-hover:text-indigo-700">
+                  <p className="text-sm font-semibold leading-snug text-neutral-900 dark:text-neutral-900 line-clamp-2 transition group-hover:text-[#ff8a00]">
                     {post.title}
                   </p>
                   <div className="mt-0.5 flex items-center gap-2">
                     {post.category && (
-                      <span className="text-[11px] font-bold uppercase text-indigo-600">
+                      <span className="text-[11px] font-bold uppercase bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
                         {post.category}
                       </span>
                     )}
@@ -58,7 +58,7 @@ export function BlogSidebar({
               <li key={cat}>
                 <Link
                   href={`/blog?category=${encodeURIComponent(cat)}`}
-                  className="flex items-center justify-between py-1 text-sm text-neutral-700 dark:text-neutral-700 transition hover:text-indigo-600"
+                  className="flex items-center justify-between py-1 text-sm text-neutral-700 dark:text-neutral-700 transition hover:bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent"
                 >
                   {cat}
                   <span className="text-neutral-300">→</span>
@@ -80,7 +80,7 @@ export function BlogSidebar({
               <Link
                 key={tag}
                 href={`/blog?tag=${encodeURIComponent(tag)}`}
-                className="rounded bg-neutral-100 dark:bg-neutral-100 px-2.5 py-1 text-xs text-neutral-600 dark:text-neutral-600 transition hover:bg-indigo-50 hover:text-indigo-700"
+                className="rounded bg-neutral-100 dark:bg-neutral-100 px-2.5 py-1 text-xs text-neutral-600 dark:text-neutral-600 transition hover:bg-[#fffcc9] hover:text-[#ff8a00]"
               >
                 {tag}
               </Link>
@@ -90,12 +90,12 @@ export function BlogSidebar({
       )}
 
       {/* Newsletter */}
-      <div className="rounded-md bg-indigo-600 p-5 text-white">
-        <p className="mb-1 text-xs font-bold uppercase tracking-widest text-indigo-300">
+      <div className="rounded-md bg-gradient-to-br from-[#ff8a00] via-[#f4b738] to-neutral-950 p-5 text-white">
+        <p className="mb-1 text-xs font-bold uppercase tracking-widest text-[#fffcc9]">
           Newsletter
         </p>
         <h3 className="mb-1 text-base font-bold">Artikel terbaru ke inbox</h3>
-        <p className="mb-4 text-xs text-indigo-200">
+        <p className="mb-4 text-xs text-[#fffcc9]/85">
           Tips dan insight langsung ke email kamu.
         </p>
         <form action="/api/newsletter" method="POST" className="space-y-2">
@@ -112,11 +112,11 @@ export function BlogSidebar({
             name="email"
             required
             placeholder="email@kamu.com"
-            className="w-full rounded-md border border-white/30 bg-white/20 px-3 py-2 text-sm text-white placeholder:text-indigo-300 outline-none focus:bg-white/30 transition"
+            className="w-full rounded-md border border-white/30 bg-white/20 px-3 py-2 text-sm text-white placeholder:text-[#fffcc9] outline-none focus:bg-white/30 transition"
           />
           <button
             type="submit"
-            className="w-full rounded-md bg-white px-4 py-2 text-sm font-bold text-indigo-700 transition hover:bg-indigo-50"
+            className="w-full rounded-md bg-white px-4 py-2 text-sm font-bold text-[#ff8a00] transition hover:bg-[#fffcc9]"
           >
             Subscribe
           </button>

@@ -50,18 +50,18 @@ export default async function AdminSettingsPage() {
       <div className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">System</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">System</p>
             <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900">Settings</h1>
             <p className="mt-1 text-sm text-neutral-500">Konfigurasi global website dan status integrasi.</p>
           </div>
           <div className="flex items-center gap-3">
             <form action={revalidateAll}>
-              <button type="submit" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 transition-colors hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700">
+              <button type="submit" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9] hover:text-[#ff8a00]">
                 <RefreshCw className="h-4 w-4" />
                 Revalidate Cache
               </button>
             </form>
-            <div className="flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-3 text-white">
+            <div className="flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-3 text-white">
               <ServerCog className="h-4 w-4" />
               <span className="text-sm font-semibold">{readyCount}/{settingsChecks.length} configured</span>
             </div>
@@ -111,7 +111,7 @@ export default async function AdminSettingsPage() {
             href="/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between rounded-md border border-neutral-200 bg-white p-4 transition-colors hover:border-indigo-200 hover:bg-indigo-50"
+            className="flex items-center justify-between rounded-md border border-neutral-200 bg-white p-4 transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9]"
           >
             <div>
               <p className="text-xs font-semibold text-neutral-900">Preview Website</p>

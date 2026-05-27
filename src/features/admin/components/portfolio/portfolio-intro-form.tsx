@@ -25,7 +25,7 @@ export function PortfolioIntroForm({ intro }: { intro: PortfolioIntroConfig }) {
             name="eyebrow"
             type="text"
             defaultValue={intro.eyebrow}
-            className="w-full rounded-md border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+            className="w-full rounded-md border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]"
           />
           <p className="text-xs text-neutral-400">Contoh: Portfolio, Showcase, Studi Kasus.</p>
         </div>
@@ -39,7 +39,7 @@ export function PortfolioIntroForm({ intro }: { intro: PortfolioIntroConfig }) {
             name="heading"
             rows={3}
             defaultValue={intro.heading}
-            className="w-full resize-none rounded-md border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+            className="w-full resize-none rounded-md border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]"
           />
           <p className="text-xs text-neutral-400">Usahakan 1-2 baris agar tetap rapi di desktop dan mobile.</p>
         </div>
@@ -53,7 +53,7 @@ export function PortfolioIntroForm({ intro }: { intro: PortfolioIntroConfig }) {
             name="description"
             rows={5}
             defaultValue={intro.description}
-            className="w-full resize-none rounded-md border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm leading-relaxed text-neutral-900 outline-none transition-colors focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+            className="w-full resize-none rounded-md border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm leading-relaxed text-neutral-900 outline-none transition-colors focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]"
           />
           <p className="text-xs text-neutral-400">Jelaskan jenis solusi/project yang pengunjung bisa lihat di portfolio.</p>
         </div>
@@ -67,7 +67,7 @@ export function PortfolioIntroForm({ intro }: { intro: PortfolioIntroConfig }) {
             name="featuredLabel"
             type="text"
             defaultValue={intro.featuredLabel}
-            className="w-full rounded-md border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+            className="w-full rounded-md border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]"
           />
           <p className="text-xs text-neutral-400">Badge kecil untuk preview/admin.</p>
         </div>
@@ -81,7 +81,7 @@ export function PortfolioIntroForm({ intro }: { intro: PortfolioIntroConfig }) {
           <Eye size={15} />
           Preview
         </button>
-        <button disabled={isPending} className="inline-flex items-center justify-center gap-2 rounded-md bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-300">
+        <button disabled={isPending} className="inline-flex items-center justify-center gap-2 rounded-md bg-[#ff8a00] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738] disabled:cursor-not-allowed disabled:bg-[#ffcd80]">
           <Save size={15} />
           {isPending ? "Menyimpan..." : "Simpan Perubahan"}
         </button>

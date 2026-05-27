@@ -19,7 +19,7 @@ export function TrendingPosts({ posts }: { posts: TrendingPostProps[] }) {
           <div className="space-y-1">
             <CardTitle className="text-base font-semibold text-neutral-900 flex items-center gap-2">
               Artikel Populer
-              <TrendingUp className="text-indigo-500" size={16} />
+              <TrendingUp className="text-[#ff8a00]" size={16} />
             </CardTitle>
             <CardDescription className="text-xs text-neutral-500">
               Postingan dengan views terbanyak
@@ -36,7 +36,7 @@ export function TrendingPosts({ posts }: { posts: TrendingPostProps[] }) {
             <p className="text-sm text-neutral-500">Belum ada artikel.</p>
             <Link
               href="/admin/blog/create"
-              className="mt-3 text-xs font-semibold text-indigo-600 hover:text-indigo-800 transition-colors"
+              className="mt-3 text-xs font-semibold text-[#ff8a00] hover:text-[#f4b738] transition-colors"
             >
               Tulis artikel pertama →
             </Link>
@@ -45,13 +45,13 @@ export function TrendingPosts({ posts }: { posts: TrendingPostProps[] }) {
           <div className="space-y-4">
             {posts.map((post, index) => (
               <div key={post.id} className="flex items-center gap-3">
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-indigo-50 text-xs font-bold text-indigo-600">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#fffcc9] text-xs font-bold text-[#ff8a00]">
                   {index + 1}
                 </div>
                 <div className="flex-1 min-w-0">
                   <Link
                     href={`/admin/blog/${post.id}`}
-                    className="block truncate text-sm font-medium text-neutral-900 hover:text-indigo-600 transition-colors"
+                    className="block truncate text-sm font-medium text-neutral-900 hover:text-[#ff8a00] transition-colors"
                   >
                     {post.title}
                   </Link>

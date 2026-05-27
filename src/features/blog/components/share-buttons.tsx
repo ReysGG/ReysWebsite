@@ -30,7 +30,7 @@ export function ShareButtons({ title, slug }: { title: string; slug: string }) {
       label: "LinkedIn",
       href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
       Icon: LinkedinIcon,
-      color: "hover:bg-blue-50 hover:text-blue-700",
+      color: "hover:bg-[#fffcc9] hover:text-[#ff8a00]",
     },
   ];
 
@@ -63,7 +63,7 @@ export function ShareButtons({ title, slug }: { title: string; slug: string }) {
         type="button"
         onClick={handleCopy}
         aria-label="Salin tautan"
-        className="inline-flex h-9 items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 text-xs font-semibold text-neutral-600 transition-colors hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"
+        className="inline-flex h-9 items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 text-xs font-semibold text-neutral-600 transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9] hover:text-[#ff8a00]"
       >
         {copied ? <Check className="h-3.5 w-3.5 text-emerald-600" /> : <Copy className="h-3.5 w-3.5" />}
         {copied ? "Tersalin" : "Salin link"}

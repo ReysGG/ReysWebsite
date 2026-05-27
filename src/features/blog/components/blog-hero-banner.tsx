@@ -3,7 +3,7 @@ import { Search, Sparkles } from "lucide-react";
 
 export function BlogHeroBanner({ totalPosts }: { totalPosts: number }) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-indigo-700 to-indigo-900 px-6 py-16 text-white md:px-12 md:py-20 lg:px-20">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#ff8a00] via-[#f4b738] to-neutral-950 px-6 py-16 text-white md:px-12 md:py-20 lg:px-20">
       {/* Decorative elements */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.06),transparent_50%)]" />
       <div className="pointer-events-none absolute right-0 top-0 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
@@ -34,7 +34,7 @@ export function BlogHeroBanner({ totalPosts }: { totalPosts: number }) {
           </div>
           <button
             type="submit"
-            className="shrink-0 rounded-full bg-white px-6 py-3 text-sm font-semibold text-indigo-700 transition-colors hover:bg-indigo-50"
+            className="shrink-0 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#ff8a00] transition-colors hover:bg-[#fffcc9]"
           >
             Cari
           </button>

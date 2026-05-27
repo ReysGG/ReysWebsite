@@ -67,8 +67,8 @@ export function BlogPagination({
                   className={cn(
                     "flex h-9 min-w-9 items-center justify-center rounded-full px-3 font-semibold transition-colors",
                     isActive
-                      ? "bg-indigo-600 text-white"
-                      : "text-neutral-500 hover:bg-indigo-50 hover:text-indigo-700"
+                      ? "bg-[#ff8a00] text-white"
+                      : "text-neutral-500 hover:bg-[#fffcc9] hover:text-[#ff8a00]"
                   )}
                 >
                   {item}

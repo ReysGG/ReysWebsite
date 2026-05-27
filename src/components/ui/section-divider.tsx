@@ -7,7 +7,7 @@ import React from "react";
 export const SectionDivider = () => {
   return (
     <div className="w-full px-16 md:px-32">
-      <div className="h-px bg-gradient-to-r from-transparent via-indigo-100 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-[#ffcd80] to-transparent" />
     </div>
   );
 };

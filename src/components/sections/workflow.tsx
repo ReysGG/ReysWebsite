@@ -43,13 +43,13 @@ export const WorkflowSection = ({ content }: { content: WorkflowContent }) => {
           transition={{ duration: 0.7 }}
           className="lg:col-span-4"
         >
-          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-blue-600">
+          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
             {content.eyebrow}
           </p>
           <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
             {content.headingPrefix}{" "}
-            <span className="text-blue-600">
-              <FlipWords words={content.rotatingWords} className="px-0 font-bold text-blue-600" />
+            <span className="text-[#ff8a00]">
+              <FlipWords words={content.rotatingWords} className="px-0 font-bold text-[#ff8a00]" />
             </span>
           </h2>
           <p className="mt-5 text-base leading-relaxed text-slate-600">
@@ -68,7 +68,7 @@ export const WorkflowSection = ({ content }: { content: WorkflowContent }) => {
               className="rounded-lg border border-slate-200 bg-white p-7"
             >
               <div className="mb-8 flex items-center justify-between gap-6">
-                <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-blue-100 bg-blue-50 text-sm font-bold text-blue-600">
+                <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-[#ffcd80] bg-[#fffcc9] text-sm font-bold text-[#ff8a00]">
                   {item.step}
                 </span>
                 <span className="h-px flex-1 bg-slate-200" />

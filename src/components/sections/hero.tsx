@@ -9,6 +9,7 @@ import {
   CalendarDays,
   Check,
   RotateCcw,
+  Star,
   type LucideIcon,
 } from "lucide-react";
 import { FlipWords } from "@/components/ui/flip-words";
@@ -144,22 +145,22 @@ function GlassMetricCard({
         animate={{ y: [0, -7, 0] }}
         transition={{ duration: 5.8 + delay, repeat: Infinity, ease: "easeInOut" }}
         className={cn(
-          "relative overflow-hidden rounded-[16px] border border-white/75 bg-white/70 shadow-[0_20px_52px_rgba(79,70,229,0.14)] ring-1 ring-blue-100/80 backdrop-blur-xl",
+          "relative overflow-hidden rounded-[16px] border border-white/75 bg-white/70 shadow-[0_20px_52px_rgba(255,138,0,0.14)] ring-1 ring-[#ffcd80]/80 backdrop-blur-xl",
           card.compact ? "p-3.5" : "p-4",
         )}
       >
-        <span className="pointer-events-none absolute inset-px rounded-[15px] bg-[linear-gradient(135deg,rgba(255,255,255,0.88),rgba(255,255,255,0.28)_44%,rgba(96,165,250,0.12))]" />
+        <span className="pointer-events-none absolute inset-px rounded-[15px] bg-[linear-gradient(135deg,rgba(255,255,255,0.88),rgba(255,255,255,0.28)_44%,rgba(255,205,128,0.18))]" />
         <span className="pointer-events-none absolute -left-12 -top-9 h-16 w-[145%] rotate-[-9deg] bg-white/55 blur-xl" />
-        <span className="pointer-events-none absolute -bottom-10 right-3 h-20 w-24 rounded-full bg-blue-500/10 blur-2xl" />
+        <span className="pointer-events-none absolute -bottom-10 right-3 h-20 w-24 rounded-full bg-[#ff8a00]/10 blur-2xl" />
 
         <div className="relative flex items-start gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/80 bg-white/80 text-blue-600 shadow-[0_10px_22px_rgba(79,70,229,0.12)]">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/80 bg-white/80 text-[#ff8a00] shadow-[0_10px_22px_rgba(255,138,0,0.12)]">
             <Icon className="h-4.5 w-4.5 h-[18px] w-[18px]" />
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-start justify-between gap-2">
               <div>
-                <p className="text-[10px] font-bold text-blue-600">{card.eyebrow}</p>
+                <p className="text-[10px] font-bold text-[#ff8a00]">{card.eyebrow}</p>
                 <p className="mt-0.5 text-xs font-bold leading-snug text-slate-950">{card.title}</p>
               </div>
               <span className="mt-0.5 flex h-4.5 h-[18px] w-[18px] w-4.5 shrink-0 items-center justify-center rounded-full bg-emerald-400 text-white shadow-[0_6px_16px_rgba(16,185,129,0.28)]">
@@ -170,7 +171,7 @@ function GlassMetricCard({
             {card.showProgress && (
               <div className="mt-2 h-1 overflow-hidden rounded-full bg-slate-200/70">
                 <motion.div
-                  className="h-full rounded-full bg-gradient-to-r from-violet-500 via-blue-600 to-cyan-400"
+                  className="h-full rounded-full bg-gradient-to-r from-[#fffcc9] via-[#f4b738] to-[#ff8a00]"
                   initial={{ width: "24%" }}
                   animate={{ width: ["24%", "92%", "84%"] }}
                   transition={{ duration: 3.8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
@@ -200,14 +201,14 @@ function MiniCard({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
     >
-      <div className="relative overflow-hidden rounded-[14px] border border-white/75 bg-white/80 p-3 shadow-[0_12px_36px_rgba(79,70,229,0.12)] backdrop-blur-xl">
-        <span className="pointer-events-none absolute inset-px rounded-[13px] bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,255,255,0.3)_44%,rgba(96,165,250,0.1))]" />
+      <div className="relative overflow-hidden rounded-[14px] border border-white/75 bg-white/80 p-3 shadow-[0_12px_36px_rgba(255,138,0,0.12)] backdrop-blur-xl">
+        <span className="pointer-events-none absolute inset-px rounded-[13px] bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,255,255,0.3)_44%,rgba(255,205,128,0.14))]" />
         <div className="relative flex items-center gap-2.5">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/80 bg-white/90 text-blue-600">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/80 bg-white/90 text-[#ff8a00]">
             <Icon className="h-4 w-4" />
           </div>
           <div className="min-w-0">
-            <p className="text-[9px] font-bold text-blue-600">{card.eyebrow}</p>
+            <p className="text-[9px] font-bold text-[#ff8a00]">{card.eyebrow}</p>
             <p className="text-[11px] font-bold leading-tight text-slate-900 truncate">{card.title}</p>
           </div>
           <span className="ml-auto flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-400 text-white">
@@ -245,12 +246,16 @@ function HeroVisual({ content }: { content: HeroContent }) {
       className="relative mx-auto h-[360px] w-full overflow-hidden sm:h-[480px] sm:overflow-visible md:h-[540px] lg:mr-0 lg:ml-auto lg:h-[700px] lg:max-w-[900px] xl:max-w-[960px]"
       aria-label="Preview deliverable Build With Reys"
     >
+      {/* Glow orbs behind mockups */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[55%] w-[65%] rounded-full bg-[#ff8a00]/10 blur-[80px]" />
+      <div className="pointer-events-none absolute right-[8%] top-[8%] h-[38%] w-[38%] rounded-full bg-[#ffcd80]/20 blur-[60px]" />
+
       {/* Dashed connector lines — desktop only, one per card */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         {/* Revisions → laptop top-left */}
-        <span className="absolute left-[22%] top-[14%] h-[14%] w-[10%] rounded-tl-[2rem] border-l border-t border-dashed border-blue-400/50 xl:left-[24%] xl:w-[11%]" />
+        <span className="absolute left-[22%] top-[14%] h-[14%] w-[10%] rounded-tl-[2rem] border-l border-t border-dashed border-[#ffcd80]/70 xl:left-[24%] xl:w-[11%]" />
         {/* Timeline → phone top-right */}
-        <span className="absolute right-[22%] top-[10%] h-[20%] w-[10%] rounded-tr-[2rem] border-r border-t border-dashed border-blue-400/50 xl:right-[23%]" />
+        <span className="absolute right-[22%] top-[10%] h-[20%] w-[10%] rounded-tr-[2rem] border-r border-t border-dashed border-[#ffcd80]/70 xl:right-[23%]" />
       </div>
 
       {/* Laptop mockup */}
@@ -303,10 +308,14 @@ export const HeroSection = ({
   secondaryHref?: string;
 }) => {
   return (
-    <section className="relative w-full overflow-x-hidden border-b border-slate-200 bg-[#f8fbff] pt-28 pb-10 antialiased md:pt-32 lg:pt-28">
+    <section className="relative w-full overflow-hidden border-b border-slate-200 bg-[#f8fbff] pt-28 pb-10 antialiased md:pt-32 lg:pt-28">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.04)_1px,transparent_1px),linear-gradient(180deg,rgba(15,23,42,0.035)_1px,transparent_1px)] bg-[size:112px_112px] opacity-35" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.74),rgba(248,251,255,0.96))]" />
+        {/* Gradient orb blobs */}
+        <div className="absolute -top-24 right-[5%] h-[520px] w-[520px] rounded-full bg-[#ff8a00]/10 blur-[110px]" />
+        <div className="absolute -bottom-20 -left-16 h-[420px] w-[420px] rounded-full bg-[#ffcd80]/15 blur-[100px]" />
+        <div className="absolute top-1/2 left-[30%] h-[280px] w-[560px] -translate-y-1/2 rounded-full bg-[#f4b738]/10 blur-[130px]" />
       </div>
 
       <div className="relative z-10 mx-auto grid w-full max-w-[1536px] gap-6 px-4 sm:px-6 md:px-12 lg:min-h-[700px] lg:grid-cols-[minmax(360px,0.88fr)_minmax(560px,1.12fr)] xl:grid-cols-[minmax(420px,0.82fr)_minmax(700px,1.18fr)] lg:items-center xl:px-14">
@@ -315,22 +324,43 @@ export const HeroSection = ({
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="mb-6 inline-flex items-center gap-3 rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm"
+            className="mb-6 inline-flex items-center gap-3 rounded-full border border-slate-200/80 bg-white/80 px-4 py-2 shadow-sm shadow-[#ffcd80]/40 backdrop-blur-sm"
           >
-            <span className="h-2 w-2 rounded-full bg-blue-600" />
-            {content.trustText}
+            {/* Avatar stack */}
+            <div className="flex -space-x-2">
+              {(["#60a5fa","#a78bfa","#34d399","#fb923c"] as const).map((color, i) => (
+                <div
+                  key={i}
+                  className="h-6 w-6 rounded-full border-2 border-white flex items-center justify-center text-[9px] font-bold text-white"
+                  style={{ backgroundColor: color, zIndex: 4 - i }}
+                >
+                  {["A","B","C","D"][i]}
+                </div>
+              ))}
+            </div>
+            <div className="h-3.5 w-px bg-slate-200" />
+            <div className="flex items-center gap-1.5">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-3 w-3 fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+              <span className="text-xs font-semibold text-slate-700">50+ klien puas</span>
+            </div>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.08, ease: "easeOut" }}
-            className="text-[2rem] font-bold leading-[1.08] text-slate-950 sm:text-5xl md:text-[52px] lg:text-[44px] xl:text-[56px]"
+            className="text-[2rem] font-bold leading-[1.08] sm:text-5xl md:text-[52px] lg:text-[44px] xl:text-[56px]"
           >
-            {content.headlinePrefix}
+            <span className="bg-gradient-to-br from-slate-950 via-slate-800 to-slate-700 bg-clip-text text-transparent">
+              {content.headlinePrefix}
+            </span>
             <br />
-            <span className="inline-flex min-h-[1.15em] w-full min-w-0 text-blue-600">
-              <FlipWords className="px-0 font-bold text-blue-600" words={content.rotatingWords} />
+            <span className="inline-flex min-h-[1.15em] w-full min-w-0 text-[#ff8a00]">
+              <FlipWords className="px-0 font-bold text-[#ff8a00]" words={content.rotatingWords} />
             </span>
           </motion.h1>
 
@@ -351,14 +381,16 @@ export const HeroSection = ({
           >
             <Link
               href="#cta"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 px-7 py-4 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition-colors duration-200 hover:bg-blue-700"
+              className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#ff8a00] to-[#f4b738] px-7 py-4 text-sm font-bold text-white shadow-lg shadow-[#ff8a00]/25 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-[#ff8a00]/35"
             >
+              {/* Shimmer sweep */}
+              <span className="pointer-events-none absolute inset-0 -translate-x-full skew-x-[-20deg] bg-white/20 transition-transform duration-700 group-hover:translate-x-[200%]" />
               {content.primaryCta}
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
             <Link
               href={secondaryHref}
-              className="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-7 py-4 text-sm font-bold text-slate-950 transition-colors duration-200 hover:border-blue-300 hover:bg-slate-50"
+              className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-7 py-4 text-sm font-bold text-slate-950 backdrop-blur-sm transition-all duration-200 hover:scale-[1.02] hover:border-[#ffcd80] hover:bg-white hover:shadow-md"
             >
               {content.secondaryCta}
             </Link>

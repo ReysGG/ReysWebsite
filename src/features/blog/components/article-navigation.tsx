@@ -11,12 +11,12 @@ export function ArticleNavigation({ prev, next }: { prev: NavPost; next: NavPost
       {prev ? (
         <Link
           href={`/blog/${prev.slug}`}
-          className="group flex flex-col rounded-2xl border border-neutral-200 bg-white/90 p-5 transition-colors hover:border-indigo-200 hover:bg-indigo-50/50"
+          className="group flex flex-col rounded-2xl border border-neutral-200 bg-white/90 p-5 transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9]/50"
         >
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-indigo-600">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">
             <ArrowLeft className="h-3.5 w-3.5" /> Sebelumnya
           </span>
-          <span className="mt-2 line-clamp-2 text-base font-semibold text-neutral-900 group-hover:text-indigo-700">
+          <span className="mt-2 line-clamp-2 text-base font-semibold text-neutral-900 group-hover:text-[#ff8a00]">
             {prev.title}
           </span>
         </Link>
@@ -27,12 +27,12 @@ export function ArticleNavigation({ prev, next }: { prev: NavPost; next: NavPost
       {next ? (
         <Link
           href={`/blog/${next.slug}`}
-          className="group flex flex-col items-end rounded-2xl border border-neutral-200 bg-white/90 p-5 text-right transition-colors hover:border-indigo-200 hover:bg-indigo-50/50"
+          className="group flex flex-col items-end rounded-2xl border border-neutral-200 bg-white/90 p-5 text-right transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9]/50"
         >
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-indigo-600">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">
             Selanjutnya <ArrowRight className="h-3.5 w-3.5" />
           </span>
-          <span className="mt-2 line-clamp-2 text-base font-semibold text-neutral-900 group-hover:text-indigo-700">
+          <span className="mt-2 line-clamp-2 text-base font-semibold text-neutral-900 group-hover:text-[#ff8a00]">
             {next.title}
           </span>
         </Link>

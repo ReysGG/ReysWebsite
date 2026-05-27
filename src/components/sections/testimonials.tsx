@@ -18,7 +18,7 @@ export const TestimonialsSection = ({ testimonials }: { testimonials: PublicTest
     <section id="testimonials" className="w-full bg-[#f7f9fb] py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mx-auto mb-14 max-w-3xl text-center">
-          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-blue-600">
+          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
             Testimoni
           </p>
           <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -41,7 +41,7 @@ export const TestimonialsSection = ({ testimonials }: { testimonials: PublicTest
               </div>
               <p className="text-base leading-relaxed text-slate-700">&ldquo;{item.quote}&rdquo;</p>
               <div className="mt-7 flex items-center gap-3">
-                <div className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-100 text-sm font-bold text-blue-600">
+                <div className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-100 text-sm font-bold text-[#ff8a00]">
                   {item.img ? (
                     <Image src={item.img} alt={item.name} fill className="object-cover" sizes="44px" />
                   ) : (

@@ -52,7 +52,7 @@ export const BackToTop = () => {
           transition={{ duration: 0.2, ease: "easeOut" }}
           onClick={scrollToTop}
           aria-label="Kembali ke atas"
-          className="fixed bottom-24 right-5 z-40 w-11 h-11 rounded-full flex items-center justify-center bg-linear-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all duration-200 cursor-pointer"
+          className="fixed bottom-24 right-5 z-40 w-11 h-11 rounded-full flex items-center justify-center bg-linear-to-br from-[#ff8a00] to-[#f4b738] shadow-lg shadow-[#ff8a00]/30 hover:shadow-[#ff8a00]/50 hover:scale-110 transition-all duration-200 cursor-pointer"
         >
           <ArrowUp className="w-5 h-5 text-white" />
         </motion.button>

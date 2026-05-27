@@ -118,7 +118,7 @@ export const Footer = async ({ settings }: FooterProps) => {
                     key={link.label}
                     href={link.href}
                     ariaLabel={link.label}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-800 text-neutral-400 transition-colors hover:border-blue-400 hover:text-blue-300"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-800 text-neutral-400 transition-colors hover:border-[#ffcd80] hover:text-[#ffcd80]"
                   >
                     {link.icon}
                   </SmartFooterLink>
@@ -130,16 +130,16 @@ export const Footer = async ({ settings }: FooterProps) => {
           <div className="flex flex-col">
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-white">Layanan</h3>
             <div className="flex flex-col gap-3 text-sm text-neutral-400">
-              <Link href="/#services" className="transition-colors hover:text-blue-300">
+              <Link href="/#services" className="transition-colors hover:text-[#ffcd80]">
                 Company Profile
               </Link>
-              <Link href="/#services" className="transition-colors hover:text-blue-300">
+              <Link href="/#services" className="transition-colors hover:text-[#ffcd80]">
                 Web Application
               </Link>
-              <Link href="/#services" className="transition-colors hover:text-blue-300">
+              <Link href="/#services" className="transition-colors hover:text-[#ffcd80]">
                 Sistem E-Commerce
               </Link>
-              <Link href="/#services" className="transition-colors hover:text-blue-300">
+              <Link href="/#services" className="transition-colors hover:text-[#ffcd80]">
                 SEO &amp; Performa
               </Link>
             </div>
@@ -148,16 +148,16 @@ export const Footer = async ({ settings }: FooterProps) => {
           <div className="flex flex-col">
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-white">Perusahaan</h3>
             <div className="flex flex-col gap-3 text-sm text-neutral-400">
-              <Link href="/#workflow" className="transition-colors hover:text-blue-300">
+              <Link href="/#workflow" className="transition-colors hover:text-[#ffcd80]">
                 Tentang Kami
               </Link>
-              <Link href="/#portfolio" className="transition-colors hover:text-blue-300">
+              <Link href="/#portfolio" className="transition-colors hover:text-[#ffcd80]">
                 Portofolio Kerja
               </Link>
-              <Link href="/#testimonials" className="transition-colors hover:text-blue-300">
+              <Link href="/#testimonials" className="transition-colors hover:text-[#ffcd80]">
                 Testimonial Klien
               </Link>
-              <Link href="/#cta" className="transition-colors hover:text-blue-300">
+              <Link href="/#cta" className="transition-colors hover:text-[#ffcd80]">
                 Hubungi Kami
               </Link>
             </div>
@@ -166,10 +166,10 @@ export const Footer = async ({ settings }: FooterProps) => {
           <div className="flex flex-col">
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-white">Legal</h3>
             <div className="flex flex-col gap-3 text-sm text-neutral-400">
-              <Link href="/#faq" className="transition-colors hover:text-blue-300">
+              <Link href="/#faq" className="transition-colors hover:text-[#ffcd80]">
                 Syarat &amp; Ketentuan
               </Link>
-              <Link href="/#faq" className="transition-colors hover:text-blue-300">
+              <Link href="/#faq" className="transition-colors hover:text-[#ffcd80]">
                 Kebijakan Privasi
               </Link>
             </div>
@@ -183,14 +183,14 @@ export const Footer = async ({ settings }: FooterProps) => {
           <div className="flex gap-6">
             <SmartFooterLink
               href={resolvedSettings.whatsapp || "/#cta"}
-              className="transition-colors hover:text-blue-300"
+              className="transition-colors hover:text-[#ffcd80]"
             >
               WhatsApp
             </SmartFooterLink>
-            <SmartFooterLink href={emailHref || "/#cta"} className="transition-colors hover:text-blue-300">
+            <SmartFooterLink href={emailHref || "/#cta"} className="transition-colors hover:text-[#ffcd80]">
               Email
             </SmartFooterLink>
-            <Link href="/blog" className="transition-colors hover:text-blue-300">
+            <Link href="/blog" className="transition-colors hover:text-[#ffcd80]">
               Blog
             </Link>
           </div>

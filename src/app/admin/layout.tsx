@@ -32,7 +32,7 @@ export default async function AdminLayout({
               <input
                 type="search"
                 placeholder="Cari artikel, portfolio, testimoni..."
-                className="w-full bg-neutral-100 border-none pl-9 h-9 text-sm rounded-md outline-none focus:ring-1 focus:ring-indigo-300 text-neutral-700 placeholder:text-neutral-400"
+                className="w-full bg-neutral-100 border-none pl-9 h-9 text-sm rounded-md outline-none focus:ring-1 focus:ring-[#ffcd80] text-neutral-700 placeholder:text-neutral-400"
               />
             </div>
           </div>
@@ -40,7 +40,7 @@ export default async function AdminLayout({
             <Link
               href="/"
               target="_blank"
-              className="text-xs font-medium text-neutral-500 hover:text-indigo-600 transition-colors"
+              className="text-xs font-medium text-neutral-500 hover:text-[#ff8a00] transition-colors"
             >
               Lihat Website →
             </Link>

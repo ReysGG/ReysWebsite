@@ -36,7 +36,7 @@ export function TestimonialForm({
               required
               defaultValue={defaultValue?.content}
               placeholder="Apa hasil konkret yang klien rasakan setelah bekerja sama?"
-              className="w-full resize-none rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+              className="w-full resize-none rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
             />
             <p className="text-xs text-neutral-400">Ideal 1–3 kalimat. Fokus ke hasil, trust, dan pengalaman kerja.</p>
           </div>
@@ -50,9 +50,9 @@ export function TestimonialForm({
             folder="testimonials"
             hint="Upload akan disimpan ke Supabase S3. Kalau env belum lengkap, error dari API akan muncul di sini."
           />
-          <div className="rounded-md border border-indigo-100 bg-indigo-50 p-4">
-            <p className="text-xs font-bold uppercase tracking-wide text-indigo-700">Tips testimoni bagus</p>
-            <ul className="mt-3 space-y-2 text-xs leading-relaxed text-indigo-900/80">
+          <div className="rounded-md border border-[#ffcd80] bg-[#fffcc9] p-4">
+            <p className="text-xs font-bold uppercase tracking-wide text-[#ff8a00]">Tips testimoni bagus</p>
+            <ul className="mt-3 space-y-2 text-xs leading-relaxed text-neutral-700">
               <li>• Sebutkan hasil spesifik atau perubahan yang terasa.</li>
               <li>• Hindari kalimat terlalu generik seperti “bagus sekali”.</li>
               <li>• Foto/avatar membuat social proof terasa lebih kredibel.</li>
@@ -65,7 +65,7 @@ export function TestimonialForm({
         <Link href="/admin/testimonials" className="inline-flex items-center justify-center rounded-md border border-neutral-200 px-5 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">
           Batal
         </Link>
-        <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-md bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700">
+        <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-md bg-[#ff8a00] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738]">
           <Save className="h-4 w-4" /> {submitLabel}
         </button>
       </div>
@@ -95,7 +95,7 @@ function Field({
         required={required}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        className="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+        className="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
       />
     </div>
   );

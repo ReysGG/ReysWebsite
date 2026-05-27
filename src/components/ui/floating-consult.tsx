@@ -41,10 +41,10 @@ export function FloatingConsult({ whatsappUrl, siteName = 'Build With Reys' }: F
     >
       {open && (
         <div className="w-72 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/5 animate-[fadeUp_240ms_ease-out]">
-          <div className="bg-gradient-to-br from-indigo-600 to-violet-600 px-4 py-4 text-white">
+          <div className="bg-gradient-to-br from-[#ff8a00] to-[#f4b738] px-4 py-4 text-white">
             <div className="flex items-start justify-between gap-2">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-widest text-indigo-100">Konsultasi Gratis</p>
+                <p className="text-[11px] font-bold uppercase tracking-widest text-[#fffcc9]">Konsultasi Gratis</p>
                 <h3 className="mt-1 text-base font-bold leading-tight">Halo, ada yang bisa kami bantu?</h3>
               </div>
               <button

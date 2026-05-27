@@ -90,15 +90,15 @@ export const StatsSection = ({ stats }: { stats: StatItemConfig[] }) => {
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden select-none">
         <span
           className="text-[160px] md:text-[220px] font-black tracking-tighter leading-none"
-          style={{ WebkitTextStroke: "1.5px rgba(99,102,241,0.06)", color: "transparent" }}
+          style={{ WebkitTextStroke: "1.5px rgba(255,138,0,0.08)", color: "transparent" }}
         >
           STATS
         </span>
       </div>
 
-      <div className="w-full border-y border-indigo-100">
+      <div className="w-full border-y border-[#ffcd80]">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-indigo-100 py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#ffcd80] py-8">
           {items.map((stat, i) => (
             <motion.div
               key={i}
@@ -107,7 +107,7 @@ export const StatsSection = ({ stats }: { stats: StatItemConfig[] }) => {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="flex flex-col items-center text-center px-6 py-4 md:px-10 first:pl-0 last:pr-0"
             >
-              <div className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-2 text-indigo-600">
+              <div className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-2 text-[#ff8a00]">
                 <CountUp target={stat.value} suffix={stat.suffix} inView={inView} />
               </div>
               <div className="text-sm font-semibold text-neutral-900 mb-1">

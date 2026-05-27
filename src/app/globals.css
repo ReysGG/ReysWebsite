@@ -69,7 +69,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 262.1 83.3% 57.8%; /* Violet 600 */
+    --primary: 32.5 100% 50%; /* Orange #ff8a00 */
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -126,9 +126,14 @@
   * {
     border-color: var(--color-border);
   }
+  html {
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    overflow-x: hidden;
   }
 }
 

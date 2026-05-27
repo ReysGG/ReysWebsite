@@ -31,7 +31,7 @@ export const FaqSection = ({ content }: { content: FaqContent }) => {
     <section id="faq" className="w-full border-y border-slate-200 bg-[#f7f9fb] py-20 md:py-28">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 md:px-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-blue-600">
+          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
             {content.eyebrow}
           </p>
           <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -54,7 +54,7 @@ export const FaqSection = ({ content }: { content: FaqContent }) => {
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   className="flex w-full items-center gap-5 py-6 text-left"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white text-blue-600">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white text-[#ff8a00]">
                     {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                   </span>
                   <span className="text-lg font-bold leading-snug text-slate-950">{faq.question}</span>

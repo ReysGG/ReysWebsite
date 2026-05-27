@@ -54,7 +54,7 @@ export function ShowcaseGrid({ items, categories }: ShowcaseGridProps) {
       <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase text-indigo-700">
+            <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase text-[#ff8a00]">
               <SlidersHorizontal className="h-3.5 w-3.5" />
               Browse Library
             </div>
@@ -70,7 +70,7 @@ export function ShowcaseGrid({ items, categories }: ShowcaseGridProps) {
               onChange={(event) => setQuery(event.target.value)}
               type="search"
               placeholder="Cari industri, fitur, atau judul"
-              className="h-11 w-full rounded-md border border-slate-200 bg-slate-50 pl-10 pr-10 text-sm font-medium text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+              className="h-11 w-full rounded-md border border-slate-200 bg-slate-50 pl-10 pr-10 text-sm font-medium text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]"
             />
             {query && (
               <button
@@ -114,8 +114,8 @@ export function ShowcaseGrid({ items, categories }: ShowcaseGridProps) {
                   className={[
                     'rounded-md border px-3 py-2 text-xs font-bold transition',
                     active
-                      ? 'border-indigo-600 bg-indigo-600 text-white'
-                      : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-300 hover:text-indigo-700',
+                      ? 'border-[#ff8a00] bg-[#ff8a00] text-white'
+                      : 'border-slate-200 bg-white text-slate-600 hover:border-[#ffcd80] hover:text-[#ff8a00]',
                   ].join(' ')}
                 >
                   {cat} <span className="ml-1 opacity-70">({count})</span>
@@ -134,7 +134,7 @@ export function ShowcaseGrid({ items, categories }: ShowcaseGridProps) {
             <button
               type="button"
               onClick={resetFilters}
-              className="mt-5 rounded-md bg-slate-950 px-4 py-2 text-sm font-bold text-white transition hover:bg-indigo-700"
+              className="mt-5 rounded-md bg-slate-950 px-4 py-2 text-sm font-bold text-white transition hover:bg-[#ff8a00]"
             >
               Reset filter
             </button>
@@ -147,7 +147,7 @@ export function ShowcaseGrid({ items, categories }: ShowcaseGridProps) {
               key={item.slug}
               href={`/showcase/${item.slug}`}
               className={[
-                'group relative flex min-h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm outline-none transition duration-300 hover:-translate-y-1 hover:border-indigo-300 hover:shadow-xl hover:shadow-slate-200/80 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 motion-safe:animate-[fadeUp_500ms_cubic-bezier(0.22,1,0.36,1)_both]',
+                'group relative flex min-h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm outline-none transition duration-300 hover:-translate-y-1 hover:border-[#ffcd80] hover:shadow-xl hover:shadow-slate-200/80 focus-visible:ring-2 focus-visible:ring-[#ff8a00] focus-visible:ring-offset-2 motion-safe:animate-[fadeUp_500ms_cubic-bezier(0.22,1,0.36,1)_both]',
                 idx === 0 && filtered.length > 3 ? 'xl:col-span-2' : '',
               ].join(' ')}
               style={{ animationDelay: `${idx * 70}ms` }}
@@ -168,13 +168,13 @@ export function ShowcaseGrid({ items, categories }: ShowcaseGridProps) {
                     /showcase/{item.slug}
                   </span>
                 </div>
-                <div className="absolute bottom-3 left-3 inline-flex max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-md bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase text-indigo-700 shadow-sm backdrop-blur">
+                <div className="absolute bottom-3 left-3 inline-flex max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-md bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase text-[#ff8a00] shadow-sm backdrop-blur">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                   {item.category}
                 </div>
               </div>
               <div className="flex flex-1 flex-col p-5">
-                <h2 className="text-lg font-bold leading-tight tracking-tight text-slate-950 transition group-hover:text-indigo-700">
+                <h2 className="text-lg font-bold leading-tight tracking-tight text-slate-950 transition group-hover:text-[#ff8a00]">
                   {item.title}
                 </h2>
                 <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-600">{item.description}</p>
@@ -192,7 +192,7 @@ export function ShowcaseGrid({ items, categories }: ShowcaseGridProps) {
                 )}
                 <div className="mt-auto flex items-center justify-between gap-3 pt-5 text-sm font-bold text-slate-950">
                   <span>Buka preview</span>
-                  <span className="flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-500 transition group-hover:border-indigo-200 group-hover:bg-indigo-50 group-hover:text-indigo-700">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-500 transition group-hover:border-[#ffcd80] group-hover:bg-[#fffcc9] group-hover:text-[#ff8a00]">
                     <ArrowUpRight className="h-4 w-4" />
                   </span>
                 </div>

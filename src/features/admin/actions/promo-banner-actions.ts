@@ -40,11 +40,11 @@ function getSchedule(formData: FormData) {
 export async function savePromoBanner(formData: FormData) {
   await requireAdmin();
 
-  const variantRaw = (formData.get("variant") as string) || "indigo";
+  const variantRaw = (formData.get("variant") as string) || "orange";
   const variant: PromoBanner["variant"] =
-    variantRaw === "amber" || variantRaw === "emerald" || variantRaw === "neutral"
+    variantRaw === "orange" || variantRaw === "amber" || variantRaw === "emerald" || variantRaw === "neutral"
       ? variantRaw
-      : "indigo";
+      : "orange";
 
   const schedule = getSchedule(formData);
 

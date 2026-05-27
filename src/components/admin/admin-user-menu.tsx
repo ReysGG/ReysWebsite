@@ -12,7 +12,7 @@ export function AdminUserMenu({ displayName }: AdminUserMenuProps) {
     <div className="flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-2.5 py-1.5">
       <div className="hidden sm:block">
         <p className="max-w-[120px] truncate text-xs font-semibold leading-tight text-neutral-900">{displayName}</p>
-        <p className="text-[10px] font-semibold uppercase tracking-widest text-indigo-600">Admin</p>
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#ff8a00]">Admin</p>
       </div>
       <UserButton
         fallback={<div className="h-8 w-8 rounded-md bg-neutral-100" aria-hidden="true" />}

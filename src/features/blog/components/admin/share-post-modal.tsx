@@ -42,7 +42,7 @@ export function SharePostModal({ isOpen, onClose, slug }: SharePostModalProps) {
 
         <div className="flex justify-center gap-4 py-8">
           <FacebookShareButton url={shareUrl}>
-            <div className="w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-colors">
+            <div className="w-12 h-12 bg-[#ff8a00] hover:bg-[#f4b738] text-white rounded-full flex items-center justify-center transition-colors">
               <FacebookIcon className="h-6 w-6" />
             </div>
           </FacebookShareButton>
@@ -54,7 +54,7 @@ export function SharePostModal({ isOpen, onClose, slug }: SharePostModalProps) {
           </TwitterShareButton>
 
           <LinkedinShareButton url={shareUrl} title={title}>
-            <div className="w-12 h-12 bg-blue-700 hover:bg-blue-800 text-white rounded-full flex items-center justify-center transition-colors">
+            <div className="w-12 h-12 bg-[#f4b738] hover:bg-[#ff8a00] text-white rounded-full flex items-center justify-center transition-colors">
               <LinkedinIcon className="h-6 w-6" />
             </div>
           </LinkedinShareButton>

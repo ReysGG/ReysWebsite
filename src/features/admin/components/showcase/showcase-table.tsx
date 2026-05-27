@@ -143,7 +143,7 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
       <div className="rounded-md border border-neutral-200 bg-white p-4 shadow-none">
         <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
-            <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase text-indigo-600">
+            <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase text-[#ff8a00]">
               <Filter className="h-3.5 w-3.5" />
               Inventory Filter
             </div>
@@ -170,13 +170,13 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
               type="search"
               defaultValue={filters.q}
               placeholder="Cari judul, slug, kategori, atau deskripsi"
-              className="h-11 w-full rounded-md border border-neutral-200 bg-neutral-50 pl-10 pr-3 text-sm outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+              className="h-11 w-full rounded-md border border-neutral-200 bg-neutral-50 pl-10 pr-3 text-sm outline-none transition focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]"
             />
           </div>
           <select
             name="status"
             defaultValue={filters.status}
-            className="h-11 rounded-md border border-neutral-200 bg-white px-3 text-sm font-medium text-neutral-700 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+            className="h-11 rounded-md border border-neutral-200 bg-white px-3 text-sm font-medium text-neutral-700 outline-none transition focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
           >
             <option value="all">Semua status</option>
             <option value="published">Published</option>
@@ -185,7 +185,7 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
           <select
             name="category"
             defaultValue={filters.category}
-            className="h-11 rounded-md border border-neutral-200 bg-white px-3 text-sm font-medium text-neutral-700 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+            className="h-11 rounded-md border border-neutral-200 bg-white px-3 text-sm font-medium text-neutral-700 outline-none transition focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
           >
             <option value="">Semua kategori</option>
             {categories.map((category) => (
@@ -196,7 +196,7 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
           </select>
           <button
             type="submit"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-neutral-950 px-4 text-sm font-bold text-white transition hover:bg-indigo-700"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-neutral-950 px-4 text-sm font-bold text-white transition hover:bg-[#f4b738]"
           >
             <Search className="h-4 w-4" />
             Terapkan
@@ -224,7 +224,7 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
                 Reset filter
               </Link>
             )}
-            <Link href="/admin/showcase/new" className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">
+            <Link href="/admin/showcase/new" className="rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white hover:bg-[#f4b738]">
               Showcase baru
             </Link>
           </div>
@@ -256,7 +256,7 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
                   </div>
                 </div>
                 <div className="mt-3 flex flex-wrap gap-1.5">
-                  <span className="rounded-md bg-indigo-50 px-2 py-1 text-[11px] font-semibold text-indigo-700">{item.category}</span>
+                  <span className="rounded-md bg-[#fffcc9] px-2 py-1 text-[11px] font-semibold text-[#ff8a00]">{item.category}</span>
                   {item.tags.slice(0, 3).map((tag) => (
                     <span key={tag} className="rounded-md bg-neutral-100 px-2 py-1 text-[11px] text-neutral-600">{tag}</span>
                   ))}
@@ -329,7 +329,7 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
                         </div>
                       </td>
                       <td className="px-4 py-4 align-top">
-                        <span className="rounded-md bg-indigo-50 px-2.5 py-1 text-xs font-semibold text-indigo-700">{item.category}</span>
+                        <span className="rounded-md bg-[#fffcc9] px-2.5 py-1 text-xs font-semibold text-[#ff8a00]">{item.category}</span>
                       </td>
                       <td className="px-4 py-4 align-top">
                         <button
@@ -405,7 +405,7 @@ function ActionLink({ href, label, icon }: { href: string; label: string; icon: 
     <Link
       href={href}
       target={href.startsWith('/showcase') ? '_blank' : undefined}
-      className="inline-flex h-9 items-center justify-center gap-1.5 rounded-md border border-neutral-200 px-3 text-xs font-semibold text-neutral-700 transition hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"
+      className="inline-flex h-9 items-center justify-center gap-1.5 rounded-md border border-neutral-200 px-3 text-xs font-semibold text-neutral-700 transition hover:border-[#ffcd80] hover:bg-[#fffcc9] hover:text-[#ff8a00]"
       aria-label={label}
     >
       {icon}
@@ -420,7 +420,7 @@ function ActionAnchor({ href, label, icon }: { href: string; label: string; icon
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex h-9 items-center justify-center gap-1.5 rounded-md border border-neutral-200 px-3 text-xs font-semibold text-neutral-700 transition hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"
+      className="inline-flex h-9 items-center justify-center gap-1.5 rounded-md border border-neutral-200 px-3 text-xs font-semibold text-neutral-700 transition hover:border-[#ffcd80] hover:bg-[#fffcc9] hover:text-[#ff8a00]"
       aria-label={label}
     >
       {icon}

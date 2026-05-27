@@ -84,14 +84,14 @@ export default async function AdminCommentsPage({ searchParams }: { searchParams
 
   return (
     <div className="space-y-6">
-      <div className="relative overflow-hidden rounded-md border border-indigo-100 bg-gradient-to-br from-white via-indigo-50/60 to-white p-6 shadow-none">
+      <div className="relative overflow-hidden rounded-md border border-[#ffcd80] bg-gradient-to-br from-white via-[#fffcc9]/60 to-white p-6 shadow-none">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">Audience</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">Audience</p>
             <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900">Comments</h1>
             <p className="mt-1 text-sm text-neutral-500">Monitor dan moderasi komentar pembaca blog.</p>
           </div>
-          <div className="flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-3 text-white">
+          <div className="flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-3 text-white">
             <MessageSquareText className="h-4 w-4" />
             <span className="text-sm font-semibold">{totalComments} komentar</span>
           </div>
@@ -130,7 +130,7 @@ export default async function AdminCommentsPage({ searchParams }: { searchParams
 
         {comments.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-indigo-50"><MessageSquareText className="h-5 w-5 text-indigo-600" /></div>
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-[#fffcc9]"><MessageSquareText className="h-5 w-5 text-[#ff8a00]" /></div>
             <p className="text-sm font-semibold text-neutral-700">Tidak ada komentar ditemukan</p>
             <p className="mt-1 text-xs text-neutral-400">Coba ubah filter atau kata kunci pencarian.</p>
           </div>
@@ -143,7 +143,7 @@ export default async function AdminCommentsPage({ searchParams }: { searchParams
                     <div className="flex flex-wrap items-center gap-2">
                       <p className="text-sm font-semibold text-neutral-900">{comment.userName ?? comment.userId}</p>
                       {comment.parentId && (
-                        <span className="inline-flex items-center gap-1 rounded-md bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700"><Reply className="h-3 w-3" /> Reply</span>
+                        <span className="inline-flex items-center gap-1 rounded-md bg-[#fffcc9] px-2 py-0.5 text-xs font-semibold text-[#ff8a00]"><Reply className="h-3 w-3" /> Reply</span>
                       )}
                       <span className="text-xs text-neutral-400">{comment.createdAt.toLocaleDateString("id-ID")}</span>
                     </div>
@@ -151,7 +151,7 @@ export default async function AdminCommentsPage({ searchParams }: { searchParams
                     <p className="mt-2 text-xs text-neutral-400">Artikel: <span className="font-medium text-neutral-600">{comment.post.title}</span></p>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
-                    <Link href={`/blog/${comment.post.slug}`} target="_blank" className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700">
+                    <Link href={`/blog/${comment.post.slug}`} target="_blank" className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9] hover:text-[#ff8a00]">
                       Lihat <ExternalLink className="h-3.5 w-3.5" />
                     </Link>
                     <DeleteCommentButton id={comment.id} slug={comment.post.slug} />

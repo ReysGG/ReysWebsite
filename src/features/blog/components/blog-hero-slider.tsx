@@ -60,13 +60,13 @@ export function BlogHeroSlider({ posts }: BlogHeroSliderProps) {
             sizes="100vw"
           />
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-700 to-violet-800" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#ff8a00] to-neutral-950" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
         <div className="absolute inset-0 z-10 flex flex-col justify-end px-6 pb-14 md:px-12 lg:px-20">
           {post.category && (
-            <span className="mb-3 inline-block w-fit rounded-full bg-indigo-600 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
+            <span className="mb-3 inline-block w-fit rounded-full bg-[#ff8a00] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
               {post.category}
             </span>
           )}
@@ -88,7 +88,7 @@ export function BlogHeroSlider({ posts }: BlogHeroSliderProps) {
             </span>
             <Link
               href={`/blog/${post.slug}`}
-              className="flex items-center gap-1.5 rounded-full bg-white px-5 py-2 text-xs font-bold text-neutral-900 transition-colors hover:bg-indigo-50"
+              className="flex items-center gap-1.5 rounded-full bg-white px-5 py-2 text-xs font-bold text-neutral-900 transition-colors hover:bg-[#fffcc9]"
             >
               Baca Selengkapnya
               <ArrowRight className="h-3.5 w-3.5" />

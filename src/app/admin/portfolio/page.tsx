@@ -39,7 +39,7 @@ export default async function ManagePortfolioPage({ searchParams }: { searchPara
       <div className="sticky top-0 z-30 rounded-md border border-neutral-200 bg-white/95 p-4 shadow-none backdrop-blur">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">Portfolio Content</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">Portfolio Content</p>
             <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900">Manage Portfolio</h1>
             <p className="mt-1 text-sm text-neutral-500">Kurasi project dari tabel Project dan preview kartu portfolio dari satu tempat.</p>
           </div>
@@ -52,7 +52,7 @@ export default async function ManagePortfolioPage({ searchParams }: { searchPara
               <ExternalLink size={16} />
               Preview Website
             </Link>
-            <Link href="/admin/portfolio/add" className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700">
+            <Link href="/admin/portfolio/add" className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738]">
               <Plus size={16} />
               Tambah Project
             </Link>
@@ -63,9 +63,9 @@ export default async function ManagePortfolioPage({ searchParams }: { searchPara
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {[
           { label: "Total Project", value: allProjects.length, icon: ImageIcon, tone: "text-neutral-700", hint: "Data real dari Project" },
-          { label: "Published", value: publishedCount, icon: Eye, tone: "text-indigo-700", hint: "Project punya link" },
+          { label: "Published", value: publishedCount, icon: Eye, tone: "text-[#ff8a00]", hint: "Project punya link" },
           { label: "Draft", value: draftCount, icon: Edit, tone: "text-amber-700", hint: "Project tanpa link" },
-          { label: "Animated", value: featuredCount, icon: Sparkles, tone: "text-violet-700", hint: "Punya GIF preview" },
+          { label: "Animated", value: featuredCount, icon: Sparkles, tone: "text-[#f4b738]", hint: "Punya GIF preview" },
         ].map((stat) => (
           <div key={stat.label} className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
             <div className="flex items-start justify-between gap-3">
@@ -92,7 +92,7 @@ export default async function ManagePortfolioPage({ searchParams }: { searchPara
                   name="q"
                   defaultValue={q}
                   placeholder="Cari project..."
-                  className="w-full rounded-md border border-neutral-200 bg-neutral-50 py-2 pl-9 pr-3 text-sm outline-none transition-colors focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+                  className="w-full rounded-md border border-neutral-200 bg-neutral-50 py-2 pl-9 pr-3 text-sm outline-none transition-colors focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]"
                 />
               </div>
               <div className="flex flex-wrap items-center gap-2">
@@ -107,7 +107,7 @@ export default async function ManagePortfolioPage({ searchParams }: { searchPara
                     name="category"
                     value={cat.key}
                     className={category === cat.key
-                      ? "rounded-md bg-indigo-600 px-3 py-2 text-xs font-semibold text-white"
+                      ? "rounded-md bg-[#ff8a00] px-3 py-2 text-xs font-semibold text-white"
                       : "rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-600 hover:bg-neutral-50"
                     }
                   >
@@ -136,13 +136,13 @@ export default async function ManagePortfolioPage({ searchParams }: { searchPara
                   <div className="relative h-32 overflow-hidden rounded-md border border-neutral-200 bg-neutral-100 lg:h-24">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={item.imageUrl} alt={item.title} className="h-full w-full object-cover" />
-                    {item.gifUrl ? <span className="absolute left-2 top-2 rounded-md bg-indigo-600 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-white">Animated</span> : null}
+                    {item.gifUrl ? <span className="absolute left-2 top-2 rounded-md bg-[#ff8a00] px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-white">Animated</span> : null}
                   </div>
 
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <h2 className="truncate text-base font-bold text-neutral-900">{item.title}</h2>
-                      <span className={status === "Published" ? "rounded-md border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700" : "rounded-md border border-neutral-200 bg-neutral-100 px-2 py-0.5 text-xs font-semibold text-neutral-500"}>{status}</span>
+                      <span className={status === "Published" ? "rounded-md border border-[#ffcd80] bg-[#fffcc9] px-2 py-0.5 text-xs font-semibold text-[#ff8a00]" : "rounded-md border border-neutral-200 bg-neutral-100 px-2 py-0.5 text-xs font-semibold text-neutral-500"}>{status}</span>
                     </div>
                     <p className="mt-1 text-xs font-semibold uppercase tracking-widest text-neutral-400">Project · Updated {formatDate(item.updatedAt)}</p>
                     <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-neutral-600">{item.description}</p>
@@ -153,14 +153,14 @@ export default async function ManagePortfolioPage({ searchParams }: { searchPara
 
                   <div className="flex items-center justify-end gap-2">
                     {item.link ? <Link href={item.link} target="_blank" className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-500 transition-colors hover:bg-neutral-50 hover:text-neutral-900" title="Preview"><ExternalLink size={15} /></Link> : null}
-                    <Link href={`/admin/portfolio/${item.id}/edit`} className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"><Edit size={14} /> Edit</Link>
+                    <Link href={`/admin/portfolio/${item.id}/edit`} className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9] hover:text-[#ff8a00]"><Edit size={14} /> Edit</Link>
                     <DeleteProjectButton id={item.id} />
                   </div>
                 </article>
               );
             }) : (
               <div className="p-10 text-center">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 text-indigo-600"><ImageIcon size={22} /></div>
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#fffcc9] text-[#ff8a00]"><ImageIcon size={22} /></div>
                 <h2 className="mt-4 text-lg font-bold text-neutral-900">
                   {q || category !== "all" ? "Tidak ada project ditemukan" : "Belum ada project portfolio"}
                 </h2>
@@ -176,10 +176,10 @@ export default async function ManagePortfolioPage({ searchParams }: { searchPara
           <div className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">Live Card Preview</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">Live Card Preview</p>
                 <h2 className="mt-2 text-lg font-bold text-neutral-900">{selectedProject?.title ?? "Belum ada project"}</h2>
               </div>
-              <span className="rounded-md bg-indigo-50 px-2.5 py-1 text-xs font-semibold text-indigo-700">Real data</span>
+              <span className="rounded-md bg-[#fffcc9] px-2.5 py-1 text-xs font-semibold text-[#ff8a00]">Real data</span>
             </div>
 
             {selectedProject ? (
@@ -189,7 +189,7 @@ export default async function ManagePortfolioPage({ searchParams }: { searchPara
                   <img src={selectedProject.imageUrl} alt={`${selectedProject.title} preview`} className="h-full w-full object-cover opacity-90" />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/10 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-indigo-200">{selectedProject.link ? "Live Project" : "Draft"}</p>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-[#fffcc9]">{selectedProject.link ? "Live Project" : "Draft"}</p>
                     <h3 className="mt-1 text-xl font-bold text-white">{selectedProject.title}</h3>
                   </div>
                 </div>

@@ -149,13 +149,13 @@ function EditableTextButton({
       type="button"
       onClick={onClick}
       className={cn(
-        "group/edit relative rounded-md outline-none transition-colors hover:bg-blue-50/70 focus:bg-blue-50/70 focus:ring-2 focus:ring-blue-100",
+        "group/edit relative rounded-md outline-none transition-colors hover:bg-[#fffcc9]/70 focus:bg-[#fffcc9]/70 focus:ring-2 focus:ring-[#ffcd80]",
         className
       )}
       title={`Edit ${field.label}`}
     >
       {children}
-      <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-md border border-blue-200 bg-white text-blue-600 opacity-0 shadow-none transition-opacity group-hover/edit:opacity-100 group-focus/edit:opacity-100">
+      <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-md border border-[#ffcd80] bg-white text-[#ff8a00] opacity-0 shadow-none transition-opacity group-hover/edit:opacity-100 group-focus/edit:opacity-100">
         <Pencil className="h-3 w-3" />
       </span>
     </button>
@@ -180,7 +180,7 @@ function HeroEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuic
       <div className="relative z-10 grid w-full gap-12 px-6 md:px-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(420px,1fr)] lg:items-center">
         <div className="max-w-2xl">
           <EditableTextButton field={field("hero.trustText")} onClick={() => onQuickEdit(field("hero.trustText"))} className="mb-6 inline-flex w-fit items-center gap-3 border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
-            <span className="h-2 w-2 rounded-full bg-blue-600" />
+            <span className="h-2 w-2 rounded-full bg-[#ff8a00]" />
             <span>{config.hero.trustText}</span>
           </EditableTextButton>
 
@@ -189,9 +189,9 @@ function HeroEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuic
               {config.hero.headlinePrefix}
             </EditableTextButton>
             <br />
-            <EditableTextButton field={field("hero.rotatingWords")} onClick={() => onQuickEdit(field("hero.rotatingWords"))} className="mt-2 inline-flex flex-wrap gap-2 px-1 text-left text-blue-600">
+            <EditableTextButton field={field("hero.rotatingWords")} onClick={() => onQuickEdit(field("hero.rotatingWords"))} className="mt-2 inline-flex flex-wrap gap-2 px-1 text-left bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
               {config.hero.rotatingWords.map((word) => (
-                <span key={word} className="rounded-md border border-blue-100 bg-white px-2 py-1">
+                <span key={word} className="rounded-md border border-[#ffcd80] bg-white px-2 py-1">
                   {word}
                 </span>
               ))}
@@ -203,7 +203,7 @@ function HeroEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuic
           </EditableTextButton>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <EditableTextButton field={field("hero.primaryCta")} onClick={() => onQuickEdit(field("hero.primaryCta"))} className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 px-7 py-4 text-sm font-bold text-white hover:bg-blue-700">
+            <EditableTextButton field={field("hero.primaryCta")} onClick={() => onQuickEdit(field("hero.primaryCta"))} className="inline-flex items-center justify-center gap-2 rounded-md bg-[#ff8a00] px-7 py-4 text-sm font-bold text-white hover:bg-blue-700">
               {config.hero.primaryCta}
               <ArrowRight className="h-4 w-4" />
             </EditableTextButton>
@@ -282,7 +282,7 @@ function TrustStripEditorPreview({ config, onQuickEdit }: { config: SiteConfig; 
     <section className="w-full border-y border-slate-200 bg-[#f7faff] py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mx-auto max-w-4xl text-center">
-          <EditableTextButton field={field("trustStrip.eyebrow")} onClick={() => onQuickEdit(field("trustStrip.eyebrow"))} className="px-1 text-xs font-bold uppercase tracking-[0.34em] text-blue-600 md:text-sm">
+          <EditableTextButton field={field("trustStrip.eyebrow")} onClick={() => onQuickEdit(field("trustStrip.eyebrow"))} className="px-1 text-xs font-bold uppercase tracking-[0.34em] bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent md:text-sm">
             {trustStrip.eyebrow}
           </EditableTextButton>
           <h2 className="mt-4 text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -305,12 +305,12 @@ function TrustStripEditorPreview({ config, onQuickEdit }: { config: SiteConfig; 
                 className="rounded-lg border border-slate-200 bg-white p-5 shadow-[0_14px_40px_rgba(15,23,42,0.07)] md:min-h-[270px] md:p-6"
               >
                 <div className="flex gap-4 md:block">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 md:mb-7 md:h-16 md:w-16">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-blue-50 bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent md:mb-7 md:h-16 md:w-16">
                     {meta.icon}
                   </div>
                   <div className="min-w-0">
                     <div className="mb-3 flex items-center gap-3 md:mb-5">
-                      <span className="text-sm font-bold text-blue-600">{meta.number}</span>
+                      <span className="text-sm font-bold bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">{meta.number}</span>
                       <span className="h-px w-20 bg-blue-100" />
                     </div>
                     <EditableTextButton field={field("trustStrip.items")} onClick={() => onQuickEdit(field("trustStrip.items"))} className="px-1 text-left text-lg font-bold leading-tight text-slate-950 md:text-xl">
@@ -328,12 +328,12 @@ function TrustStripEditorPreview({ config, onQuickEdit }: { config: SiteConfig; 
 
         <div className="mx-auto mt-10 flex max-w-xl flex-col items-center gap-5 text-center">
           <p className="inline-flex items-center gap-3 text-sm font-medium text-slate-600 md:text-base">
-            <ShieldCheck className="h-6 w-6 shrink-0 text-blue-600" />
+            <ShieldCheck className="h-6 w-6 shrink-0 bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent" />
             <EditableTextButton field={field("trustStrip.footerText")} onClick={() => onQuickEdit(field("trustStrip.footerText"))} className="px-1 text-center">
               {trustStrip.footerText}
             </EditableTextButton>
           </p>
-          <EditableTextButton field={field("trustStrip.buttonText")} onClick={() => onQuickEdit(field("trustStrip.buttonText"))} className="inline-flex min-h-11 w-full max-w-sm items-center justify-center gap-3 rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-[0_14px_35px_rgba(37,99,235,0.24)] sm:w-auto sm:min-w-72">
+          <EditableTextButton field={field("trustStrip.buttonText")} onClick={() => onQuickEdit(field("trustStrip.buttonText"))} className="inline-flex min-h-11 w-full max-w-sm items-center justify-center gap-3 rounded-lg bg-[#ff8a00] px-6 py-3 text-sm font-bold text-white shadow-[0_14px_35px_rgba(37,99,235,0.24)] sm:w-auto sm:min-w-72">
             {trustStrip.buttonText}
             <ArrowRight className="h-5 w-5" />
           </EditableTextButton>
@@ -352,7 +352,7 @@ function ProblemsEditorPreview({ config, onQuickEdit }: { config: SiteConfig; on
     <section className="w-full bg-white py-20 md:py-28">
       <div className="px-6 md:px-12">
         <div className="mb-14 max-w-3xl">
-          <EditableTextButton field={getField("problems.eyebrow")} onClick={() => onQuickEdit(getField("problems.eyebrow"))} className="mb-4 px-1 text-left text-xs font-bold uppercase tracking-wider text-blue-600">
+          <EditableTextButton field={getField("problems.eyebrow")} onClick={() => onQuickEdit(getField("problems.eyebrow"))} className="mb-4 px-1 text-left text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
             {config.problems.eyebrow}
           </EditableTextButton>
           <EditableTextButton field={getField("problems.heading")} onClick={() => onQuickEdit(getField("problems.heading"))} className="block px-1 text-left text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -368,7 +368,7 @@ function ProblemsEditorPreview({ config, onQuickEdit }: { config: SiteConfig; on
             const descriptionField = getField(`problems.items.${index}.description`);
             return (
               <div key={index} className="rounded-lg border border-slate-200 bg-[#f7f9fb] p-7">
-                <span className="mb-7 flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-bold text-blue-600">{String(index + 1).padStart(2, "0")}</span>
+                <span className="mb-7 flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-bold bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">{String(index + 1).padStart(2, "0")}</span>
                 <EditableTextButton field={titleField} onClick={() => onQuickEdit(titleField)} className="block px-1 text-left text-lg font-bold text-slate-950">
                   {problem.title}
                 </EditableTextButton>
@@ -393,7 +393,7 @@ function WhatYouGetEditorPreview({ config, onQuickEdit }: { config: SiteConfig; 
     <section className="w-full border-y border-slate-200 bg-[#f2f4f6] py-20 md:py-28">
       <div className="grid gap-12 px-6 md:px-12 lg:grid-cols-12 lg:items-start">
         <div className="lg:col-span-4">
-          <EditableTextButton field={getField("whatYouGet.eyebrow")} onClick={() => onQuickEdit(getField("whatYouGet.eyebrow"))} className="mb-4 px-1 text-left text-xs font-bold uppercase tracking-wider text-blue-600">
+          <EditableTextButton field={getField("whatYouGet.eyebrow")} onClick={() => onQuickEdit(getField("whatYouGet.eyebrow"))} className="mb-4 px-1 text-left text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
             {config.whatYouGet.eyebrow}
           </EditableTextButton>
           <EditableTextButton field={getField("whatYouGet.heading")} onClick={() => onQuickEdit(getField("whatYouGet.heading"))} className="block px-1 text-left text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -408,7 +408,7 @@ function WhatYouGetEditorPreview({ config, onQuickEdit }: { config: SiteConfig; 
             const itemField = getField("whatYouGet.items");
             return (
               <div key={item} className="flex gap-4 rounded-lg border border-slate-200 bg-white p-5">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-blue-600 text-white">
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#ff8a00] text-white">
                   <Check className="h-4 w-4" />
                 </span>
                 <EditableTextButton field={itemField} onClick={() => onQuickEdit(itemField)} className="px-1 text-left text-sm font-semibold leading-relaxed text-slate-700">
@@ -455,7 +455,7 @@ function StatsEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQui
 
               return (
                 <div key={index} className="flex flex-col items-center px-6 py-4 text-center md:px-10 first:pl-0 last:pr-0">
-                  <div className="mb-2 text-4xl font-bold text-blue-600 md:text-5xl lg:text-6xl">
+                  <div className="mb-2 text-4xl font-bold bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent md:text-5xl lg:text-6xl">
                     <EditableTextButton field={valueField} onClick={() => onQuickEdit(valueField)} className="px-1">
                       {stat.value}
                     </EditableTextButton>
@@ -494,7 +494,7 @@ function ServicesEditorPreview({ config, onQuickEdit }: { config: SiteConfig; on
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mb-14 max-w-3xl">
           <EditableTextButton field={getField("services.eyebrow")} onClick={() => onQuickEdit(getField("services.eyebrow"))} className="mb-6 inline-flex w-fit items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-slate-700">
-            <span className="h-2 w-2 rounded-full bg-blue-600" />
+            <span className="h-2 w-2 rounded-full bg-[#ff8a00]" />
             {config.services.eyebrow}
           </EditableTextButton>
           <EditableTextButton field={getField("services.heading")} onClick={() => onQuickEdit(getField("services.heading"))} className="max-w-4xl px-1 text-left text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -528,7 +528,7 @@ function ServicesEditorPreview({ config, onQuickEdit }: { config: SiteConfig; on
                   <EditableTextButton field={descriptionField} onClick={() => onQuickEdit(descriptionField)} className={cn("mt-4 flex-1 px-1 text-left text-sm leading-relaxed text-slate-600", isFeatured && "text-base")}>
                     {service.description}
                   </EditableTextButton>
-                  <span className="mt-auto inline-flex w-fit items-center gap-2 pt-8 text-sm font-bold text-blue-600">
+                  <span className="mt-auto inline-flex w-fit items-center gap-2 pt-8 text-sm font-bold bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
                     {style.cta}
                     <ArrowRight className="h-4 w-4" />
                   </span>
@@ -565,14 +565,14 @@ function WorkflowEditorPreview({ config, onQuickEdit }: { config: SiteConfig; on
     <section className="w-full border-y border-slate-200 bg-[#f2f4f6] py-20 md:py-28">
       <div className="grid gap-12 px-6 md:px-12 lg:grid-cols-12 lg:items-start">
         <div className="lg:col-span-4">
-          <EditableTextButton field={getField("workflow.eyebrow")} onClick={() => onQuickEdit(getField("workflow.eyebrow"))} className="mb-4 px-1 text-left text-xs font-bold uppercase tracking-wider text-blue-600">
+          <EditableTextButton field={getField("workflow.eyebrow")} onClick={() => onQuickEdit(getField("workflow.eyebrow"))} className="mb-4 px-1 text-left text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
             {config.workflow.eyebrow}
           </EditableTextButton>
           <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
             <EditableTextButton field={getField("workflow.headingPrefix")} onClick={() => onQuickEdit(getField("workflow.headingPrefix"))} className="px-1">
               {config.workflow.headingPrefix}
             </EditableTextButton>{" "}
-            <EditableTextButton field={getField("workflow.rotatingWords")} onClick={() => onQuickEdit(getField("workflow.rotatingWords"))} className="px-1 text-blue-600">
+            <EditableTextButton field={getField("workflow.rotatingWords")} onClick={() => onQuickEdit(getField("workflow.rotatingWords"))} className="px-1 bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
               {config.workflow.rotatingWords.join(", ")}
             </EditableTextButton>
           </h2>
@@ -588,7 +588,7 @@ function WorkflowEditorPreview({ config, onQuickEdit }: { config: SiteConfig; on
             return (
               <article key={idx} className="rounded-lg border border-slate-200 bg-white p-7">
                 <div className="mb-8 flex items-center justify-between gap-6">
-                  <EditableTextButton field={stepField} onClick={() => onQuickEdit(stepField)} className="flex h-12 w-12 items-center justify-center rounded-lg border border-blue-100 bg-blue-50 text-sm font-bold text-blue-600">
+                  <EditableTextButton field={stepField} onClick={() => onQuickEdit(stepField)} className="flex h-12 w-12 items-center justify-center rounded-lg border border-blue-100 bg-blue-50 text-sm font-bold bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
                     {item.step}
                   </EditableTextButton>
                   <span className="h-px flex-1 bg-slate-200" />
@@ -620,7 +620,7 @@ function PricingEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQ
   return (
     <section className="w-full bg-white py-20 md:py-28">
       <div className="mx-auto mb-14 w-full max-w-3xl px-6 text-center md:px-12">
-        <EditableTextButton field={getField("pricing.eyebrow")} onClick={() => onQuickEdit(getField("pricing.eyebrow"))} className="mb-4 px-1 text-xs font-bold uppercase tracking-wider text-blue-600">
+        <EditableTextButton field={getField("pricing.eyebrow")} onClick={() => onQuickEdit(getField("pricing.eyebrow"))} className="mb-4 px-1 text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
           {config.pricing.eyebrow}
         </EditableTextButton>
         <EditableTextButton field={getField("pricing.heading")} onClick={() => onQuickEdit(getField("pricing.heading"))} className="mx-auto block px-1 text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -641,7 +641,7 @@ function PricingEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQ
           const buttonField = getField(`pricing.tiers.${idx}.buttonText`);
           return (
             <div key={idx} className={cn("relative flex min-h-[620px] flex-col rounded-lg border bg-[#f7f9fb] p-7", popular ? "border-blue-500 bg-white" : "border-slate-200")}>
-              {popular ? <span className="mb-6 inline-block w-fit rounded-md bg-blue-600 px-3 py-2 text-xs font-bold uppercase tracking-wider text-white">Paling sesuai</span> : null}
+              {popular ? <span className="mb-6 inline-block w-fit rounded-md bg-[#ff8a00] px-3 py-2 text-xs font-bold uppercase tracking-wider text-white">Paling sesuai</span> : null}
               <EditableTextButton field={titleField} onClick={() => onQuickEdit(titleField)} className="mb-4 px-1 text-left text-2xl font-bold text-slate-950">
                 {tier.title}
               </EditableTextButton>
@@ -659,11 +659,11 @@ function PricingEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQ
               <EditableTextButton field={featuresField} onClick={() => onQuickEdit(featuresField)} className="mb-8 flex-1 px-1 text-left">
                 <ul className="space-y-4">
                   {tier.features.map((feature) => (
-                    <li key={feature} className="flex items-start text-sm leading-relaxed text-slate-700"><span className={cn("mr-3 mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-xs font-bold", popular ? "bg-blue-600 text-white" : "bg-slate-200 text-slate-700")}><Check className="h-3.5 w-3.5" /></span>{feature}</li>
+                    <li key={feature} className="flex items-start text-sm leading-relaxed text-slate-700"><span className={cn("mr-3 mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-xs font-bold", popular ? "bg-[#ff8a00] text-white" : "bg-slate-200 text-slate-700")}><Check className="h-3.5 w-3.5" /></span>{feature}</li>
                   ))}
                 </ul>
               </EditableTextButton>
-              <EditableTextButton field={buttonField} onClick={() => onQuickEdit(buttonField)} className={cn("mt-auto inline-flex w-full items-center justify-center rounded-md px-6 py-4 text-sm font-bold", popular ? "bg-blue-600 text-white" : "border border-slate-300 bg-white text-slate-950")}>
+              <EditableTextButton field={buttonField} onClick={() => onQuickEdit(buttonField)} className={cn("mt-auto inline-flex w-full items-center justify-center rounded-md px-6 py-4 text-sm font-bold", popular ? "bg-[#ff8a00] text-white" : "border border-slate-300 bg-white text-slate-950")}>
                 {tier.buttonText}
               </EditableTextButton>
             </div>
@@ -699,7 +699,7 @@ function CtaEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuick
           {config.cta.description}
         </EditableTextButton>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <EditableTextButton field={getField("cta.primaryCta")} onClick={() => onQuickEdit(getField("cta.primaryCta"))} className="inline-flex items-center justify-center gap-3 rounded-md bg-blue-600 px-7 py-4 text-sm font-bold text-white">
+          <EditableTextButton field={getField("cta.primaryCta")} onClick={() => onQuickEdit(getField("cta.primaryCta"))} className="inline-flex items-center justify-center gap-3 rounded-md bg-[#ff8a00] px-7 py-4 text-sm font-bold text-white">
             {config.cta.primaryCta} →
           </EditableTextButton>
           <EditableTextButton field={getField("cta.secondaryCta")} onClick={() => onQuickEdit(getField("cta.secondaryCta"))} className="inline-flex items-center justify-center gap-2 rounded-md border border-white/15 px-7 py-4 text-sm font-bold text-white">
@@ -733,7 +733,7 @@ function FaqEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuick
     <section className="w-full border-y border-slate-200 bg-[#f7f9fb] py-20 md:py-28">
       <div className="grid gap-12 px-6 md:px-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <EditableTextButton field={getField("faq.eyebrow")} onClick={() => onQuickEdit(getField("faq.eyebrow"))} className="mb-4 w-fit px-1 text-left text-xs font-bold uppercase tracking-wider text-blue-600">
+          <EditableTextButton field={getField("faq.eyebrow")} onClick={() => onQuickEdit(getField("faq.eyebrow"))} className="mb-4 w-fit px-1 text-left text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
             {config.faq.eyebrow}
           </EditableTextButton>
           <EditableTextButton field={getField("faq.heading")} onClick={() => onQuickEdit(getField("faq.heading"))} className="px-1 text-left text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -747,7 +747,7 @@ function FaqEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuick
             return (
               <div key={index} className={cn("flex flex-col border-b border-slate-200", index === 0 && "border-t")}>
                 <div className="flex w-full items-center gap-6 py-6 text-left">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white text-blue-600">+</span>
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">+</span>
                   <EditableTextButton field={questionField} onClick={() => onQuickEdit(questionField)} className="px-1 text-left text-lg font-bold text-slate-950">
                     {faq.question}
                   </EditableTextButton>
@@ -775,7 +775,7 @@ function AddFaqItemForm() {
           <p className="text-sm font-bold text-neutral-900">Tambah FAQ baru</p>
           <p className="mt-1 text-xs text-neutral-500">Isi pertanyaan dan jawaban, lalu simpan. Item baru akan muncul di bawah daftar FAQ.</p>
         </div>
-        <span className="rounded-md bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600">Create</span>
+        <span className="rounded-md bg-blue-50 px-3 py-1 text-xs font-bold bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">Create</span>
       </div>
 
       <div className="mt-4 space-y-3">
@@ -805,7 +805,7 @@ function AddFaqItemForm() {
       {state.success && state.message ? <p className="mt-3 rounded-md border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-700">{state.message}</p> : null}
 
       <div className="mt-4 flex justify-end">
-        <button disabled={isPending} className="inline-flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300">
+        <button disabled={isPending} className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300">
           <Save className="h-4 w-4" />
           {isPending ? "Menambahkan..." : "Tambah Pertanyaan"}
         </button>

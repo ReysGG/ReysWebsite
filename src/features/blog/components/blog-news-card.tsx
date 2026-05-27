@@ -44,11 +44,11 @@ export function BlogNewsCard({
         </div>
         <div className="min-w-0">
           {post.category && (
-            <span className="text-[10px] font-bold uppercase tracking-wide text-indigo-600">
+            <span className="text-[10px] font-bold uppercase tracking-wide bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
               {post.category}
             </span>
           )}
-          <h3 className="mt-0.5 text-xs font-semibold leading-snug text-neutral-900 dark:text-neutral-900 group-hover:text-indigo-700 line-clamp-2">
+          <h3 className="mt-0.5 text-xs font-semibold leading-snug text-neutral-900 dark:text-neutral-900 group-hover:text-[#ff8a00] line-clamp-2">
             {post.title}
           </h3>
           <span className="text-[10px] text-neutral-400">
@@ -79,21 +79,21 @@ export function BlogNewsCard({
               blurDataURL={BLUR_DATA_URL}
             />
           ) : (
-            <div className="flex h-full items-center justify-center bg-gradient-to-br from-indigo-100 to-violet-100">
-              <FileText className="h-10 w-10 text-indigo-300" />
+            <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#fffcc9] to-[#ffcd80]">
+              <FileText className="h-10 w-10 text-[#ff8a00]" />
             </div>
           )}
         </div>
         <div className="mb-1.5 flex items-center gap-3">
           {post.category && (
-            <span className="text-[11px] font-bold uppercase tracking-wide text-indigo-600">
+            <span className="text-[11px] font-bold uppercase tracking-wide bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
               {post.category}
             </span>
           )}
           <span className="text-xs text-neutral-400">{formatBlogDate(getPostDate(post))}</span>
           <span className="text-xs text-neutral-400">{getReadingTime(post)}</span>
         </div>
-        <h2 className="text-xl font-bold leading-snug text-neutral-900 dark:text-neutral-900 transition group-hover:text-indigo-700 md:text-2xl">
+        <h2 className="text-xl font-bold leading-snug text-neutral-900 dark:text-neutral-900 transition group-hover:text-[#ff8a00] md:text-2xl">
           {post.title}
         </h2>
         <p className="mt-1.5 text-sm leading-6 text-neutral-500 dark:text-neutral-500 line-clamp-2">
@@ -142,17 +142,17 @@ export function BlogNewsCard({
         <div>
           <div className="mb-1 flex items-center gap-2">
             {post.category && (
-              <span className="text-xs font-bold uppercase tracking-wide text-indigo-600">
+              <span className="text-xs font-bold uppercase tracking-wide bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent">
                 {post.category}
               </span>
             )}
             {post.featured && (
-              <span className="rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-bold text-violet-700">
+              <span className="rounded bg-[#fffcc9] px-1.5 py-0.5 text-[10px] font-bold text-[#ff8a00]">
                 Featured
               </span>
             )}
           </div>
-          <h3 className="text-[15px] font-bold leading-snug text-neutral-900 dark:text-neutral-900 transition line-clamp-2 group-hover:text-indigo-700 md:text-base">
+          <h3 className="text-[15px] font-bold leading-snug text-neutral-900 dark:text-neutral-900 transition line-clamp-2 group-hover:text-[#ff8a00] md:text-base">
             {post.title}
           </h3>
           <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-500 line-clamp-2">

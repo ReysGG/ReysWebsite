@@ -73,7 +73,7 @@ function PortfolioCard({
   actionLabel: string;
 }) {
   const card = (
-    <article className="group flex h-full flex-col rounded-lg border border-slate-200 bg-white p-6 transition-colors duration-300 hover:border-blue-400">
+    <article className="group flex h-full flex-col rounded-lg border border-slate-200 bg-white p-6 transition-colors duration-300 hover:border-[#ffcd80]">
       <div className="relative mb-7 aspect-video overflow-hidden rounded-lg border border-slate-200 bg-slate-100">
         <Image
           src={project.src}
@@ -85,7 +85,7 @@ function PortfolioCard({
       </div>
 
       <div className="mb-4 flex flex-wrap gap-2">
-        <span className="rounded-md bg-blue-50 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-blue-700">
+        <span className="rounded-md bg-[#fffcc9] px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
           {project.category}
         </span>
         {project.tags.slice(0, 2).map((tag) => (
@@ -98,7 +98,7 @@ function PortfolioCard({
       <h3 className="text-xl font-bold leading-snug text-slate-950">{project.title}</h3>
       <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-600">{project.description}</p>
 
-      <span className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-blue-600 transition-colors duration-200 group-hover:text-slate-950">
+      <span className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-[#ff8a00] transition-colors duration-200 group-hover:text-slate-950">
         {actionLabel}
         <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
       </span>
@@ -118,11 +118,11 @@ function SolutionExampleCard({ example }: { example: (typeof SOLUTION_EXAMPLES)[
   const Icon = example.icon;
 
   return (
-    <article className="rounded-lg border border-slate-200 bg-white p-5 transition-colors duration-300 hover:border-blue-400 md:p-6">
-      <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+    <article className="rounded-lg border border-slate-200 bg-white p-5 transition-colors duration-300 hover:border-[#ffcd80] md:p-6">
+      <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-[#fffcc9] text-[#ff8a00]">
         <Icon className="h-6 w-6" />
       </div>
-      <span className="rounded-md bg-blue-50 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-blue-700">
+      <span className="rounded-md bg-[#fffcc9] px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
         {example.category}
       </span>
       <h3 className="mt-4 text-lg font-bold leading-snug text-slate-950">{example.title}</h3>
@@ -146,7 +146,7 @@ export const PortfolioSection = ({ intro, projects }: PortfolioSectionProps) => 
       <section id="portfolio" className="w-full bg-[#f7f9fb] py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6 md:px-12">
           <div className="mb-10 max-w-3xl">
-            <p className="mb-4 text-xs font-bold uppercase tracking-wider text-blue-600">
+            <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
               Contoh solusi
             </p>
             <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -165,7 +165,7 @@ export const PortfolioSection = ({ intro, projects }: PortfolioSectionProps) => 
 
           <Link
             href="#cta"
-            className="mt-8 inline-flex items-center gap-2 rounded-md border border-blue-200 bg-white px-5 py-3 text-sm font-bold text-blue-700 transition-colors hover:border-blue-400 hover:bg-blue-50"
+            className="mt-8 inline-flex items-center gap-2 rounded-md border border-[#ffcd80] bg-white px-5 py-3 text-sm font-bold text-[#ff8a00] transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9]"
           >
             Bahas scope project kamu
             <ArrowRight className="h-4 w-4" />
@@ -182,7 +182,7 @@ export const PortfolioSection = ({ intro, projects }: PortfolioSectionProps) => 
     <section id="portfolio" className="w-full bg-[#f7f9fb] py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mb-12 max-w-3xl">
-          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-blue-600">
+          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
             {intro.eyebrow}
           </p>
           <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -200,8 +200,8 @@ export const PortfolioSection = ({ intro, projects }: PortfolioSectionProps) => 
               type="button"
               className={
                 index === 0
-                  ? "rounded-md border border-blue-600 bg-blue-600 px-5 py-2.5 text-sm font-bold text-white"
-                  : "rounded-md border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-600 transition-colors duration-200 hover:border-blue-400 hover:text-blue-600"
+                  ? "rounded-md border border-[#ff8a00] bg-[#ff8a00] px-5 py-2.5 text-sm font-bold text-white"
+                  : "rounded-md border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-600 transition-colors duration-200 hover:border-[#ffcd80] hover:text-[#ff8a00]"
               }
             >
               {filter}

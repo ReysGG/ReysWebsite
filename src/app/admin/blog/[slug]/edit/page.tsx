@@ -13,8 +13,8 @@ export default async function EditBlogPage({ params }: { params: Promise<{ slug:
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50">
-            <PenLine size={16} className="text-indigo-600" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#fffcc9]">
+            <PenLine size={16} className="text-[#ff8a00]" />
           </div>
           <div>
             <h1 className="text-base font-bold text-neutral-900">Edit Artikel</h1>

@@ -7,7 +7,7 @@ export type PromoBanner = {
   message: string;
   ctaLabel: string;
   ctaHref: string;
-  variant: "indigo" | "amber" | "emerald" | "neutral";
+  variant: "orange" | "amber" | "emerald" | "neutral";
   version: string;
   startAt: string; // ISO datetime or empty
   endAt: string;   // ISO datetime or empty
@@ -18,7 +18,7 @@ export const DEFAULT_PROMO_BANNER: PromoBanner = {
   message: "",
   ctaLabel: "",
   ctaHref: "",
-  variant: "indigo",
+  variant: "orange",
   version: "v1",
   startAt: "",
   endAt: "",

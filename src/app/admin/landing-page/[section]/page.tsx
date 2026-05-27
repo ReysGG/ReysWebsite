@@ -53,7 +53,7 @@ export default async function LandingPageSectionAdmin({
       <div className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">
               Website Content
             </p>
             <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900 md:text-3xl">

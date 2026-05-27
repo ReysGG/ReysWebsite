@@ -17,7 +17,7 @@ export function SyncButton() {
     <button
       onClick={handleSync}
       disabled={isPending}
-      className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
+      className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738] disabled:cursor-not-allowed disabled:opacity-60"
     >
       <RefreshCw size={16} className={isPending ? "animate-spin" : ""} />
       {isPending ? "Syncing..." : "Sync ke Database"}

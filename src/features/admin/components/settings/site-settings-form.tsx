@@ -3,7 +3,7 @@ import { saveSiteSettings } from "@/features/admin/actions/settings-actions";
 import type { SiteSettings } from "@/lib/site-settings";
 
 export function SiteSettingsForm({ settings }: { settings: SiteSettings }) {
-  const inputClass = "w-full rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-indigo-300 focus:bg-white focus:ring-2 focus:ring-indigo-100";
+  const inputClass = "w-full rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]";
   const labelClass = "text-xs font-semibold uppercase tracking-widest text-neutral-500";
 
   return (
@@ -52,12 +52,12 @@ export function SiteSettingsForm({ settings }: { settings: SiteSettings }) {
         </div>
       </div>
 
-      <p className="mt-4 rounded-md border border-blue-100 bg-blue-50 px-3 py-2 text-xs font-medium leading-relaxed text-blue-800">
+      <p className="mt-4 rounded-md border border-[#ffcd80] bg-[#fffcc9] px-3 py-2 text-xs font-medium leading-relaxed text-neutral-700">
         Untuk social media, boleh isi username saja. Contoh: <span className="font-bold">@buildwithreys</span> akan otomatis dibuat menjadi link sesuai platform.
       </p>
 
       <div className="mt-6 flex justify-end border-t border-neutral-100 pt-5">
-        <button type="submit" className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-indigo-700">
+        <button type="submit" className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738]">
           <Save className="h-4 w-4" />
           Simpan Settings
         </button>

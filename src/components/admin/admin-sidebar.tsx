@@ -220,7 +220,7 @@ const NavItemRow = ({ item, collapsed }: { item: NavItem; collapsed: boolean }) 
           className={cn(
             "flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
             expanded
-              ? "bg-indigo-50 text-indigo-700"
+              ? "bg-[#fffcc9] text-[#ff8a00]"
               : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
           )}
           title={collapsed ? item.label : undefined}
@@ -245,7 +245,7 @@ const NavItemRow = ({ item, collapsed }: { item: NavItem; collapsed: boolean }) 
                   className={cn(
                     "flex min-w-0 items-center gap-2 rounded-md px-2 py-1.5 text-xs font-medium transition-colors",
                     subActive
-                      ? "bg-white text-indigo-700 ring-1 ring-indigo-100"
+                      ? "bg-white text-[#ff8a00] ring-1 ring-[#ffcd80]"
                       : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800"
                   )}
                 >
@@ -267,7 +267,7 @@ const NavItemRow = ({ item, collapsed }: { item: NavItem; collapsed: boolean }) 
       href={item.href!}
       className={cn(
         "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-        active ? "bg-indigo-50 text-indigo-700" : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
+        active ? "bg-[#fffcc9] text-[#ff8a00]" : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
       )}
       title={collapsed ? item.label : undefined}
     >
@@ -298,7 +298,7 @@ export const AdminSidebar = () => {
               priority
               className="h-8 w-auto"
             />
-            <span className="rounded bg-indigo-50 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-indigo-700">
+            <span className="rounded bg-[#fffcc9] px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[#ff8a00]">
               Admin
             </span>
           </div>

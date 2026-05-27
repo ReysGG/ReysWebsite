@@ -38,14 +38,14 @@ export const Navbar = () => {
       )}
     >
       <div className="flex items-center gap-2">
-        <MonitorSmartphone className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+        <MonitorSmartphone className="w-6 h-6 text-[#ff8a00] dark:text-[#ffcd80]" />
         <span className="text-xl font-bold dark:text-white text-black">WebServices</span>
       </div>
 
       <div className="hidden md:flex items-center gap-6">
-        <Link href="#services" className="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Layanan</Link>
-        <Link href="#portfolio" className="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Portofolio</Link>
-        <Link href="#testimonials" className="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Testimoni</Link>
+        <Link href="#services" className="text-sm font-medium hover:text-[#ff8a00] dark:hover:text-[#ffcd80] transition-colors">Layanan</Link>
+        <Link href="#portfolio" className="text-sm font-medium hover:text-[#ff8a00] dark:hover:text-[#ffcd80] transition-colors">Portofolio</Link>
+        <Link href="#testimonials" className="text-sm font-medium hover:text-[#ff8a00] dark:hover:text-[#ffcd80] transition-colors">Testimoni</Link>
       </div>
 
       <div className="flex items-center gap-4">
@@ -57,7 +57,7 @@ export const Navbar = () => {
         </button>
         <Link 
           href="/admin" 
-          className="px-4 py-2 text-sm font-medium bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+          className="px-4 py-2 text-sm font-medium bg-[#ff8a00] text-white rounded-md hover:bg-[#f4b738] transition"
         >
           Admin
         </Link>

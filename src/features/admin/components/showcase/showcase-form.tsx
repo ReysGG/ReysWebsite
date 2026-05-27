@@ -165,7 +165,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                 value={title}
                 onChange={(event) => setTitle(event.target.value)}
                 placeholder="PT Inovasi Kerja Digital"
-                className="w-full rounded-md border border-neutral-200 px-3 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                className="w-full rounded-md border border-neutral-200 px-3 py-2.5 text-sm outline-none transition focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
               />
             </div>
 
@@ -173,7 +173,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
               <label className="mb-1.5 flex items-center justify-between text-xs font-semibold uppercase tracking-widest text-neutral-500">
                 <span>Slug URL</span>
                 {!slugManual && (
-                  <span className="rounded-md bg-indigo-50 px-2 py-0.5 text-[10px] font-bold text-indigo-600">
+                  <span className="rounded-md bg-[#fffcc9] px-2 py-0.5 text-[10px] font-bold text-[#ff8a00]">
                     Auto
                   </span>
                 )}
@@ -188,7 +188,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                     setSlug(slugify(event.target.value));
                   }}
                   placeholder="nama-prototype"
-                  className="min-w-0 flex-1 rounded-md border border-neutral-200 px-3 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                  className="min-w-0 flex-1 rounded-md border border-neutral-200 px-3 py-2.5 text-sm outline-none transition focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
                 />
                 {slugManual && (
                   <button
@@ -227,7 +227,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                   value={tags}
                   onChange={(event) => setTags(event.target.value)}
                   placeholder="Corporate, Light Mode, Material"
-                  className="w-full rounded-md border border-neutral-200 px-3 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                  className="w-full rounded-md border border-neutral-200 px-3 py-2.5 text-sm outline-none transition focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
                 />
               </div>
             </div>
@@ -243,7 +243,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                 required
                 rows={4}
                 placeholder="Deskripsi singkat yang muncul di card showcase..."
-                className="w-full resize-none rounded-md border border-neutral-200 px-3 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                className="w-full resize-none rounded-md border border-neutral-200 px-3 py-2.5 text-sm outline-none transition focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
               />
             </div>
           </div>
@@ -336,7 +336,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                     setHtmlUploaded(false);
                   }}
                   placeholder="https://... atau /showcase/nama.html"
-                  className="w-full rounded-md border border-neutral-200 px-3 py-2.5 text-xs outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                  className="w-full rounded-md border border-neutral-200 px-3 py-2.5 text-xs outline-none transition focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
                 />
               </div>
             ) : (
@@ -348,7 +348,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                   rows={16}
                   spellCheck={false}
                   placeholder={'<!doctype html>\n<html>\n  <head>\n    <title>Prototype</title>\n  </head>\n  <body>\n    ...\n  </body>\n</html>'}
-                  className="min-h-72 w-full resize-y rounded-md border border-neutral-200 bg-neutral-950 px-3 py-3 font-mono text-xs leading-5 text-neutral-100 outline-none transition placeholder:text-neutral-500 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                  className="min-h-72 w-full resize-y rounded-md border border-neutral-200 bg-neutral-950 px-3 py-3 font-mono text-xs leading-5 text-neutral-100 outline-none transition placeholder:text-neutral-500 focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
                 />
                 {htmlSource.trim() ? (
                   <p className={editorHtmlLooksValid ? 'text-xs font-semibold text-emerald-600' : 'text-xs font-semibold text-amber-600'}>
@@ -410,7 +410,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                   setThumbUploaded(false);
                 }}
                 placeholder="atau tempel URL gambar"
-                className="w-full rounded-md border border-neutral-200 px-3 py-2.5 text-xs outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                className="w-full rounded-md border border-neutral-200 px-3 py-2.5 text-xs outline-none transition focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
               />
             </div>
           </div>
@@ -469,7 +469,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                 value={order}
                 onChange={(event) => setOrder(event.target.value)}
                 placeholder={String(options?.nextOrder ?? 1)}
-                className="w-full rounded-md border border-neutral-200 px-3 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                className="w-full rounded-md border border-neutral-200 px-3 py-2.5 text-sm outline-none transition focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
               />
               <p className="mt-1 text-[11px] text-neutral-400">
                 Kosongkan untuk auto order berikutnya ({orderPreview}). Angka kecil tampil duluan.

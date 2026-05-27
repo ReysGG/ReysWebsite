@@ -78,7 +78,7 @@ export const TrustStripSection = ({ content }: { content: SiteConfig["trustStrip
     <section className="w-full border-y border-slate-200 bg-[#f7faff] py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mx-auto max-w-4xl text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.34em] text-blue-600 md:text-sm">
+          <p className="text-xs font-bold uppercase tracking-[0.34em] text-[#ff8a00] md:text-sm">
             {trustStrip.eyebrow}
           </p>
           <h2 className="mt-4 text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -100,13 +100,13 @@ export const TrustStripSection = ({ content }: { content: SiteConfig["trustStrip
                 className="rounded-lg border border-slate-200 bg-white p-5 shadow-[0_14px_40px_rgba(15,23,42,0.07)] md:min-h-[270px] md:p-6"
               >
                 <div className="flex gap-4 md:block">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 md:mb-7 md:h-16 md:w-16">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#fffcc9] text-[#ff8a00] md:mb-7 md:h-16 md:w-16">
                     <Icon className="h-7 w-7 stroke-[1.8] md:h-8 md:w-8" />
                   </div>
                   <div className="min-w-0">
                     <div className="mb-3 flex items-center gap-3 md:mb-5">
-                      <span className="text-sm font-bold text-blue-600">{meta.number}</span>
-                      <span className="h-px w-20 bg-blue-100" />
+                      <span className="text-sm font-bold text-[#ff8a00]">{meta.number}</span>
+                      <span className="h-px w-20 bg-[#ffcd80]" />
                     </div>
                     <h3 className="text-lg font-bold leading-tight text-slate-950 md:text-xl">
                       {point.title}
@@ -123,12 +123,12 @@ export const TrustStripSection = ({ content }: { content: SiteConfig["trustStrip
 
         <div className="mx-auto mt-10 flex max-w-xl flex-col items-center gap-5 text-center">
           <p className="inline-flex items-center gap-3 text-sm font-medium text-slate-600 md:text-base">
-            <ShieldCheck className="h-6 w-6 shrink-0 text-blue-600" />
+            <ShieldCheck className="h-6 w-6 shrink-0 text-[#ff8a00]" />
             {trustStrip.footerText}
           </p>
           <a
             href="#cta"
-            className="inline-flex min-h-11 w-full max-w-sm items-center justify-center gap-3 rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-[0_14px_35px_rgba(37,99,235,0.24)] transition-colors hover:bg-blue-700 sm:w-auto sm:min-w-72"
+            className="inline-flex min-h-11 w-full max-w-sm items-center justify-center gap-3 rounded-lg bg-[#ff8a00] px-6 py-3 text-sm font-bold text-white shadow-[0_14px_35px_rgba(255,138,0,0.24)] transition-colors hover:bg-[#f4b738] sm:w-auto sm:min-w-72"
           >
             {trustStrip.buttonText}
             <ArrowRight className="h-5 w-5" />

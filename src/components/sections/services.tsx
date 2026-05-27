@@ -55,7 +55,7 @@ function ServicesVisualPanel() {
       <div className="absolute inset-0 bg-linear-to-t from-slate-950/50 via-slate-950/5 to-transparent" />
       <div className="absolute bottom-5 left-5 right-5 rounded-lg border border-white/20 bg-white/85 p-4 backdrop-blur">
         <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
-          <MonitorSmartphone className="h-4 w-4 text-blue-600" />
+          <MonitorSmartphone className="h-4 w-4 text-[#ff8a00]" />
           Scope sebelum coding
         </div>
         <p className="text-sm font-semibold leading-relaxed text-slate-950">
@@ -82,7 +82,7 @@ export const ServicesSection = ({
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mb-14 max-w-3xl">
           <div className="mb-6 inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2">
-            <span className="h-2 w-2 rounded-full bg-blue-600" />
+            <span className="h-2 w-2 rounded-full bg-[#ff8a00]" />
             <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
               {content.eyebrow}
             </span>

@@ -47,7 +47,7 @@ function BlogNavbarInner() {
               priority
               className="h-8 w-auto"
             />
-            <span className="ml-1 rounded bg-indigo-600 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white">
+            <span className="ml-1 rounded bg-[#ff8a00] px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white">
               Blog
             </span>
           </Link>
@@ -73,14 +73,14 @@ function BlogNavbarInner() {
               <input
                 name="q"
                 placeholder="Cari artikel..."
-                className="w-44 rounded-md border border-neutral-200 bg-neutral-50 py-1.5 pl-8 pr-3 text-sm text-neutral-900 placeholder-neutral-400 outline-none focus:border-indigo-400 focus:w-56 transition-all dark:bg-neutral-50 dark:text-neutral-900"
+                className="w-44 rounded-md border border-neutral-200 bg-neutral-50 py-1.5 pl-8 pr-3 text-sm text-neutral-900 placeholder-neutral-400 outline-none focus:border-[#ff8a00] focus:w-56 transition-all dark:bg-neutral-50 dark:text-neutral-900"
               />
             </form>
 
 
             <Link
               href="/#cta"
-              className="hidden items-center gap-1.5 bg-indigo-600 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-700 transition-colors sm:flex"
+              className="hidden items-center gap-1.5 bg-[#ff8a00] px-4 py-2 text-xs font-semibold text-white hover:bg-[#f4b738] transition-colors sm:flex"
             >
               Konsultasi <ArrowRight className="h-3 w-3" />
             </Link>
@@ -113,7 +113,7 @@ function BlogNavbarInner() {
                   'relative shrink-0 px-4 h-full flex items-center text-sm font-medium transition-colors',
                   i > 0 ? 'border-l border-neutral-100' : '',
                   isActive
-                    ? 'text-indigo-600 dark:text-indigo-600 after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:bg-indigo-600'
+                    ? 'bg-gradient-to-r from-[#ff8a00] via-[#f4b738] to-[#ffcd80] bg-clip-text text-transparent after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:bg-[#ff8a00]'
                     : 'text-neutral-500 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-neutral-900',
                 ].join(' ')}
               >
@@ -136,14 +136,14 @@ function BlogNavbarInner() {
               <input
                 name="q"
                 placeholder="Cari artikel..."
-                className="w-full rounded-md border border-neutral-200 bg-neutral-50 py-2 pl-8 pr-3 text-sm outline-none focus:border-indigo-400"
+                className="w-full rounded-md border border-neutral-200 bg-neutral-50 py-2 pl-8 pr-3 text-sm outline-none focus:border-[#ff8a00]"
               />
             </form>
             {[...NAV_LINKS, { name: 'Blog', href: '/blog' }].map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="py-2 text-sm font-medium text-neutral-700 hover:text-indigo-600"
+                className="py-2 text-sm font-medium text-neutral-700 hover:text-[#ff8a00]"
               >
                 {link.name}
               </Link>
@@ -153,7 +153,7 @@ function BlogNavbarInner() {
                 <Link
                   key={cat}
                   href={cat === 'Semua' ? '/blog' : `/blog?category=${encodeURIComponent(cat)}`}
-                  className="text-xs font-medium text-neutral-600 hover:text-indigo-600"
+                  className="text-xs font-medium text-neutral-600 hover:text-[#ff8a00]"
                 >
                   {cat}
                 </Link>
