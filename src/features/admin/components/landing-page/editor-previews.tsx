@@ -19,7 +19,7 @@ import {
   Smartphone,
 } from "lucide-react";
 import { addLandingPageFaqItem } from "@/features/admin/actions/landing-page-actions";
-import type { SiteConfig } from "@/lib/site-config";
+import type { SimpleTextItemConfig, SiteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 import { CtaSection } from "@/components/sections/cta";
 import { FaqSection } from "@/components/sections/faq";
@@ -48,16 +48,55 @@ const TRUST_EDITOR_STYLES = [
   { icon: <BookOpen className="h-7 w-7 stroke-[1.8] md:h-8 md:w-8" />, number: "04" },
 ];
 
-const TRUST_EDITOR_DESCRIPTIONS: Record<string, string> = {
-  "Scope jelas sebelum development":
-    "Halaman, fitur, timeline, dan kebutuhan project disepakati di awal agar semua terarah dan sesuai tujuan.",
-  "Progress bisa dicek via staging link":
-    "Pantau hasil website secara real-time sebelum masuk tahap launch, jadi lebih transparan dan minim revisi.",
-  "Mobile-first dan SEO-ready":
-    "Website dibuat responsif, cepat, dan lebih mudah dipahami Google untuk performa yang lebih baik.",
-  "Handover akses penuh setelah launch":
-    "Akses, dokumentasi, dan panduan penggunaan diberikan setelah project selesai, jadi kamu bisa kelola sendiri.",
+const DEFAULT_TRUST_STRIP_ITEMS: SimpleTextItemConfig[] = [
+  {
+    title: "Scope jelas sebelum development",
+    description: "Halaman, fitur, timeline, dan kebutuhan project disepakati di awal agar semua terarah dan sesuai tujuan.",
+  },
+  {
+    title: "Progress bisa dicek via staging link",
+    description: "Pantau hasil website secara real-time sebelum masuk tahap launch, jadi lebih transparan dan minim revisi.",
+  },
+  {
+    title: "Mobile-first dan SEO-ready",
+    description: "Website dibuat responsif, cepat, dan lebih mudah dipahami Google untuk performa yang lebih baik.",
+  },
+  {
+    title: "Handover akses penuh setelah launch",
+    description: "Akses, dokumentasi, dan panduan penggunaan diberikan setelah project selesai, jadi kamu bisa kelola sendiri.",
+  },
+];
+
+const DEFAULT_TRUST_STRIP_COPY = {
+  eyebrow: "Kenapa Build With Reys?",
+  heading: "Website bukan cuma dibuat bagus, tapi dibangun dengan alur yang jelas.",
+  description: "Dari perencanaan sampai serah terima, setiap langkah transparan dan terukur.",
+  footerText: "Proses jelas, hasil maksimal, dan support tetap ada.",
+  buttonText: "Mulai konsultasi project",
 };
+
+function normalizeTrustStripItem(item: SimpleTextItemConfig | string, index: number): SimpleTextItemConfig {
+  const fallback = DEFAULT_TRUST_STRIP_ITEMS[index] ?? { title: "", description: "" };
+  if (typeof item === "string") {
+    return { title: item, description: fallback.description };
+  }
+  return {
+    title: item.title || fallback.title,
+    description: item.description || fallback.description,
+  };
+}
+
+function normalizeTrustStrip(content: SiteConfig["trustStrip"] | string[]): SiteConfig["trustStrip"] {
+  if (Array.isArray(content)) {
+    return { ...DEFAULT_TRUST_STRIP_COPY, items: content.map(normalizeTrustStripItem) };
+  }
+
+  return {
+    ...DEFAULT_TRUST_STRIP_COPY,
+    ...content,
+    items: Array.isArray(content.items) ? content.items.map(normalizeTrustStripItem) : DEFAULT_TRUST_STRIP_ITEMS,
+  };
+}
 
 export function SectionRenderer({
   section,
@@ -74,7 +113,7 @@ export function SectionRenderer({
     case "hero":
       return editMode ? <HeroEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <HeroSection content={config.hero} />;
     case "trustStrip":
-      return editMode ? <TrustStripEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <TrustStripSection items={config.trustStrip} />;
+      return editMode ? <TrustStripEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <TrustStripSection content={config.trustStrip} />;
     case "problems":
       return editMode ? <ProblemsEditorPreview config={config} onQuickEdit={onQuickEdit} /> : <ProblemSection content={config.problems} />;
     case "stats":
@@ -234,29 +273,35 @@ function HeroScopeEditorPreview({ config, onQuickEdit }: { config: SiteConfig; o
 }
 
 function TrustStripEditorPreview({ config, onQuickEdit }: { config: SiteConfig; onQuickEdit: (field: InlineEditField) => void }) {
-  const field = getInlineEditFields("trustStrip", config)[0];
+  const fields = getInlineEditFields("trustStrip", config);
+  const fieldByName = new Map(fields.map((field) => [field.name, field]));
+  const field = (name: string) => fieldByName.get(name)!;
+  const trustStrip = normalizeTrustStrip(config.trustStrip);
+
   return (
     <section className="w-full border-y border-slate-200 bg-[#f7faff] py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mx-auto max-w-4xl text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.34em] text-blue-600 md:text-sm">
-            Kenapa Build With Reys?
-          </p>
+          <EditableTextButton field={field("trustStrip.eyebrow")} onClick={() => onQuickEdit(field("trustStrip.eyebrow"))} className="px-1 text-xs font-bold uppercase tracking-[0.34em] text-blue-600 md:text-sm">
+            {trustStrip.eyebrow}
+          </EditableTextButton>
           <h2 className="mt-4 text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
-            Website bukan cuma dibuat bagus, tapi dibangun dengan alur yang jelas.
+            <EditableTextButton field={field("trustStrip.heading")} onClick={() => onQuickEdit(field("trustStrip.heading"))} className="px-1 text-center">
+              {trustStrip.heading}
+            </EditableTextButton>
           </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-base font-medium leading-relaxed text-slate-600 md:text-lg">
-            Dari perencanaan sampai serah terima, setiap langkah transparan dan terukur.
-          </p>
+          <EditableTextButton field={field("trustStrip.description")} onClick={() => onQuickEdit(field("trustStrip.description"))} className="mx-auto mt-4 max-w-3xl px-1 text-center text-base font-medium leading-relaxed text-slate-600 md:text-lg">
+            {trustStrip.description}
+          </EditableTextButton>
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-4 md:gap-6">
-          {config.trustStrip.slice(0, 4).map((point, index) => {
+          {trustStrip.items.slice(0, 4).map((point, index) => {
             const meta = TRUST_EDITOR_STYLES[index] ?? TRUST_EDITOR_STYLES[0];
 
             return (
               <article
-                key={point}
+                key={`${point.title}-${index}`}
                 className="rounded-lg border border-slate-200 bg-white p-5 shadow-[0_14px_40px_rgba(15,23,42,0.07)] md:min-h-[270px] md:p-6"
               >
                 <div className="flex gap-4 md:block">
@@ -268,12 +313,12 @@ function TrustStripEditorPreview({ config, onQuickEdit }: { config: SiteConfig; 
                       <span className="text-sm font-bold text-blue-600">{meta.number}</span>
                       <span className="h-px w-20 bg-blue-100" />
                     </div>
-                    <EditableTextButton field={field} onClick={() => onQuickEdit(field)} className="px-1 text-left text-lg font-bold leading-tight text-slate-950 md:text-xl">
-                      {point}
+                    <EditableTextButton field={field("trustStrip.items")} onClick={() => onQuickEdit(field("trustStrip.items"))} className="px-1 text-left text-lg font-bold leading-tight text-slate-950 md:text-xl">
+                      {point.title}
                     </EditableTextButton>
-                    <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600 md:mt-4 md:text-[15px]">
-                      {TRUST_EDITOR_DESCRIPTIONS[point] ?? "Detail project dibuat jelas, mudah dipantau, dan siap dilanjutkan setelah launch."}
-                    </p>
+                    <EditableTextButton field={field(`trustStrip.items.${index}.description`)} onClick={() => onQuickEdit(field(`trustStrip.items.${index}.description`))} className="mt-3 block px-1 text-left text-sm font-medium leading-relaxed text-slate-600 md:mt-4 md:text-[15px]">
+                      {point.description}
+                    </EditableTextButton>
                   </div>
                 </div>
               </article>
@@ -284,12 +329,14 @@ function TrustStripEditorPreview({ config, onQuickEdit }: { config: SiteConfig; 
         <div className="mx-auto mt-10 flex max-w-xl flex-col items-center gap-5 text-center">
           <p className="inline-flex items-center gap-3 text-sm font-medium text-slate-600 md:text-base">
             <ShieldCheck className="h-6 w-6 shrink-0 text-blue-600" />
-            Proses jelas, hasil maksimal, dan support tetap ada.
+            <EditableTextButton field={field("trustStrip.footerText")} onClick={() => onQuickEdit(field("trustStrip.footerText"))} className="px-1 text-center">
+              {trustStrip.footerText}
+            </EditableTextButton>
           </p>
-          <span className="inline-flex min-h-11 w-full max-w-sm items-center justify-center gap-3 rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-[0_14px_35px_rgba(37,99,235,0.24)] sm:w-auto sm:min-w-72">
-            Mulai konsultasi project
+          <EditableTextButton field={field("trustStrip.buttonText")} onClick={() => onQuickEdit(field("trustStrip.buttonText"))} className="inline-flex min-h-11 w-full max-w-sm items-center justify-center gap-3 rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-[0_14px_35px_rgba(37,99,235,0.24)] sm:w-auto sm:min-w-72">
+            {trustStrip.buttonText}
             <ArrowRight className="h-5 w-5" />
-          </span>
+          </EditableTextButton>
         </div>
       </div>
     </section>

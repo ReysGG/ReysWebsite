@@ -37,6 +37,15 @@ export type FaqItemConfig = {
   answer: string;
 };
 
+export type TrustStripConfig = {
+  eyebrow: string;
+  heading: string;
+  description: string;
+  items: SimpleTextItemConfig[];
+  footerText: string;
+  buttonText: string;
+};
+
 export type SimpleTextItemConfig = {
   title: string;
   description: string;
@@ -64,7 +73,7 @@ export type SiteConfig = {
     };
   };
   stats: StatItemConfig[];
-  trustStrip: string[];
+  trustStrip: TrustStripConfig;
   problems: {
     eyebrow: string;
     heading: string;
@@ -124,7 +133,7 @@ export const defaultSiteConfig: SiteConfig = {
       "Build With Reys membantu bisnis membuat company profile, dashboard internal, e-commerce, dan website SEO-ready dengan scope jelas, staging link, dan handover penuh.",
     primaryCta: "Konsultasi via WhatsApp",
     secondaryCta: "Lihat Proses Kerja",
-    visualImage: "/hero-visual.webp",
+    visualImage: "/Asset/Build With Reys_20260527_120546_0005.png",
     scopePreview: {
       eyebrow: "Before development",
       title: "Scope dikunci sebelum coding",
@@ -143,12 +152,31 @@ export const defaultSiteConfig: SiteConfig = {
     { value: 3, suffix: "+", label: "Tahun Pengalaman", description: "Web & software development" },
     { value: 100, suffix: "%", label: "On-Time Delivery", description: "Tidak ada proyek terlambat" },
   ],
-  trustStrip: [
-    "Scope jelas sebelum development",
-    "Progress bisa dicek via staging link",
-    "Mobile-first dan SEO-ready",
-    "Handover akses penuh setelah launch",
-  ],
+  trustStrip: {
+    eyebrow: "Kenapa Build With Reys?",
+    heading: "Website bukan cuma dibuat bagus, tapi dibangun dengan alur yang jelas.",
+    description: "Dari perencanaan sampai serah terima, setiap langkah transparan dan terukur.",
+    items: [
+      {
+        title: "Scope jelas sebelum development",
+        description: "Halaman, fitur, timeline, dan kebutuhan project disepakati di awal agar semua terarah dan sesuai tujuan.",
+      },
+      {
+        title: "Progress bisa dicek via staging link",
+        description: "Pantau hasil website secara real-time sebelum masuk tahap launch, jadi lebih transparan dan minim revisi.",
+      },
+      {
+        title: "Mobile-first dan SEO-ready",
+        description: "Website dibuat responsif, cepat, dan lebih mudah dipahami Google untuk performa yang lebih baik.",
+      },
+      {
+        title: "Handover akses penuh setelah launch",
+        description: "Akses, dokumentasi, dan panduan penggunaan diberikan setelah project selesai, jadi kamu bisa kelola sendiri.",
+      },
+    ],
+    footerText: "Proses jelas, hasil maksimal, dan support tetap ada.",
+    buttonText: "Mulai konsultasi project",
+  },
   problems: {
     eyebrow: "Masalah yang sering terjadi",
     heading: "Biasanya masalahnya bukan cuma belum punya website.",
@@ -321,6 +349,24 @@ function isSiteConfig(value: unknown): value is Partial<SiteConfig> {
   return Boolean(value.hero || value.stats || value.services || value.workflow || value.pricing || value.cta || value.faq);
 }
 
+function normalizeTrustStripItems(value: unknown): SimpleTextItemConfig[] {
+  if (!Array.isArray(value)) return defaultSiteConfig.trustStrip.items;
+
+  return value.map((item, index) => {
+    const fallback = defaultSiteConfig.trustStrip.items[index] ?? { title: "", description: "" };
+    if (typeof item === "string") {
+      return { title: item, description: fallback.description };
+    }
+    if (isRecord(item)) {
+      return {
+        title: typeof item.title === "string" && item.title.trim() ? item.title : fallback.title,
+        description: typeof item.description === "string" && item.description.trim() ? item.description : fallback.description,
+      };
+    }
+    return fallback;
+  });
+}
+
 function mergeSiteConfig(value: Partial<SiteConfig>): SiteConfig {
   return {
     ...defaultSiteConfig,
@@ -334,7 +380,13 @@ function mergeSiteConfig(value: Partial<SiteConfig>): SiteConfig {
       },
     },
     stats: Array.isArray(value.stats) ? value.stats : defaultSiteConfig.stats,
-    trustStrip: Array.isArray(value.trustStrip) ? value.trustStrip : defaultSiteConfig.trustStrip,
+    trustStrip: Array.isArray(value.trustStrip)
+      ? { ...defaultSiteConfig.trustStrip, items: normalizeTrustStripItems(value.trustStrip) }
+      : {
+          ...defaultSiteConfig.trustStrip,
+          ...value.trustStrip,
+          items: normalizeTrustStripItems(value.trustStrip?.items),
+        },
     problems: {
       ...defaultSiteConfig.problems,
       ...value.problems,

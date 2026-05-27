@@ -58,7 +58,17 @@ export async function saveLandingPage(formData: FormData) {
       label: getString(formData, `stats.${index}.label`, stat.label),
       description: getString(formData, `stats.${index}.description`, stat.description),
     })),
-    trustStrip: lines(getString(formData, "trustStrip", current.trustStrip.join("\n"))),
+    trustStrip: {
+      eyebrow: getString(formData, "trustStrip.eyebrow", current.trustStrip.eyebrow),
+      heading: getString(formData, "trustStrip.heading", current.trustStrip.heading),
+      description: getString(formData, "trustStrip.description", current.trustStrip.description),
+      items: lines(getString(formData, "trustStrip.items", current.trustStrip.items.map((item) => item.title).join("\n"))).map((title, index) => ({
+        title,
+        description: getString(formData, `trustStrip.items.${index}.description`, current.trustStrip.items[index]?.description ?? ""),
+      })),
+      footerText: getString(formData, "trustStrip.footerText", current.trustStrip.footerText),
+      buttonText: getString(formData, "trustStrip.buttonText", current.trustStrip.buttonText),
+    },
     problems: {
       eyebrow: getString(formData, "problems.eyebrow", current.problems.eyebrow),
       heading: getString(formData, "problems.heading", current.problems.heading),

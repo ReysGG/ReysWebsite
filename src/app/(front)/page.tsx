@@ -45,7 +45,7 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between font-sans bg-white text-neutral-900 selection:bg-neutral-200">
       <PromoBanner />
       <HeroSection content={heroContent} secondaryHref="#portfolio" />
-      <TrustStripSection items={config.trustStrip} />
+      <TrustStripSection content={config.trustStrip} />
       <ProblemSection content={config.problems} />
       <ServicesSection content={config.services} whatsappUrl={whatsappUrl} />
       <WorkflowSection content={config.workflow} />

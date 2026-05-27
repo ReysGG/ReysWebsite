@@ -95,7 +95,18 @@ export function setLandingPageField(config: SiteConfig, name: string, rawValue: 
 
   const currentValue = target[lastKey];
   if (Array.isArray(currentValue)) {
-    target[lastKey] = value.split("\n").map((item) => item.trim()).filter(Boolean);
+    const nextItems = value.split("\n").map((item) => item.trim()).filter(Boolean);
+    if (name === "trustStrip.items") {
+      target[lastKey] = nextItems.map((title, index) => {
+        const currentItem = currentValue[index];
+        if (currentItem && typeof currentItem === "object" && "description" in currentItem) {
+          return { ...(currentItem as Record<string, unknown>), title };
+        }
+        return { title, description: "" };
+      });
+    } else {
+      target[lastKey] = nextItems;
+    }
   } else if (typeof currentValue === "number") {
     const nextNumber = Number(value);
     if (!Number.isFinite(nextNumber)) throw new Error("Konten harus berupa angka yang valid.");
