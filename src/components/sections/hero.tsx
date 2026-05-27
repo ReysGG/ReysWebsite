@@ -2,8 +2,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
+import { Iphone17Pro } from "@/components/ui/iphone-17-pro";
+import { MacbookPro } from "@/components/ui/macbook-pro";
 import {
   ArrowRight,
   CalendarDays,
@@ -18,32 +19,10 @@ import type { SiteConfig } from "@/lib/site-config";
 
 type HeroContent = SiteConfig["hero"];
 
-const ASSET_BASE = "/Asset/Build%20With%20Reys_20260527_120546_";
-const HERO_CANVAS = { width: 1080, height: 1350 };
-
-type HeroAsset = {
-  src: string;
-  alt: string;
-  box: {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-  };
+const heroMockups = {
+  desktop: "/Asset/Modern design and development process illustration.png",
+  mobile: "/Asset/Modern SaaS website process illustration.png",
 };
-
-const heroAssets = {
-  laptop: {
-    src: `${ASSET_BASE}0005.png`,
-    alt: "Mockup laptop project dashboard Build With Reys",
-    box: { x: 40, y: 366, width: 965, height: 651 },
-  },
-  phone: {
-    src: `${ASSET_BASE}0006.png`,
-    alt: "Mockup mobile website Build With Reys",
-    box: { x: 350, y: 118, width: 379, height: 1105 },
-  },
-} satisfies Record<string, HeroAsset>;
 
 type GlassCardConfig = {
   eyebrow: string;
@@ -53,75 +32,6 @@ type GlassCardConfig = {
   compact?: boolean;
   showProgress?: boolean;
 };
-
-function CroppedAsset({
-  asset,
-  className,
-  priority = false,
-  sizes = "(max-width: 768px) 72vw, 280px",
-}: {
-  asset: HeroAsset;
-  className?: string;
-  priority?: boolean;
-  sizes?: string;
-}) {
-  return (
-    <div
-      className={cn("pointer-events-none relative overflow-hidden", className)}
-      style={{ aspectRatio: `${asset.box.width} / ${asset.box.height}` }}
-    >
-      <Image
-        src={asset.src}
-        alt={asset.alt}
-        width={HERO_CANVAS.width}
-        height={HERO_CANVAS.height}
-        priority={priority}
-        draggable={false}
-        className="absolute h-auto max-w-none select-none"
-        style={{
-          width: `${(HERO_CANVAS.width / asset.box.width) * 100}%`,
-          left: `${(-asset.box.x / asset.box.width) * 100}%`,
-          top: `${(-asset.box.y / asset.box.height) * 100}%`,
-        }}
-        sizes={sizes}
-      />
-    </div>
-  );
-}
-
-function FloatingAsset({
-  asset,
-  className,
-  imageClassName,
-  priority = false,
-  sizes,
-  delay = 0,
-  float = 8,
-}: {
-  asset: HeroAsset;
-  className: string;
-  imageClassName?: string;
-  priority?: boolean;
-  sizes: string;
-  delay?: number;
-  float?: number;
-}) {
-  return (
-    <motion.div
-      className={cn("absolute", className)}
-      initial={{ opacity: 0, y: 24, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.8, delay, ease: "easeOut" }}
-    >
-      <motion.div
-        animate={{ y: [0, -float, 0] }}
-        transition={{ duration: 7 + delay, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <CroppedAsset asset={asset} priority={priority} sizes={sizes} className={cn("w-full", imageClassName)} />
-      </motion.div>
-    </motion.div>
-  );
-}
 
 function GlassMetricCard({
   card,
@@ -252,32 +162,49 @@ function HeroVisual({ content }: { content: HeroContent }) {
 
       {/* Dashed connector lines — desktop only, one per card */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
-        {/* Revisions → laptop top-left */}
         <span className="absolute left-[22%] top-[14%] h-[14%] w-[10%] rounded-tl-[2rem] border-l border-t border-dashed border-[#ffcd80]/70 xl:left-[24%] xl:w-[11%]" />
-        {/* Timeline → phone top-right */}
         <span className="absolute right-[22%] top-[10%] h-[20%] w-[10%] rounded-tr-[2rem] border-r border-t border-dashed border-[#ffcd80]/70 xl:right-[23%]" />
       </div>
 
-      {/* Laptop mockup */}
-      <FloatingAsset
-        asset={heroAssets.laptop}
-        priority
-        className="left-[3%] top-[6%] z-20 w-[70%] sm:left-[3%] sm:top-[16%] sm:w-[71%] lg:left-[3%] lg:top-[24%] lg:w-[74%]"
-        imageClassName="drop-shadow-[0_42px_82px_rgba(15,23,42,0.42)]"
-        sizes="(max-width: 640px) 72vw, (max-width: 768px) 71vw, (max-width: 1200px) 52vw, 690px"
-        delay={0.05}
-        float={6}
-      />
-      {/* Phone mockup */}
-      <FloatingAsset
-        asset={heroAssets.phone}
-        priority
-        className="right-[2%] top-[1%] z-30 w-[24%] sm:right-[1%] sm:top-[13%] sm:w-[21%] lg:right-[0%] lg:top-[18%] lg:w-[23%] xl:right-[1%] xl:w-[22%]"
-        imageClassName="drop-shadow-[0_44px_86px_rgba(15,23,42,0.45)]"
-        sizes="(max-width: 640px) 25vw, (max-width: 768px) 22vw, 190px"
-        delay={0.16}
-        float={9}
-      />
+      <motion.div
+        className="absolute left-[1%] top-[15%] z-20 w-[86%] text-slate-950 drop-shadow-[0_42px_82px_rgba(15,23,42,0.34)] sm:left-[0%] sm:top-[21%] sm:w-[82%] lg:left-[2%] lg:top-[27%] lg:w-[78%] xl:w-[76%]"
+        initial={{ opacity: 0, y: 24, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.05, ease: "easeOut" }}
+      >
+        <motion.div
+          animate={{ y: [0, -6, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <MacbookPro
+            width={650}
+            height={400}
+            src={heroMockups.desktop}
+            className="h-auto w-full"
+            aria-label="Preview website dalam frame MacBook Pro"
+          />
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        className="absolute right-[2%] top-[7%] z-30 w-[28%] text-slate-950 drop-shadow-[0_44px_86px_rgba(15,23,42,0.42)] sm:right-[3%] sm:top-[15%] sm:w-[23%] lg:right-[2%] lg:top-[19%] lg:w-[22%] xl:right-[3%] xl:w-[20%]"
+        initial={{ opacity: 0, y: 24, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.16, ease: "easeOut" }}
+      >
+        <motion.div
+          animate={{ y: [0, -9, 0] }}
+          transition={{ duration: 7.16, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <Iphone17Pro
+            width={200}
+            height={400}
+            src={heroMockups.mobile}
+            className="h-auto w-full"
+            aria-label="Preview website mobile dalam frame iPhone 17 Pro"
+          />
+        </motion.div>
+      </motion.div>
 
       {/* Desktop / tablet — 2 cards only, well-spaced */}
       <GlassMetricCard

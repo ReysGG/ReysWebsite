@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <rect width="1200" height="760" rx="36" fill="#ffffff"/>
+  <rect x="76" y="76" width="1048" height="608" rx="30" fill="#fffcc9" stroke="#ffcd80" stroke-width="4"/>
+  <text x="124" y="154" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="800" fill="#111827">Scope &amp; Estimate</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#111827">
+    <rect x="124" y="210" width="420" height="78" rx="18" fill="#ffffff"/><text x="154" y="260">4-6 halaman utama</text>
+    <rect x="124" y="318" width="420" height="78" rx="18" fill="#ffffff"/><text x="154" y="368">Timeline 14-21 hari</text>
+    <rect x="124" y="426" width="420" height="78" rx="18" fill="#ffffff"/><text x="154" y="476">2x minor revision</text>
+  </g>
+  <rect x="650" y="220" width="350" height="260" rx="28" fill="#111827"/>
+  <text x="700" y="310" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="800" fill="#ffcd80">Approved</text>
+  <path d="M710 390l65 65 135-155" fill="none" stroke="#ff8a00" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
