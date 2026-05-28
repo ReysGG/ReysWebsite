@@ -16,7 +16,7 @@ import {
   NavbarButton,
 } from "@/components/ui/resizable-navbar";
 import Link from "next/link";
-import logoBuildWithReys from "@/app/logo buildwithreys.png";
+
 
 const NAV_ITEMS = [
   { name: "Layanan", link: "/#services" },
@@ -120,7 +120,7 @@ export const SiteNavbar = () => {
           {/* Logo */}
           <Link href="/" className="relative z-20 flex items-center gap-2 px-2 py-1 group">
             <Image
-              src={logoBuildWithReys}
+              src="/BWR.png"
               alt="Build With Reys"
               width={132}
               height={36}
@@ -148,7 +148,7 @@ export const SiteNavbar = () => {
           <MobileNavHeader>
             <Link href="/" className="flex items-center gap-2">
               <Image
-                src={logoBuildWithReys}
+                src="/BWR.png"
                 alt="Build With Reys"
                 width={112}
                 height={31}

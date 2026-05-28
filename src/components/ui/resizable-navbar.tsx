@@ -10,45 +10,7 @@ import {
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
-
-
-interface NavbarProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-interface NavBodyProps {
-  children: React.ReactNode;
-  className?: string;
-  visible?: boolean;
-}
-
-interface NavItemsProps {
-  items: {
-    name: string;
-    link: string;
-  }[];
-  className?: string;
-  onItemClick?: () => void;
-}
-
-interface MobileNavProps {
-  children: React.ReactNode;
-  className?: string;
-  visible?: boolean;
-}
-
-interface MobileNavHeaderProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-interface MobileNavMenuProps {
-  children: React.ReactNode;
-  className?: string;
-  isOpen: boolean;
-  onClose: () => void;
-}
+import type { MobileNavHeaderProps, MobileNavMenuProps, MobileNavProps, NavBodyProps, NavItemsProps, NavbarProps } from "@/components/ui/resizable-navbar-types";
 
 export const Navbar = ({ children, className }: NavbarProps) => {
   const ref = useRef<HTMLDivElement>(null);

@@ -5,7 +5,7 @@ import { Mail } from "lucide-react";
 import { GithubIcon, InstagramIcon, LinkedinIcon, TwitterIcon, WhatsappIcon } from "@/components/ui/brand-icons";
 import { normalizeEmailLink } from "@/lib/contact-links";
 import { getSiteSettings, type SiteSettings } from "@/lib/site-settings";
-import logoBuildWithReys from "@/app/logo buildwithreys.png";
+
 
 type FooterProps = {
   settings?: SiteSettings;
@@ -102,7 +102,7 @@ export const Footer = async ({ settings }: FooterProps) => {
           <div className="col-span-1 flex flex-col md:col-span-1">
             <Link href="/" className="mb-4 inline-flex items-center">
               <Image
-                src={logoBuildWithReys}
+                src="/BWR.png"
                 alt="Build With Reys"
                 width={140}
                 height={38}

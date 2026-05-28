@@ -1,72 +1,33 @@
 'use client';
 
-import { useActionState, useEffect, useMemo, useRef, useState, useTransition } from 'react';
+import { useActionState, useMemo, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import {
-  Check,
-  CheckCircle2,
-  ChevronDown,
-  Code2,
-  ExternalLink,
-  FileCode2,
-  ImageIcon,
-  Loader2,
-  Plus,
-  Save,
-  Search,
-  Upload,
-  X,
-} from 'lucide-react';
+import { CheckCircle2, Code2, ExternalLink, FileCode2, ImageIcon, Loader2, Save, Upload } from 'lucide-react';
 import {
   createShowcase,
   updateShowcase,
   type ShowcaseActionState,
 } from '@/features/admin/actions/showcase-actions';
+import { CategoryCombobox, ChecklistItem } from '@/features/admin/components/showcase/showcase-form-fields';
+import {
+  getShowcaseCategoryOptions,
+  looksLikeShowcaseHtml,
+  parseShowcaseTags,
+  SHOWCASE_DESCRIPTION_MIN_LENGTH,
+  SHOWCASE_HTML_UPLOAD_ENDPOINT,
+  SHOWCASE_IMAGE_UPLOAD_ENDPOINT,
+  SHOWCASE_THUMBNAIL_FOLDER,
+  SHOWCASE_TITLE_MIN_LENGTH,
+  slugifyShowcase,
+} from '@/features/admin/lib/showcase-form';
+import type { ShowcaseFormData, ShowcaseFormMode, ShowcaseFormOptions, ShowcaseHtmlSourceMode } from '@/features/admin/types/showcase-form';
 
-type Mode = 'create' | 'edit';
-type HtmlSourceMode = 'upload' | 'editor';
-
-export type ShowcaseFormData = {
-  id?: string;
-  slug?: string;
-  title?: string;
-  description?: string;
-  category?: string;
-  htmlUrl?: string;
-  thumbnail?: string;
-  tags?: string[];
-  published?: boolean;
-  order?: number;
-};
-
-export type ShowcaseFormOptions = {
-  categories: string[];
-  nextOrder: number;
-};
+export type { ShowcaseFormData, ShowcaseFormOptions } from '@/features/admin/types/showcase-form';
 
 const initialState: ShowcaseActionState = {};
 
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 80);
-}
-
-function parseTags(value: string) {
-  return Array.from(new Set(value.split(',').map((tag) => tag.trim()).filter(Boolean))).slice(0, 10);
-}
-
-function looksLikeHtmlClient(content: string) {
-  const head = content.slice(0, 2000).toLowerCase();
-  return head.includes('<!doctype html') || /<html[\s>]/.test(head) || /<body[\s>]/.test(head);
-}
-
-export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defaultValue?: ShowcaseFormData; options?: ShowcaseFormOptions }) {
+export function ShowcaseForm({ mode, defaultValue, options }: { mode: ShowcaseFormMode; defaultValue?: ShowcaseFormData; options?: ShowcaseFormOptions }) {
   const router = useRouter();
   const action = mode === 'edit' && defaultValue?.id
     ? updateShowcase.bind(null, defaultValue.id)
@@ -75,13 +36,13 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
   const [state, formAction, pending] = useActionState(action, initialState);
   const [title, setTitle] = useState(defaultValue?.title ?? '');
   const [description, setDescription] = useState(defaultValue?.description ?? '');
-  const categoryOptions = useMemo(() => Array.from(new Set([...(options?.categories ?? []), 'Company Profile', 'Landing Page', 'Dashboard', 'E-Commerce', 'Portfolio', 'Blog'].filter(Boolean))).sort((a, b) => a.localeCompare(b)), [options?.categories]);
+  const categoryOptions = useMemo(() => getShowcaseCategoryOptions(options?.categories), [options?.categories]);
   const [category, setCategory] = useState(defaultValue?.category ?? '');
   const [tags, setTags] = useState(defaultValue?.tags?.join(', ') ?? '');
   const [slug, setSlug] = useState(defaultValue?.slug ?? '');
   const [slugManual, setSlugManual] = useState(mode === 'edit');
   const [htmlUrl, setHtmlUrl] = useState(defaultValue?.htmlUrl ?? '');
-  const [htmlSourceMode, setHtmlSourceMode] = useState<HtmlSourceMode>('upload');
+  const [htmlSourceMode, setHtmlSourceMode] = useState<ShowcaseHtmlSourceMode>('upload');
   const [htmlSource, setHtmlSource] = useState('');
   const [thumbnail, setThumbnail] = useState(defaultValue?.thumbnail ?? '');
   const [published, setPublished] = useState(defaultValue?.published ?? true);
@@ -92,13 +53,13 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
   const [htmlUploaded, setHtmlUploaded] = useState(false);
   const [thumbUploaded, setThumbUploaded] = useState(false);
 
-  const effectiveSlug = slugManual ? slug : slugify(title);
-  const tagList = useMemo(() => parseTags(tags), [tags]);
+  const effectiveSlug = slugManual ? slug : slugifyShowcase(title);
+  const tagList = useMemo(() => parseShowcaseTags(tags), [tags]);
   const orderPreview = order.trim() || String(options?.nextOrder ?? 1);
-  const editorHtmlLooksValid = useMemo(() => looksLikeHtmlClient(htmlSource), [htmlSource]);
+  const editorHtmlLooksValid = useMemo(() => looksLikeShowcaseHtml(htmlSource), [htmlSource]);
   const editorHtmlReady = Boolean(htmlSource.trim() && editorHtmlLooksValid);
   const htmlReady = htmlSourceMode === 'editor' ? editorHtmlReady : Boolean(htmlUrl);
-  const canSubmit = Boolean(title.trim().length >= 3 && description.trim().length >= 10 && category.trim() && htmlReady);
+  const canSubmit = Boolean(title.trim().length >= SHOWCASE_TITLE_MIN_LENGTH && description.trim().length >= SHOWCASE_DESCRIPTION_MIN_LENGTH && category.trim() && htmlReady);
 
   const handleHtmlUpload = (file: File | null) => {
     if (!file) return;
@@ -108,7 +69,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
       const fd = new FormData();
       fd.append('file', file);
       if (effectiveSlug) fd.append('slug', effectiveSlug);
-      const res = await fetch('/api/upload/showcase', { method: 'POST', body: fd });
+      const res = await fetch(SHOWCASE_HTML_UPLOAD_ENDPOINT, { method: 'POST', body: fd });
       const json = await res.json();
       if (!res.ok) {
         setUploadError(json.error ?? 'Upload gagal.');
@@ -127,8 +88,8 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
     startThumbUpload(async () => {
       const fd = new FormData();
       fd.append('file', file);
-      fd.append('folder', 'showcase-thumb');
-      const res = await fetch('/api/upload', { method: 'POST', body: fd });
+      fd.append('folder', SHOWCASE_THUMBNAIL_FOLDER);
+      const res = await fetch(SHOWCASE_IMAGE_UPLOAD_ENDPOINT, { method: 'POST', body: fd });
       const json = await res.json();
       if (!res.ok) {
         setUploadError(json.error ?? 'Upload gambar gagal.');
@@ -185,7 +146,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                   value={effectiveSlug}
                   onChange={(event) => {
                     setSlugManual(true);
-                    setSlug(slugify(event.target.value));
+                    setSlug(slugifyShowcase(event.target.value));
                   }}
                   placeholder="nama-prototype"
                   className="min-w-0 flex-1 rounded-md border border-neutral-200 px-3 py-2.5 text-sm outline-none transition focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
@@ -197,7 +158,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                       setSlugManual(false);
                       setSlug('');
                     }}
-                    className="shrink-0 text-[11px] font-semibold text-neutral-500 hover:text-indigo-600"
+                    className="shrink-0 text-[11px] font-semibold text-neutral-500 hover:text-[#ff8a00]"
                   >
                     Reset
                   </button>
@@ -251,7 +212,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
 
         <section className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
           <div className="mb-5 flex items-start gap-3">
-            <span className="rounded-md bg-indigo-50 p-2 text-indigo-600">
+            <span className="rounded-md bg-[#fffcc9] p-2 text-[#ff8a00]">
               <FileCode2 className="h-4 w-4" />
             </span>
             <div>
@@ -297,7 +258,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                     'inline-flex cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-xs font-semibold transition',
                     htmlUrl
                       ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
-                      : 'border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100',
+                      : 'border-[#ffcd80] bg-[#fffcc9] text-[#ff8a00] hover:bg-[#ffcd80]/30',
                     uploadingHtml ? 'pointer-events-none opacity-60' : '',
                   ].join(' ')}
                   >
@@ -320,7 +281,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                       href={htmlUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-indigo-700"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-[#ff8a00]"
                     >
                       <ExternalLink className="h-3.5 w-3.5" />
                       Buka file
@@ -366,7 +327,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
 
         <section className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
           <div className="mb-5 flex items-start gap-3">
-            <span className="rounded-md bg-indigo-50 p-2 text-indigo-600">
+            <span className="rounded-md bg-[#fffcc9] p-2 text-[#ff8a00]">
               <ImageIcon className="h-4 w-4" />
             </span>
             <div>
@@ -388,7 +349,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                 'inline-flex cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-xs font-semibold transition',
                 thumbnail
                   ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
-                  : 'border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100',
+                  : 'border-[#ffcd80] bg-[#fffcc9] text-[#ff8a00] hover:bg-[#ffcd80]/30',
                 uploadingThumb ? 'pointer-events-none opacity-60' : '',
               ].join(' ')}>
                 {uploadingThumb ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Upload className="h-3.5 w-3.5" />}
@@ -433,7 +394,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                     Thumbnail preview
                   </div>
                 )}
-                <div className="absolute bottom-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase text-indigo-700 shadow-sm">
+                <div className="absolute bottom-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase text-[#ff8a00] shadow-sm">
                   {category || 'Kategori'}
                 </div>
               </div>
@@ -482,7 +443,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
                 name="published"
                 checked={published}
                 onChange={(event) => setPublished(event.target.checked)}
-                className="h-4 w-4 rounded border-neutral-300 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-neutral-300 text-[#ff8a00] focus:ring-[#ffcd80]"
               />
               <div>
                 <p className="text-sm font-semibold text-neutral-900">Publish ke /showcase</p>
@@ -510,7 +471,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
             <button
               type="submit"
               disabled={pending || uploadingHtml || uploadingThumb || !canSubmit}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-neutral-950 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-neutral-950 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-[#ff8a00] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
               {mode === 'edit' ? 'Simpan perubahan' : 'Buat showcase'}
@@ -531,179 +492,5 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: Mode; defa
         </section>
       </aside>
     </form>
-  );
-}
-
-function ChecklistItem({ ready, label }: { ready: boolean; label: string }) {
-  return (
-    <div className="flex items-center gap-2 text-xs font-medium">
-      <span className={`h-2 w-2 rounded-full ${ready ? 'bg-emerald-500' : 'bg-neutral-300'}`} />
-      <span className={ready ? 'text-neutral-700' : 'text-neutral-400'}>{label}</span>
-    </div>
-  );
-}
-
-function CategoryCombobox({
-  value,
-  onChange,
-  options,
-}: {
-  value: string;
-  onChange: (value: string) => void;
-  options: string[];
-}) {
-  const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState('');
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const handleClick = (event: MouseEvent) => {
-      if (!containerRef.current?.contains(event.target as Node)) {
-        setOpen(false);
-        setQuery('');
-      }
-    };
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, [open]);
-
-  const trimmedQuery = query.trim();
-  const filtered = useMemo(() => {
-    const needle = trimmedQuery.toLowerCase();
-    if (!needle) return options;
-    return options.filter((option) => option.toLowerCase().includes(needle));
-  }, [options, trimmedQuery]);
-
-  const exactMatch = useMemo(
-    () =>
-      options.some((option) => option.toLowerCase() === trimmedQuery.toLowerCase()) ||
-      value.toLowerCase() === trimmedQuery.toLowerCase(),
-    [options, trimmedQuery, value],
-  );
-
-  const showCreateOption = trimmedQuery.length > 0 && !exactMatch;
-
-  const commit = (next: string) => {
-    onChange(next);
-    setQuery('');
-    setOpen(false);
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      if (filtered.length > 0) {
-        commit(filtered[0]);
-      } else if (trimmedQuery) {
-        commit(trimmedQuery);
-      }
-      return;
-    }
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      setOpen(false);
-      setQuery('');
-    }
-  };
-
-  return (
-    <div ref={containerRef} className="relative">
-      <input type="hidden" name="category" value={value} />
-      <button
-        type="button"
-        onClick={() => {
-          setOpen((prev) => !prev);
-          setTimeout(() => inputRef.current?.focus(), 0);
-        }}
-        className={[
-          'flex w-full items-center justify-between gap-2 rounded-md border px-3 py-2.5 text-left text-sm outline-none transition',
-          open
-            ? 'border-indigo-500 ring-2 ring-indigo-100'
-            : 'border-neutral-200 hover:border-neutral-300',
-          value ? 'text-neutral-900' : 'text-neutral-400',
-        ].join(' ')}
-      >
-        <span className="truncate">{value || 'Pilih atau ketik kategori baru'}</span>
-        <span className="flex shrink-0 items-center gap-1 text-neutral-400">
-          {value && (
-            <span
-              role="button"
-              tabIndex={-1}
-              onClick={(event) => {
-                event.stopPropagation();
-                onChange('');
-                setQuery('');
-              }}
-              className="rounded p-0.5 hover:bg-neutral-100 hover:text-neutral-700"
-              aria-label="Hapus kategori"
-            >
-              <X className="h-3.5 w-3.5" />
-            </span>
-          )}
-          <ChevronDown
-            className={`h-4 w-4 transition ${open ? 'rotate-180 text-indigo-500' : ''}`}
-          />
-        </span>
-      </button>
-
-      {open && (
-        <div className="absolute left-0 right-0 top-full z-30 mt-1 overflow-hidden rounded-md border border-neutral-200 bg-white shadow-lg">
-          <div className="relative border-b border-neutral-100">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-neutral-400" />
-            <input
-              ref={inputRef}
-              type="text"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Cari atau ketik kategori baru..."
-              className="w-full bg-transparent py-2.5 pl-9 pr-3 text-sm outline-none"
-            />
-          </div>
-
-          <ul className="max-h-60 overflow-y-auto py-1 text-sm">
-            {filtered.length === 0 && !showCreateOption && (
-              <li className="px-3 py-2 text-xs text-neutral-400">Tidak ada kategori yang cocok.</li>
-            )}
-            {filtered.map((option) => {
-              const selected = option === value;
-              return (
-                <li key={option}>
-                  <button
-                    type="button"
-                    onClick={() => commit(option)}
-                    className={[
-                      'flex w-full items-center justify-between gap-2 px-3 py-2 text-left transition',
-                      selected
-                        ? 'bg-indigo-50 text-indigo-700'
-                        : 'text-neutral-700 hover:bg-neutral-50',
-                    ].join(' ')}
-                  >
-                    <span className="truncate">{option}</span>
-                    {selected && <Check className="h-3.5 w-3.5 text-indigo-500" />}
-                  </button>
-                </li>
-              );
-            })}
-            {showCreateOption && (
-              <li>
-                <button
-                  type="button"
-                  onClick={() => commit(trimmedQuery)}
-                  className="flex w-full items-center gap-2 border-t border-neutral-100 bg-emerald-50/50 px-3 py-2 text-left font-semibold text-emerald-700 hover:bg-emerald-50"
-                >
-                  <Plus className="h-3.5 w-3.5" />
-                  <span className="truncate">
-                    Buat kategori baru: <span className="text-emerald-900">&quot;{trimmedQuery}&quot;</span>
-                  </span>
-                </button>
-              </li>
-            )}
-          </ul>
-        </div>
-      )}
-    </div>
   );
 }

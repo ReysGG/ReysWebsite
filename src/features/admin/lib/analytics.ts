@@ -1,5 +1,7 @@
+import "server-only";
+
 import db from "@/lib/db";
-import type { ChartDataPoint } from "@/features/admin/components/analytics-chart";
+import type { AdminDashboardChartPoint } from "@/features/admin/types/dashboard";
 
 const DAY_LABELS = ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
 
@@ -8,7 +10,7 @@ const DAY_LABELS = ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
  * Uses Post.publishedAt as the date dimension and Post.views as the metric.
  * For each day, sums up views from posts published on that day.
  */
-export async function getDailyViewsChart(days: number = 7): Promise<ChartDataPoint[]> {
+export async function getDailyViewsChart(days: number = 7): Promise<AdminDashboardChartPoint[]> {
   const now = new Date();
   const start = new Date(now);
   start.setHours(0, 0, 0, 0);
@@ -27,7 +29,7 @@ export async function getDailyViewsChart(days: number = 7): Promise<ChartDataPoi
     });
 
     // Build per-day buckets
-    const buckets: ChartDataPoint[] = [];
+    const buckets: AdminDashboardChartPoint[] = [];
     for (let i = 0; i < days; i++) {
       const d = new Date(start);
       d.setDate(start.getDate() + i);

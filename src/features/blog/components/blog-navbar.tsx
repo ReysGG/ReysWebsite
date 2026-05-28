@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { Search, Menu, X, ArrowRight } from 'lucide-react';
-import logoBuildWithReys from '@/app/logo buildwithreys.png';
+
 
 const NAV_LINKS = [
   { name: 'Beranda', href: '/' },
@@ -40,7 +40,7 @@ function BlogNavbarInner() {
             className="flex shrink-0 items-center gap-2 text-neutral-900 dark:text-neutral-900"
           >
             <Image
-              src={logoBuildWithReys}
+              src="/BWR.png"
               alt="Build With Reys"
               width={120}
               height={33}

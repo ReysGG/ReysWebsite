@@ -1,38 +1,14 @@
 "use client";
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  createContext,
-  useContext,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState, useContext } from "react";
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import type { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
+import { CarouselContext } from "@/components/ui/apple-cards-carousel-context";
+import type { AppleCard, CarouselProps } from "@/components/ui/apple-cards-carousel-types";
 
-interface CarouselProps {
-  items: React.JSX.Element[];
-  initialScroll?: number;
-}
-
-export type Card = {
-  src: string;
-  gifUrl?: string;
-  title: string;
-  category: string;
-  content: React.ReactNode;
-};
-
-export const CarouselContext = createContext<{
-  onCardClose: (index: number) => void;
-  currentIndex: number;
-}>({
-  onCardClose: () => {},
-  currentIndex: 0,
-});
+export type Card = AppleCard;
 
 export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   const carouselRef = React.useRef<HTMLDivElement>(null);

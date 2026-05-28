@@ -1,303 +1,26 @@
 "use client"
 
-import {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type MouseEvent,
-} from "react"
-import Image, { type StaticImageData } from "next/image"
+import { useEffect, useState, type MouseEvent } from "react"
 import clsx from "clsx"
 import {
   AnimatePresence,
   motion,
   useMotionTemplate,
   useMotionValue,
-  type MotionStyle,
-  type MotionValue,
-  type Variants,
 } from "motion/react"
 import Balancer from "react-wrap-balancer"
 
+import {
+  defaultFeatureCarouselClasses,
+  defaultFeatureCarouselSteps,
+  FEATURE_CAROUSEL_ANIMATION_PRESETS,
+  featureCarouselStepVariants,
+} from "@/components/ui/feature-carousel-config"
+import type { CardProps, FeatureCarouselProps, Step, WrapperStyle } from "@/components/ui/feature-carousel-types"
+import { useIsMobile, useNumberCycler } from "@/components/ui/use-feature-carousel"
 import { cn } from "@/lib/utils"
 
-// Types
-type WrapperStyle = MotionStyle & {
-  "--x": MotionValue<string>
-  "--y": MotionValue<string>
-}
-
-interface CardProps {
-  title: string
-  description: string
-  bgClass?: string
-}
-
-interface ImageSet {
-  step1dark1?: StaticImageData | string
-  step1dark2?: StaticImageData | string
-  step1light1: StaticImageData | string
-  step1light2: StaticImageData | string
-  step2dark1?: StaticImageData | string
-  step2dark2?: StaticImageData | string
-  step2light1: StaticImageData | string
-  step2light2: StaticImageData | string
-  step3dark?: StaticImageData | string
-  step3light: StaticImageData | string
-  step4light: StaticImageData | string
-  alt: string
-}
-
-interface FeatureCarouselProps extends CardProps {
-  steps?: readonly Step[]
-  step1img1Class?: string
-  step1img2Class?: string
-  step2img1Class?: string
-  step2img2Class?: string
-  step3imgClass?: string
-  step4imgClass?: string
-  image: ImageSet
-}
-
-interface StepImageProps {
-  src: StaticImageData | string
-  alt: string
-  className?: string
-  style?: React.CSSProperties
-  width?: number
-  height?: number
-}
-
-interface Step {
-  id: string
-  name: string
-  title: string
-  description: string
-}
-
-// Constants
-const TOTAL_STEPS = 4
-
-const defaultSteps = [
-  {
-    id: "1",
-    name: "Step 1",
-    title: "Feature 1",
-    description: "Feature 1 description  ",
-  },
-  {
-    id: "2",
-    name: "Step 2",
-    title: "Feature 2",
-    description: "Feature 2 description",
-  },
-  {
-    id: "3",
-    name: "Step 3",
-    title: "Feature 3",
-    description: "Feature 3 description",
-  },
-  {
-    id: "4",
-    name: "Step 4",
-    title: "Feature 4",
-    description: "Feature 4 description",
-  },
-] as const
-
-/**
- * Animation presets for reusable motion configurations.
- * Each preset defines the initial, animate, and exit states,
- * along with spring physics parameters for smooth transitions.
- */
-const ANIMATION_PRESETS = {
-  fadeInScale: {
-    initial: { opacity: 0, scale: 0.95 },
-    animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.95 },
-    transition: {
-      type: "spring",
-      stiffness: 300, // Higher value = more rigid spring
-      damping: 25, // Higher value = less oscillation
-      mass: 0.5, // Lower value = faster movement
-    },
-  },
-  slideInRight: {
-    initial: { opacity: 0, x: 20 },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -20 },
-    transition: {
-      type: "spring",
-      stiffness: 300,
-      damping: 25,
-      mass: 0.5,
-    },
-  },
-  slideInLeft: {
-    initial: { opacity: 0, x: -20 },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: 20 },
-    transition: {
-      type: "spring",
-      stiffness: 300,
-      damping: 25,
-      mass: 0.5,
-    },
-  },
-} as const
-
-type AnimationPreset = keyof typeof ANIMATION_PRESETS
-
-interface AnimatedStepImageProps extends StepImageProps {
-  preset?: AnimationPreset
-  delay?: number
-  onAnimationComplete?: () => void
-}
-
-/**
- * Custom hook for managing cyclic transitions with auto-play functionality.
- * Handles both automatic cycling and manual transitions between steps.
- */
-function useNumberCycler(
-  totalSteps: number = TOTAL_STEPS,
-  interval: number = 3000
-) {
-  const [currentNumber, setCurrentNumber] = useState(0)
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
-
-  const clearTimer = useCallback(() => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current)
-    }
-  }, [])
-
-  const setupTimer = useCallback(() => {
-    clearTimer()
-    timerRef.current = setTimeout(() => {
-      setCurrentNumber((prev) => (prev + 1) % totalSteps)
-    }, interval)
-  }, [clearTimer, interval, totalSteps])
-
-  const increment = useCallback(() => {
-    setCurrentNumber((prev) => (prev + 1) % totalSteps)
-    setupTimer()
-  }, [setupTimer, totalSteps])
-
-  useEffect(() => {
-    setupTimer()
-    return clearTimer
-  }, [clearTimer, currentNumber, setupTimer])
-
-  return {
-    currentNumber,
-    increment,
-  }
-}
-
-function useIsMobile() {
-  const isMobileRef = useRef(false)
-
-  useEffect(() => {
-    const updateIsMobile = () => {
-      const userAgent = navigator.userAgent
-      const isSmall = window.matchMedia("(max-width: 768px)").matches
-      const isMobileUserAgent = Boolean(
-        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.exec(
-          userAgent
-        )
-      )
-
-      isMobileRef.current = isSmall || isMobileUserAgent
-    }
-
-    updateIsMobile()
-    window.addEventListener("resize", updateIsMobile)
-
-    return () => window.removeEventListener("resize", updateIsMobile)
-  }, [])
-
-  return useCallback(() => isMobileRef.current, [])
-}
-
-// Components
-function IconCheck({ className, ...props }: React.ComponentProps<"svg">) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 256 256"
-      fill="currentColor"
-      className={cn("h-4 w-4", className)}
-      {...props}
-    >
-      <path d="m229.66 77.66-128 128a8 8 0 0 1-11.32 0l-56-56a8 8 0 0 1 11.32-11.32L96 188.69 218.34 66.34a8 8 0 0 1 11.32 11.32Z" />
-    </svg>
-  )
-}
-
-const stepVariants: Variants = {
-  inactive: {
-    scale: 0.8,
-    opacity: 0.5,
-  },
-  active: {
-    scale: 1,
-    opacity: 1,
-  },
-}
-
-const StepImage = forwardRef<HTMLImageElement, StepImageProps>(
-  (
-    { src, alt, className, style, width = 1200, height = 630, ...props },
-    ref
-  ) => {
-    return (
-      <Image
-        ref={ref}
-        alt={alt}
-        className={className}
-        src={src}
-        width={width}
-        height={height}
-        style={{
-          position: "absolute",
-          userSelect: "none",
-          maxWidth: "unset",
-          ...style,
-        }}
-        {...props}
-      />
-    )
-  }
-)
-StepImage.displayName = "StepImage"
-
-const MotionStepImage = motion(StepImage)
-
-/**
- * Wrapper component for StepImage that applies animation presets.
- * Simplifies the application of complex animations through preset configurations.
- */
-const AnimatedStepImage = ({
-  preset = "fadeInScale",
-  delay = 0,
-  onAnimationComplete,
-  ...props
-}: AnimatedStepImageProps) => {
-  const presetConfig = ANIMATION_PRESETS[preset]
-  return (
-    <MotionStepImage
-      {...props}
-      {...presetConfig}
-      transition={{
-        ...presetConfig.transition,
-        delay,
-      }}
-      onAnimationComplete={onAnimationComplete}
-    />
-  )
-}
+import { AnimatedStepImage, IconCheck } from "@/components/ui/feature-carousel-images"
 
 /**
  * Main card component that handles mouse tracking for gradient effect.
@@ -424,7 +147,7 @@ function Steps({
               key={`${step.name}-${stepIdx}`}
               initial="inactive"
               animate={isCurrent ? "active" : "inactive"}
-              variants={stepVariants}
+              variants={featureCarouselStepVariants}
               transition={{ duration: 0.3 }}
               className={cn(
                 "relative z-50 rounded-md px-3 py-1 transition-all duration-300 ease-in-out md:flex",
@@ -498,21 +221,6 @@ function Steps({
   )
 }
 
-const defaultClasses = {
-  step1img1:
-    "pointer-events-none w-[50%] border border-border-100/10 transition-all duration-500 dark:border-border-700/50 rounded-lg",
-  step1img2:
-    "pointer-events-none w-[60%] border border-border-100/10 dark:border-border-700/50 transition-all duration-500 overflow-hidden rounded-lg",
-  step2img1:
-    "pointer-events-none w-[50%] border border-border-100/10 transition-all duration-500 dark:border-border-700 rounded-lg overflow-hidden",
-  step2img2:
-    "pointer-events-none w-[40%] border border-border-100/10 dark:border-border-700 transition-all duration-500 rounded-lg overflow-hidden",
-  step3img:
-    "pointer-events-none w-[90%] border border-border-100/10 dark:border-border-700 rounded-lg transition-all duration-500 overflow-hidden",
-  step4img:
-    "pointer-events-none w-[90%] border border-border-100/10 dark:border-border-700 rounded-lg transition-all duration-500 overflow-hidden",
-} as const
-
 /**
  * Main component that orchestrates the multi-step animation sequence.
  * Manages state transitions, handles animation timing, and prevents
@@ -520,13 +228,13 @@ const defaultClasses = {
  */
 export function FeatureCarousel({
   image,
-  steps = defaultSteps,
-  step1img1Class = defaultClasses.step1img1,
-  step1img2Class = defaultClasses.step1img2,
-  step2img1Class = defaultClasses.step2img1,
-  step2img2Class = defaultClasses.step2img2,
-  step3imgClass = defaultClasses.step3img,
-  step4imgClass = defaultClasses.step4img,
+  steps = defaultFeatureCarouselSteps,
+  step1img1Class = defaultFeatureCarouselClasses.step1img1,
+  step1img2Class = defaultFeatureCarouselClasses.step1img2,
+  step2img1Class = defaultFeatureCarouselClasses.step2img1,
+  step2img2Class = defaultFeatureCarouselClasses.step2img2,
+  step3imgClass = defaultFeatureCarouselClasses.step3img,
+  step4imgClass = defaultFeatureCarouselClasses.step4img,
   ...props
 }: FeatureCarouselProps) {
   const { currentNumber: step, increment } = useNumberCycler()
@@ -651,7 +359,7 @@ export function FeatureCarousel({
       <AnimatePresence mode="wait">
         <motion.div
           key={step}
-          {...ANIMATION_PRESETS.fadeInScale}
+          {...FEATURE_CAROUSEL_ANIMATION_PRESETS.fadeInScale}
           className="w-full h-full absolute"
         >
           {content()}

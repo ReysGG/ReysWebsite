@@ -1,127 +1,31 @@
 import "server-only";
 
-import type { Prisma } from "@prisma/client";
 import db from "@/lib/db";
 import { uploadShowcaseHtml } from "@/features/admin/services/showcase-html-storage-service";
-
-export const ADMIN_SHOWCASE_PAGE_SIZE = 12;
-
-export type ShowcaseStatus = "all" | "published" | "draft";
-
-export type AdminShowcaseSearchParams = {
-  q?: string;
-  status?: string;
-  category?: string;
-  page?: string;
-};
-
-const adminShowcaseListSelect = {
-  id: true,
-  slug: true,
-  title: true,
-  description: true,
-  category: true,
-  thumbnail: true,
-  htmlUrl: true,
-  tags: true,
-  published: true,
-  order: true,
-  createdAt: true,
-  updatedAt: true,
-} satisfies Prisma.ShowcaseSelect;
-
-const showcaseFormSelect = {
-  id: true,
-  slug: true,
-  title: true,
-  description: true,
-  category: true,
-  thumbnail: true,
-  htmlUrl: true,
-  tags: true,
-  published: true,
-  order: true,
-} satisfies Prisma.ShowcaseSelect;
-
-export type AdminShowcaseRow = Prisma.ShowcaseGetPayload<{ select: typeof adminShowcaseListSelect }>;
-export type ShowcaseFormRecord = Prisma.ShowcaseGetPayload<{ select: typeof showcaseFormSelect }>;
-
-export type AdminShowcaseDashboard = {
-  items: AdminShowcaseRow[];
-  categories: Array<{ name: string; count: number }>;
-  filters: {
-    q: string;
-    status: ShowcaseStatus;
-    category: string;
-    page: number;
-  };
-  pagination: {
-    page: number;
-    pageSize: number;
-    total: number;
-    totalPages: number;
-    hasNextPage: boolean;
-    hasPreviousPage: boolean;
-  };
-  stats: {
-    total: number;
-    published: number;
-    draft: number;
-    categories: number;
-  };
-};
-
-export type ShowcaseMutationInput = {
-  title: string;
-  description: string;
-  category: string;
-  htmlUrl: string;
-  htmlSourceMode: "upload" | "editor";
-  htmlSource: string;
-  thumbnail: string;
-  requestedSlug: string;
-  order?: number;
-  published: boolean;
-  tags: string[];
-};
-
-export function emptyAdminShowcaseDashboard(): AdminShowcaseDashboard {
-  return {
-    items: [],
-    categories: [],
-    filters: { q: "", status: "all", category: "", page: 1 },
-    pagination: {
-      page: 1,
-      pageSize: ADMIN_SHOWCASE_PAGE_SIZE,
-      total: 0,
-      totalPages: 1,
-      hasNextPage: false,
-      hasPreviousPage: false,
-    },
-    stats: { total: 0, published: 0, draft: 0, categories: 0 },
-  };
-}
-
-export function normalizeShowcaseStatus(value?: string): ShowcaseStatus {
-  if (value === "published" || value === "draft") return value;
-  return "all";
-}
-
-export function parseShowcaseFormData(formData: FormData): ShowcaseMutationInput {
-  return {
-    title: getString(formData, "title"),
-    description: getString(formData, "description"),
-    category: getString(formData, "category"),
-    htmlUrl: getString(formData, "htmlUrl"),
-    htmlSourceMode: getHtmlSourceMode(formData),
-    htmlSource: getString(formData, "htmlSource"),
-    thumbnail: getString(formData, "thumbnail"),
-    requestedSlug: getString(formData, "slug"),
-    order: getOptionalNumber(formData, "order"),
-    published: formData.get("published") === "on" || formData.get("published") === "true",
-    tags: getTags(formData),
-  };
-}
+import {
+  adminShowcaseListSelect,
+  ADMIN_SHOWCASE_PAGE_SIZE,
+  showcaseFormSelect,
+  type AdminShowcaseDashboard,
+  type AdminShowcaseSearchParams,
+  type ShowcaseMutationInput,
+} from "@/features/admin/types/showcase-service";
+import {
+  buildShowcaseWhere,
+  normalizeShowcaseStatus,
+  readShowcaseGroupCount,
+  slugifyShowcaseRecord,
+} from "@/features/admin/lib/showcase-service-utils";
+export { emptyAdminShowcaseDashboard, parseShowcaseFormData } from "@/features/admin/lib/showcase-service-utils";
+export { ADMIN_SHOWCASE_PAGE_SIZE } from "@/features/admin/types/showcase-service";
+export type {
+  AdminShowcaseDashboard,
+  AdminShowcaseRow,
+  AdminShowcaseSearchParams,
+  ShowcaseFormRecord,
+  ShowcaseMutationInput,
+  ShowcaseStatus,
+} from "@/features/admin/types/showcase-service";
 
 export async function getAdminShowcaseDashboard(
   searchParams: AdminShowcaseSearchParams,
@@ -154,13 +58,13 @@ export async function getAdminShowcaseDashboard(
     }),
   ]);
 
-  const published = readGroupCount(statusCounts.find((item) => item.published));
-  const draft = readGroupCount(statusCounts.find((item) => !item.published));
+  const published = readShowcaseGroupCount(statusCounts.find((item) => item.published));
+  const draft = readShowcaseGroupCount(statusCounts.find((item) => !item.published));
   const totalPages = Math.max(1, Math.ceil(filteredTotal / ADMIN_SHOWCASE_PAGE_SIZE));
 
   return {
     items,
-    categories: categoryCounts.map((item) => ({ name: item.category, count: readGroupCount(item) })),
+    categories: categoryCounts.map((item) => ({ name: item.category, count: readShowcaseGroupCount(item) })),
     filters: { q, status, category, page },
     pagination: {
       page,
@@ -224,73 +128,14 @@ export async function toggleShowcasePublishedById(id: string) {
   `;
 }
 
-function getString(formData: FormData, key: string) {
-  const value = formData.get(key);
-  return typeof value === "string" ? value.trim() : "";
-}
-
-function getOptionalNumber(formData: FormData, key: string) {
-  const value = formData.get(key);
-  if (typeof value !== "string" || !value.trim()) return undefined;
-  const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : undefined;
-}
-
-function getTags(formData: FormData) {
-  const raw = getString(formData, "tags");
-  if (!raw) return [];
-  return Array.from(new Set(raw.split(",").map((tag) => tag.trim()).filter(Boolean))).slice(0, 10);
-}
-
-function getHtmlSourceMode(formData: FormData): ShowcaseMutationInput["htmlSourceMode"] {
-  return formData.get("htmlSourceMode") === "editor" ? "editor" : "upload";
-}
-
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 80);
-}
-
-function buildShowcaseWhere(params: { q: string; status: ShowcaseStatus; category: string }) {
-  const and: Prisma.ShowcaseWhereInput[] = [];
-
-  if (params.status === "published") and.push({ published: true });
-  if (params.status === "draft") and.push({ published: false });
-  if (params.category) and.push({ category: params.category });
-
-  if (params.q) {
-    and.push({
-      OR: [
-        { title: { contains: params.q, mode: "insensitive" } },
-        { description: { contains: params.q, mode: "insensitive" } },
-        { category: { contains: params.q, mode: "insensitive" } },
-        { slug: { contains: params.q, mode: "insensitive" } },
-      ],
-    });
-  }
-
-  const where: Prisma.ShowcaseWhereInput = and.length ? { AND: and } : {};
-  return where;
-}
-
-function readGroupCount(row: { _count?: true | { id?: number; _all?: number } } | undefined) {
-  const count = row?._count;
-  if (!count || count === true) return 0;
-  return count.id ?? count._all ?? 0;
-}
-
 async function buildShowcaseData(input: ShowcaseMutationInput, excludeId?: string) {
   if (input.title.length < 3) throw new Error("Judul minimal 3 karakter.");
   if (input.description.length < 10) throw new Error("Deskripsi minimal 10 karakter.");
   if (!input.category) throw new Error("Kategori wajib diisi.");
 
-  const baseSlug = slugify(input.requestedSlug || input.title);
+  const baseSlug = slugifyShowcaseRecord(input.requestedSlug || input.title);
   const slug = await ensureUniqueSlug(baseSlug, excludeId);
   const htmlUrl = await resolveShowcaseHtmlUrl(input, slug);
-
   const order = input.order ?? await getNextShowcaseOrder();
 
   return {
