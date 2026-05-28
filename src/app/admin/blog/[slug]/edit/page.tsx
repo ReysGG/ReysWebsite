@@ -3,11 +3,11 @@ import { notFound } from "next/navigation";
 import { BlogEditorForm } from "@/features/admin/components/blog/blog-editor-form";
 import { BlogPreviewModal } from "@/features/admin/components/blog/blog-preview-modal";
 import { PenLine } from "lucide-react";
-import db from "@/lib/db";
+import { getBlogPostForEdit } from "@/features/admin/services/blog-admin-service";
 
 export default async function EditBlogPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = await db.post.findUnique({ where: { slug } });
+  const post = await getBlogPostForEdit(slug);
   if (!post) notFound();
   return (
     <div className="space-y-4">

@@ -108,12 +108,17 @@ export const StatsSection = ({ stats }: { stats: StatItemConfig[] }) => {
               className="flex flex-col items-center text-center px-6 py-4 md:px-10 first:pl-0 last:pr-0"
             >
               <div className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-2 text-[#ff8a00]">
-                <CountUp target={stat.value} suffix={stat.suffix} inView={inView} />
+                <span data-edit-field={`stats.${i}.value`}>
+                  <CountUp target={stat.value} suffix="" inView={inView} />
+                </span>
+                <span data-edit-field={`stats.${i}.suffix`}>
+                  {stat.suffix}
+                </span>
               </div>
-              <div className="text-sm font-semibold text-neutral-900 mb-1">
+              <div data-edit-field={`stats.${i}.label`} className="text-sm font-semibold text-neutral-900 mb-1">
                 {stat.label}
               </div>
-              <div className="text-xs text-neutral-500 leading-relaxed">
+              <div data-edit-field={`stats.${i}.description`} className="text-xs text-neutral-500 leading-relaxed">
                 {stat.description}
               </div>
             </motion.div>

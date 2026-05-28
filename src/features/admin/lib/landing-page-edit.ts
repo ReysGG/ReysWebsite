@@ -5,12 +5,13 @@ import { getHeroEditFields } from "@/features/admin/components/landing-page/sect
 import { getPricingEditFields } from "@/features/admin/components/landing-page/sections/pricing-edit";
 import { getProblemsEditFields } from "@/features/admin/components/landing-page/sections/problems-edit";
 import { getServicesEditFields } from "@/features/admin/components/landing-page/sections/services-edit";
+import { getSolutionsEditFields } from "@/features/admin/components/landing-page/sections/solutions-edit";
 import { getStatsEditFields } from "@/features/admin/components/landing-page/sections/stats-edit";
 import { getTrustStripEditFields } from "@/features/admin/components/landing-page/sections/trust-strip-edit";
 import { getWhatYouGetEditFields } from "@/features/admin/components/landing-page/sections/what-you-get-edit";
 import { getWorkflowEditFields } from "@/features/admin/components/landing-page/sections/workflow-edit";
 
-export type SectionKey = "hero" | "trustStrip" | "problems" | "stats" | "services" | "workflow" | "pricing" | "whatYouGet" | "cta" | "faq";
+export type SectionKey = "hero" | "trustStrip" | "problems" | "stats" | "services" | "workflow" | "solutions" | "pricing" | "whatYouGet" | "cta" | "faq";
 
 export type InlineEditField = {
   section: SectionKey;
@@ -34,6 +35,7 @@ export const LANDING_PAGE_SECTIONS: SectionMeta[] = [
   { key: "stats", label: "Statistik", description: "Angka ringkas yang tampil setelah hero." },
   { key: "services", label: "Layanan", description: "Section service cards di homepage." },
   { key: "workflow", label: "Workflow", description: "Step proses kerja dari awal sampai delivery." },
+  { key: "solutions", label: "Contoh Solusi", description: "Fallback bento cards dan GIF hover saat portfolio publik kosong." },
   { key: "pricing", label: "Pricing", description: "Paket harga, fitur, dan popular badge." },
   { key: "whatYouGet", label: "What You Get", description: "Checklist deliverable project." },
   { key: "cta", label: "CTA Akhir", description: "Section ajakan konsultasi sebelum FAQ." },
@@ -52,6 +54,7 @@ export function getInlineEditFields(section: SectionKey, config: SiteConfig): In
     stats: getStatsEditFields,
     services: getServicesEditFields,
     workflow: getWorkflowEditFields,
+    solutions: getSolutionsEditFields,
     pricing: getPricingEditFields,
     whatYouGet: getWhatYouGetEditFields,
     cta: getCtaEditFields,

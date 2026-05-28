@@ -1,7 +1,6 @@
 "use client";
 
 import { useActionState } from "react";
-import type { Post } from "@prisma/client";
 import { createPost, updatePost, type BlogActionState } from "@/features/admin/actions/blog-actions";
 import { BlogRichTextEditor } from "./blog-rich-text-editor";
 import { BlogSeoPanel } from "./blog-seo-panel";
@@ -12,7 +11,27 @@ import { BlogTagsField } from "./blog-tags-field";
 import { BlogFormMessage } from "./blog-form-message";
 import { Settings2 } from "lucide-react";
 
-export function BlogEditorForm({ initialData }: { initialData?: Post }) {
+type BlogEditorData = {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string | null;
+  coverImage: string | null;
+  ogImage: string | null;
+  author: string | null;
+  category: string | null;
+  focusKeyword: string | null;
+  canonicalUrl: string | null;
+  published: boolean;
+  featured: boolean;
+  publishedAt: Date | null;
+  metaTitle: string | null;
+  metaDesc: string | null;
+  tags: string[];
+};
+
+export function BlogEditorForm({ initialData }: { initialData?: BlogEditorData }) {
   const action = initialData ? updatePost : createPost;
   const [state, formAction, pending] = useActionState(action, {} as BlogActionState);
   return (
@@ -61,7 +80,7 @@ export function BlogEditorForm({ initialData }: { initialData?: Post }) {
 
         <section className="rounded-xl border border-neutral-200 bg-white p-5 space-y-4">
           <div className="flex items-center gap-2">
-            <Settings2 size={14} className="text-indigo-500" />
+            <Settings2 size={14} className="text-[#ff8a00]" />
             <h2 className="text-sm font-semibold text-neutral-900">Media & Detail</h2>
           </div>
           <BlogCoverImageField defaultValue={initialData?.coverImage} defaultOgImage={initialData?.ogImage} />
@@ -72,7 +91,7 @@ export function BlogEditorForm({ initialData }: { initialData?: Post }) {
               defaultValue={initialData?.category || ""}
               list="blog-category-options"
               placeholder="Pilih atau tulis kategori"
-              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-indigo-400 transition-colors"
+              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-[#ff8a00] transition-colors"
             />
             <datalist id="blog-category-options">
               <option value="Web Development" />
@@ -92,7 +111,7 @@ export function BlogEditorForm({ initialData }: { initialData?: Post }) {
             <input
               name="author"
               defaultValue={initialData?.author || "Admin"}
-              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-indigo-400 transition-colors"
+              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-[#ff8a00] transition-colors"
             />
           </label>
           <BlogTagsField defaultValue={initialData?.tags || []} />

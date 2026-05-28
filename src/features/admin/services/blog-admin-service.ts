@@ -12,6 +12,31 @@ export type BlogAdminSearchParams = {
 
 export type BlogAdminView = "all" | "published" | "draft" | "seo";
 
+export async function getBlogPostForEdit(slug: string) {
+  return db.post.findUnique({
+    where: { slug },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      content: true,
+      excerpt: true,
+      coverImage: true,
+      ogImage: true,
+      author: true,
+      category: true,
+      focusKeyword: true,
+      canonicalUrl: true,
+      published: true,
+      featured: true,
+      publishedAt: true,
+      metaTitle: true,
+      metaDesc: true,
+      tags: true,
+    },
+  });
+}
+
 function normalizeBlogStatus(params: BlogAdminSearchParams, view: BlogAdminView) {
   if (view === "published") return "published";
   if (view === "draft") return "draft";

@@ -67,6 +67,7 @@ const LANDING_SECTIONS: SubItem[] = [
   { label: "Statistik", href: "/admin/landing-page/stats", icon: <BarChart3 className="h-3.5 w-3.5" /> },
   { label: "Layanan", href: "/admin/landing-page/services", icon: <ListChecks className="h-3.5 w-3.5" /> },
   { label: "Workflow", href: "/admin/landing-page/workflow", icon: <MousePointerClick className="h-3.5 w-3.5" /> },
+  { label: "Contoh Solusi", href: "/admin/landing-page/solutions", icon: <Sparkles className="h-3.5 w-3.5" /> },
   { label: "Pricing", href: "/admin/landing-page/pricing", icon: <DollarSign className="h-3.5 w-3.5" /> },
   { label: "What You Get", href: "/admin/landing-page/whatYouGet", icon: <PackageCheck className="h-3.5 w-3.5" /> },
   { label: "CTA Akhir", href: "/admin/landing-page/cta", icon: <Megaphone className="h-3.5 w-3.5" /> },

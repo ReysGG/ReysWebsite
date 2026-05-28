@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import db from "@/lib/db";
+import { DEFAULT_SOLUTIONS_CONFIG, type SolutionExampleConfig } from "@/lib/solutions-config";
 
 export const SITE_CONFIG_TAG = "site-config";
 
@@ -21,6 +22,7 @@ export type WorkflowStepConfig = {
   title: string;
   description: string;
 };
+
 
 export type PricingTierConfig = {
   title: string;
@@ -91,6 +93,12 @@ export type SiteConfig = {
     rotatingWords: string[];
     description: string;
     steps: WorkflowStepConfig[];
+  };
+  solutions: {
+    eyebrow: string;
+    heading: string;
+    description: string;
+    items: SolutionExampleConfig[];
   };
   pricing: {
     eyebrow: string;
@@ -230,6 +238,7 @@ export const defaultSiteConfig: SiteConfig = {
       { step: "04", title: "Launch & Handover", description: "Deploy ke domain, serah terima akses admin, dokumentasi singkat, dan support awal." },
     ],
   },
+  solutions: DEFAULT_SOLUTIONS_CONFIG,
   pricing: {
     eyebrow: "Harga",
     heading: "Paket project yang jelas sejak awal",
@@ -346,7 +355,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function isSiteConfig(value: unknown): value is Partial<SiteConfig> {
   if (!isRecord(value)) return false;
-  return Boolean(value.hero || value.stats || value.services || value.workflow || value.pricing || value.cta || value.faq);
+  return Boolean(value.hero || value.stats || value.services || value.workflow || value.solutions || value.pricing || value.cta || value.faq);
 }
 
 function normalizeTrustStripItems(value: unknown): SimpleTextItemConfig[] {
@@ -402,6 +411,11 @@ function mergeSiteConfig(value: Partial<SiteConfig>): SiteConfig {
       ...value.workflow,
       rotatingWords: Array.isArray(value.workflow?.rotatingWords) ? value.workflow.rotatingWords : defaultSiteConfig.workflow.rotatingWords,
       steps: Array.isArray(value.workflow?.steps) ? value.workflow.steps : defaultSiteConfig.workflow.steps,
+    },
+    solutions: {
+      ...defaultSiteConfig.solutions,
+      ...value.solutions,
+      items: Array.isArray(value.solutions?.items) ? value.solutions.items : defaultSiteConfig.solutions.items,
     },
     pricing: {
       ...defaultSiteConfig.pricing,

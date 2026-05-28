@@ -49,7 +49,7 @@ export default async function Home() {
       <ProblemSection content={config.problems} />
       <ServicesSection content={config.services} whatsappUrl={whatsappUrl} />
       <WorkflowSection content={config.workflow} />
-      <PortfolioSection intro={portfolioIntro} projects={portfolioProjects} />
+      <PortfolioSection intro={portfolioIntro} projects={portfolioProjects} solutions={config.solutions} />
       <PricingSection content={config.pricing} />
       <WhatYouGetSection content={config.whatYouGet} />
       {testimonials.length > 0 && <TestimonialsSection testimonials={testimonials} />}

@@ -51,7 +51,7 @@ export function ImageUploadField({ name, label, defaultValue = '', hint, folder 
         <button
           type="button"
           onClick={() => setShowUrlInput(!showUrlInput)}
-          className="flex items-center gap-1 text-xs text-indigo-600 hover:text-indigo-700"
+          className="flex items-center gap-1 text-xs text-[#ff8a00] hover:text-[#ff8a00]"
         >
           <Link size={12} />
           {showUrlInput ? 'Upload file' : 'Pakai URL'}
@@ -66,7 +66,7 @@ export function ImageUploadField({ name, label, defaultValue = '', hint, folder 
           value={value}
           onChange={e => setValue(e.target.value)}
           placeholder="https://images.unsplash.com/..."
-          className="w-full rounded-md border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-indigo-400"
+          className="w-full rounded-md border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-[#ff8a00]"
         />
       ) : (
         <div
@@ -74,7 +74,7 @@ export function ImageUploadField({ name, label, defaultValue = '', hint, folder 
           onDragLeave={() => setDragOver(false)}
           onDrop={handleDrop}
           className={`relative rounded-md border-2 border-dashed transition ${
-            dragOver ? 'border-indigo-400 bg-indigo-50' : 'border-neutral-200 bg-neutral-50'
+            dragOver ? 'border-[#ff8a00] bg-[#fffcc9]' : 'border-neutral-200 bg-neutral-50'
           }`}
         >
           {value ? (
@@ -95,7 +95,7 @@ export function ImageUploadField({ name, label, defaultValue = '', hint, folder 
               type="button"
               onClick={() => fileRef.current?.click()}
               disabled={uploading}
-              className="flex w-full flex-col items-center gap-2 py-8 text-neutral-400 hover:text-indigo-600 disabled:opacity-50"
+              className="flex w-full flex-col items-center gap-2 py-8 text-neutral-400 hover:text-[#ff8a00] disabled:opacity-50"
             >
               {uploading ? <Loader2 size={24} className="animate-spin" /> : <Upload size={24} />}
               <span className="text-xs font-medium">

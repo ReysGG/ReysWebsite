@@ -2,47 +2,54 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BarChart3, BriefcaseBusiness, LineChart, ShoppingBag } from "lucide-react";
+import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import type { Project } from "@prisma/client";
 import type { PortfolioIntroConfig } from "@/lib/portfolio-config";
+import { DEFAULT_SOLUTIONS_CONFIG, type SolutionsConfig } from "@/lib/solutions-config";
 
 const SOLUTION_EXAMPLES = [
   {
-    category: "Contoh Scope",
     title: "UMKM Storefront",
     description:
       "Storefront cepat untuk katalog produk, promo, checkout ringan, dan jalur kontak WhatsApp agar calon pembeli tidak berhenti di tengah jalan.",
     tags: ["Katalog", "WhatsApp", "SEO awal"],
     icon: ShoppingBag,
+    className: "col-span-3 lg:col-span-1",
+    media: "/gif/Create_a_clean_modern_ui_animation_for_a_smal.gif",
   },
   {
-    category: "Contoh Scope",
     title: "Dashboard Operasional",
     description:
       "Dashboard internal untuk monitoring stok, transaksi, dan laporan harian agar owner bisa mengambil keputusan lebih cepat.",
     tags: ["Admin panel", "Laporan", "Workflow"],
     icon: BarChart3,
+    className: "col-span-3 lg:col-span-2",
+    media: "/gif/Create_a_clean_operations_dashboard_ui_animat.gif",
   },
   {
-    category: "Contoh Scope",
     title: "Profil Bisnis Profesional",
     description:
       "Website representasi brand dengan struktur layanan, portfolio, testimoni, dan CTA yang jelas untuk meningkatkan trust pengunjung.",
     tags: ["Trust", "Layanan", "CTA"],
     icon: BriefcaseBusiness,
+    className: "col-span-3 lg:col-span-2",
+    media: "/gif/Create_a_clean_company_profile_website_animat.gif",
   },
   {
-    category: "Contoh Scope",
     title: "Landing Page Campaign",
     description:
       "Halaman campaign dengan pesan yang fokus, section benefit, social proof, dan CTA yang disusun untuk mengubah visitor menjadi lead.",
     tags: ["Campaign", "Copywriting", "Lead"],
     icon: LineChart,
+    className: "col-span-3 lg:col-span-1",
+    media: "/gif/Create_a_clean_landing_page_campaign_ui_anima.gif",
   },
 ];
 
 type PortfolioSectionProps = {
   intro: PortfolioIntroConfig;
   projects: Project[];
+  solutions?: SolutionsConfig;
 };
 
 type PortfolioCardData = {
@@ -114,62 +121,62 @@ function PortfolioCard({
   );
 }
 
-function SolutionExampleCard({ example }: { example: (typeof SOLUTION_EXAMPLES)[number] }) {
-  const Icon = example.icon;
-
+function SolutionExampleCard({ example, fallback }: { example: SolutionsConfig["items"][number]; fallback: (typeof SOLUTION_EXAMPLES)[number] }) {
   return (
-    <article className="rounded-lg border border-slate-200 bg-white p-5 transition-colors duration-300 hover:border-[#ffcd80] md:p-6">
-      <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-[#fffcc9] text-[#ff8a00]">
-        <Icon className="h-6 w-6" />
-      </div>
-      <span className="rounded-md bg-[#fffcc9] px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
-        {example.category}
-      </span>
-      <h3 className="mt-4 text-lg font-bold leading-snug text-slate-950">{example.title}</h3>
-      <p className="mt-3 text-sm leading-relaxed text-slate-600">{example.description}</p>
-      <div className="mt-5 flex flex-wrap gap-2">
-        {example.tags.slice(0, 3).map((tag) => (
-          <span key={tag} className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">
-            {tag}
-          </span>
-        ))}
-      </div>
-    </article>
+    <BentoCard
+      name={example.title}
+      description={example.description}
+      Icon={fallback.icon}
+      href="#cta"
+      cta="Bahas scope"
+      className={[
+        "border border-slate-200 bg-white text-slate-950 [&_svg]:text-[#ff8a00] [&_h3]:font-bold [&_h3]:text-slate-950 [&_p]:text-slate-600 [&_a]:text-[#ff8a00]",
+        fallback.className,
+      ].join(" ")}
+      background={
+        example.media ? (
+          <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <img
+              src={example.media}
+              alt=""
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-white via-white/30 to-transparent" />
+          </div>
+        ) : (
+          <div />
+        )
+      }
+    />
   );
 }
 
-export const PortfolioSection = ({ intro, projects }: PortfolioSectionProps) => {
+export const PortfolioSection = ({ intro, projects, solutions }: PortfolioSectionProps) => {
   const hasPublishedProjects = projects.length > 0;
+  const solutionContent = solutions ?? DEFAULT_SOLUTIONS_CONFIG;
 
   if (!hasPublishedProjects) {
     return (
       <section id="portfolio" className="w-full bg-[#f7f9fb] py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6 md:px-12">
-          <div className="mb-10 max-w-3xl">
+          <div className="mb-12 max-w-3xl">
             <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
-              Contoh solusi
+              {solutionContent.eyebrow}
             </p>
             <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
-              Tidak semua project bisa dipublikasikan. Scope tetap bisa dinilai sejak awal.
+              {solutionContent.heading}
             </h2>
             <p className="mt-5 text-base leading-relaxed text-slate-600 md:text-lg">
-              Saat portfolio publik belum tersedia, cara paling aman menilai kerja sama adalah dari contoh scope, staging link, dan deliverable yang jelas sebelum development.
+              {solutionContent.description}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {SOLUTION_EXAMPLES.map((example) => (
-              <SolutionExampleCard key={example.title} example={example} />
+          <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {solutionContent.items.slice(0, 4).map((example, index) => (
+              <SolutionExampleCard key={example.title} example={example} fallback={SOLUTION_EXAMPLES[index] ?? SOLUTION_EXAMPLES[0]} />
             ))}
-          </div>
-
-          <Link
-            href="#cta"
-            className="mt-8 inline-flex items-center gap-2 rounded-md border border-[#ffcd80] bg-white px-5 py-3 text-sm font-bold text-[#ff8a00] transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9]"
-          >
-            Bahas scope project kamu
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+          </BentoGrid>
         </div>
       </section>
     );

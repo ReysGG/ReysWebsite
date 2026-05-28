@@ -42,7 +42,7 @@ export function BlogRichTextEditor({ defaultValue = "", error }: { defaultValue?
           [&_.ql-editor_h2]:text-2xl [&_.ql-editor_h2]:font-bold [&_.ql-editor_h2]:mb-3
           [&_.ql-editor_h3]:text-xl [&_.ql-editor_h3]:font-semibold [&_.ql-editor_h3]:mb-2
           [&_.ql-editor_p]:mb-3
-          [&_.ql-editor_blockquote]:border-l-4 [&_.ql-editor_blockquote]:border-indigo-400
+          [&_.ql-editor_blockquote]:border-l-4 [&_.ql-editor_blockquote]:border-[#ff8a00]
           [&_.ql-editor_blockquote]:pl-4 [&_.ql-editor_blockquote]:text-neutral-600 [&_.ql-editor_blockquote]:italic
           [&_.ql-editor_pre]:bg-neutral-950 [&_.ql-editor_pre]:text-green-400 [&_.ql-editor_pre]:rounded-md [&_.ql-editor_pre]:p-4
           [&_.ql-toolbar_.ql-stroke]:stroke-neutral-700
