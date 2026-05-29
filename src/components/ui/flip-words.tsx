@@ -14,6 +14,7 @@ export const FlipWords = ({
 }) => {
   const [currentWord, setCurrentWord] = useState(words[0]);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
 
   const startAnimation = useCallback(() => {
     const word = words[words.indexOf(currentWord) + 1] || words[0];
@@ -22,11 +23,30 @@ export const FlipWords = ({
   }, [currentWord, words]);
 
   useEffect(() => {
-    if (!isAnimating)
-      setTimeout(() => {
+    const mediaQuery = window.matchMedia("(min-width: 640px) and (prefers-reduced-motion: no-preference)");
+    const updateAnimationPreference = () => setShouldAnimate(mediaQuery.matches);
+
+    updateAnimationPreference();
+    mediaQuery.addEventListener("change", updateAnimationPreference);
+
+    return () => mediaQuery.removeEventListener("change", updateAnimationPreference);
+  }, []);
+
+  useEffect(() => {
+    if (!shouldAnimate) return;
+
+    if (!isAnimating) {
+      const timeoutId = window.setTimeout(() => {
         startAnimation();
       }, duration);
-  }, [isAnimating, duration, startAnimation]);
+
+      return () => window.clearTimeout(timeoutId);
+    }
+  }, [isAnimating, duration, startAnimation, shouldAnimate]);
+
+  if (!shouldAnimate) {
+    return <span className={cn("inline-block text-left text-neutral-900", className)}>{words[0]}</span>;
+  }
 
   return (
     <AnimatePresence

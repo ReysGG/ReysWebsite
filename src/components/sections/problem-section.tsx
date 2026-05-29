@@ -13,13 +13,13 @@ export const ProblemSection = ({ content }: { content: SiteConfig["problems"] })
   const columnClass = COLUMN_CLASSES[count] ?? "md:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <section className="w-full bg-white py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-6 md:px-12">
-        <div className="mb-14 max-w-3xl">
+    <section className="w-full bg-white py-14 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
+        <div className="mb-8 max-w-3xl md:mb-14">
           <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
             {content.eyebrow}
           </p>
-          <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
+          <h2 className="text-[1.7rem] font-bold leading-tight text-slate-950 md:text-5xl">
             {content.heading}
           </h2>
           <p className="mt-5 text-base leading-relaxed text-slate-600 md:text-lg">
@@ -31,7 +31,7 @@ export const ProblemSection = ({ content }: { content: SiteConfig["problems"] })
           {content.items.map((problem, index) => (
             <article
               key={problem.title}
-              className="rounded-lg border border-slate-200 bg-[#f7f9fb] p-7 transition-colors duration-300 hover:border-[#ffcd80]"
+              className="rounded-lg border border-slate-200 bg-[#f7f9fb] p-5 transition-colors duration-300 hover:border-[#ffcd80] md:p-7"
             >
               <span className="mb-7 flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-bold text-[#ff8a00]">
                 {String(index + 1).padStart(2, "0")}

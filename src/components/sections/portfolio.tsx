@@ -15,7 +15,7 @@ const SOLUTION_EXAMPLES = [
     tags: ["Katalog", "WhatsApp", "SEO awal"],
     icon: ShoppingBag,
     className: "col-span-3 lg:col-span-1",
-    media: "/gif/Create_a_clean_modern_ui_animation_for_a_smal.gif",
+    media: "/gif/Create_a_clean_modern_ui_animation_for_a_smal.webp",
   },
   {
     title: "Dashboard Operasional",
@@ -24,7 +24,7 @@ const SOLUTION_EXAMPLES = [
     tags: ["Admin panel", "Laporan", "Workflow"],
     icon: BarChart3,
     className: "col-span-3 lg:col-span-2",
-    media: "/gif/Create_a_clean_operations_dashboard_ui_animat.gif",
+    media: "/gif/Create_a_clean_operations_dashboard_ui_animat.webp",
   },
   {
     title: "Profil Bisnis Profesional",
@@ -33,7 +33,7 @@ const SOLUTION_EXAMPLES = [
     tags: ["Trust", "Layanan", "CTA"],
     icon: BriefcaseBusiness,
     className: "col-span-3 lg:col-span-2",
-    media: "/gif/Create_a_clean_company_profile_website_animat.gif",
+    media: "/gif/Create_a_clean_company_profile_website_animat.webp",
   },
   {
     title: "Landing Page Campaign",
@@ -42,7 +42,7 @@ const SOLUTION_EXAMPLES = [
     tags: ["Campaign", "Copywriting", "Lead"],
     icon: LineChart,
     className: "col-span-3 lg:col-span-1",
-    media: "/gif/Create_a_clean_landing_page_campaign_ui_anima.gif",
+    media: "/gif/Create_a_clean_landing_page_campaign_ui_anima.webp",
   },
 ];
 
@@ -122,6 +122,11 @@ function PortfolioCard({
 }
 
 function SolutionExampleCard({ example, fallback }: { example: SolutionsConfig["items"][number]; fallback: (typeof SOLUTION_EXAMPLES)[number] }) {
+  const mediaSrc = example.media?.replace("/gif/Create_a_clean_modern_ui_animation_for_a_smal.gif", "/gif/Create_a_clean_modern_ui_animation_for_a_smal.webp")
+    .replace("/gif/Create_a_clean_operations_dashboard_ui_animat.gif", "/gif/Create_a_clean_operations_dashboard_ui_animat.webp")
+    .replace("/gif/Create_a_clean_company_profile_website_animat.gif", "/gif/Create_a_clean_company_profile_website_animat.webp")
+    .replace("/gif/Create_a_clean_landing_page_campaign_ui_anima.gif", "/gif/Create_a_clean_landing_page_campaign_ui_anima.webp");
+
   return (
     <BentoCard
       name={example.title}
@@ -134,10 +139,10 @@ function SolutionExampleCard({ example, fallback }: { example: SolutionsConfig["
         fallback.className,
       ].join(" ")}
       background={
-        example.media ? (
+        mediaSrc ? (
           <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             <img
-              src={example.media}
+              src={mediaSrc}
               alt=""
               className="h-full w-full object-cover"
               loading="lazy"

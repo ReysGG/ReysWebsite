@@ -75,13 +75,13 @@ export const TrustStripSection = ({ content }: { content: SiteConfig["trustStrip
   const colClass = GRID_COLS[safeItems.length] ?? "md:grid-cols-4";
 
   return (
-    <section className="w-full border-y border-slate-200 bg-[#f7faff] py-14 md:py-20">
+    <section className="w-full border-y border-slate-200 bg-[#f7faff] py-12 md:py-20">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-xs font-bold uppercase tracking-[0.34em] text-[#ff8a00] md:text-sm">
             {trustStrip.eyebrow}
           </p>
-          <h2 className="mt-4 text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
+          <h2 className="mt-4 text-[1.7rem] font-bold leading-tight text-slate-950 md:text-5xl">
             {trustStrip.heading}
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-base font-medium leading-relaxed text-slate-600 md:text-lg">
@@ -89,7 +89,7 @@ export const TrustStripSection = ({ content }: { content: SiteConfig["trustStrip
           </p>
         </div>
 
-        <div className={`mt-10 grid gap-4 md:gap-6 ${colClass}`}>
+        <div className={`mt-8 grid gap-4 md:mt-10 md:gap-6 ${colClass}`}>
           {safeItems.map((point, index) => {
             const meta = CARD_META[index] ?? CARD_META[0];
             const Icon = meta.icon;
@@ -97,7 +97,7 @@ export const TrustStripSection = ({ content }: { content: SiteConfig["trustStrip
             return (
               <article
                 key={`${point.title}-${index}`}
-                className="rounded-lg border border-slate-200 bg-white p-5 shadow-[0_14px_40px_rgba(15,23,42,0.07)] md:min-h-[270px] md:p-6"
+                className="rounded-lg border border-slate-200 bg-white p-4 shadow-[0_14px_40px_rgba(15,23,42,0.07)] md:min-h-[270px] md:p-6"
               >
                 <div className="flex gap-4 md:block">
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#fffcc9] text-[#ff8a00] md:mb-7 md:h-16 md:w-16">

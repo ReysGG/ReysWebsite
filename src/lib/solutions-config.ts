@@ -21,25 +21,25 @@ export const DEFAULT_SOLUTIONS_CONFIG: SolutionsConfig = {
       title: "UMKM Storefront",
       description:
         "Storefront cepat untuk katalog produk, promo, checkout ringan, dan jalur kontak WhatsApp agar calon pembeli tidak berhenti di tengah jalan.",
-      media: "/gif/Create_a_clean_modern_ui_animation_for_a_smal.gif",
+      media: "/gif/Create_a_clean_modern_ui_animation_for_a_smal.webp",
     },
     {
       title: "Dashboard Operasional",
       description:
         "Dashboard internal untuk monitoring stok, transaksi, dan laporan harian agar owner bisa mengambil keputusan lebih cepat.",
-      media: "/gif/Create_a_clean_operations_dashboard_ui_animat.gif",
+      media: "/gif/Create_a_clean_operations_dashboard_ui_animat.webp",
     },
     {
       title: "Profil Bisnis Profesional",
       description:
         "Website representasi brand dengan struktur layanan, portfolio, testimoni, dan CTA yang jelas untuk meningkatkan trust pengunjung.",
-      media: "/gif/Create_a_clean_company_profile_website_animat.gif",
+      media: "/gif/Create_a_clean_company_profile_website_animat.webp",
     },
     {
       title: "Landing Page Campaign",
       description:
         "Halaman campaign dengan pesan yang fokus, section benefit, social proof, dan CTA yang disusun untuk mengubah visitor menjadi lead.",
-      media: "/gif/Create_a_clean_landing_page_campaign_ui_anima.gif",
+      media: "/gif/Create_a_clean_landing_page_campaign_ui_anima.webp",
     },
   ],
 };

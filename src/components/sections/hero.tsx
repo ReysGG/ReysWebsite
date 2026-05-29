@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
 import { FlipWords } from "@/components/ui/flip-words";
+import { RotatingSplitText } from "@/components/ui/rotating-split-text";
 import type { SiteConfig } from "@/lib/site-config";
 import { HeroVisual } from "@/components/sections/hero-visual";
 
@@ -15,10 +16,10 @@ const HERO_AVATAR_LABELS = ["A", "B", "C", "D"] as const;
 function HeroTrustBadge() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 18 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      className="mb-6 inline-flex items-center gap-3 rounded-full border border-slate-200/80 bg-white/80 px-4 py-2 shadow-sm shadow-[#ffcd80]/40 backdrop-blur-sm"
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="mb-4 inline-flex items-center gap-3 rounded-full border border-slate-200/80 bg-white/80 px-4 py-2 shadow-sm shadow-[#ffcd80]/40 backdrop-blur-sm sm:mb-6"
     >
       <div className="flex -space-x-2">
         {HERO_AVATAR_COLORS.map((color, index) => (
@@ -46,16 +47,16 @@ function HeroTrustBadge() {
 
 export const HeroSection = ({ content, secondaryHref = "#workflow" }: { content: HeroContent; secondaryHref?: string }) => {
   return (
-    <section className="relative flex min-h-screen w-full items-center overflow-hidden border-b border-slate-200 bg-[#fffcc9]/25 pt-28 pb-10 antialiased md:pt-32 lg:min-h-[100svh] lg:pt-28">
+    <section className="relative flex min-h-[100svh] w-full items-center overflow-hidden border-b border-slate-200 bg-[#fffcc9]/25 pt-20 pb-6 antialiased md:pt-32 lg:min-h-[100svh] lg:pt-28">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.04)_1px,transparent_1px),linear-gradient(180deg,rgba(15,23,42,0.035)_1px,transparent_1px)] bg-[size:112px_112px] opacity-35" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.74),rgba(255,252,201,0.96))]" />
-        <div className="absolute -top-24 right-[5%] h-[520px] w-[520px] rounded-full bg-[#ff8a00]/10 blur-[110px]" />
-        <div className="absolute -bottom-20 -left-16 h-[420px] w-[420px] rounded-full bg-[#ffcd80]/15 blur-[100px]" />
-        <div className="absolute top-1/2 left-[30%] h-[280px] w-[560px] -translate-y-1/2 rounded-full bg-[#f4b738]/10 blur-[130px]" />
+        <div className="absolute -top-24 right-[5%] hidden h-[520px] w-[520px] rounded-full bg-[#ff8a00]/10 blur-[110px] sm:block" />
+        <div className="absolute -bottom-20 -left-16 hidden h-[420px] w-[420px] rounded-full bg-[#ffcd80]/15 blur-[100px] sm:block" />
+        <div className="absolute top-1/2 left-[30%] hidden h-[280px] w-[560px] -translate-y-1/2 rounded-full bg-[#f4b738]/10 blur-[130px] lg:block" />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-[1536px] gap-6 px-4 sm:px-6 md:px-12 lg:min-h-[700px] lg:grid-cols-[minmax(360px,0.88fr)_minmax(560px,1.12fr)] lg:items-center xl:grid-cols-[minmax(420px,0.82fr)_minmax(700px,1.18fr)] xl:px-14">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1536px] gap-1 px-4 sm:gap-6 sm:px-6 md:px-12 lg:min-h-[700px] lg:grid-cols-[minmax(360px,0.88fr)_minmax(560px,1.12fr)] lg:items-center xl:grid-cols-[minmax(420px,0.82fr)_minmax(700px,1.18fr)] xl:px-14">
         <div className="max-w-[620px] lg:pb-16">
           <HeroTrustBadge />
 
@@ -69,8 +70,19 @@ export const HeroSection = ({ content, secondaryHref = "#workflow" }: { content:
               {content.headlinePrefix}
             </span>
             <br />
-            <span className="inline-flex min-h-[1.15em] w-full min-w-0 text-[#ff8a00]">
-              <FlipWords className="px-0 font-bold text-[#ff8a00]" words={content.rotatingWords} />
+            <span className="inline-flex min-h-[1.15em] w-full min-w-0 break-words text-[#ff8a00]">
+              <RotatingSplitText
+                words={content.rotatingWords}
+                className="font-bold text-[#ff8a00] sm:hidden"
+                delay={42}
+                duration={0.75}
+                holdDuration={1700}
+                ease="power3.out"
+                from={{ opacity: 0, y: 22 }}
+                to={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -18 }}
+              />
+              <FlipWords className="hidden px-0 font-bold text-[#ff8a00] sm:inline-block" words={content.rotatingWords} />
             </span>
           </motion.h1>
 
@@ -78,7 +90,7 @@ export const HeroSection = ({ content, secondaryHref = "#workflow" }: { content:
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.16, ease: "easeOut" }}
-            className="mt-6 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg"
+            className="mt-4 max-w-xl text-[15px] leading-relaxed text-slate-600 sm:mt-6 sm:text-base md:text-lg"
           >
             {content.description}
           </motion.p>
@@ -87,14 +99,14 @@ export const HeroSection = ({ content, secondaryHref = "#workflow" }: { content:
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.24, ease: "easeOut" }}
-            className="mt-9 flex flex-col gap-3 sm:flex-row"
+            className="mt-6 flex flex-col gap-3 sm:mt-9 sm:flex-row"
           >
-            <Link href="#cta" className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#ff8a00] to-[#f4b738] px-7 py-4 text-sm font-bold text-white shadow-lg shadow-[#ff8a00]/25 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-[#ff8a00]/35">
+            <Link href="#cta" className="group relative inline-flex min-h-12 items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#ff8a00] to-[#f4b738] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#ff8a00]/25 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-[#ff8a00]/35 sm:px-7 sm:py-4">
               <span className="pointer-events-none absolute inset-0 -translate-x-full skew-x-[-20deg] bg-white/20 transition-transform duration-700 group-hover:translate-x-[200%]" />
               {content.primaryCta}
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
-            <Link href={secondaryHref} className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-7 py-4 text-sm font-bold text-slate-950 backdrop-blur-sm transition-all duration-200 hover:scale-[1.02] hover:border-[#ffcd80] hover:bg-white hover:shadow-md">
+            <Link href={secondaryHref} className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-6 py-3.5 text-sm font-bold text-slate-950 backdrop-blur-sm transition-all duration-200 hover:scale-[1.02] hover:border-[#ffcd80] hover:bg-white hover:shadow-md sm:px-7 sm:py-4">
               {content.secondaryCta}
             </Link>
           </motion.div>

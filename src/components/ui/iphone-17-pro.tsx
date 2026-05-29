@@ -48,7 +48,7 @@ export function Iphone17Pro({
           height="374.37"
           rx="24.62"
           ry="24.62"
-          preserveAspectRatio="none"
+          preserveAspectRatio="xMidYMid slice"
           clipPath="url(#iphoneScreenClip)"
         />
       )}

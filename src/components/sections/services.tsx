@@ -44,7 +44,7 @@ function buildServiceCtaHref(whatsappUrl: string | undefined, serviceTitle: stri
 
 function ServicesVisualPanel() {
   return (
-    <aside className="relative min-h-[320px] overflow-hidden rounded-lg border border-slate-200 bg-slate-100 lg:col-span-4">
+    <aside className="relative min-h-[240px] overflow-hidden rounded-lg border border-slate-200 bg-slate-100 sm:min-h-[320px] lg:col-span-4">
       <Image
         src="/hero-desk-clean.jpg"
         alt="Workspace pengembangan website Build With Reys"
@@ -53,7 +53,7 @@ function ServicesVisualPanel() {
         sizes="(max-width: 1024px) 100vw, 420px"
       />
       <div className="absolute inset-0 bg-linear-to-t from-slate-950/50 via-slate-950/5 to-transparent" />
-      <div className="absolute bottom-5 left-5 right-5 rounded-lg border border-white/20 bg-white/85 p-4 backdrop-blur">
+      <div className="absolute bottom-4 left-4 right-4 rounded-lg border border-white/20 bg-white/85 p-3 backdrop-blur sm:bottom-5 sm:left-5 sm:right-5 sm:p-4">
         <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
           <MonitorSmartphone className="h-4 w-4 text-[#ff8a00]" />
           Scope sebelum coding
@@ -78,16 +78,16 @@ export const ServicesSection = ({
   if (!featuredService) return null;
 
   return (
-    <section id="services" className="w-full bg-[#f7f9fb] py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-6 md:px-12">
-        <div className="mb-14 max-w-3xl">
+    <section id="services" className="w-full bg-[#f7f9fb] py-14 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
+        <div className="mb-8 max-w-3xl md:mb-14">
           <div className="mb-6 inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2">
             <span className="h-2 w-2 rounded-full bg-[#ff8a00]" />
             <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
               {content.eyebrow}
             </span>
           </div>
-          <h2 className="max-w-4xl text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
+          <h2 className="max-w-4xl text-[1.7rem] font-bold leading-tight text-slate-950 md:text-5xl">
             {content.heading}
           </h2>
         </div>

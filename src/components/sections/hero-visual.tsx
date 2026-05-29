@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { CalendarDays, Check, RotateCcw, type LucideIcon } from "lucide-react";
 import { Iphone17Pro } from "@/components/ui/iphone-17-pro";
@@ -10,8 +11,13 @@ import type { SiteConfig } from "@/lib/site-config";
 type HeroContent = SiteConfig["hero"];
 
 const heroMockups = {
-  desktop: "/home_gif/Create_a_polished_digital_product_interface_a.gif",
-  mobile: "/home_gif/Create_a_clean_animated_website_dashboard_int.gif",
+  desktop: "/home_gif/Create_a_polished_digital_product_interface_a_poster.webp",
+  mobile: "/home_gif/Create_a_clean_animated_website_dashboard_int_poster.webp",
+};
+
+const animatedHeroMockups = {
+  desktop: "/home_gif/Create_a_polished_digital_product_interface_a_animated.webp",
+  mobile: "/home_gif/Create_a_clean_animated_website_dashboard_int_animated.webp",
 };
 
 type GlassCardConfig = {
@@ -101,7 +107,7 @@ function MiniCard({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
     >
-      <div className="relative overflow-hidden rounded-[12px] border border-white/65 bg-white/55 p-2 shadow-[0_10px_28px_rgba(15,23,42,0.1),0_8px_22px_rgba(255,138,0,0.12)] backdrop-blur-2xl">
+      <div className="relative overflow-hidden rounded-[12px] border border-white/70 bg-white/75 p-2 shadow-[0_10px_24px_rgba(15,23,42,0.08)] backdrop-blur-sm">
         <div className="relative flex items-center gap-2">
           <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-white/70 bg-white/55 text-[#ff8a00] backdrop-blur-xl">
             <Icon className="h-3 w-3" />
@@ -120,6 +126,19 @@ function MiniCard({
 }
 
 export function HeroVisual({ content }: { content: HeroContent }) {
+  const [useMobilePoster, setUseMobilePoster] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 639px)");
+    const sync = () => setUseMobilePoster(mediaQuery.matches);
+
+    sync();
+    mediaQuery.addEventListener("change", sync);
+    return () => mediaQuery.removeEventListener("change", sync);
+  }, []);
+
+  const mockups = useMobilePoster ? heroMockups : animatedHeroMockups;
+
   const featuredCards: GlassCardConfig[] = [
     {
       eyebrow: "Revisions",
@@ -139,15 +158,15 @@ export function HeroVisual({ content }: { content: HeroContent }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 36 }}
+      initial={{ opacity: 0, x: 18 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.9, delay: 0.18, ease: "easeOut" }}
-      className="relative mx-auto h-[360px] w-full overflow-hidden sm:h-[480px] sm:overflow-visible md:h-[540px] lg:mr-0 lg:ml-auto lg:h-[700px] lg:max-w-[900px] lg:-translate-x-6 lg:-translate-y-12 xl:max-w-[960px] xl:-translate-x-8 xl:-translate-y-14"
+      transition={{ duration: 0.65, delay: 0.12, ease: "easeOut" }}
+      className="relative mx-auto h-[250px] w-full max-w-[360px] overflow-hidden sm:h-[480px] sm:max-w-none sm:overflow-visible md:h-[540px] lg:mr-0 lg:ml-auto lg:h-[700px] lg:max-w-[900px] lg:-translate-x-6 lg:-translate-y-12 xl:max-w-[960px] xl:-translate-x-8 xl:-translate-y-14"
       aria-label="Preview deliverable Build With Reys"
     >
       {/* Glow orbs behind mockups */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[55%] w-[65%] rounded-full bg-[#ff8a00]/10 blur-[80px]" />
-      <div className="pointer-events-none absolute right-[8%] top-[8%] h-[38%] w-[38%] rounded-full bg-[#ffcd80]/20 blur-[60px]" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[55%] w-[65%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff8a00]/10 blur-[80px] sm:block" />
+      <div className="pointer-events-none absolute right-[8%] top-[8%] hidden h-[38%] w-[38%] rounded-full bg-[#ffcd80]/20 blur-[60px] sm:block" />
 
       {/* Dashed connector lines — desktop only, one per card */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
@@ -158,21 +177,21 @@ export function HeroVisual({ content }: { content: HeroContent }) {
       {/* Detached oval shadows are rendered inside each device wrapper so they stay visible above the warm background. */}
 
       <motion.div
-        className="absolute left-[1%] top-[15%] z-20 w-[86%] text-slate-950 sm:left-[0%] sm:top-[21%] sm:w-[82%] lg:left-[6%] lg:top-[28%] lg:w-[78%] xl:left-[7%] xl:top-[27%] xl:w-[76%]"
+        className="absolute left-[1%] top-[8%] z-20 w-[82%] text-slate-950 sm:left-[0%] sm:top-[21%] sm:w-[82%] lg:left-[6%] lg:top-[28%] lg:w-[78%] xl:left-[7%] xl:top-[27%] xl:w-[76%]"
         initial={{ opacity: 0, y: 24, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.05, ease: "easeOut" }}
       >
         <motion.div
           className="relative"
-          animate={{ y: [0, -6, 0] }}
+          animate={{ y: [0, -4, 0] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         >
           <span className="pointer-events-none absolute left-[11%] top-[93%] z-0 hidden h-[46px] w-[78%] rounded-full bg-slate-950/32 blur-[26px] lg:block" />
           <MacbookPro
             width={650}
             height={400}
-            src={heroMockups.desktop}
+            src={mockups.desktop}
             className="relative z-10 h-auto w-full"
             aria-label="Preview website dalam frame MacBook Pro"
           />
@@ -180,14 +199,14 @@ export function HeroVisual({ content }: { content: HeroContent }) {
       </motion.div>
 
       <motion.div
-        className="absolute right-[2%] top-[7%] z-30 w-[28%] text-slate-950 sm:right-[3%] sm:top-[15%] sm:w-[23%] lg:right-[7%] lg:top-[30%] lg:w-[22%] xl:right-[8%] xl:top-[31%] xl:w-[20%]"
+        className="absolute right-[6%] top-[8%] z-30 w-[24%] text-slate-950 sm:right-[3%] sm:top-[15%] sm:w-[23%] lg:right-[7%] lg:top-[30%] lg:w-[22%] xl:right-[8%] xl:top-[31%] xl:w-[20%]"
         initial={{ opacity: 0, y: 24, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.16, ease: "easeOut" }}
       >
         <motion.div
           className="relative"
-          animate={{ y: [0, -9, 0] }}
+          animate={{ y: [0, -5, 0] }}
           transition={{ duration: 7.16, repeat: Infinity, ease: "easeInOut" }}
         >
           <span className="pointer-events-none absolute left-[12%] top-[94%] z-0 hidden h-[34px] w-[80%] rounded-full bg-slate-950/30 blur-[22px] lg:block" />
@@ -196,7 +215,7 @@ export function HeroVisual({ content }: { content: HeroContent }) {
               <Iphone17Pro
                 width={200}
                 height={400}
-                src={heroMockups.mobile}
+                src={mockups.mobile}
                 className="relative z-10 h-auto w-full"
                 aria-label="Preview website mobile dalam frame iPhone 17 Pro"
               />
@@ -218,7 +237,7 @@ export function HeroVisual({ content }: { content: HeroContent }) {
       />
 
       {/* Mobile only: same 2 cards, compact */}
-      <div className="absolute bottom-0 left-0 right-0 z-50 flex gap-1.5 px-2 pb-2 sm:hidden">
+      <div className="absolute bottom-4 left-0 right-0 z-50 flex gap-1.5 px-2 sm:hidden">
         <MiniCard card={featuredCards[0]} delay={0.18} />
         <MiniCard card={featuredCards[1]} delay={0.26} />
       </div>

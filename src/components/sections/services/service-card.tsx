@@ -26,14 +26,14 @@ export function ServiceCard({
   return (
     <article
       className={cn(
-        "group relative flex min-h-[320px] flex-col overflow-hidden rounded-lg border border-slate-200 bg-white p-7 transition-colors duration-300 hover:border-[#ffcd80]",
-        featured && "min-h-[390px] p-8 md:p-10",
+        "group relative flex min-h-[260px] flex-col overflow-hidden rounded-lg border border-slate-200 bg-white p-5 transition-colors duration-300 hover:border-[#ffcd80] md:min-h-[320px] md:p-7",
+        featured && "min-h-[300px] md:min-h-[390px] md:p-10",
         className,
       )}
     >
       <div className="pointer-events-none absolute right-0 top-0 h-40 w-40 -translate-y-12 translate-x-12 rounded-full bg-[#fffcc9] opacity-80 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
 
-      <div className="relative z-10 mb-8 flex items-start justify-between gap-6">
+      <div className="relative z-10 mb-6 flex items-start justify-between gap-6 md:mb-8">
         <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-950">
           {icon}
         </div>
@@ -76,7 +76,7 @@ export function ServiceCard({
         <Link
           href={href}
           {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          className="mt-auto inline-flex w-fit items-center gap-2 pt-8 text-sm font-bold text-[#ff8a00] transition-colors duration-200 hover:text-slate-950"
+          className="mt-auto inline-flex min-h-11 w-fit items-center gap-2 pt-6 text-sm font-bold text-[#ff8a00] transition-colors duration-200 hover:text-slate-950 md:pt-8"
         >
           Diskusikan layanan
           <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />

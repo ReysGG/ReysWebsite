@@ -28,13 +28,13 @@ export const PricingSection = ({ content }: { content: PricingContent }) => {
   const pricingTiers = content.tiers.length ? content.tiers : fallbackPricingTiers;
 
   return (
-    <section id="pricing" className="w-full bg-white py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-6 md:px-12">
-        <div className="mx-auto mb-14 max-w-3xl text-center">
+    <section id="pricing" className="w-full bg-white py-14 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
+        <div className="mx-auto mb-8 max-w-3xl text-center md:mb-14">
           <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
             {content.eyebrow}
           </p>
-          <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
+          <h2 className="text-[1.7rem] font-bold leading-tight text-slate-950 md:text-5xl">
             {content.heading}
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg">
@@ -47,7 +47,7 @@ export const PricingSection = ({ content }: { content: PricingContent }) => {
             <article
               key={tier.title}
               className={cn(
-                "relative flex min-h-[620px] flex-col rounded-lg border bg-[#f7f9fb] p-7",
+                "relative flex min-h-0 flex-col rounded-lg border bg-[#f7f9fb] p-5 md:min-h-[620px] md:p-7",
                 tier.popular ? "border-[#ff8a00] bg-white" : "border-slate-200",
               )}
             >
