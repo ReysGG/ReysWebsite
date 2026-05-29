@@ -46,7 +46,7 @@ function HeroTrustBadge() {
 
 export const HeroSection = ({ content, secondaryHref = "#workflow" }: { content: HeroContent; secondaryHref?: string }) => {
   return (
-    <section className="relative flex min-h-screen w-full overflow-hidden border-b border-slate-200 bg-[#fffcc9]/25 pt-28 pb-10 antialiased md:pt-32 lg:min-h-[100svh] lg:pt-28">
+    <section className="relative flex min-h-screen w-full items-center overflow-hidden border-b border-slate-200 bg-[#fffcc9]/25 pt-28 pb-10 antialiased md:pt-32 lg:min-h-[100svh] lg:pt-28">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.04)_1px,transparent_1px),linear-gradient(180deg,rgba(15,23,42,0.035)_1px,transparent_1px)] bg-[size:112px_112px] opacity-35" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.74),rgba(255,252,201,0.96))]" />

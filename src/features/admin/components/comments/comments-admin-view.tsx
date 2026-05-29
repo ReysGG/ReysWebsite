@@ -19,6 +19,11 @@ function buildCommentsPageUrl(filters: AdminCommentListFilters, page: number) {
   return `/admin/comments${qs ? `?${qs}` : ""}`;
 }
 
+function getCommentAuthorName(comment: { userName: string | null }) {
+  if (comment.userName?.trim()) return comment.userName;
+  return "Pengunjung";
+}
+
 export function CommentsAdminView({ filters, result }: CommentsAdminViewProps) {
   const { q, slug, filter, page } = filters;
   const { comments, totalComments, repliesCount, filteredCount, totalPages, pageSize, databaseError } = result;
@@ -79,7 +84,7 @@ export function CommentsAdminView({ filters, result }: CommentsAdminViewProps) {
                 <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="text-sm font-semibold text-neutral-900">{comment.userName ?? comment.userId}</p>
+                      <p className="text-sm font-semibold text-neutral-900">{getCommentAuthorName(comment)}</p>
                       {comment.parentId && <span className="inline-flex items-center gap-1 rounded-md bg-[#fffcc9] px-2 py-0.5 text-xs font-semibold text-[#ff8a00]"><Reply className="h-3 w-3" /> Reply</span>}
                       <span className="text-xs text-neutral-400">{comment.createdAt.toLocaleDateString("id-ID")}</span>
                     </div>

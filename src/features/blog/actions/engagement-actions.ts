@@ -11,6 +11,8 @@ export type PostEngagementData = {
     content: string;
     createdAt: Date;
     userId: string;
+    userName: string | null;
+    userImg: string | null;
     parentId: string | null;
   }>;
 };
@@ -23,7 +25,7 @@ export async function getPostEngagement(postId: string): Promise<PostEngagementD
         where: { postId },
         orderBy: { createdAt: 'desc' },
         take: 50,
-        select: { id: true, content: true, createdAt: true, userId: true, parentId: true },
+        select: { id: true, content: true, createdAt: true, userId: true, userName: true, userImg: true, parentId: true },
       })
       .catch(() => []),
     db.like.count({ where: { postId } }).catch(() => 0),

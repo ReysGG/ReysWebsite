@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useTransition } from "react";
-import { useAuth, SignInButton } from "@clerk/nextjs";
+import { useAuth, useUser, SignInButton } from "@clerk/nextjs";
 import { Heart, MessageCircle, Send } from 'lucide-react';
 import { toggleLike, addComment } from "@/features/blog/actions/social-actions";
 import { usePathname } from "next/navigation";
@@ -16,9 +16,30 @@ type CommentType = {
   content: string;
   createdAt: Date;
   userId: string;
+  userName: string | null;
+  userImg: string | null;
   parentId: string | null;
   replies?: CommentType[];
 };
+
+function getCommentAuthorName(comment: Pick<CommentType, "userName">) {
+  if (comment.userName?.trim()) return comment.userName;
+  return "Pengunjung";
+}
+
+function getCommentInitials(comment: Pick<CommentType, "userName">) {
+  const source = comment.userName?.trim() || "Pengunjung";
+  return source
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("") || "U";
+}
+
+function getUserDisplayName(user: ReturnType<typeof useUser>["user"]) {
+  if (!user) return null;
+  return [user.firstName, user.lastName].filter(Boolean).join(" ") || user.username || user.primaryEmailAddress?.emailAddress || null;
+}
 
 export function SocialEngagement({
   postId,
@@ -32,13 +53,16 @@ export function SocialEngagement({
   comments: CommentType[];
 }) {
   const { isSignedIn } = useAuth();
+  const { user } = useUser();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
   const [optimisticLiked, setOptimisticLiked] = useState(userHasLiked);
   const [optimisticLikesCount, setOptimisticLikesCount] = useState(initialLikesCount);
+  const [optimisticComments, setOptimisticComments] = useState(comments);
   
   const [commentText, setCommentText] = useState("");
   const [replyTo, setReplyTo] = useState<string | null>(null);
+  const [replyText, setReplyText] = useState("");
 
   const handleToggleLike = () => {
     setOptimisticLiked(!optimisticLiked);
@@ -59,15 +83,33 @@ export function SocialEngagement({
     if (!commentText.trim()) return;
 
     startTransition(async () => {
-      await addComment(postId, commentText, pathname, replyTo || undefined);
+      const createdComment = await addComment(postId, commentText, pathname, undefined, {
+        name: getUserDisplayName(user),
+        imageUrl: user?.imageUrl,
+      });
+      setOptimisticComments((currentComments) => [createdComment, ...currentComments]);
       setCommentText("");
+    });
+  };
+
+  const handleSubmitReply = (e: React.FormEvent, parentId: string) => {
+    e.preventDefault();
+    if (!replyText.trim()) return;
+
+    startTransition(async () => {
+      const createdReply = await addComment(postId, replyText, pathname, parentId, {
+        name: getUserDisplayName(user),
+        imageUrl: user?.imageUrl,
+      });
+      setOptimisticComments((currentComments) => [createdReply, ...currentComments]);
+      setReplyText("");
       setReplyTo(null);
     });
   };
 
   // Group comments
-  const rootComments = comments.filter(c => !c.parentId);
-  const getReplies = (parentId: string) => comments.filter(c => c.parentId === parentId);
+  const rootComments = optimisticComments.filter(c => !c.parentId);
+  const getReplies = (parentId: string) => optimisticComments.filter(c => c.parentId === parentId);
 
   return (
     <section className="mt-14 border-t border-neutral-200 pt-10">
@@ -105,8 +147,8 @@ export function SocialEngagement({
           <div className="p-3 rounded-full bg-neutral-100 text-neutral-500 flex items-center justify-center">
             <MessageCircle size={24} />
           </div>
-          {comments.length > 0 && (
-            <span className="font-mono text-lg text-neutral-900 font-bold">{comments.length}</span>
+          {optimisticComments.length > 0 && (
+            <span className="font-mono text-lg text-neutral-900 font-bold">{optimisticComments.length}</span>
           )}
         </div>
       </div>
@@ -122,12 +164,6 @@ export function SocialEngagement({
               onChange={(e) => setCommentText(e.target.value)}
               className="bg-neutral-50 border-neutral-200 min-h-[120px] text-neutral-950 focus-visible:ring-neutral-950"
             />
-            {replyTo && (
-              <div className="w-full flex justify-between items-center text-sm">
-                <span className="text-neutral-700">Membalas komentar...</span>
-                <button type="button" onClick={() => setReplyTo(null)} className="text-neutral-500 hover:text-neutral-950">Batal Balas</button>
-              </div>
-            )}
             <Button type="submit" disabled={isPending || !commentText.trim()} className="bg-neutral-950 hover:bg-black text-white gap-2">
               <Send size={16} />
               Kirim Komentar
@@ -153,11 +189,11 @@ export function SocialEngagement({
                 <div className="bg-neutral-50 p-5 rounded-lg border border-neutral-200">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-10 h-10 rounded-full bg-neutral-950 flex items-center justify-center font-bold text-white text-sm">
-                      {comment.userId.substring(0, 2).toUpperCase()}
+                      {getCommentInitials(comment)}
                     </div>
                     <div>
                       <div className="text-sm font-medium text-neutral-950 flex items-center gap-2">
-                        User {comment.userId.substring(comment.userId.length - 4)}
+                        {getCommentAuthorName(comment)}
                       </div>
                       <div className="text-xs text-neutral-500">
                         {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true, locale: id })}
@@ -169,13 +205,47 @@ export function SocialEngagement({
                   </p>
                   {isSignedIn && (
                     <button 
-                      onClick={() => setReplyTo(comment.id)}
+                      onClick={() => {
+                        setReplyTo(comment.id);
+                        setReplyText("");
+                      }}
                       className="mt-3 text-xs font-semibold text-neutral-500 hover:text-neutral-950 transition-colors"
                     >
                       Balas Komentar
                     </button>
                   )}
                 </div>
+
+                {isSignedIn && replyTo === comment.id && (
+                  <form onSubmit={(event) => handleSubmitReply(event, comment.id)} className="ml-4 space-y-3 rounded-lg border border-neutral-200 bg-white p-4 md:ml-12">
+                    <p className="text-xs font-semibold text-neutral-700">Balas {getCommentAuthorName(comment)}</p>
+                    <Textarea
+                      autoFocus
+                      placeholder="Tulis balasan Anda di sini..."
+                      value={replyText}
+                      onChange={(event) => setReplyText(event.target.value)}
+                      className="min-h-[96px] border-neutral-200 bg-neutral-50 text-neutral-950 focus-visible:ring-neutral-950"
+                    />
+                    <div className="flex justify-end gap-2">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        disabled={isPending}
+                        onClick={() => {
+                          setReplyTo(null);
+                          setReplyText("");
+                        }}
+                        className="border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50"
+                      >
+                        Cancel
+                      </Button>
+                      <Button type="submit" disabled={isPending || !replyText.trim()} className="gap-2 bg-neutral-950 text-white hover:bg-black">
+                        <Send size={14} />
+                        Kirim Balasan
+                      </Button>
+                    </div>
+                  </form>
+                )}
                 
                 {/* Replies */}
                 {getReplies(comment.id).length > 0 && (
@@ -184,11 +254,11 @@ export function SocialEngagement({
                       <div key={reply.id} className="bg-neutral-50 p-4 rounded-lg border border-neutral-200">
                         <div className="flex items-center gap-3 mb-2">
                            <div className="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center font-bold text-white text-xs">
-                            {reply.userId.substring(0, 2).toUpperCase()}
+                            {getCommentInitials(reply)}
                           </div>
                           <div>
                             <div className="text-xs font-medium text-neutral-950">
-                               User {reply.userId.substring(reply.userId.length - 4)}
+                               {getCommentAuthorName(reply)}
                             </div>
                             <div className="text-[10px] text-neutral-500">
                               {formatDistanceToNow(new Date(reply.createdAt), { addSuffix: true, locale: id })}

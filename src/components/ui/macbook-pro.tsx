@@ -52,7 +52,7 @@ export function MacbookPro({
           width="501.22"
           height="323.85"
           preserveAspectRatio="xMidYMid slice"
-          clipPath="url(#roundedCorners)"
+          clipPath="url(#macbookScreenClip)"
         />
       )}
       <rect fill="#1d1d1d" x="69.09" y="350.51" width="512.11" height="12.48" />
@@ -93,7 +93,7 @@ export function MacbookPro({
       />
 
       <defs>
-        <clipPath id="roundedCorners">
+        <clipPath id="macbookScreenClip">
           <rect
             fill="#ffffff"
             x="74.52"

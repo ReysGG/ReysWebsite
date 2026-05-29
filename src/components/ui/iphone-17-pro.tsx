@@ -48,8 +48,8 @@ export function Iphone17Pro({
           height="374.37"
           rx="24.62"
           ry="24.62"
-          preserveAspectRatio="xMidYMid slice"
-          clipPath="url(#roundedCorners)"
+          preserveAspectRatio="none"
+          clipPath="url(#iphoneScreenClip)"
         />
       )}
       <path
@@ -62,7 +62,7 @@ export function Iphone17Pro({
       />
 
       <defs>
-        <clipPath id="roundedCorners">
+        <clipPath id="iphoneScreenClip">
           <rect
             fill="#ffffff"
             x="14.08"
