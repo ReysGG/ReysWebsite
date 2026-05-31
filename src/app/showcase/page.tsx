@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "Showcase | Build With Reys",
   description:
     "Koleksi prototipe website yang bisa kamu telusuri sebelum memulai project bersama kami.",
+  alternates: { canonical: "/showcase" },
 };
 
 export default async function ShowcasePage() {

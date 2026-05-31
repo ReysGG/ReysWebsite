@@ -19,7 +19,6 @@ const listSelect = {
   author: true,
   category: true,
   focusKeyword: true,
-  canonicalUrl: true,
   published: true,
   featured: true,
   publishedAt: true,
