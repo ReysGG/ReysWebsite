@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPublishedShowcaseItem } from "@/features/showcase/data";
 import { ShowcaseFrame } from "@/features/showcase/components/showcase-frame";
+import { absoluteUrl } from "@/lib/site-url";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -19,7 +20,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${item.title} (Prototipe) | Showcase`,
     description: item.description,
-    robots: { index: false, follow: false },
+    alternates: { canonical: `/showcase/${item.slug}` },
+    openGraph: {
+      title: `${item.title} (Prototipe) | Showcase`,
+      description: item.description,
+      url: absoluteUrl(`/showcase/${item.slug}`),
+      images: item.thumbnail ? [{ url: item.thumbnail, alt: item.title }] : undefined,
+    },
   };
 }
 

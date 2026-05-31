@@ -12,6 +12,8 @@ export type ShowcaseItem = {
   thumbnail: string;
   htmlPath: string;
   tags: string[];
+  updatedAt: Date;
+  createdAt: Date;
 };
 
 const FALLBACK_THUMBNAIL = "/images/homepage-slider-reference.webp";
@@ -25,6 +27,8 @@ const showcaseItemSelect = {
   thumbnail: true,
   htmlUrl: true,
   tags: true,
+  updatedAt: true,
+  createdAt: true,
 } as const;
 
 function toItem(row: {
@@ -36,6 +40,8 @@ function toItem(row: {
   thumbnail: string | null;
   htmlUrl: string;
   tags: string[];
+  updatedAt: Date;
+  createdAt: Date;
 }): ShowcaseItem {
   return {
     id: row.id,
@@ -46,6 +52,8 @@ function toItem(row: {
     thumbnail: row.thumbnail || FALLBACK_THUMBNAIL,
     htmlPath: row.htmlUrl,
     tags: row.tags,
+    updatedAt: row.updatedAt,
+    createdAt: row.createdAt,
   };
 }
 

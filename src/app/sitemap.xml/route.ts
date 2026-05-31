@@ -2,8 +2,9 @@ export const dynamic = "force-dynamic";
 
 import { getAllPublishedSlugs } from "@/features/blog/data/posts";
 import { getPublishedShowcaseItems } from "@/features/showcase/data";
+import { getSiteUrl } from "@/lib/site-url";
 
-const BASE_URL = "https://buildwithreys.tech";
+const BASE_URL = getSiteUrl();
 
 export async function GET() {
   const [blogSlugs, showcaseItems] = await Promise.all([
@@ -17,16 +18,16 @@ export async function GET() {
     { url: `${BASE_URL}/showcase`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
   ];
 
-  const blogRoutes = blogSlugs.map(({ slug }: { slug: string }) => ({
+  const blogRoutes = blogSlugs.map(({ slug, updatedAt, publishedAt, createdAt }: { slug: string; updatedAt: Date; publishedAt: Date | null; createdAt: Date }) => ({
     url: `${BASE_URL}/blog/${slug}`,
-    lastModified: new Date(),
+    lastModified: updatedAt || publishedAt || createdAt,
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  const showcaseRoutes = showcaseItems.map((item: { slug: string }) => ({
+  const showcaseRoutes = showcaseItems.map((item) => ({
     url: `${BASE_URL}/showcase/${item.slug}`,
-    lastModified: new Date(),
+    lastModified: item.updatedAt || item.createdAt,
     changeFrequency: "monthly",
     priority: 0.6,
   }));

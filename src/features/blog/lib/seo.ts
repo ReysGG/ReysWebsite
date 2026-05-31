@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { sameOriginCanonical } from "@/lib/site-url";
 
 type SeoPost = {
   title: string;
@@ -29,7 +30,7 @@ export function buildPostMetadata(post: SeoPost): Metadata {
     title,
     description,
     keywords: keywords.length ? keywords : undefined,
-    alternates: post.canonicalUrl ? { canonical: post.canonicalUrl } : undefined,
+    alternates: { canonical: sameOriginCanonical(post.canonicalUrl, `/blog/${post.slug}`) },
     openGraph: {
       title,
       description,

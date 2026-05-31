@@ -15,6 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Blog & Insights | WebServices',
     description: 'Panduan teknis, studi kasus, dan insight pengembangan website.',
+    alternates: { canonical: '/blog' },
   };
 }
 

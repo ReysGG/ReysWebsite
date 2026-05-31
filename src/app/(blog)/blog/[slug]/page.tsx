@@ -6,6 +6,7 @@ import { ArticleContent } from "@/features/blog/components/article-content";
 import { ArticleRelatedPosts } from "@/features/blog/components/article-related-posts";
 import { ViewCounter } from "@/features/blog/components/view-counter";
 import { SocialEngagementLoader } from "@/features/blog/components/frontend/social-engagement-loader";
+import { absoluteUrl, sameOriginCanonical } from "@/lib/site-url";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -26,10 +27,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!post) return { title: "Artikel Tidak Ditemukan" };
   const description = post.metaDesc || post.excerpt || "";
   const image = post.ogImage || post.coverImage;
+  const canonical = sameOriginCanonical(post.canonicalUrl, `/blog/${post.slug}`);
   return {
     title: post.metaTitle || `${post.title} | WebServices Blog`,
     description,
-    alternates: post.canonicalUrl ? { canonical: post.canonicalUrl } : undefined,
+    alternates: { canonical },
     keywords: post.focusKeyword ? [post.focusKeyword] : undefined,
     openGraph: {
       type: "article",
@@ -55,6 +57,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   if (!post) notFound();
 
   const related = await getRelatedPosts(post).catch(() => []);
+  const canonical = sameOriginCanonical(post.canonicalUrl, `/blog/${post.slug}`);
 
   const jsonLd = [
     {
@@ -73,9 +76,9 @@ export default async function BlogPostPage({ params }: PageProps) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-        { "@type": "ListItem", position: 2, name: "Blog", item: "/blog" },
-        { "@type": "ListItem", position: 3, name: post.title, item: `/blog/${post.slug}` },
+        { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+        { "@type": "ListItem", position: 2, name: "Blog", item: absoluteUrl("/blog") },
+        { "@type": "ListItem", position: 3, name: post.title, item: canonical },
       ],
     },
   ];

@@ -106,7 +106,7 @@ export async function getPublishedPosts(params: Partial<BlogSearchParams> = {}) 
 export async function getAllPublishedSlugs() {
   return db.post.findMany({
     where: { published: true },
-    select: { slug: true },
+    select: { slug: true, updatedAt: true, publishedAt: true, createdAt: true },
   });
 }
 
