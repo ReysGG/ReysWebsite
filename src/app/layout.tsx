@@ -16,10 +16,11 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: { canonical: "/" },
     icons: {
       icon: [
-        { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
-        { url: "/favicon-192.png", sizes: "192x192", type: "image/png" },
+        { url: "/32.png", sizes: "32x32", type: "image/png" },
+        { url: "/192.png", sizes: "192x192", type: "image/png" },
+        { url: "/512.png", sizes: "512x512", type: "image/png" },
       ],
-      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+      apple: [{ url: "/190.png", sizes: "180x180", type: "image/png" }],
     },
     other: {
       "facebook-domain-verification": "14p40lig23xo6orqv8qnge0u0qm19q",
