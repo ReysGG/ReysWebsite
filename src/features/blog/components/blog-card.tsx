@@ -2,11 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, CalendarDays, FileText } from "lucide-react";
 import type { BlogPost } from "@/features/blog/data/posts";
-
-export const formatBlogDate = (date: Date) => new Intl.DateTimeFormat("id-ID", { day: "numeric", month: "long", year: "numeric" }).format(date);
-export const stripHtml = (value: string) => value.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim();
-export const getReadingTime = (post: { readingTime: number }) => `${Math.max(1, post.readingTime)} min read`;
-export const getPostDate = (post: { publishedAt: Date | null; createdAt: Date }) => post.publishedAt || post.createdAt;
+import { formatBlogDate, getPostDate, getReadingTime } from "@/features/blog/lib/blog-format";
 
 export function BlogCard({ post }: { post: BlogPost }) {
   return <Link href={`/blog/${post.slug}`} className="group flex min-h-[420px] flex-col overflow-hidden rounded-3xl border border-[#ffcd80] bg-white/90 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">

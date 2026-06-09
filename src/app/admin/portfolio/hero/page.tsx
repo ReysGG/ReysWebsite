@@ -16,11 +16,11 @@ export default async function ManagePortfolioIntroPage() {
             <p className="mt-1 text-sm text-neutral-500">Atur copy pembuka section portfolio dari data real SiteConfig.</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Link href="/admin/portfolio" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 px-3 py-2 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-50">
+            <Link href="/admin/portfolio" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 px-3 py-2 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
               <ArrowLeft size={16} />
               Kembali
             </Link>
-            <Link href="/#portfolio" target="_blank" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 px-3 py-2 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-50">
+            <Link href="/#portfolio" target="_blank" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 px-3 py-2 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
               <ExternalLink size={16} />
               Preview Website
             </Link>

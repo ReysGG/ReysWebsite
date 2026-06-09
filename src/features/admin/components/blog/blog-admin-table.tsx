@@ -34,7 +34,7 @@ function TogglePublishButton({ id, published }: { id: string; published: boolean
   return (
     <form action={formAction}>
       <input type="hidden" name="id" value={id} />
-      <button
+      <button type="submit"
         disabled={pending}
         className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-2 text-xs font-semibold disabled:opacity-50 ${
           published
@@ -60,13 +60,13 @@ function BulkActions({ selectedIds }: { selectedIds: string[] }) {
       <span className="text-xs font-semibold text-neutral-500">{selectedIds.length} dipilih</span>
       <form action={publishAction}>
         {hiddenInputs}
-        <button disabled={disabled} className="rounded-md bg-[#ff8a00] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#f4b738] disabled:cursor-not-allowed disabled:opacity-50">
+        <button type="submit" disabled={disabled} className="rounded-md bg-[#ff8a00] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#f4b738] disabled:cursor-not-allowed disabled:opacity-50 active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
           Bulk Publish
         </button>
       </form>
       <form action={draftAction}>
         {hiddenInputs}
-        <button disabled={disabled} className="rounded-md border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50">
+        <button type="submit" disabled={disabled} className="rounded-md border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
           Bulk Draft
         </button>
       </form>
@@ -175,8 +175,8 @@ export function BlogAdminTable({ posts, page, totalPages }: { posts: BlogPost[];
         <div className="flex items-center justify-between border-t border-neutral-100 px-4 py-3 text-sm text-neutral-500">
           <span>Halaman {page} dari {totalPages}</span>
           <div className="flex gap-2">
-            {page > 1 && <Link href={pagination.prev} className="rounded-md border border-neutral-200 px-3 py-1.5 hover:bg-neutral-50">← Prev</Link>}
-            {page < totalPages && <Link href={pagination.next} className="rounded-md border border-neutral-200 px-3 py-1.5 hover:bg-neutral-50">Next →</Link>}
+            {page > 1 && <Link href={pagination.prev} className="rounded-md border border-neutral-200 px-3 py-1.5 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">← Prev</Link>}
+            {page < totalPages && <Link href={pagination.next} className="rounded-md border border-neutral-200 px-3 py-1.5 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">Next →</Link>}
           </div>
         </div>
       )}

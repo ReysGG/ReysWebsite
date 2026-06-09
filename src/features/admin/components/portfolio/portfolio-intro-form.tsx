@@ -77,11 +77,11 @@ export function PortfolioIntroForm({ intro }: { intro: PortfolioIntroConfig }) {
       {state.success && state.message ? <p className="mt-5 rounded-md border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-700">{state.message}</p> : null}
 
       <div className="mt-6 flex flex-col gap-3 border-t border-neutral-100 pt-5 sm:flex-row sm:justify-end">
-        <button type="button" className="inline-flex items-center justify-center gap-2 rounded-md border border-neutral-200 px-5 py-2.5 text-sm font-semibold text-neutral-600 transition-colors hover:bg-neutral-50">
+        <button type="button" className="inline-flex items-center justify-center gap-2 rounded-md border border-neutral-200 px-5 py-2.5 text-sm font-semibold text-neutral-600 transition-colors hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
           <Eye size={15} />
           Preview
         </button>
-        <button disabled={isPending} className="inline-flex items-center justify-center gap-2 rounded-md bg-[#ff8a00] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738] disabled:cursor-not-allowed disabled:bg-[#ffcd80]">
+        <button type="submit" disabled={isPending} className="inline-flex items-center justify-center gap-2 rounded-md bg-[#ff8a00] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738] disabled:cursor-not-allowed disabled:bg-[#ffcd80] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
           <Save size={15} />
           {isPending ? "Menyimpan..." : "Simpan Perubahan"}
         </button>

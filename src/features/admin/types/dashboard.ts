@@ -9,6 +9,7 @@ export type AdminDashboardTrendingPost = {
   slug: string;
   views: number;
   createdAt: Date;
+  coverImage: string | null;
 };
 
 export type AdminDashboardMetrics = {

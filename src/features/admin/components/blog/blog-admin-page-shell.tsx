@@ -70,10 +70,10 @@ export async function BlogAdminPageShell({
             <p className="mt-1 text-sm text-neutral-500">{copy.description}</p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Link href="/admin/blog/create" className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738]">
+            <Link href="/admin/blog/create" className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
               <Plus className="h-4 w-4" /> Tulis Artikel
             </Link>
-            <Link href="/blog" target="_blank" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">
+            <Link href="/blog" target="_blank" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
               <Eye className="h-4 w-4" /> Lihat Blog
             </Link>
           </div>
@@ -87,7 +87,7 @@ export async function BlogAdminPageShell({
               <p className="text-xs font-semibold text-neutral-500">{label}</p>
               <span className="rounded-md bg-[#fffcc9] p-2 text-[#ff8a00]"><Icon className="h-4 w-4" /></span>
             </div>
-            <p className="mt-3 text-2xl font-bold text-neutral-900">{value}</p>
+            <p className="mt-3 text-2xl tracking-tight leading-[1.1] font-bold text-neutral-900">{value}</p>
           </Link>
         ))}
       </div>

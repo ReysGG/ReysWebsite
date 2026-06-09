@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Clock } from 'lucide-react';
 import type { BlogPost } from '@/features/blog/data/posts';
-import { formatBlogDate, getPostDate } from './blog-card';
+import { formatBlogDate, getPostDate } from '@/features/blog/lib/blog-format';
 
 interface BlogHeroSliderProps {
   posts: BlogPost[];

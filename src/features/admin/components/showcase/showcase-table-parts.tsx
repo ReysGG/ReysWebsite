@@ -25,11 +25,11 @@ export function ShowcaseEmptyState({ hasFilters }: { hasFilters: boolean }) {
       </p>
       <div className="mt-5 flex justify-center gap-2">
         {hasFilters && (
-          <Link href="/admin/showcase" className="rounded-md border border-neutral-200 px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">
+          <Link href="/admin/showcase" className="rounded-md border border-neutral-200 px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
             Reset filter
           </Link>
         )}
-        <Link href="/admin/showcase/new" className="rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white hover:bg-[#f4b738]">
+        <Link href="/admin/showcase/new" className="rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
           Showcase baru
         </Link>
       </div>
@@ -87,7 +87,7 @@ export function ShowcaseMobileCard({ item, pending, activeId, onToggle, onDelete
           type="button"
           onClick={() => onToggle(item.id)}
           disabled={pending && activeId === item.id}
-          className="inline-flex h-9 items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition hover:bg-neutral-50 disabled:opacity-50"
+          className="inline-flex h-9 items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition hover:bg-neutral-50 disabled:opacity-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"
           aria-label={item.published ? 'Jadikan draft' : 'Publish'}
         >
           {pending && activeId === item.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}

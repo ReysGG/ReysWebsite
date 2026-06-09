@@ -45,7 +45,7 @@ export function InlineEditModal({ field, onClose }: { field: InlineEditField; on
             <h3 className="mt-2 text-lg font-bold text-neutral-900">{field.label}</h3>
             <p className="mt-1 text-sm text-neutral-500">Field: {field.name}</p>
           </div>
-          <button type="button" onClick={onClose} className="rounded-md border border-neutral-200 px-3 py-1.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">Tutup</button>
+          <button type="button" onClick={onClose} className="rounded-md border border-neutral-200 px-3 py-1.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">Tutup</button>
         </div>
         <form action={formAction} className="mt-5 space-y-4">
           <input type="hidden" name="name" value={field.name} />
@@ -58,8 +58,8 @@ export function InlineEditModal({ field, onClose }: { field: InlineEditField; on
           {state.error ? <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">{state.error}</p> : null}
           {state.success && state.message ? <p className="rounded-md border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-700">{state.message}</p> : null}
           <div className="flex justify-end gap-2 border-t border-neutral-200 pt-4">
-            <button type="button" onClick={onClose} className="rounded-md border border-neutral-200 px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">Batal</button>
-            <button disabled={isPending} className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white shadow-none transition-colors hover:bg-[#f4b738] disabled:cursor-not-allowed disabled:bg-[#ffcd80]">
+            <button type="button" onClick={onClose} className="rounded-md border border-neutral-200 px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">Batal</button>
+            <button type="submit" disabled={isPending} className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white shadow-none transition-colors hover:bg-[#f4b738] disabled:cursor-not-allowed disabled:bg-[#ffcd80] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
               <Save className="h-4 w-4" />
               {isPending ? "Menyimpan..." : "Simpan"}
             </button>

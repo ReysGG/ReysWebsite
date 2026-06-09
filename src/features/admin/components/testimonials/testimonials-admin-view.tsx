@@ -24,13 +24,13 @@ export function TestimonialsAdminView({ data }: TestimonialsAdminViewProps) {
             <p className="mt-1 text-sm text-neutral-500">Kelola review klien yang tampil sebagai bukti kredibilitas di website publik.</p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Link href="/#testimonials" target="_blank" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">Lihat Section</Link>
+            <Link href="/#testimonials" target="_blank" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">Lihat Section</Link>
             {testimonials.length === 0 && (
               <form action={seedDummyTestimonials}>
                 <button type="submit" className="inline-flex items-center gap-2 rounded-md border border-[#ffcd80] bg-[#fffcc9] px-4 py-2.5 text-sm font-semibold text-[#ff8a00] hover:bg-[#ffcd80]/60"><Sparkles className="h-4 w-4" /> Isi Dummy</button>
               </form>
             )}
-            <Link href="/admin/testimonials/add" className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738]"><Plus className="h-4 w-4" /> Tambah Testimoni</Link>
+            <Link href="/admin/testimonials/add" className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"><Plus className="h-4 w-4" /> Tambah Testimoni</Link>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@ export function TestimonialsAdminView({ data }: TestimonialsAdminViewProps) {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-[#fffcc9] text-[#ff8a00]"><MessageSquareQuote className="h-6 w-6" /></div>
               <p className="text-sm font-semibold text-neutral-800">Belum ada testimoni</p>
               <p className="mt-1 text-xs text-neutral-400">Tambahkan review klien pertama untuk memperkuat trust website.</p>
-              <Link href="/admin/testimonials/add" className="mt-4 inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white hover:bg-[#f4b738]"><Plus className="h-4 w-4" /> Tambah Sekarang</Link>
+              <Link href="/admin/testimonials/add" className="mt-4 inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"><Plus className="h-4 w-4" /> Tambah Sekarang</Link>
             </div>
           ) : (
             <div className="divide-y divide-neutral-100">
@@ -119,7 +119,7 @@ function StatCard({ icon, label, value, detail }: { icon: React.ReactNode; label
   return (
     <div className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
       <div className="flex items-center justify-between"><p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">{label}</p><span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#fffcc9] text-[#ff8a00]">{icon}</span></div>
-      <p className="mt-4 text-2xl font-bold text-neutral-900">{value}</p>
+      <p className="mt-4 text-2xl tracking-tight leading-[1.1] font-bold text-neutral-900">{value}</p>
       <p className="mt-1 text-xs text-neutral-400">{detail}</p>
     </div>
   );

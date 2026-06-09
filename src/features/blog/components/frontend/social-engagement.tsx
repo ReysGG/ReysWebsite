@@ -115,7 +115,7 @@ export function SocialEngagement({
     <section className="mt-14 border-t border-neutral-200 pt-10">
       <div className="flex items-center gap-6 mb-10">
         {isSignedIn ? (
-          <button 
+          <button type="button" 
             onClick={handleToggleLike}
             disabled={isPending}
             className="flex items-center gap-2 group transition-all"
@@ -132,7 +132,7 @@ export function SocialEngagement({
           </button>
         ) : (
           <SignInButton mode="modal" fallbackRedirectUrl={pathname}>
-            <button className="flex items-center gap-2 group transition-all">
+            <button type="button" className="flex items-center gap-2 group transition-all">
               <div className="p-3 rounded-full bg-neutral-100 text-neutral-500 group-hover:bg-neutral-950 group-hover:text-pink-300 transition-colors flex items-center justify-center">
                 <Heart size={24} />
               </div>
@@ -204,7 +204,7 @@ export function SocialEngagement({
                     {comment.content}
                   </p>
                   {isSignedIn && (
-                    <button 
+                    <button type="button" 
                       onClick={() => {
                         setReplyTo(comment.id);
                         setReplyText("");

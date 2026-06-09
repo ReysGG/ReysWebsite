@@ -142,10 +142,10 @@ export function CategoryCombobox({
                     type="button"
                     onClick={() => commit(option)}
                     className={[
-                      'flex w-full items-center justify-between gap-2 px-3 py-2 text-left transition',
+                      'flex w-full items-center justify-between gap-2 px-3 py-2 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]',
                       selected
                         ? 'bg-[#fffcc9] text-[#ff8a00]'
-                        : 'text-neutral-700 hover:bg-neutral-50',
+                        : 'text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100',
                     ].join(' ')}
                   >
                     <span className="truncate">{option}</span>

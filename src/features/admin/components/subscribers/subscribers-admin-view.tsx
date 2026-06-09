@@ -48,15 +48,15 @@ export function SubscribersAdminView({ filters, result }: SubscribersAdminViewPr
       <div className="grid gap-4 md:grid-cols-3">
         <div className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
           <p className="text-xs font-semibold text-neutral-500">Total Subscriber</p>
-          <p className="mt-2 text-3xl font-bold text-neutral-900">{totalCount}</p>
+          <p className="mt-2 text-3xl tracking-tight leading-[1.1] font-bold text-neutral-900">{totalCount}</p>
         </div>
         <div className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
           <p className="text-xs font-semibold text-neutral-500">Aktif</p>
-          <p className="mt-2 text-3xl font-bold text-emerald-600">{activeCount}</p>
+          <p className="mt-2 text-3xl tracking-tight leading-[1.1] font-bold text-emerald-600">{activeCount}</p>
         </div>
         <div className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
           <p className="text-xs font-semibold text-neutral-500">Nonaktif</p>
-          <p className="mt-2 text-3xl font-bold text-neutral-900">{inactiveCount}</p>
+          <p className="mt-2 text-3xl tracking-tight leading-[1.1] font-bold text-neutral-900">{inactiveCount}</p>
         </div>
       </div>
 
@@ -71,7 +71,7 @@ export function SubscribersAdminView({ filters, result }: SubscribersAdminViewPr
             <option value="active">Aktif</option>
             <option value="inactive">Nonaktif</option>
           </select>
-          <button type="submit" className="rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738]">Filter</button>
+          <button type="submit" className="rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">Filter</button>
         </form>
 
         {filteredCount > 0 && (
@@ -122,8 +122,8 @@ export function SubscribersAdminView({ filters, result }: SubscribersAdminViewPr
           <div className="flex items-center justify-between border-t border-neutral-200 px-5 py-4">
             <p className="text-xs text-neutral-500">Halaman {page} dari {totalPages}</p>
             <div className="flex items-center gap-2">
-              {page > 1 ? <Link href={buildSubscriberPageUrl(filters, page - 1)} className="inline-flex items-center gap-1 rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-50"><ChevronLeft className="h-3.5 w-3.5" /> Prev</Link> : <span className="inline-flex items-center gap-1 rounded-md border border-neutral-100 px-3 py-2 text-xs font-semibold text-neutral-300"><ChevronLeft className="h-3.5 w-3.5" /> Prev</span>}
-              {page < totalPages ? <Link href={buildSubscriberPageUrl(filters, page + 1)} className="inline-flex items-center gap-1 rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-50">Next <ChevronRight className="h-3.5 w-3.5" /></Link> : <span className="inline-flex items-center gap-1 rounded-md border border-neutral-100 px-3 py-2 text-xs font-semibold text-neutral-300">Next <ChevronRight className="h-3.5 w-3.5" /></span>}
+              {page > 1 ? <Link href={buildSubscriberPageUrl(filters, page - 1)} className="inline-flex items-center gap-1 rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"><ChevronLeft className="h-3.5 w-3.5" /> Prev</Link> : <span className="inline-flex items-center gap-1 rounded-md border border-neutral-100 px-3 py-2 text-xs font-semibold text-neutral-300"><ChevronLeft className="h-3.5 w-3.5" /> Prev</span>}
+              {page < totalPages ? <Link href={buildSubscriberPageUrl(filters, page + 1)} className="inline-flex items-center gap-1 rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">Next <ChevronRight className="h-3.5 w-3.5" /></Link> : <span className="inline-flex items-center gap-1 rounded-md border border-neutral-100 px-3 py-2 text-xs font-semibold text-neutral-300">Next <ChevronRight className="h-3.5 w-3.5" /></span>}
             </div>
           </div>
         )}

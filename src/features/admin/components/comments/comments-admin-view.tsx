@@ -50,15 +50,15 @@ export function CommentsAdminView({ filters, result }: CommentsAdminViewProps) {
       <div className="grid gap-4 md:grid-cols-3">
         <div className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
           <p className="text-xs font-semibold text-neutral-500">Total Komentar</p>
-          <p className="mt-2 text-3xl font-bold text-neutral-900">{totalComments}</p>
+          <p className="mt-2 text-3xl tracking-tight leading-[1.1] font-bold text-neutral-900">{totalComments}</p>
         </div>
         <div className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
           <p className="text-xs font-semibold text-neutral-500">Top-level</p>
-          <p className="mt-2 text-3xl font-bold text-neutral-900">{topLevelCount}</p>
+          <p className="mt-2 text-3xl tracking-tight leading-[1.1] font-bold text-neutral-900">{topLevelCount}</p>
         </div>
         <div className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
           <p className="text-xs font-semibold text-neutral-500">Replies</p>
-          <p className="mt-2 text-3xl font-bold text-neutral-900">{repliesCount}</p>
+          <p className="mt-2 text-3xl tracking-tight leading-[1.1] font-bold text-neutral-900">{repliesCount}</p>
         </div>
       </div>
 
@@ -107,8 +107,8 @@ export function CommentsAdminView({ filters, result }: CommentsAdminViewProps) {
           <div className="flex items-center justify-between border-t border-neutral-200 px-5 py-4">
             <p className="text-xs text-neutral-500">Halaman {page} dari {totalPages}</p>
             <div className="flex items-center gap-2">
-              {page > 1 ? <Link href={buildCommentsPageUrl(filters, page - 1)} className="inline-flex items-center gap-1 rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-50"><ChevronLeft className="h-3.5 w-3.5" /> Prev</Link> : <span className="inline-flex items-center gap-1 rounded-md border border-neutral-100 px-3 py-2 text-xs font-semibold text-neutral-300"><ChevronLeft className="h-3.5 w-3.5" /> Prev</span>}
-              {page < totalPages ? <Link href={buildCommentsPageUrl(filters, page + 1)} className="inline-flex items-center gap-1 rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-50">Next <ChevronRight className="h-3.5 w-3.5" /></Link> : <span className="inline-flex items-center gap-1 rounded-md border border-neutral-100 px-3 py-2 text-xs font-semibold text-neutral-300">Next <ChevronRight className="h-3.5 w-3.5" /></span>}
+              {page > 1 ? <Link href={buildCommentsPageUrl(filters, page - 1)} className="inline-flex items-center gap-1 rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"><ChevronLeft className="h-3.5 w-3.5" /> Prev</Link> : <span className="inline-flex items-center gap-1 rounded-md border border-neutral-100 px-3 py-2 text-xs font-semibold text-neutral-300"><ChevronLeft className="h-3.5 w-3.5" /> Prev</span>}
+              {page < totalPages ? <Link href={buildCommentsPageUrl(filters, page + 1)} className="inline-flex items-center gap-1 rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">Next <ChevronRight className="h-3.5 w-3.5" /></Link> : <span className="inline-flex items-center gap-1 rounded-md border border-neutral-100 px-3 py-2 text-xs font-semibold text-neutral-300">Next <ChevronRight className="h-3.5 w-3.5" /></span>}
             </div>
           </div>
         )}

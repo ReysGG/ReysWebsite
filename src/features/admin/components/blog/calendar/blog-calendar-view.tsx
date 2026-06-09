@@ -35,8 +35,8 @@ export function BlogCalendarView({ filters, data }: BlogCalendarViewProps) {
             <p className="mt-1 text-sm text-neutral-500">Rencanakan kalender editorial dengan membuat, menjadwalkan, dan mengelola konten blog.</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Link href="/admin/blog" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50"><Search className="h-4 w-4" /> Semua Artikel</Link>
-            <Link href="/admin/blog/create" className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738]"><Plus className="h-4 w-4" /> Create post</Link>
+            <Link href="/admin/blog" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"><Search className="h-4 w-4" /> Semua Artikel</Link>
+            <Link href="/admin/blog/create" className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"><Plus className="h-4 w-4" /> Create post</Link>
           </div>
         </div>
       </div>
@@ -48,8 +48,8 @@ export function BlogCalendarView({ filters, data }: BlogCalendarViewProps) {
           <div className="flex flex-col gap-4 border-b border-neutral-200 px-5 py-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap items-center gap-2">
               <div className="inline-flex rounded-md border border-neutral-200 bg-neutral-50 p-1">
-                <button className="rounded-md bg-[#fffcc9] px-3 py-1.5 text-xs font-semibold text-[#ff8a00]">Week</button>
-                <button className="rounded-md px-3 py-1.5 text-xs font-semibold text-neutral-500">Month</button>
+                <button type="button" className="rounded-md bg-[#fffcc9] px-3 py-1.5 text-xs font-semibold text-[#ff8a00]">Week</button>
+                <button type="button" className="rounded-md px-3 py-1.5 text-xs font-semibold text-neutral-500">Month</button>
               </div>
               <div className="inline-flex items-center gap-1 rounded-md border border-neutral-200 bg-white p-1">
                 <Link href={buildBlogCalendarWeekHref(weekStart, -1)} className="flex h-8 w-8 items-center justify-center rounded-md text-neutral-500 hover:bg-neutral-100"><ChevronLeft className="h-4 w-4" /></Link>
@@ -59,8 +59,8 @@ export function BlogCalendarView({ filters, data }: BlogCalendarViewProps) {
             </div>
             <div className="text-sm font-bold text-neutral-900">{blogCalendarMonthFormatter.format(weekStart)}</div>
             <div className="flex flex-wrap gap-2">
-              <button className="rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-600">Content type: all</button>
-              <button className="rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-600">Status: all</button>
+              <button type="button" className="rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-600">Content type: all</button>
+              <button type="button" className="rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-600">Status: all</button>
             </div>
           </div>
 
@@ -108,7 +108,7 @@ export function BlogCalendarView({ filters, data }: BlogCalendarViewProps) {
                   <div className="mb-2 flex items-center justify-between text-xs font-semibold text-neutral-500"><span>{publishedThisWeek.length}/{BLOG_CALENDAR_WEEKLY_GOAL} published</span><span>{goalReady}%</span></div>
                   <div className="h-2 overflow-hidden rounded-md bg-neutral-100"><div className="h-full rounded-md bg-[#ff8a00]" style={{ width: `${goalReady}%` }} /></div>
                 </div>
-                <Link href="/admin/blog/create" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738]"><Plus className="h-4 w-4" /> Start new post</Link>
+                <Link href="/admin/blog/create" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"><Plus className="h-4 w-4" /> Start new post</Link>
               </>
             ) : activeTab === "drafts" ? (
               <DraftQueue posts={drafts} />
@@ -135,7 +135,7 @@ function DraftQueue({ posts }: { posts: CalendarPost[] }) {
         ))}
         {posts.length === 0 && <p className="rounded-md bg-neutral-50 p-3 text-xs text-neutral-400">Tidak ada draft tertunda.</p>}
       </div>
-      <Link href="/admin/blog/drafts" className="mt-4 inline-flex w-full justify-center rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-700 hover:bg-neutral-50">Lihat semua draft</Link>
+      <Link href="/admin/blog/drafts" className="mt-4 inline-flex w-full justify-center rounded-md border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">Lihat semua draft</Link>
     </>
   );
 }

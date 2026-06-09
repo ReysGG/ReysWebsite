@@ -49,7 +49,7 @@ export const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <button
+        <button type="button"
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
         >

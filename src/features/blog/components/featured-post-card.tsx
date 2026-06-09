@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import type { BlogPost } from "@/features/blog/data/posts";
-import { formatBlogDate, getPostDate } from "./blog-card";
+import { formatBlogDate, getPostDate } from "@/features/blog/lib/blog-format";
 
 export function FeaturedPostCard({ post }: { post: BlogPost }) {
   return <section className="mb-8 overflow-hidden rounded-3xl border border-[#ffcd80] bg-white shadow-sm lg:grid lg:grid-cols-2">

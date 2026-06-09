@@ -107,14 +107,14 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           </div>
         </div>
         <div className="mr-10 flex justify-end gap-2">
-          <button
+          <button type="button"
             className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
             onClick={scrollLeft}
             disabled={!canScrollLeft}
           >
             <ArrowLeft className="h-6 w-6 text-gray-500" />
           </button>
-          <button
+          <button type="button"
             className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
             onClick={scrollRight}
             disabled={!canScrollRight}
@@ -187,7 +187,7 @@ export const Card = ({
               layoutId={layout ? `card-${card.title}` : undefined}
               className="relative z-60 mx-auto my-10 h-fit max-w-5xl rounded-3xl bg-white p-4 font-sans md:p-10 dark:bg-neutral-900"
             >
-              <button
+              <button type="button"
                 className="sticky top-4 right-0 ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-black hover:bg-neutral-800 transition-colors"
                 onClick={handleClose}
               >

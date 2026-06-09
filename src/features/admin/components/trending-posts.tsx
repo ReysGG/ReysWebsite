@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Eye, TrendingUp } from 'lucide-react';
+import { Eye, FileText, TrendingUp } from 'lucide-react';
+import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 
@@ -9,6 +10,7 @@ type TrendingPostProps = {
   slug: string;
   views: number;
   createdAt: Date;
+  coverImage: string | null;
 };
 
 export function TrendingPosts({ posts }: { posts: TrendingPostProps[] }) {
@@ -45,8 +47,17 @@ export function TrendingPosts({ posts }: { posts: TrendingPostProps[] }) {
           <div className="space-y-4">
             {posts.map((post, index) => (
               <div key={post.id} className="flex items-center gap-3">
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#fffcc9] text-xs font-bold text-[#ff8a00]">
-                  {index + 1}
+                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-md bg-[#fffcc9]">
+                  {post.coverImage ? (
+                    <Image src={post.coverImage} alt={post.title} fill sizes="44px" className="object-cover" />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center text-[#ff8a00]">
+                      <FileText size={16} />
+                    </div>
+                  )}
+                  <span className="absolute -left-1 -top-1 flex h-4 w-4 items-center justify-center rounded-md bg-[#ff8a00] text-[10px] font-bold text-white">
+                    {index + 1}
+                  </span>
                 </div>
                 <div className="flex-1 min-w-0">
                   <Link

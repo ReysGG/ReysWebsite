@@ -19,7 +19,7 @@ export default function CreateBlogPage() {
               <p className="mt-1 text-sm text-neutral-500">Tulis draft, lengkapi SEO, lalu publish ke blog publik.</p>
             </div>
           </div>
-          <Link href="/admin/blog" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">
+          <Link href="/admin/blog" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
             <ArrowLeft className="h-4 w-4" /> Kembali ke Blog
           </Link>
         </div>

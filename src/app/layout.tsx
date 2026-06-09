@@ -14,6 +14,29 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `${siteName} | ${tagline}`,
     description: settings.description || "Dinamis & profesional web services, startups, and personal brands.",
     alternates: { canonical: "/" },
+    openGraph: {
+      type: "website",
+      siteName,
+      locale: "id_ID",
+      title: `${siteName} | ${tagline}`,
+      description: settings.description || "Dinamis & profesional web services, startups, and personal brands.",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${siteName} | ${tagline}`,
+      description: settings.description || "Dinamis & profesional web services, startups, and personal brands.",
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     icons: {
       icon: [
         { url: "/32.png", sizes: "32x32", type: "image/png" },
@@ -22,6 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ],
       apple: [{ url: "/190.png", sizes: "180x180", type: "image/png" }],
     },
+    manifest: "/manifest.webmanifest",
     other: {
       "facebook-domain-verification": "14p40lig23xo6orqv8qnge0u0qm19q",
     },

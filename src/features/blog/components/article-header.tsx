@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, CalendarDays } from "lucide-react";
 import type { Post } from "@prisma/client";
-import { formatBlogDate, getPostDate, getReadingTime } from "./blog-card";
+import { formatBlogDate, getPostDate, getReadingTime } from "@/features/blog/lib/blog-format";
 
 export function ArticleHeader({ post }: { post: Post }) {
   const author = post.author || "BuildWebsite Team";

@@ -80,7 +80,7 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
             </p>
           </div>
           {hasFilters && (
-            <Link href="/admin/showcase" className="inline-flex w-fit items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-600 transition hover:bg-neutral-50 hover:text-neutral-900">
+            <Link href="/admin/showcase" className="inline-flex w-fit items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-600 transition hover:bg-neutral-50 hover:text-neutral-900 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
               <RotateCcw className="h-3.5 w-3.5" />
               Reset
             </Link>
@@ -111,7 +111,7 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
               </option>
             ))}
           </select>
-          <button type="submit" className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-neutral-950 px-4 text-sm font-bold text-white transition hover:bg-[#f4b738]">
+          <button type="submit" className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-neutral-950 px-4 text-sm font-bold text-white transition hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
             <Search className="h-4 w-4" />
             Terapkan
           </button>
@@ -165,12 +165,12 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
           </span>
           <div className="flex gap-2">
             {pagination.hasPreviousPage && (
-              <Link href={paginationHref.prev} className="rounded-md border border-neutral-200 px-3 py-1.5 font-semibold hover:bg-neutral-50">
+              <Link href={paginationHref.prev} className="rounded-md border border-neutral-200 px-3 py-1.5 font-semibold hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
                 Prev
               </Link>
             )}
             {pagination.hasNextPage && (
-              <Link href={paginationHref.next} className="rounded-md border border-neutral-200 px-3 py-1.5 font-semibold hover:bg-neutral-50">
+              <Link href={paginationHref.next} className="rounded-md border border-neutral-200 px-3 py-1.5 font-semibold hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
                 Next
               </Link>
             )}

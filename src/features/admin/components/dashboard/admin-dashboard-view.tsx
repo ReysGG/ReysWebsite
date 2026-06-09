@@ -104,14 +104,14 @@ export function AdminDashboardView({ data }: AdminDashboardViewProps) {
         <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">Admin Overview</p>
-            <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900 md:text-3xl">Dashboard</h1>
+            <h1 className="mt-2 text-2xl font-bold tracking-tight leading-[1.15] text-neutral-900 md:text-3xl">Dashboard</h1>
             <p className="mt-1 text-sm text-neutral-500">Control center untuk konten, readiness launch, dan performa website.</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             {headerActions.map((action) => {
               const Icon = action.icon;
               return (
-                <Link key={action.href + action.label} href={action.href} target={action.external ? "_blank" : undefined} className={action.primary ? "inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738]" : "inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50"}>
+                <Link key={action.href + action.label} href={action.href} target={action.external ? "_blank" : undefined} className={action.primary ? "inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80] disabled:opacity-50 disabled:pointer-events-none" : "inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80] disabled:opacity-50 disabled:pointer-events-none"}>
                   <Icon className="h-4 w-4" />
                   {action.label}
                 </Link>
@@ -145,20 +145,32 @@ export function AdminDashboardView({ data }: AdminDashboardViewProps) {
             <div className="h-full rounded-md bg-[#ff8a00]" style={{ width: `${readinessPercent}%` }} />
           </div>
           <div className="grid gap-3 lg:grid-cols-2">
-            {healthItems.map((item) => (
-              <Link key={item.label} href={item.href} className="group flex items-start gap-3 rounded-md border border-neutral-200 bg-neutral-50 p-4 transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9]/50">
-                <div className={item.ready ? "mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[#fffcc9] text-[#ff8a00]" : "mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-amber-50 text-amber-600"}>
-                  {item.ready ? <CheckCircle2 className="h-4 w-4" /> : <TriangleAlert className="h-4 w-4" />}
+            {readyCount === healthItems.length ? (
+              <div className="lg:col-span-2 flex items-center gap-3 rounded-md border border-[#ffcd80] bg-[#fffcc9]/50 p-4">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[#fffcc9] text-[#ff8a00]">
+                  <CheckCircle2 className="h-4 w-4" />
                 </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-semibold text-neutral-900 group-hover:text-[#ff8a00]">{item.label}</p>
-                    <span className="shrink-0 rounded-md bg-white px-2 py-1 text-xs font-bold text-neutral-500">{item.value}</span>
+                <div>
+                  <p className="text-sm font-semibold text-neutral-900">Semua konten inti sudah lengkap</p>
+                  <p className="mt-1 text-xs text-neutral-500">Website siap dipromosikan. Fokus ke konten baru dan pantau traffic di bawah.</p>
+                </div>
+              </div>
+            ) : (
+              healthItems.map((item) => (
+                <Link key={item.label} href={item.href} className="group flex items-start gap-3 rounded-md border border-neutral-200 bg-neutral-50 p-4 transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9]/50">
+                  <div className={item.ready ? "mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[#fffcc9] text-[#ff8a00]" : "mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-amber-50 text-amber-600"}>
+                    {item.ready ? <CheckCircle2 className="h-4 w-4" /> : <TriangleAlert className="h-4 w-4" />}
                   </div>
-                  <p className="mt-1 text-xs leading-relaxed text-neutral-500">{item.description}</p>
-                </div>
-              </Link>
-            ))}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-sm font-semibold text-neutral-900 group-hover:text-[#ff8a00]">{item.label}</p>
+                      <span className="shrink-0 rounded-md bg-white px-2 py-1 text-sm font-bold text-[#ff8a00]">{item.value}</span>
+                    </div>
+                    <p className="mt-1 text-xs leading-relaxed text-neutral-500">{item.description}</p>
+                  </div>
+                </Link>
+              ))
+            )}
           </div>
         </div>
 
@@ -170,10 +182,10 @@ export function AdminDashboardView({ data }: AdminDashboardViewProps) {
               <p className="mt-1 text-sm text-neutral-500">Website readiness berdasarkan konten utama.</p>
             </div>
             <div>
-              <p className="text-4xl font-bold text-neutral-900">{readinessPercent}%</p>
+              <p className="text-4xl font-bold tracking-tight leading-[1.1] text-neutral-900">{readinessPercent}%</p>
               <p className="mt-1 text-sm text-neutral-500">{readyCount === healthItems.length ? "Siap dipromosikan." : "Masih ada konten yang bisa dilengkapi."}</p>
             </div>
-            <Link href="/" target="_blank" className="inline-flex items-center justify-center gap-2 rounded-md border border-neutral-200 px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">Preview website <ExternalLink className="h-4 w-4" /></Link>
+            <Link href="/" target="_blank" className="inline-flex items-center justify-center gap-2 rounded-md border border-neutral-200 px-4 py-2.5 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">Preview website <ExternalLink className="h-4 w-4" /></Link>
           </div>
         </div>
       </div>
@@ -188,7 +200,7 @@ export function AdminDashboardView({ data }: AdminDashboardViewProps) {
                 <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#fffcc9]"><Icon className="h-4 w-4 text-[#ff8a00]" /></div>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-neutral-900">{stat.value}</div>
+                <div className="text-3xl font-bold tracking-tight leading-[1.1] text-neutral-900">{stat.value}</div>
                 <p className="mt-1 text-xs text-neutral-400">{stat.description}</p>
               </CardContent>
             </Card>

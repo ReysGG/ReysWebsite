@@ -47,14 +47,14 @@ export function BlogEditorForm({ initialData }: { initialData?: BlogEditorData }
             name="title"
             defaultValue={initialData?.title || ""}
             placeholder="Judul artikel..."
-            className="w-full border-0 bg-transparent text-4xl font-bold text-neutral-900 placeholder:text-neutral-300 outline-none leading-tight"
+            className="w-full border-0 bg-transparent text-4xl tracking-tight leading-[1.1] font-bold text-neutral-900 placeholder:text-neutral-300 outline-none leading-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff8a00]/40 focus-visible:border-[#ffcd80]"
           />
           <textarea
             name="excerpt"
             defaultValue={initialData?.excerpt || ""}
             rows={2}
             placeholder="Tulis ringkasan singkat artikel..."
-            className="mt-4 w-full resize-none border-0 bg-transparent text-base italic text-neutral-500 placeholder:text-neutral-300 outline-none leading-relaxed"
+            className="mt-4 w-full resize-none border-0 bg-transparent text-base italic text-neutral-500 placeholder:text-neutral-300 outline-none leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff8a00]/40 focus-visible:border-[#ffcd80]"
           />
           <div className="mt-3 border-t border-neutral-100 pt-3">
             <BlogSlugField defaultTitle={initialData?.title} defaultSlug={initialData?.slug} />

@@ -437,7 +437,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: ShowcaseFo
               </p>
             </div>
 
-            <label className="flex cursor-pointer items-center gap-3 rounded-md border border-neutral-200 px-3 py-2.5 transition hover:bg-neutral-50">
+            <label className="flex cursor-pointer items-center gap-3 rounded-md border border-neutral-200 px-3 py-2.5 transition hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
               <input
                 type="checkbox"
                 name="published"
@@ -479,7 +479,7 @@ export function ShowcaseForm({ mode, defaultValue, options }: { mode: ShowcaseFo
             <button
               type="button"
               onClick={() => router.push('/admin/showcase')}
-              className="rounded-md border border-neutral-200 px-5 py-2.5 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-50"
+              className="rounded-md border border-neutral-200 px-5 py-2.5 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"
             >
               Batal
             </button>

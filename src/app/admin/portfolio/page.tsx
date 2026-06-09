@@ -44,15 +44,15 @@ export default async function ManagePortfolioPage({ searchParams }: { searchPara
             <p className="mt-1 text-sm text-neutral-500">Kurasi project dari tabel Project dan preview kartu portfolio dari satu tempat.</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Link href="/admin/portfolio/hero" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-50">
+            <Link href="/admin/portfolio/hero" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
               <LayoutDashboard size={16} />
               Edit Intro Portfolio
             </Link>
-            <Link href="/#portfolio" target="_blank" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-50">
+            <Link href="/#portfolio" target="_blank" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
               <ExternalLink size={16} />
               Preview Website
             </Link>
-            <Link href="/admin/portfolio/add" className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738]">
+            <Link href="/admin/portfolio/add" className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
               <Plus size={16} />
               Tambah Project
             </Link>
@@ -152,7 +152,7 @@ export default async function ManagePortfolioPage({ searchParams }: { searchPara
                   </div>
 
                   <div className="flex items-center justify-end gap-2">
-                    {item.link ? <Link href={item.link} target="_blank" className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-500 transition-colors hover:bg-neutral-50 hover:text-neutral-900" title="Preview"><ExternalLink size={15} /></Link> : null}
+                    {item.link ? <Link href={item.link} target="_blank" className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-500 transition-colors hover:bg-neutral-50 hover:text-neutral-900 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]" title="Preview"><ExternalLink size={15} /></Link> : null}
                     <Link href={`/admin/portfolio/${item.id}/edit`} className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9] hover:text-[#ff8a00]"><Edit size={14} /> Edit</Link>
                     <DeleteProjectButton id={item.id} />
                   </div>

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FileText } from 'lucide-react';
 import type { BlogPost } from '@/features/blog/data/posts';
-import { formatBlogDate, getReadingTime, getPostDate } from './blog-card';
+import { formatBlogDate, getReadingTime, getPostDate } from '@/features/blog/lib/blog-format';
 
 const BLUR_DATA_URL =
   'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDgiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjgiIGZpbGw9IiNlNWU3ZWIiLz48L3N2Zz4=';

@@ -47,7 +47,7 @@ export function FloatingConsult({ whatsappUrl, siteName = 'Build With Reys' }: F
                 <p className="text-[11px] font-bold uppercase tracking-widest text-[#fffcc9]">Konsultasi Gratis</p>
                 <h3 className="mt-1 text-base font-bold leading-tight">Halo, ada yang bisa kami bantu?</h3>
               </div>
-              <button
+              <button type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Tutup"
                 className="rounded-full bg-white/10 p-1 text-white transition hover:bg-white/20"
@@ -74,7 +74,7 @@ export function FloatingConsult({ whatsappUrl, siteName = 'Build With Reys' }: F
         </div>
       )}
 
-      <button
+      <button type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? 'Tutup konsultasi' : 'Buka konsultasi'}
         className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-emerald-500/30 transition hover:scale-105 hover:bg-[#1ebe5d]"

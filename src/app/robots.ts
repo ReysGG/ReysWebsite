@@ -8,13 +8,19 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/blog/", "/showcase/"],
+        allow: ["/", "/blog", "/blog/", "/showcase", "/showcase/"],
         disallow: [
           "/admin/",
           "/sign-in/",
           "/sign-up/",
           "/api/",
-          "/blog?*",
+          // Block thin/duplicate filtered listings, but allow ?page= pagination
+          // so crawlers can reach articles beyond page 1.
+          "/blog?*q=",
+          "/blog?*tag=",
+          "/blog?*category=",
+          "/blog?*year=",
+          "/*?*sort=",
         ],
       },
     ],

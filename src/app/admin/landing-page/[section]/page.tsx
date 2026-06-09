@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getSiteConfig } from "@/lib/site-config";
 import { resetLandingPage } from "@/features/admin/actions/landing-page-actions";
 import { LandingPageForm } from "@/features/admin/components/landing-page/landing-page-form";
+import { SubmitButton } from "@/features/admin/components/ui/submit-button";
 
 type SectionKey = "hero" | "trustStrip" | "problems" | "stats" | "services" | "workflow" | "solutions" | "pricing" | "whatYouGet" | "cta" | "faq";
 
@@ -66,9 +67,9 @@ export default async function LandingPageSectionAdmin({
             </p>
           </div>
           <form action={resetLandingPage}>
-            <button className="rounded-md border border-neutral-200 px-4 py-2.5 text-sm font-semibold text-neutral-600 transition-colors hover:bg-neutral-50 hover:text-neutral-900">
+            <SubmitButton pendingLabel="Mereset..." className="rounded-md border border-neutral-200 px-4 py-2.5 text-sm font-semibold text-neutral-600 transition-colors hover:bg-neutral-50 hover:text-neutral-900 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80] disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100">
               Reset default
-            </button>
+            </SubmitButton>
           </form>
         </div>
       </div>

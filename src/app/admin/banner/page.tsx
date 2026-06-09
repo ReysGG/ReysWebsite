@@ -1,5 +1,6 @@
 import { getPromoBanner, isBannerInSchedule } from "@/lib/promo-banner";
 import { savePromoBanner } from "@/features/admin/actions/promo-banner-actions";
+import { SubmitButton } from "@/features/admin/components/ui/submit-button";
 import { Calendar, Eye, Megaphone, Power, Save, Sparkles } from "lucide-react";
 
 function toLocalInputValue(iso: string) {
@@ -84,7 +85,7 @@ export default async function AdminBannerPage() {
             </div>
           </section>
 
-          <div className="flex justify-end border-t border-neutral-100 pt-5"><button type="submit" className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738]"><Save className="h-4 w-4" />Simpan Banner</button></div>
+          <div className="flex justify-end border-t border-neutral-100 pt-5"><SubmitButton idleIcon={<Save className="h-4 w-4" />} pendingLabel="Menyimpan..." className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80] disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100">Simpan Banner</SubmitButton></div>
         </form>
 
         <aside className="space-y-6 xl:sticky xl:top-24 xl:self-start">

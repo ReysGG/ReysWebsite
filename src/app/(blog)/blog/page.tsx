@@ -11,11 +11,40 @@ import { BlogErrorState } from '@/features/blog/components/blog-error-state';
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ searchParams }: { searchParams: SearchParams }): Promise<Metadata> {
+  const params = await searchParams;
+  const parsed = parseBlogSearchParams(params);
+  const tag = parsed.tag || '';
+  const category = parsed.category || '';
+  const year = parsed.year ? String(parsed.year) : '';
+  const isFiltered = !!(parsed.q || tag || category || year);
+  const page = parsed.page || 1;
+
+  const title = 'Blog & Insights | WebServices';
+  const description = 'Panduan teknis, studi kasus, dan insight pengembangan website.';
+
+  // Filtered/search views are thin, near-duplicate listings — keep them out of the
+  // index but let crawlers follow links to the underlying articles. Paginated pages
+  // get a self-referencing canonical so each page is its own indexable entity.
+  const canonical = page > 1 ? `/blog?page=${page}` : '/blog';
+
   return {
-    title: 'Blog & Insights | WebServices',
-    description: 'Panduan teknis, studi kasus, dan insight pengembangan website.',
-    alternates: { canonical: '/blog' },
+    title,
+    description,
+    alternates: { canonical },
+    robots: isFiltered ? { index: false, follow: true } : undefined,
+    openGraph: {
+      type: 'website',
+      url: canonical,
+      title,
+      description,
+      locale: 'id_ID',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
   };
 }
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Save } from "lucide-react";
 import { ImageUploadField } from "@/features/admin/components/blog/image-upload-field";
+import { SubmitButton } from "@/features/admin/components/ui/submit-button";
 
 type TestimonialFormValue = {
   name?: string;
@@ -62,12 +63,16 @@ export function TestimonialForm({
       </div>
 
       <div className="mt-6 flex flex-col gap-3 border-t border-neutral-100 pt-5 sm:flex-row sm:justify-end">
-        <Link href="/admin/testimonials" className="inline-flex items-center justify-center rounded-md border border-neutral-200 px-5 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50">
+        <Link href="/admin/testimonials" className="inline-flex items-center justify-center rounded-md border border-neutral-200 px-5 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
           Batal
         </Link>
-        <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-md bg-[#ff8a00] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738]">
-          <Save className="h-4 w-4" /> {submitLabel}
-        </button>
+        <SubmitButton
+          idleIcon={<Save className="h-4 w-4" />}
+          pendingLabel="Menyimpan..."
+          className="inline-flex items-center justify-center gap-2 rounded-md bg-[#ff8a00] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80] disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100"
+        >
+          {submitLabel}
+        </SubmitButton>
       </div>
     </form>
   );

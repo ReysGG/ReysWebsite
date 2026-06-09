@@ -69,7 +69,7 @@ export async function getAdminDashboardData(): Promise<AdminDashboardData> {
       db.post.findMany({
         orderBy: { views: "desc" },
         take: TRENDING_POST_LIMIT,
-        select: { id: true, title: true, slug: true, views: true, createdAt: true },
+        select: { id: true, title: true, slug: true, views: true, createdAt: true, coverImage: true },
       }),
       db.siteConfig.findUnique({ where: { key: "landing-page" }, select: { value: true } }),
     ]);

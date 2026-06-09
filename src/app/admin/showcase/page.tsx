@@ -52,7 +52,7 @@ export default async function AdminShowcaseListPage({
           <div className="flex flex-wrap gap-2">
             <Link
               href="/admin/showcase/new"
-              className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#f4b738]"
+              className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"
             >
               <Plus className="h-4 w-4" />
               Showcase Baru
@@ -60,7 +60,7 @@ export default async function AdminShowcaseListPage({
             <Link
               href="/showcase"
               target="_blank"
-              className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-50"
+              className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"
             >
               <Eye className="h-4 w-4" />
               Lihat Publik
@@ -78,7 +78,7 @@ export default async function AdminShowcaseListPage({
                 <Icon className="h-4 w-4" />
               </span>
             </div>
-            <p className="mt-3 text-2xl font-bold text-neutral-900">{value}</p>
+            <p className="mt-3 text-2xl tracking-tight leading-[1.1] font-bold text-neutral-900">{value}</p>
           </div>
         ))}
       </div>

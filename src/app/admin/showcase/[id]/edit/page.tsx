@@ -27,7 +27,7 @@ export default async function EditShowcasePage({ params }: PageProps) {
           <ArrowLeft className="h-3.5 w-3.5" />
           Kembali ke daftar
         </Link>
-        <h1 className="mt-2 text-2xl font-bold text-neutral-900">Edit Showcase</h1>
+        <h1 className="mt-2 text-2xl tracking-tight leading-[1.1] font-bold text-neutral-900">Edit Showcase</h1>
         <p className="text-sm text-neutral-500">Perbarui metadata atau ganti file HTML.</p>
       </div>
 

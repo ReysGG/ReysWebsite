@@ -65,7 +65,7 @@ export const OverviewBento = () => {
           <Link
             key={action.href}
             href={action.href}
-            className="group flex items-start gap-4 rounded-md border border-neutral-200 bg-neutral-50 p-4 transition-all hover:border-[#ffcd80] hover:bg-[#fffcc9]/50 hover:shadow-none"
+            className="group flex items-start gap-4 rounded-md border border-neutral-200 bg-neutral-50 p-4 transition-all hover:border-[#ffcd80] hover:bg-[#fffcc9]/50 active:scale-[0.99] active:bg-[#fffcc9]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"
           >
             <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md ${action.color}`}>
               <Icon className="h-4 w-4" />
