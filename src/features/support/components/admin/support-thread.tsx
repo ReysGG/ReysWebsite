@@ -3,7 +3,6 @@
 import { useActionState, useEffect, useRef } from "react";
 import { Bot, CheckCheck, Headset, RotateCcw, SendHorizontal, User } from "lucide-react";
 import {
-  markConversationReadAction,
   replyToConversationAction,
   setConversationStatusAction,
   type SupportActionState,
@@ -19,12 +18,10 @@ export function SupportThread({
   conversationId,
   status,
   messages,
-  hasUnread,
 }: {
   conversationId: string;
   status: "AI" | "WAITING_HUMAN" | "HUMAN" | "CLOSED";
   messages: SupportMessageView[];
-  hasUnread: boolean;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -38,9 +35,6 @@ export function SupportThread({
     bottomRef.current?.scrollIntoView({ block: "end" });
   }, [messages.length]);
 
-  useEffect(() => {
-    if (hasUnread) void markConversationReadAction(conversationId);
-  }, [hasUnread, conversationId]);
 
   return (
     <div className="flex h-[calc(100vh-16rem)] min-h-[480px] flex-col rounded-md border border-neutral-200 bg-white">

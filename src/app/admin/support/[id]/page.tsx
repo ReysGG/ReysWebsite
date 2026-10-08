@@ -26,7 +26,7 @@ export default async function AdminSupportThreadPage({ params }: { params: Promi
           </p>
         </div>
       </div>
-      <SupportThread conversationId={conversation.id} status={conversation.status} messages={conversation.messages} hasUnread={conversation.adminUnread > 0} />
+      <SupportThread conversationId={conversation.id} status={conversation.status} messages={conversation.messages} />
     </div>
   );
 }

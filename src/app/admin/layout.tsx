@@ -5,6 +5,8 @@ import { Search } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { requireAdmin, type AdminUser } from "@/features/admin/lib/auth";
+import { SupportInboxBell } from "@/features/support/components/admin/support-inbox-bell";
+import { countNeedsReply } from "@/features/support/services/support-service";
 
 export default async function AdminLayout({
   children,
@@ -19,6 +21,7 @@ export default async function AdminLayout({
   }
 
   const displayName = user.name;
+  const needsReply = await countNeedsReply().catch(() => 0);
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-neutral-50">
@@ -37,6 +40,7 @@ export default async function AdminLayout({
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <SupportInboxBell initialCount={needsReply} />
             <Link
               href="/"
               target="_blank"

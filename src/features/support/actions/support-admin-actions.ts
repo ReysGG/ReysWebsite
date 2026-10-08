@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/features/admin/lib/auth";
-import { adminReply, markConversationRead, setConversationStatus } from "@/features/support/services/support-service";
+import { adminReply, setConversationStatus } from "@/features/support/services/support-service";
 
 export type SupportActionState = { ok?: boolean; error?: string };
 
@@ -29,8 +29,3 @@ export async function setConversationStatusAction(id: string, status: "AI" | "CL
   revalidateSupport(id);
 }
 
-export async function markConversationReadAction(id: string) {
-  await requireAdmin();
-  await markConversationRead(id);
-  revalidatePath("/admin/support");
-}

@@ -172,10 +172,6 @@ export async function getConversationForAdmin(id: string) {
   return { ...conversation, createdAt: conversation.createdAt.toISOString(), messages };
 }
 
-export async function markConversationRead(id: string) {
-  await db.supportConversation.update({ where: { id }, data: { adminUnread: 0 }, select: { id: true } });
-}
-
 export async function adminReply(id: string, adminName: string, content: string) {
   const text = content.trim().slice(0, SUPPORT_MAX_MESSAGE_LENGTH * 2);
   if (!text) throw new Error("Pesan kosong.");
@@ -197,4 +193,32 @@ export async function setConversationStatus(id: string, status: Extract<SupportS
     "SYSTEM",
     status === "AI" ? "Admin mengembalikan percakapan ke asisten AI." : "Percakapan ditutup oleh admin. Kirim pesan baru untuk memulai lagi.",
   );
+}
+
+/** Conversations the admin still has to answer: waiting for handoff, or new visitor messages in an admin-handled chat. */
+const NEEDS_REPLY_WHERE = {
+  OR: [{ status: "WAITING_HUMAN" as const }, { status: "HUMAN" as const, adminUnread: { gt: 0 } }],
+};
+
+export async function countNeedsReply() {
+  return db.supportConversation.count({ where: NEEDS_REPLY_WHERE });
+}
+
+export async function getNeedsReplySummary(take = 5): Promise<{ count: number; items: SupportInboxItem[] }> {
+  const [count, rows] = await db.$transaction([
+    db.supportConversation.count({ where: NEEDS_REPLY_WHERE }),
+    db.supportConversation.findMany({
+      where: NEEDS_REPLY_WHERE,
+      orderBy: { lastMessageAt: "asc" }, // oldest waiting first
+      take,
+      select: {
+        id: true, userName: true, userEmail: true, status: true, handoffReason: true, adminUnread: true, lastMessageAt: true,
+        messages: { orderBy: { createdAt: "desc" }, take: 1, select: { role: true, content: true } },
+      },
+    }),
+  ]);
+  return {
+    count,
+    items: rows.map(({ messages, ...row }) => ({ ...row, lastMessageAt: row.lastMessageAt.toISOString(), lastMessage: messages[0] ?? null })),
+  };
 }
