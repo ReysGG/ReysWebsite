@@ -78,7 +78,7 @@ export function TableOfContents() {
   return (
     <nav aria-label="Daftar Isi" className="sticky top-28">
       <div className="rounded-2xl border border-brand-soft bg-white/85 p-5 shadow-sm">
-        <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] bg-gradient-to-r from-brand via-brand-cyan to-brand-soft bg-clip-text text-transparent">
+        <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] bg-gradient-to-r from-brand to-brand-deep bg-clip-text text-transparent">
           <ListTree className="h-4 w-4" />
           Daftar Isi
         </div>

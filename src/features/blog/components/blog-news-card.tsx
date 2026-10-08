@@ -44,7 +44,7 @@ export function BlogNewsCard({
         </div>
         <div className="min-w-0">
           {post.category && (
-            <span className="text-[10px] font-bold uppercase tracking-wide bg-gradient-to-r from-brand via-brand-cyan to-brand-soft bg-clip-text text-transparent">
+            <span className="text-[10px] font-bold uppercase tracking-wide bg-gradient-to-r from-brand to-brand-deep bg-clip-text text-transparent">
               {post.category}
             </span>
           )}
@@ -86,7 +86,7 @@ export function BlogNewsCard({
         </div>
         <div className="mb-1.5 flex items-center gap-3">
           {post.category && (
-            <span className="text-[11px] font-bold uppercase tracking-wide bg-gradient-to-r from-brand via-brand-cyan to-brand-soft bg-clip-text text-transparent">
+            <span className="text-[11px] font-bold uppercase tracking-wide bg-gradient-to-r from-brand to-brand-deep bg-clip-text text-transparent">
               {post.category}
             </span>
           )}
@@ -142,7 +142,7 @@ export function BlogNewsCard({
         <div>
           <div className="mb-1 flex items-center gap-2">
             {post.category && (
-              <span className="text-xs font-bold uppercase tracking-wide bg-gradient-to-r from-brand via-brand-cyan to-brand-soft bg-clip-text text-transparent">
+              <span className="text-xs font-bold uppercase tracking-wide bg-gradient-to-r from-brand to-brand-deep bg-clip-text text-transparent">
                 {post.category}
               </span>
             )}

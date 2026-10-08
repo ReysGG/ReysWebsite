@@ -30,7 +30,7 @@ export function BlogSidebar({
                   </p>
                   <div className="mt-0.5 flex items-center gap-2">
                     {post.category && (
-                      <span className="text-[11px] font-bold uppercase bg-gradient-to-r from-brand via-brand-cyan to-brand-soft bg-clip-text text-transparent">
+                      <span className="text-[11px] font-bold uppercase text-brand-deep">
                         {post.category}
                       </span>
                     )}
@@ -58,10 +58,10 @@ export function BlogSidebar({
               <li key={cat}>
                 <Link
                   href={`/blog?category=${encodeURIComponent(cat)}`}
-                  className="flex items-center justify-between py-1 text-sm text-neutral-700 dark:text-neutral-700 transition hover:bg-gradient-to-r from-brand via-brand-cyan to-brand-soft bg-clip-text text-transparent"
+                  className="group flex items-center justify-between py-1 text-sm text-neutral-700 dark:text-neutral-700 transition-colors hover:text-brand-deep"
                 >
                   {cat}
-                  <span className="text-neutral-300">→</span>
+                  <span className="text-neutral-300 transition-colors group-hover:text-brand">→</span>
                 </Link>
               </li>
             ))}

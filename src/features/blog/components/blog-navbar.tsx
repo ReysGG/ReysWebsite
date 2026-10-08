@@ -113,7 +113,7 @@ function BlogNavbarInner() {
                   'relative shrink-0 px-4 h-full flex items-center text-sm font-medium transition-colors',
                   i > 0 ? 'border-l border-neutral-100' : '',
                   isActive
-                    ? 'bg-gradient-to-r from-brand via-brand-cyan to-brand-soft bg-clip-text text-transparent after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:bg-brand'
+                    ? 'bg-gradient-to-r from-brand to-brand-deep bg-clip-text text-transparent after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:bg-brand'
                     : 'text-neutral-500 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-neutral-900',
                 ].join(' ')}
               >
