@@ -235,16 +235,16 @@ export function buildArticleTools(ctx: ToolContext) {
   const sources = getStockSources();
   const imageTools = {
     searchImages: tool({
-      description: `Cari foto stock (${[sources.unsplash && "Unsplash", sources.pexels && "Pexels"].filter(Boolean).join(" + ") || "tidak ada sumber aktif"}). Query sebaiknya bahasa Inggris, 2–4 kata, visual konkret.`,
+      description: `Cari foto stock berlisensi bebas pakai komersial (${[sources.unsplash && "Unsplash", sources.pexels && "Pexels", "Openverse"].filter(Boolean).join(" + ")}). Query sebaiknya bahasa Inggris, 2–4 kata, visual konkret (mis. "laptop coffee desk", "small shop owner"). Kredit foto otomatis ikut terpasang.`,
       inputSchema: z.object({
         query: z.string().min(2).max(80),
         limit: z.number().int().min(1).max(10).default(6),
       }),
       execute: async ({ query, limit }) => {
-        if (!sources.unsplash && !sources.pexels) {
-          return { ok: false, error: "UNSPLASH_ACCESS_KEY / PEXELS_API_KEY belum di-set. Gunakan generateImage atau lewati gambar." };
-        }
         const { images, errors } = await searchStockImages(query, limit);
+        if (images.length === 0) {
+          return { ok: false, error: `Tidak ada foto untuk "${query}". Coba query lain yang lebih umum/visual, atau gunakan generateImage.`, errors: errors.length ? errors : undefined };
+        }
         images.forEach((image) =>
           ctx.imageCandidates.set(image.id, {
             url: image.url, alt: image.alt, credit: image.credit, creditUrl: image.creditUrl, downloadLocation: image.downloadLocation, hosted: false,

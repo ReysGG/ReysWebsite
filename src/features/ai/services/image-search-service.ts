@@ -1,9 +1,12 @@
 import "server-only";
 
-/** Stock photo search (Unsplash + Pexels). Keys come from env; each source is optional. */
+/**
+ * Stock photo search. Openverse (CC-licensed, commercial use) works without a key;
+ * Unsplash/Pexels are added when their keys are set in env.
+ */
 export type StockImage = {
-  id: string; // "unsplash:<id>" | "pexels:<id>"
-  source: "unsplash" | "pexels";
+  id: string; // "unsplash:<id>" | "pexels:<id>" | "openverse:<id>"
+  source: "unsplash" | "pexels" | "openverse";
   url: string; // full-size download URL
   thumbUrl: string;
   alt: string;
@@ -35,10 +38,25 @@ type PexelsPhoto = {
   src: { large2x: string; medium: string };
 };
 
+type OpenverseImage = {
+  id: string;
+  title: string | null;
+  url: string;
+  thumbnail: string;
+  width: number | null;
+  height: number | null;
+  creator: string | null;
+  license: string;
+  license_version: string | null;
+  source: string;
+  foreign_landing_url: string | null;
+};
+
 export function getStockSources() {
   return {
     unsplash: Boolean(process.env.UNSPLASH_ACCESS_KEY),
     pexels: Boolean(process.env.PEXELS_API_KEY),
+    openverse: true,
   };
 }
 
@@ -92,10 +110,46 @@ async function searchPexels(query: string, perPage: number): Promise<StockImage[
 
 export async function searchStockImages(query: string, limit = 6) {
   const perSource = Math.max(2, Math.ceil(limit / 2));
-  const settled = await Promise.allSettled([searchUnsplash(query, perSource), searchPexels(query, perSource)]);
+  const settled = await Promise.allSettled([
+    searchUnsplash(query, perSource),
+    searchPexels(query, perSource),
+    // Keyless fallback/extra source; keyed sources are listed first.
+    searchOpenverse(query, limit),
+  ]);
   const images = settled.flatMap((r) => (r.status === "fulfilled" ? r.value : []));
   const errors = settled.flatMap((r) => (r.status === "rejected" ? [String(r.reason?.message ?? r.reason)] : []));
   return { images: images.slice(0, limit), errors };
+}
+
+async function searchOpenverse(query: string, perPage: number): Promise<StockImage[]> {
+  const url = new URL("https://api.openverse.org/v1/images/");
+  url.searchParams.set("q", query);
+  url.searchParams.set("page_size", String(Math.min(20, perPage * 2)));
+  url.searchParams.set("license_type", "commercial");
+  url.searchParams.set("aspect_ratio", "wide");
+  url.searchParams.set("mature", "false");
+  const res = await fetch(url, { headers: { Accept: "application/json" }, signal: AbortSignal.timeout(15_000) });
+  if (!res.ok) throw new Error(`Openverse HTTP ${res.status}`);
+  const json = (await res.json()) as { results?: OpenverseImage[] };
+  return (json.results ?? [])
+    // Only images we can re-host (https) and that are large enough for a blog cover.
+    .filter((img) => img.url.startsWith("https://") && (img.width ?? 0) >= 800)
+    .slice(0, perPage)
+    .map((img) => {
+      const license = `CC ${img.license.toUpperCase()}${img.license_version ? ` ${img.license_version}` : ""}`;
+      const title = img.title?.trim();
+      return {
+        id: `openverse:${img.id}`,
+        source: "openverse" as const,
+        url: img.url,
+        thumbUrl: img.thumbnail,
+        alt: title || query,
+        width: img.width ?? 0,
+        height: img.height ?? 0,
+        credit: `${title ? `"${title}" ` : "Foto "}oleh ${img.creator || "anonim"} (${license}) via ${img.source}`,
+        creditUrl: img.foreign_landing_url || `https://openverse.org/image/${img.id}`,
+      };
+    });
 }
 
 /** Unsplash API guideline: trigger the download endpoint when a photo is actually used. */

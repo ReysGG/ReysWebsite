@@ -5,7 +5,7 @@ import type { Post } from "@prisma/client";
 import { formatBlogDate, getPostDate, getReadingTime } from "@/features/blog/lib/blog-format";
 
 export function ArticleHeader({ post }: { post: Post }) {
-  const author = post.author || "BuildWebsite Team";
+  const author = post.author || "Tim Buildwithreys";
 
   return (
     <header className="mb-7">
@@ -45,9 +45,14 @@ export function ArticleHeader({ post }: { post: Post }) {
       )}
 
       {post.coverImage && (
-        <div className="relative mt-7 h-[340px] overflow-hidden rounded-2xl md:h-[440px]">
-          <Image src={post.coverImage} alt={post.title} fill sizes="(min-width: 1280px) 1152px, 100vw" className="object-cover" priority />
-        </div>
+        <figure className="mt-7">
+          <div className="relative h-[340px] overflow-hidden rounded-2xl md:h-[440px]">
+            <Image src={post.coverImage} alt={post.title} fill sizes="(min-width: 1280px) 1152px, 100vw" className="object-cover" priority />
+          </div>
+          {post.coverImageCredit && (
+            <figcaption className="mt-2 text-right text-xs text-neutral-500">{post.coverImageCredit}</figcaption>
+          )}
+        </figure>
       )}
     </header>
   );
