@@ -21,7 +21,7 @@ export function buildOrganizationJsonLd(settings: SiteSettings) {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": ORGANIZATION_ID,
-    name: settings.siteName || "WebServices",
+    name: settings.siteName || "Buildwithreys",
     url: getSiteUrl(),
     logo: {
       "@type": "ImageObject",
@@ -51,7 +51,7 @@ export function buildWebSiteJsonLd(settings: SiteSettings) {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": WEBSITE_ID,
-    name: settings.siteName || "WebServices",
+    name: settings.siteName || "Buildwithreys",
     url: getSiteUrl(),
     inLanguage: "id-ID",
     publisher: { "@id": ORGANIZATION_ID },

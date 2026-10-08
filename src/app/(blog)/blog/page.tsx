@@ -20,8 +20,8 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
   const isFiltered = !!(parsed.q || tag || category || year);
   const page = parsed.page || 1;
 
-  const title = 'Blog & Insights | WebServices';
-  const description = 'Panduan teknis, studi kasus, dan insight pengembangan website.';
+  const title = 'Blog & Insights | Buildwithreys';
+  const description = 'Panduan, studi kasus, dan tips membuat website & aplikasi yang mendatangkan pelanggan untuk UMKM dan bisnis Indonesia.';
 
   // Filtered/search views are thin, near-duplicate listings — keep them out of the
   // index but let crawlers follow links to the underlying articles. Paginated pages

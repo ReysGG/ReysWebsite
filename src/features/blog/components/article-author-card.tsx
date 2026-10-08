@@ -1,7 +1,7 @@
 import { User } from "lucide-react";
 
 export function ArticleAuthorCard({ author, role }: { author: string | null; role?: string }) {
-  const name = author && author.trim() ? author : "WebServices Team";
+  const name = author && author.trim() ? author : "Tim Buildwithreys";
   const initials = name
     .split(" ")
     .map((n) => n[0])
@@ -20,7 +20,7 @@ export function ArticleAuthorCard({ author, role }: { author: string | null; rol
           <p className="text-xs font-semibold uppercase tracking-widest text-brand">Penulis</p>
           <p className="mt-0.5 text-base font-bold text-neutral-900">{name}</p>
           <p className="mt-0.5 text-sm text-neutral-600">
-            {role || "Tim editorial WebServices, menulis tentang web, SEO, dan strategi bisnis digital."}
+            {role || "Tim editorial Buildwithreys, menulis tentang web, SEO, dan strategi bisnis digital."}
           </p>
         </div>
       </div>

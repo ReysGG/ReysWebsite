@@ -5,10 +5,10 @@ export const dynamic = "force-static";
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
   const settings = await getSiteSettings();
-  const siteName = settings.siteName || "WebServices";
+  const siteName = settings.siteName || "Buildwithreys";
 
   return {
-    name: `${siteName} | ${settings.tagline || "Your Tech Partner"}`,
+    name: `${siteName} | ${settings.tagline || "Jasa Pembuatan Website & Aplikasi"}`,
     short_name: siteName,
     description: settings.description || "Web services profesional untuk bisnis, startup, dan personal brand.",
     start_url: "/",

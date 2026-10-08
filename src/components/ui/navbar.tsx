@@ -39,7 +39,7 @@ export const Navbar = () => {
     >
       <div className="flex items-center gap-2">
         <MonitorSmartphone className="w-6 h-6 text-brand dark:text-brand-soft" />
-        <span className="text-xl font-bold dark:text-white text-black">WebServices</span>
+        <span className="text-xl font-bold dark:text-white text-black">Buildwithreys</span>
       </div>
 
       <div className="hidden md:flex items-center gap-6">

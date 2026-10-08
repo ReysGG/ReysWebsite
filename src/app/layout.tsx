@@ -7,24 +7,24 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
-  const siteName = settings.siteName || "WebServices";
-  const tagline = settings.tagline || "Your Tech Partner";
+  const siteName = settings.siteName || "Buildwithreys";
+  const tagline = settings.tagline || "Jasa Pembuatan Website & Aplikasi";
   return {
     metadataBase: new URL(getSiteUrl()),
     title: `${siteName} | ${tagline}`,
-    description: settings.description || "Dinamis & profesional web services, startups, and personal brands.",
+    description: settings.description || "Jasa pembuatan website & aplikasi untuk UMKM, startup, dan personal brand. Cepat, SEO-friendly, dan siap mendatangkan pelanggan. Konsultasi gratis.",
     alternates: { canonical: "/" },
     openGraph: {
       type: "website",
       siteName,
       locale: "id_ID",
       title: `${siteName} | ${tagline}`,
-      description: settings.description || "Dinamis & profesional web services, startups, and personal brands.",
+      description: settings.description || "Jasa pembuatan website & aplikasi untuk UMKM, startup, dan personal brand. Cepat, SEO-friendly, dan siap mendatangkan pelanggan. Konsultasi gratis.",
     },
     twitter: {
       card: "summary_large_image",
       title: `${siteName} | ${tagline}`,
-      description: settings.description || "Dinamis & profesional web services, startups, and personal brands.",
+      description: settings.description || "Jasa pembuatan website & aplikasi untuk UMKM, startup, dan personal brand. Cepat, SEO-friendly, dan siap mendatangkan pelanggan. Konsultasi gratis.",
     },
     robots: {
       index: true,

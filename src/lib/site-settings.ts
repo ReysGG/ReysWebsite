@@ -18,15 +18,15 @@ export type SiteSettings = {
 };
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
-  siteName: "WebServices",
-  tagline: "Your Tech Partner",
+  siteName: "Buildwithreys",
+  tagline: "Jasa Pembuatan Website & Aplikasi",
   contactEmail: "",
   whatsapp: "",
   instagram: "",
   twitter: "",
   linkedin: "",
   github: "",
-  description: "Dinamis & profesional web services, startups, and personal brands.",
+  description: "Jasa pembuatan website & aplikasi untuk UMKM, startup, dan personal brand. Cepat, SEO-friendly, dan siap mendatangkan pelanggan. Konsultasi gratis.",
 };
 
 export const getSiteSettings = unstable_cache(

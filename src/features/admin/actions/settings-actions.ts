@@ -10,7 +10,7 @@ export async function saveSiteSettings(formData: FormData) {
   await requireAdmin();
 
   const settings: SiteSettings = normalizeSiteSettings({
-    siteName: (formData.get("siteName") as string)?.trim() || "WebServices",
+    siteName: (formData.get("siteName") as string)?.trim() || "Buildwithreys",
     tagline: (formData.get("tagline") as string)?.trim() || "",
     contactEmail: (formData.get("contactEmail") as string)?.trim() || "",
     whatsapp: (formData.get("whatsapp") as string)?.trim() || "",

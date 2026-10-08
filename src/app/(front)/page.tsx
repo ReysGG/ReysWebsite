@@ -23,10 +23,10 @@ import { buildFaqJsonLd, buildOrganizationJsonLd, buildWebSiteJsonLd } from "@/l
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
-  const siteName = settings.siteName || "WebServices";
-  const tagline = settings.tagline || "Your Tech Partner";
+  const siteName = settings.siteName || "Buildwithreys";
+  const tagline = settings.tagline || "Jasa Pembuatan Website & Aplikasi";
   const title = `${siteName} | ${tagline}`;
-  const description = settings.description || "Dinamis & profesional web services, startups, and personal brands.";
+  const description = settings.description || "Jasa pembuatan website & aplikasi untuk UMKM, startup, dan personal brand. Cepat, SEO-friendly, dan siap mendatangkan pelanggan. Konsultasi gratis.";
 
   return {
     title,

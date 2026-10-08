@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const image = post.ogImage || post.coverImage;
   const canonical = sameOriginCanonical(post.canonicalUrl, `/blog/${post.slug}`);
   return {
-    title: post.metaTitle || `${post.title} | WebServices Blog`,
+    title: post.metaTitle || `${post.title} | Buildwithreys Blog`,
     description,
     alternates: { canonical },
     keywords: post.focusKeyword ? [post.focusKeyword] : undefined,
@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       dateModified: post.updatedAt.toISOString(),
       keywords: post.focusKeyword || undefined,
       articleSection: post.category || undefined,
-      author: { "@type": "Person", name: post.author || "WebServices" },
+      author: { "@type": "Person", name: post.author || "Buildwithreys" },
     },
     {
       "@context": "https://schema.org",

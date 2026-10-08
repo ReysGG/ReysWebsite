@@ -8,8 +8,8 @@ export const alt = "buildwithreys.com";
 // Brand OG image — warm cream/orange palette, no blue/indigo per brand rules.
 export default async function OpengraphImage() {
   const settings = await getSiteSettings();
-  const siteName = settings.siteName || "WebServices";
-  const tagline = settings.tagline || "Your Tech Partner";
+  const siteName = settings.siteName || "Buildwithreys";
+  const tagline = settings.tagline || "Jasa Pembuatan Website & Aplikasi";
 
   return new ImageResponse(
     (
