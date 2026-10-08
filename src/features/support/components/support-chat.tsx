@@ -55,6 +55,14 @@ export function SupportChat({ whatsappTarget }: { whatsappTarget: string | null 
   const [error, setError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const lastAtRef = useRef<string | null>(null);
+  const [slowAuth, setSlowAuth] = useState(false);
+
+  // If the auth script never loads (blocked, DNS, network), don't spin forever.
+  useEffect(() => {
+    if (isLoaded) return;
+    const timer = setTimeout(() => setSlowAuth(true), 8000);
+    return () => clearTimeout(timer);
+  }, [isLoaded]);
 
   const applyPayload = useCallback((data: Payload) => {
     if (data.conversation) setStatus(data.conversation.status);
@@ -132,6 +140,19 @@ export function SupportChat({ whatsappTarget }: { whatsappTarget: string | null 
     }
   };
 
+  if (!isLoaded && slowAuth) {
+    return (
+      <div className="space-y-3 px-4 py-4 text-sm text-neutral-700">
+        <p>Chat belum bisa dimuat di browser ini. Coba muat ulang halaman, atau hubungi kami via WhatsApp.</p>
+        <button type="button" onClick={() => window.location.reload()} className="w-full rounded-xl bg-brand px-4 py-2.5 text-sm font-bold text-white hover:bg-brand-deep">Muat ulang</button>
+        {whatsappTarget && (
+          <a href={whatsappTarget} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 rounded-xl border border-neutral-200 px-4 py-2.5 font-bold text-neutral-700 hover:border-[#25D366]">
+            <MessageCircle className="h-4 w-4" /> Chat via WhatsApp
+          </a>
+        )}
+      </div>
+    );
+  }
   if (!isLoaded) {
     return <div className="flex h-40 items-center justify-center text-brand-deep"><LatticeLoader label="Memuat" showTimer={false} fontSize={13} cellSize={5} /></div>;
   }
