@@ -29,6 +29,7 @@ import {
   KeyRound,
   ScrollText,
   CalendarClock,
+  Headset,
 } from "lucide-react";
 import type { AdminSidebarNavGroup, AdminSidebarSubItem } from "@/components/admin/admin-sidebar-types";
 
@@ -139,6 +140,7 @@ export const ADMIN_NAV_GROUPS: AdminSidebarNavGroup[] = [
     title: "Audience",
     items: [
       { label: "Subscribers", href: "/admin/subscribers", icon: <Mail className="h-4 w-4" /> },
+      { label: "Support Chat", href: "/admin/support", icon: <Headset className="h-4 w-4" /> },
       { label: "Comments", href: "/admin/comments", icon: <MessageSquareText className="h-4 w-4" /> },
     ],
   },

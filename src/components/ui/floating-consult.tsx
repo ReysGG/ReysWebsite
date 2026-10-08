@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { SupportChat } from '@/features/support/components/support-chat';
 
 type FloatingConsultProps = {
   whatsappUrl: string;
@@ -15,6 +16,7 @@ export function FloatingConsult({ whatsappUrl, siteName = 'Build With Reys' }: F
   const [shouldShow, setShouldShow] = useState(false);
 
   const isAdmin = pathname?.startsWith('/admin');
+  const isAuthPage = pathname?.startsWith('/sign-in') || pathname?.startsWith('/sign-up');
 
   useEffect(() => {
     if (isAdmin) return;
@@ -22,15 +24,16 @@ export function FloatingConsult({ whatsappUrl, siteName = 'Build With Reys' }: F
     return () => clearTimeout(timer);
   }, [isAdmin]);
 
-  if (isAdmin) return null;
-  if (!whatsappUrl) return null;
+  if (isAdmin || isAuthPage) return null;
 
   const message = encodeURIComponent(
     `Halo ${siteName}, saya tertarik konsultasi pembuatan website. Boleh dibantu?`,
   );
-  const target = whatsappUrl.includes('?')
-    ? `${whatsappUrl}&text=${message}`
-    : `${whatsappUrl}?text=${message}`;
+  const target = !whatsappUrl
+    ? null
+    : whatsappUrl.includes('?')
+      ? `${whatsappUrl}&text=${message}`
+      : `${whatsappUrl}?text=${message}`;
 
   return (
     <div
@@ -40,7 +43,7 @@ export function FloatingConsult({ whatsappUrl, siteName = 'Build With Reys' }: F
       ].join(' ')}
     >
       {open && (
-        <div className="w-72 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/5 animate-[fadeUp_240ms_ease-out]">
+        <div className="w-[22rem] max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/5 animate-[fadeUp_240ms_ease-out]">
           <div className="bg-gradient-to-br from-brand to-brand-cyan px-4 py-4 text-white">
             <div className="flex items-start justify-between gap-2">
               <div>
@@ -56,31 +59,17 @@ export function FloatingConsult({ whatsappUrl, siteName = 'Build With Reys' }: F
               </button>
             </div>
           </div>
-          <div className="px-4 py-4">
-            <p className="text-sm leading-6 text-neutral-700">
-              Ceritakan kebutuhan website atau sistem digital kamu, kami bantu susun scope, timeline, dan estimasi.
-            </p>
-            <a
-              href={target}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#1ebe5d]"
-            >
-              <MessageCircle className="h-4 w-4" />
-              Chat WhatsApp Sekarang
-            </a>
-            <p className="mt-2 text-center text-[11px] text-neutral-400">Respon di jam kerja, gratis tanpa komitmen.</p>
-          </div>
+          <SupportChat whatsappTarget={target} />
         </div>
       )}
 
       <button type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? 'Tutup konsultasi' : 'Buka konsultasi'}
-        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-emerald-500/30 transition hover:scale-105 hover:bg-[#1ebe5d]"
+        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-brand-cyan to-brand text-white shadow-lg shadow-brand/30 transition hover:scale-105"
       >
         {!open && (
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#25D366] opacity-40" />
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-30" />
         )}
         {open ? <X className="relative h-6 w-6" /> : <MessageCircle className="relative h-7 w-7" />}
       </button>
