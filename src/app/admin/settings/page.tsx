@@ -23,16 +23,12 @@ const settingsChecks = [
     env: "CLERK_SECRET_KEY",
   },
   {
-    label: "Supabase S3 Endpoint",
-    description: "Endpoint upload image untuk blog dan media.",
-    ready: Boolean(process.env.SUPABASE_S3_ENDPOINT),
-    env: "SUPABASE_S3_ENDPOINT",
-  },
-  {
-    label: "Supabase S3 Access Key",
-    description: "Credential upload storage.",
-    ready: Boolean(process.env.SUPABASE_S3_ACCESS_KEY_ID && process.env.SUPABASE_S3_SECRET_ACCESS_KEY),
-    env: "SUPABASE_S3_ACCESS_KEY_ID / SECRET",
+    label: "Storage Upload",
+    description: process.env.SUPABASE_S3_ENDPOINT && process.env.SUPABASE_S3_ACCESS_KEY_ID && process.env.SUPABASE_S3_SECRET_ACCESS_KEY
+      ? "Upload gambar & HTML disimpan di Supabase S3."
+      : "Upload disimpan di disk server (UPLOAD_DIR / volume uploads). Isi SUPABASE_S3_* untuk pakai S3.",
+    ready: true,
+    env: "SUPABASE_S3_* (opsional)",
   },
   {
     label: "AI Encryption Key",

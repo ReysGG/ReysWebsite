@@ -33,6 +33,11 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 COPY --from=builder --chown=nextjs:nodejs /app/prisma.config.ts ./prisma.config.ts
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/db-bootstrap.mjs ./scripts/db-bootstrap.mjs
+
+# Local upload storage (used when Supabase S3 is not configured); mounted as a volume in docker-compose.
+RUN mkdir -p /app/uploads && chown nextjs:nodejs /app/uploads
+ENV UPLOAD_DIR=/app/uploads
 
 COPY --chown=nextjs:nodejs docker-entrypoint.sh ./docker-entrypoint.sh
 RUN chmod +x ./docker-entrypoint.sh

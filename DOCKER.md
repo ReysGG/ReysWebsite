@@ -151,3 +151,16 @@ Test manual:
 ```bash
 curl -i -H "Authorization: Bearer $CRON_SECRET" http://localhost:3000/api/cron/ai-tick
 ```
+
+## 9. Database & upload lokal (self-hosted)
+
+`docker-compose.yml` menjalankan Postgres sendiri (service `db`, volume `postgres_data`) — tidak perlu Supabase.
+
+- `.env.docker`: isi `POSTGRES_PASSWORD`, lalu `DATABASE_URL` dan `DIRECT_URL` = `postgresql://reys:<POSTGRES_PASSWORD>@db:5432/reys`.
+- Database kosong otomatis dibuatkan schema saat container pertama kali start (`scripts/db-bootstrap.mjs`), lalu `prisma migrate deploy` jalan seperti biasa.
+- Jika `SUPABASE_S3_*` kosong, upload gambar & HTML showcase disimpan di volume `uploads` dan disajikan di `/uploads/...`.
+- Backup:
+
+```bash
+docker compose --env-file .env.docker exec db pg_dump -U reys reys > backup-$(date +%F).sql
+```

@@ -2,6 +2,7 @@ import "server-only";
 
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import sharp from "sharp";
+import { isS3Configured, saveLocalFile } from "@/lib/storage/local-storage";
 
 const BUCKET = process.env.SUPABASE_S3_BUCKET ?? "blog-images";
 export const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
@@ -89,6 +90,9 @@ export async function uploadImageBuffer(buffer: Buffer, folder = "blog") {
 
   const random = Math.random().toString(36).slice(2, 8);
   const filename = `${sanitizeFolder(folder)}/${Date.now()}-${random}.${processed.ext}`;
+
+  // Self-hosted setup: no S3 configured → keep files on local disk.
+  if (!isS3Configured()) return saveLocalFile(filename, processed.buffer);
 
   await getStorageClient().send(new PutObjectCommand({
     Bucket: BUCKET,

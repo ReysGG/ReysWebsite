@@ -2,6 +2,7 @@ import "server-only";
 
 import { Buffer } from "node:buffer";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { isS3Configured, saveLocalFile } from "@/lib/storage/local-storage";
 
 const BUCKET = process.env.SUPABASE_S3_BUCKET ?? "blog-images";
 const FOLDER = "showcase";
@@ -22,6 +23,9 @@ export async function uploadShowcaseHtml({ html, slug }: { html: string; slug?: 
   if (!looksLikeHtml(html)) throw new Error("Konten tidak terlihat seperti HTML valid.");
 
   const filename = buildShowcaseHtmlFilename(slug);
+
+  // Self-hosted setup: no S3 configured → keep files on local disk (same-origin URL).
+  if (!isS3Configured()) return saveLocalFile(filename, Buffer.from(html, "utf-8"));
 
   await getStorageClient().send(
     new PutObjectCommand({
