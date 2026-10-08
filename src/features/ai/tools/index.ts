@@ -19,6 +19,7 @@ import {
 } from "@/features/ai/services/ai-blog-service";
 import { getStockSources, searchStockImages, trackUnsplashDownload } from "@/features/ai/services/image-search-service";
 import { getImageModel } from "@/features/ai/services/model-router";
+import { runWebResearch } from "@/features/ai/services/web-research-service";
 import { auditSeo } from "@/features/ai/lib/seo-audit";
 import type { AiWriterRules } from "@/features/ai/lib/writer-rules";
 import { uploadImageBuffer, uploadImageFromUrl } from "@/lib/storage/image-storage";
@@ -168,6 +169,15 @@ export function buildArticleTools(ctx: ToolContext) {
       description: "Cari artikel published yang relevan untuk internal link.",
       inputSchema: z.object({ keyword: z.string(), excludePostId: z.string().optional() }),
       execute: async ({ keyword, excludePostId }) => findInternalLinkCandidates(keyword, excludePostId),
+    }),
+    webResearch: tool({
+      description:
+        "Cari & baca informasi TERBARU di web (via web search bawaan provider). Pakai untuk data, statistik, harga, tren, regulasi, dan untuk mendapatkan URL sumber otoritatif sebagai external link. Mengembalikan ringkasan + daftar sumber. Maksimal 3x per artikel.",
+      inputSchema: z.object({
+        query: z.string().min(3).max(200).describe("Pertanyaan riset spesifik, mis. 'rata-rata biaya pembuatan website UMKM di Indonesia 2026'."),
+        focus: z.string().max(200).optional().describe("Opsional: aspek yang dicari, mis. 'angka & sumber resmi'."),
+      }),
+      execute: async ({ query, focus }) => runWebResearch(query, focus),
     }),
     seoAudit: tool({
       description: "Audit SEO on-page sebuah artikel. Mengembalikan skor 0–100 dan daftar issue yang harus diperbaiki.",

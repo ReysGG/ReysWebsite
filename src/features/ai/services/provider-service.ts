@@ -5,7 +5,7 @@ import { createAnthropic } from "@ai-sdk/anthropic";
 import { createGoogle } from "@ai-sdk/google";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import type { ImageModelV4, LanguageModelV4 } from "@ai-sdk/provider";
-import { generateText } from "ai";
+import { generateText, type ToolSet } from "ai";
 import type { AiProviderType } from "@prisma/client";
 import db from "@/lib/db";
 import { decryptSecret, encryptSecret, maskSecret } from "@/features/ai/lib/crypto";
@@ -78,15 +78,27 @@ function createSdkProvider(provider: ProviderSecretRecord) {
   switch (provider.type) {
     case "OPENAI": {
       const sdk = createOpenAI({ apiKey, baseURL });
-      return { language: (id: string) => sdk(id), image: (id: string) => sdk.image(id) };
+      return {
+        language: (id: string) => sdk(id),
+        image: (id: string) => sdk.image(id),
+        webSearch: (id: string) => ({ model: sdk(id), tools: { web_search: sdk.tools.webSearch({ searchContextSize: "medium" }) } }),
+      };
     }
     case "ANTHROPIC": {
       const sdk = createAnthropic({ apiKey, baseURL });
-      return { language: (id: string) => sdk(id), image: null };
+      return {
+        language: (id: string) => sdk(id),
+        image: null,
+        webSearch: (id: string) => ({ model: sdk(id), tools: { web_search: sdk.tools.webSearch_20250305({ maxUses: 5 }) } }),
+      };
     }
     case "GOOGLE": {
       const sdk = createGoogle({ apiKey, baseURL });
-      return { language: (id: string) => sdk(id), image: (id: string) => sdk.image(id) };
+      return {
+        language: (id: string) => sdk(id),
+        image: (id: string) => sdk.image(id),
+        webSearch: (id: string) => ({ model: sdk(id), tools: { google_search: sdk.tools.googleSearch({}) } }),
+      };
     }
     case "OPENROUTER":
     case "OPENAI_COMPATIBLE": {
@@ -97,13 +109,27 @@ function createSdkProvider(provider: ProviderSecretRecord) {
         includeUsage: true,
         headers: provider.type === "OPENROUTER" ? { "HTTP-Referer": siteUrl(), "X-Title": "Buildwithreys AI Studio" } : undefined,
       });
-      return { language: (id: string) => sdk.chatModel(id), image: (id: string) => sdk.imageModel(id) };
+      return {
+        language: (id: string) => sdk.chatModel(id),
+        image: (id: string) => sdk.imageModel(id),
+        // OpenRouter enables its web plugin via the ":online" model suffix; generic endpoints have no native search.
+        webSearch:
+          provider.type === "OPENROUTER"
+            ? (id: string) => ({ model: sdk.chatModel(id.endsWith(":online") ? id : `${id}:online`), tools: {} as ToolSet })
+            : null,
+      };
     }
   }
 }
 
 export function buildLanguageModel(provider: ProviderSecretRecord, modelId?: string): LanguageModelV4 {
   return createSdkProvider(provider).language(modelId || provider.defaultModel);
+}
+
+/** Model + provider-native web search tool for this provider, or null if it has no built-in search. */
+export function buildWebSearchSetup(provider: ProviderSecretRecord): { model: LanguageModelV4; tools: ToolSet } | null {
+  const sdk = createSdkProvider(provider);
+  return sdk.webSearch ? sdk.webSearch(provider.defaultModel) : null;
 }
 
 export function buildImageModel(provider: ProviderSecretRecord): ImageModelV4 | null {

@@ -9,6 +9,7 @@ const TOOL_LABELS: Record<string, string> = {
   listPosts: "Mencari artikel",
   getPost: "Membaca artikel",
   findInternalLinks: "Mencari internal link",
+  webResearch: "Riset web",
   seoAudit: "Audit SEO",
   createDraft: "Membuat draft",
   updatePost: "Memperbarui artikel",
@@ -66,6 +67,23 @@ function OutputSummary({ toolName, output }: { toolName: string; output: unknown
         {typeof o.status === "string" && <span className="font-semibold text-neutral-700">Status: {o.status}</span>}
         <Link href={o.editUrl} className="font-semibold text-brand-deep underline underline-offset-2">Edit</Link>
         {typeof o.previewUrl === "string" && <Link href={o.previewUrl} className="font-semibold text-brand-deep underline underline-offset-2">Preview</Link>}
+      </div>
+    );
+  }
+  if (toolName === "webResearch" && typeof o.summary === "string") {
+    const sources = Array.isArray(o.sources) ? (o.sources as Json[]) : [];
+    return (
+      <div className="mt-1 space-y-1 text-xs">
+        <p className="line-clamp-4 whitespace-pre-wrap text-neutral-700">{o.summary}</p>
+        {sources.length > 0 && (
+          <ul className="space-y-0.5">
+            {sources.slice(0, 6).map((src) => (
+              <li key={String(src.url)} className="truncate">
+                <a href={String(src.url)} target="_blank" rel="noopener noreferrer" className="text-brand-deep underline underline-offset-2">{String(src.title || src.url)}</a>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     );
   }

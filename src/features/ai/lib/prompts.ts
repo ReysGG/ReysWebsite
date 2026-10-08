@@ -27,7 +27,7 @@ export function buildRulesBlock(rules: AiWriterRules) {
 - Target pembaca: ${rules.audience}.
 - Brand voice: ${rules.brandVoice}
 - Panjang artikel: ${rules.minWords}–${rules.maxWords} kata (hitung hanya teks, bukan HTML).
-- Internal link: minimal ${rules.internalLinks} ke artikel lain (pakai tool findInternalLinks, URL relatif /blog/slug). External link: minimal ${rules.externalLinks} ke sumber otoritatif (dokumentasi resmi, riset, situs pemerintah) dengan URL yang kamu yakin valid.
+- Internal link: minimal ${rules.internalLinks} ke artikel lain (pakai tool findInternalLinks, URL relatif /blog/slug). External link: minimal ${rules.externalLinks} ke sumber otoritatif (dokumentasi resmi, riset, situs pemerintah) — utamakan URL dari hasil webResearch.
 - Gambar: ${rules.imageSource === "none" ? "tidak perlu gambar." : `1 cover image + ${rules.inlineImages} gambar di dalam artikel. Sumber: ${rules.imageSource === "stock" ? "stock photo (searchImages)" : rules.imageSource === "ai" ? "AI (generateImage)" : "stock photo dulu (searchImages), pakai generateImage jika tidak ada yang relevan"}. Alt text deskriptif & mengandung keyword bila natural.`}
 ${required.length ? `- Wajib ada:\n${required.map((r) => `  - ${r}`).join("\n")}` : ""}
 - Topik terlarang: ${rules.forbiddenTopics || "-"}
@@ -47,6 +47,7 @@ ${rules.extraRules ? `- Aturan tambahan dari admin:\n${rules.extraRules}` : ""}
 
 const WORKFLOW = `## Alur kerja menulis artikel
 1. Riset internal: listPosts(query: keyword) untuk cek duplikasi, getBlogTaxonomy untuk kategori/tag, findInternalLinks(keyword) untuk kandidat internal link.
+   Riset web: webResearch (1–3x) untuk data/angka/tren terbaru dan URL sumber otoritatif. Pakai URL dari hasil webResearch sebagai external link; jika webResearch tidak tersedia, jangan mengarang statistik.
 2. Susun outline di kepala (search intent → H2/H3), lalu tulis artikel LENGKAP dalam HTML.
 3. createDraft dengan semua field SEO terisi (title, content, focusKeyword, metaTitle, metaDesc, excerpt, category, tags). Hasilnya berisi skor SEO + daftar issue.
 4. Jika skor < threshold, perbaiki dengan updatePost (kirim hanya field yang berubah). Maksimal 3 putaran perbaikan.

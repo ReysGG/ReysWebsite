@@ -20,7 +20,7 @@ export const PROVIDER_META: Record<AiProviderTypeValue, ProviderMeta> = {
     supportsImages: true,
     modelPlaceholder: "gpt-5-mini",
     imageModelPlaceholder: "gpt-image-1",
-    hint: "API key dari platform.openai.com.",
+    hint: "API key dari platform.openai.com. Mendukung web search bawaan.",
   },
   ANTHROPIC: {
     label: "Anthropic Claude",
@@ -28,7 +28,7 @@ export const PROVIDER_META: Record<AiProviderTypeValue, ProviderMeta> = {
     baseUrlRequired: false,
     supportsImages: false,
     modelPlaceholder: "claude-sonnet-5-5",
-    hint: "API key dari console.anthropic.com. Tidak mendukung generate gambar.",
+    hint: "API key dari console.anthropic.com. Web search bawaan harus diaktifkan di Console → Settings → Privacy. Tidak mendukung generate gambar.",
   },
   GOOGLE: {
     label: "Google Gemini",
@@ -37,7 +37,7 @@ export const PROVIDER_META: Record<AiProviderTypeValue, ProviderMeta> = {
     supportsImages: true,
     modelPlaceholder: "gemini-2.5-flash",
     imageModelPlaceholder: "imagen-4.0-generate-001",
-    hint: "API key dari aistudio.google.com.",
+    hint: "API key dari aistudio.google.com. Mendukung Google Search grounding.",
   },
   OPENROUTER: {
     label: "OpenRouter",
@@ -45,7 +45,7 @@ export const PROVIDER_META: Record<AiProviderTypeValue, ProviderMeta> = {
     baseUrlRequired: false,
     supportsImages: true,
     modelPlaceholder: "anthropic/claude-sonnet-5-5",
-    hint: "Satu key untuk ratusan model. Pastikan model mendukung tool calling.",
+    hint: "Satu key untuk ratusan model. Pastikan model mendukung tool calling. Web search via suffix :online (biaya tambahan per pencarian).",
   },
   OPENAI_COMPATIBLE: {
     label: "OpenAI-compatible (9router, Ollama, Groq, DeepSeek, …)",
@@ -53,7 +53,7 @@ export const PROVIDER_META: Record<AiProviderTypeValue, ProviderMeta> = {
     baseUrlRequired: true,
     supportsImages: true,
     modelPlaceholder: "cc/claude-sonnet-5-5",
-    hint: "Endpoint apa pun yang kompatibel dengan OpenAI /v1/chat/completions, termasuk router self-hosted seperti 9router.",
+    hint: "Endpoint apa pun yang kompatibel dengan OpenAI /v1/chat/completions, termasuk router self-hosted seperti 9router. Tidak punya web search bawaan.",
   },
 };
 
