@@ -10,9 +10,54 @@ import {
   lastAssistantMessageIsCompleteWithApprovalResponses,
   type UIMessage,
 } from "ai";
-import { Bot, RotateCcw, SendHorizontal, Square, User } from "lucide-react";
+import { Bot, ChevronDown, RotateCcw, SendHorizontal, Square, User } from "lucide-react";
+import LatticeLoader from "@/components/LatticeLoader";
 import { ChatMarkdown } from "./chat-markdown";
-import { ChatToolCard } from "./chat-tool-card";
+import { ChatToolCard, TOOL_LABELS } from "./chat-tool-card";
+
+type ApprovalHandler = (approvalId: string, approved: boolean) => void;
+
+function Thinking({ label }: { label: string }) {
+  return <LatticeLoader label={label} pattern="orbit" color="currentColor" fontSize={13} cellSize={5} className="text-brand-deep" />;
+}
+
+/**
+ * Assistant message: the agent's working steps (tool calls) stay hidden behind a loader while it runs,
+ * then fold into a collapsed process section. Approval requests are always shown because they need a click.
+ */
+function AssistantParts({ message, working, onApprove }: { message: UIMessage; working: boolean; onApprove: ApprovalHandler }) {
+  const toolParts = message.parts.filter(isToolUIPart);
+  const pending = toolParts.filter((p) => p.state === "approval-requested" && !p.approval.isAutomatic);
+  const steps = toolParts.filter((p) => !pending.includes(p));
+  const running = [...steps].reverse().find((p) => p.state === "input-streaming" || p.state === "input-available" || p.state === "approval-responded");
+  const label = running ? TOOL_LABELS[getToolName(running)] ?? "Bekerja" : "Berpikir";
+
+  return (
+    <>
+      {working ? (
+        <Thinking label={label} />
+      ) : (
+        steps.length > 0 && (
+          <details className="group rounded-md border border-neutral-200 bg-neutral-50/60">
+            <summary className="flex cursor-pointer list-none items-center gap-1.5 px-3 py-2 text-xs font-semibold text-neutral-500 hover:text-neutral-800">
+              Lihat proses AI · {steps.length} langkah
+              <ChevronDown className="h-3.5 w-3.5 transition group-open:rotate-180" />
+            </summary>
+            <div className="space-y-2 border-t border-neutral-200 p-2">
+              {steps.map((part) => (
+                <ChatToolCard key={part.toolCallId} part={part} toolName={getToolName(part)} onApprove={onApprove} />
+              ))}
+            </div>
+          </details>
+        )
+      )}
+      {message.parts.map((part, index) => (part.type === "text" && part.text.trim() ? <ChatMarkdown key={index} text={part.text} /> : null))}
+      {pending.map((part) => (
+        <ChatToolCard key={part.toolCallId} part={part} toolName={getToolName(part)} onApprove={onApprove} />
+      ))}
+    </>
+  );
+}
 
 const QUICK_PROMPTS = [
   "Tulis artikel SEO lengkap tentang biaya pembuatan website company profile, lalu simpan sebagai draft.",
@@ -93,34 +138,27 @@ export function ChatPanel({ sessionId, initialMessages, providersReady }: { sess
               {message.role === "user" ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
             </span>
             <div className={`min-w-0 max-w-[85%] space-y-2 ${message.role === "user" ? "items-end text-right" : ""}`}>
-              {message.parts.map((part, index) => {
-                if (part.type === "text") {
-                  return message.role === "user" ? (
+              {message.role === "user" ? (
+                message.parts.map((part, index) =>
+                  part.type === "text" ? (
                     <p key={index} className="inline-block whitespace-pre-wrap rounded-2xl rounded-tr-sm bg-brand px-4 py-2.5 text-left text-sm text-white">{part.text}</p>
-                  ) : (
-                    <ChatMarkdown key={index} text={part.text} />
-                  );
-                }
-                if (isToolUIPart(part)) {
-                  return (
-                    <ChatToolCard
-                      key={part.toolCallId}
-                      part={part}
-                      toolName={getToolName(part)}
-                      onApprove={(id, approved) => void addToolApprovalResponse({ id, approved })}
-                    />
-                  );
-                }
-                return null;
-              })}
+                  ) : null,
+                )
+              ) : (
+                <AssistantParts
+                  message={message}
+                  working={busy && message.id === messages.at(-1)?.id}
+                  onApprove={(id, approved) => void addToolApprovalResponse({ id, approved })}
+                />
+              )}
             </div>
           </div>
         ))}
 
-        {status === "submitted" && (
-          <div className="flex items-center gap-2 text-sm text-neutral-500">
+        {busy && messages.at(-1)?.role !== "assistant" && (
+          <div className="flex items-center gap-3">
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-tint text-brand-deep"><Bot className="h-4 w-4" /></span>
-            <span className="animate-pulse">Berpikir…</span>
+            <Thinking label="Berpikir" />
           </div>
         )}
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Check, CheckCircle2, ChevronDown, Loader2, ShieldQuestion, X, XCircle } from "lucide-react";
 import type { DynamicToolUIPart, ToolUIPart, UITools } from "ai";
 
-const TOOL_LABELS: Record<string, string> = {
+export const TOOL_LABELS: Record<string, string> = {
   getBlogTaxonomy: "Membaca kategori & tag",
   listPosts: "Mencari artikel",
   getPost: "Membaca artikel",
