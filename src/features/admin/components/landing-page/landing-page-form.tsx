@@ -57,25 +57,25 @@ export function LandingPageForm({ config, initialSection = "hero" }: { config: S
         <div className="sticky top-0 z-30 rounded-md border border-neutral-200 bg-white/95 p-3 shadow-none backdrop-blur">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">Visual Editor</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-brand">Visual Editor</p>
               <p className="mt-1 text-sm text-neutral-600">Preview bersih secara default. Aktifkan mode edit untuk klik elemen dan ubah konten.</p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-md bg-[#fffcc9] px-3 py-2 text-sm font-semibold text-[#ff8a00]">Aktif: {active.label}</span>
+              <span className="rounded-md bg-brand-tint px-3 py-2 text-sm font-semibold text-brand">Aktif: {active.label}</span>
               <button
                 type="button"
                 onClick={() => setEditMode((current) => !current)}
                 className={cn(
-                  "inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]",
+                  "inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft",
                   editMode
-                    ? "bg-[#ff8a00] text-white hover:bg-[#f4b738] active:bg-[#e07a00]"
+                    ? "bg-brand text-white hover:bg-brand-deep active:bg-brand-deep"
                     : "border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100"
                 )}
               >
                 <Pencil className="h-4 w-4" />
                 {editMode ? "Mode Preview" : "Mode Edit"}
               </button>
-              <Link href="/" target="_blank" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
+              <Link href="/" target="_blank" className="inline-flex items-center gap-2 rounded-md border border-neutral-200 px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft">
                 Lihat Website <ExternalLink className="h-4 w-4" />
               </Link>
             </div>

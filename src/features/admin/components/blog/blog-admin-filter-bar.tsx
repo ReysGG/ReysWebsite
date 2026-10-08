@@ -19,14 +19,14 @@ export function BlogAdminFilterBar({
           name="q"
           defaultValue={search || ""}
           placeholder="Cari judul, slug, excerpt..."
-          className="w-full rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 pl-9 text-sm outline-none focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]"
+          className="w-full rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 pl-9 text-sm outline-none focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand-tint"
         />
       </div>
       <select
         name="status"
         defaultValue={status || "all"}
         disabled={lockedStatus}
-        className="rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700 outline-none focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9] disabled:cursor-not-allowed disabled:opacity-60"
+        className="rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700 outline-none focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand-tint disabled:cursor-not-allowed disabled:opacity-60"
       >
         <option value="all">Semua status</option>
         <option value="published">Published</option>
@@ -36,9 +36,9 @@ export function BlogAdminFilterBar({
         name="category"
         defaultValue={category || ""}
         placeholder="Kategori / tag"
-        className="rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm outline-none focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]"
+        className="rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm outline-none focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand-tint"
       />
-      <button type="submit" className="rounded-md bg-[#ff8a00] px-4 py-2 text-sm font-semibold text-white hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
+      <button type="submit" className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-deep active:bg-brand-deep active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft">
         Filter
       </button>
     </form>

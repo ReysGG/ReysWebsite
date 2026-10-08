@@ -11,19 +11,19 @@ export function ArticleHeader({ post }: { post: Post }) {
     <header className="mb-7">
       <Link
         href="/blog"
-        className="mb-5 inline-flex items-center gap-2 text-sm font-bold text-neutral-600 hover:text-[#ff8a00]"
+        className="mb-5 inline-flex items-center gap-2 text-sm font-bold text-neutral-600 hover:text-brand"
       >
         <ArrowLeft className="h-4 w-4" />
         Kembali ke Blog
       </Link>
 
-      <div className="mb-4 text-sm font-semibold text-[#ff8a00]">
+      <div className="mb-4 text-sm font-semibold text-brand">
         {author}
       </div>
 
       <div className="mb-5 flex flex-wrap gap-3 text-sm font-medium text-neutral-500">
         {post.category && (
-          <span className="rounded-full bg-[#fffcc9] px-3 py-1 text-[#ff8a00]">
+          <span className="rounded-full bg-brand-tint px-3 py-1 text-brand">
             {post.category}
           </span>
         )}
@@ -32,7 +32,7 @@ export function ArticleHeader({ post }: { post: Post }) {
           {formatBlogDate(getPostDate(post))}
         </span>
         <span>{getReadingTime(post)}</span>
-        {post.featured && <span className="text-[#ff8a00]">Featured</span>}
+        {post.featured && <span className="text-brand">Featured</span>}
       </div>
 
       <h1 className="max-w-5xl text-3xl font-bold tracking-tight text-neutral-950 md:text-5xl">

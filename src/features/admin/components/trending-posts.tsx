@@ -21,7 +21,7 @@ export function TrendingPosts({ posts }: { posts: TrendingPostProps[] }) {
           <div className="space-y-1">
             <CardTitle className="text-base font-semibold text-neutral-900 flex items-center gap-2">
               Artikel Populer
-              <TrendingUp className="text-[#ff8a00]" size={16} />
+              <TrendingUp className="text-brand" size={16} />
             </CardTitle>
             <CardDescription className="text-xs text-neutral-500">
               Postingan dengan views terbanyak
@@ -38,7 +38,7 @@ export function TrendingPosts({ posts }: { posts: TrendingPostProps[] }) {
             <p className="text-sm text-neutral-500">Belum ada artikel.</p>
             <Link
               href="/admin/blog/create"
-              className="mt-3 text-xs font-semibold text-[#ff8a00] hover:text-[#f4b738] transition-colors"
+              className="mt-3 text-xs font-semibold text-brand hover:text-brand-deep transition-colors"
             >
               Tulis artikel pertama →
             </Link>
@@ -47,22 +47,22 @@ export function TrendingPosts({ posts }: { posts: TrendingPostProps[] }) {
           <div className="space-y-4">
             {posts.map((post, index) => (
               <div key={post.id} className="flex items-center gap-3">
-                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-md bg-[#fffcc9]">
+                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-md bg-brand-tint">
                   {post.coverImage ? (
                     <Image src={post.coverImage} alt={post.title} fill sizes="44px" className="object-cover" />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-[#ff8a00]">
+                    <div className="flex h-full w-full items-center justify-center text-brand">
                       <FileText size={16} />
                     </div>
                   )}
-                  <span className="absolute -left-1 -top-1 flex h-4 w-4 items-center justify-center rounded-md bg-[#ff8a00] text-[10px] font-bold text-white">
+                  <span className="absolute -left-1 -top-1 flex h-4 w-4 items-center justify-center rounded-md bg-brand text-[10px] font-bold text-white">
                     {index + 1}
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
                   <Link
                     href={`/admin/blog/${post.id}`}
-                    className="block truncate text-sm font-medium text-neutral-900 hover:text-[#ff8a00] transition-colors"
+                    className="block truncate text-sm font-medium text-neutral-900 hover:text-brand transition-colors"
                   >
                     {post.title}
                   </Link>

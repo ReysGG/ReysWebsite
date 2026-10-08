@@ -19,6 +19,12 @@
     "seed": "npm run seed:blog-all"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.74",
+    "@ai-sdk/google": "^4.0.90",
+    "@ai-sdk/openai": "^4.0.86",
+    "@ai-sdk/openai-compatible": "^3.0.65",
+    "@ai-sdk/provider": "^4.0.24",
+    "@ai-sdk/react": "^4.0.133",
     "@aws-sdk/client-s3": "3.758.0",
     "@clerk/nextjs": "^7.3.3",
     "@gsap/react": "^2.1.2",
@@ -29,8 +35,10 @@
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.4",
     "@ui-layouts/mcp": "^0.3.0",
+    "ai": "^7.0.130",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cron-parser": "^5.10.1",
     "date-fns": "^4.1.0",
     "dotenv": "^17.4.2",
     "framer-motion": "^12.38.0",
@@ -47,7 +55,8 @@
     "react-wrap-balancer": "^1.1.1",
     "recharts": "^2.15.4",
     "sharp": "^0.34.5",
-    "tailwind-merge": "^3.5.0"
+    "tailwind-merge": "^3.5.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.2.6",

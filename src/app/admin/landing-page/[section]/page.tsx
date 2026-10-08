@@ -56,7 +56,7 @@ export default async function LandingPageSectionAdmin({
       <div className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">
+            <p className="text-xs font-semibold uppercase tracking-widest text-brand">
               Website Content
             </p>
             <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900 md:text-3xl">
@@ -67,7 +67,7 @@ export default async function LandingPageSectionAdmin({
             </p>
           </div>
           <form action={resetLandingPage}>
-            <SubmitButton pendingLabel="Mereset..." className="rounded-md border border-neutral-200 px-4 py-2.5 text-sm font-semibold text-neutral-600 transition-colors hover:bg-neutral-50 hover:text-neutral-900 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80] disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100">
+            <SubmitButton pendingLabel="Mereset..." className="rounded-md border border-neutral-200 px-4 py-2.5 text-sm font-semibold text-neutral-600 transition-colors hover:bg-neutral-50 hover:text-neutral-900 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100">
               Reset default
             </SubmitButton>
           </form>

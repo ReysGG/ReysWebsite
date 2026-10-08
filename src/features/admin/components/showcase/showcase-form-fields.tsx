@@ -89,7 +89,7 @@ export function CategoryCombobox({
         className={[
           'flex w-full items-center justify-between gap-2 rounded-md border px-3 py-2.5 text-left text-sm outline-none transition',
           open
-            ? 'border-[#ff8a00] ring-2 ring-[#fffcc9]'
+            ? 'border-brand ring-2 ring-brand-tint'
             : 'border-neutral-200 hover:border-neutral-300',
           value ? 'text-neutral-900' : 'text-neutral-400',
         ].join(' ')}
@@ -111,7 +111,7 @@ export function CategoryCombobox({
               <X className="h-3.5 w-3.5" />
             </span>
           )}
-          <ChevronDown className={`h-4 w-4 transition ${open ? 'rotate-180 text-[#ff8a00]' : ''}`} />
+          <ChevronDown className={`h-4 w-4 transition ${open ? 'rotate-180 text-brand' : ''}`} />
         </span>
       </button>
 
@@ -142,14 +142,14 @@ export function CategoryCombobox({
                     type="button"
                     onClick={() => commit(option)}
                     className={[
-                      'flex w-full items-center justify-between gap-2 px-3 py-2 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]',
+                      'flex w-full items-center justify-between gap-2 px-3 py-2 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft',
                       selected
-                        ? 'bg-[#fffcc9] text-[#ff8a00]'
+                        ? 'bg-brand-tint text-brand'
                         : 'text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100',
                     ].join(' ')}
                   >
                     <span className="truncate">{option}</span>
-                    {selected && <Check className="h-3.5 w-3.5 text-[#ff8a00]" />}
+                    {selected && <Check className="h-3.5 w-3.5 text-brand" />}
                   </button>
                 </li>
               );

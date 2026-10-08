@@ -28,7 +28,7 @@ function NavItemRow({ item, collapsed }: { item: AdminSidebarNavItem; collapsed:
           className={cn(
             "flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
             expanded
-              ? "bg-[#fffcc9] text-[#ff8a00]"
+              ? "bg-brand-tint text-brand"
               : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
           )}
           title={collapsed ? item.label : undefined}
@@ -53,7 +53,7 @@ function NavItemRow({ item, collapsed }: { item: AdminSidebarNavItem; collapsed:
                   className={cn(
                     "flex min-w-0 items-center gap-2 rounded-md px-2 py-1.5 text-xs font-medium transition-colors",
                     subActive
-                      ? "bg-white text-[#ff8a00] ring-1 ring-[#ffcd80]"
+                      ? "bg-white text-brand ring-1 ring-brand-soft"
                       : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800"
                   )}
                 >
@@ -75,7 +75,7 @@ function NavItemRow({ item, collapsed }: { item: AdminSidebarNavItem; collapsed:
       href={item.href!}
       className={cn(
         "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-        active ? "bg-[#fffcc9] text-[#ff8a00]" : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
+        active ? "bg-brand-tint text-brand" : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
       )}
       title={collapsed ? item.label : undefined}
     >
@@ -101,12 +101,12 @@ export function AdminSidebar() {
             <Image
               src="/BWR.png"
               alt="Build With Reys"
-              width={112}
+              width={117}
               height={31}
               priority
               className="h-8 w-auto"
             />
-            <span className="rounded bg-[#fffcc9] px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[#ff8a00]">
+            <span className="rounded bg-brand-tint px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-brand">
               Admin
             </span>
           </div>

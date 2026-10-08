@@ -160,7 +160,7 @@ export function WorkflowImageSlider() {
           ].join(" ")}
         />
 
-        <div className="absolute left-4 top-4 z-20 rounded-md border border-white/15 bg-black/45 px-3 py-2 text-xs font-bold uppercase tracking-wider text-[#fffcc9] backdrop-blur md:left-5 md:top-5">
+        <div className="absolute left-4 top-4 z-20 rounded-md border border-white/15 bg-black/45 px-3 py-2 text-xs font-bold uppercase tracking-wider text-brand-tint backdrop-blur md:left-5 md:top-5">
           {activeSlide.step} / {activeSlide.title}
         </div>
 
@@ -186,7 +186,7 @@ export function WorkflowImageSlider() {
           type="button"
           onClick={goToPrevious}
           aria-label="Slide sebelumnya"
-          className="absolute left-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md border border-white/15 bg-black/45 text-white transition hover:bg-[#ff8a00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffcd80] md:left-4"
+          className="absolute left-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md border border-white/15 bg-black/45 text-white transition hover:bg-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-soft md:left-4"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
@@ -194,7 +194,7 @@ export function WorkflowImageSlider() {
           type="button"
           onClick={goToNext}
           aria-label="Slide berikutnya"
-          className="absolute right-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md border border-white/15 bg-black/45 text-white transition hover:bg-[#ff8a00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffcd80] md:right-4"
+          className="absolute right-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md border border-white/15 bg-black/45 text-white transition hover:bg-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-soft md:right-4"
         >
           <ChevronRight className="h-5 w-5" />
         </button>
@@ -207,8 +207,8 @@ export function WorkflowImageSlider() {
               onClick={() => setActiveIndex(index)}
               aria-label={`Tampilkan slide ${slide.step}`}
               className={[
-                "h-2.5 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffcd80]",
-                activeIndex === index ? "w-8 bg-[#ff8a00]" : "w-2.5 bg-white/45 hover:bg-[#ffcd80]",
+                "h-2.5 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-soft",
+                activeIndex === index ? "w-8 bg-brand" : "w-2.5 bg-white/45 hover:bg-brand-soft",
               ].join(" ")}
             />
           ))}

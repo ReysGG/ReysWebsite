@@ -65,7 +65,7 @@ function FeatureCard({
     >
       <div
         className={clsx(
-          "group relative w-full overflow-hidden rounded-lg border border-black/10 bg-gradient-to-br from-neutral-950 via-neutral-900 to-[#ff8a00] transition duration-300",
+          "group relative w-full overflow-hidden rounded-lg border border-black/10 bg-gradient-to-br from-neutral-950 via-neutral-900 to-brand transition duration-300",
           "md:hover:border-transparent",
           bgClass
         )}
@@ -151,7 +151,7 @@ function Steps({
               transition={{ duration: 0.3 }}
               className={cn(
                 "relative z-50 rounded-md px-3 py-1 transition-all duration-300 ease-in-out md:flex",
-                isCompleted ? "bg-[#ff8a00]/20" : "bg-white/10"
+                isCompleted ? "bg-brand/20" : "bg-white/10"
               )}
             >
               <div
@@ -170,9 +170,9 @@ function Steps({
                     className={cn(
                       "flex h-4 w-4 shrink-0 items-center justify-center rounded-full duration-300",
                       isCompleted &&
-                        "bg-[#ff8a00] text-white",
+                        "bg-brand text-white",
                       isCurrent &&
-                        "bg-[#ffcd80] text-neutral-950",
+                        "bg-brand-soft text-neutral-950",
                       isFuture && "bg-white/20"
                     )}
                   >
@@ -192,7 +192,7 @@ function Steps({
                       <span
                         className={cn(
                           "text-xs",
-                          !isCurrent && "text-[#fffcc9]"
+                          !isCurrent && "text-brand-tint"
                         )}
                       >
                         {stepIdx + 1}
@@ -205,7 +205,7 @@ function Steps({
                     className={clsx(
                       "text-sm font-medium duration-300",
                       isCompleted && "text-muted-foreground",
-                      isCurrent && "text-[#fffcc9]",
+                      isCurrent && "text-brand-tint",
                       isFuture && "text-neutral-500"
                     )}
                   >

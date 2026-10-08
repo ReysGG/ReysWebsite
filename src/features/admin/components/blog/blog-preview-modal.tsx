@@ -12,7 +12,7 @@ export function BlogPreviewModal({ slug, label = "↗ Preview", className }: Blo
       href={`/admin/blog/${slug}/preview`}
       target="_blank"
       rel="noopener noreferrer"
-      className={className ?? "text-sm font-semibold text-[#ff8a00] hover:text-[#ff8a00]"}
+      className={className ?? "text-sm font-semibold text-brand hover:text-brand"}
     >
       {label}
     </Link>

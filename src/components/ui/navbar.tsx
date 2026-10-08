@@ -38,14 +38,14 @@ export const Navbar = () => {
       )}
     >
       <div className="flex items-center gap-2">
-        <MonitorSmartphone className="w-6 h-6 text-[#ff8a00] dark:text-[#ffcd80]" />
+        <MonitorSmartphone className="w-6 h-6 text-brand dark:text-brand-soft" />
         <span className="text-xl font-bold dark:text-white text-black">WebServices</span>
       </div>
 
       <div className="hidden md:flex items-center gap-6">
-        <Link href="#services" className="text-sm font-medium hover:text-[#ff8a00] dark:hover:text-[#ffcd80] transition-colors">Layanan</Link>
-        <Link href="#portfolio" className="text-sm font-medium hover:text-[#ff8a00] dark:hover:text-[#ffcd80] transition-colors">Portofolio</Link>
-        <Link href="#testimonials" className="text-sm font-medium hover:text-[#ff8a00] dark:hover:text-[#ffcd80] transition-colors">Testimoni</Link>
+        <Link href="#services" className="text-sm font-medium hover:text-brand dark:hover:text-brand-soft transition-colors">Layanan</Link>
+        <Link href="#portfolio" className="text-sm font-medium hover:text-brand dark:hover:text-brand-soft transition-colors">Portofolio</Link>
+        <Link href="#testimonials" className="text-sm font-medium hover:text-brand dark:hover:text-brand-soft transition-colors">Testimoni</Link>
       </div>
 
       <div className="flex items-center gap-4">
@@ -57,7 +57,7 @@ export const Navbar = () => {
         </button>
         <Link 
           href="/admin" 
-          className="px-4 py-2 text-sm font-medium bg-[#ff8a00] text-white rounded-md hover:bg-[#f4b738] transition"
+          className="px-4 py-2 text-sm font-medium bg-brand text-white rounded-md hover:bg-brand-deep transition"
         >
           Admin
         </Link>

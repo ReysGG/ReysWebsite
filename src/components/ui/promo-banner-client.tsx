@@ -6,9 +6,9 @@ import { X } from "lucide-react";
 import type { PromoBanner } from "@/lib/promo-banner";
 
 const VARIANT_STYLES: Record<PromoBanner["variant"], string> = {
-  orange: "bg-[#ff8a00] text-white border-[#f4b738]",
-  amber: "bg-[#f4b738] text-neutral-900 border-[#ffcd80]",
-  emerald: "bg-[#fffcc9] text-neutral-900 border-[#ffcd80]",
+  orange: "bg-brand text-white border-brand-cyan",
+  amber: "bg-brand-cyan text-neutral-900 border-brand-soft",
+  emerald: "bg-brand-tint text-neutral-900 border-brand-soft",
   neutral: "bg-neutral-900 text-white border-neutral-950/40",
 };
 

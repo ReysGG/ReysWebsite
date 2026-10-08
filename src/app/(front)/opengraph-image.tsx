@@ -3,7 +3,7 @@ import { getSiteSettings } from "@/lib/site-settings";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "buildwithreys.tech";
+export const alt = "buildwithreys.com";
 
 // Brand OG image — warm cream/orange palette, no blue/indigo per brand rules.
 export default async function OpengraphImage() {
@@ -20,7 +20,7 @@ export default async function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(135deg, #ffffff 0%, #fffcc9 45%, #ffcd80 100%)",
+          background: "linear-gradient(135deg, #ffffff 0%, #EAF4FF 45%, #A9D4FF 100%)",
           padding: "80px",
           fontFamily: "sans-serif",
         }}
@@ -31,7 +31,7 @@ export default async function OpengraphImage() {
               width: "64px",
               height: "64px",
               borderRadius: "16px",
-              background: "#ff8a00",
+              background: "#1E6BFF",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -58,14 +58,14 @@ export default async function OpengraphImage() {
           >
             {tagline}
           </div>
-          <div style={{ fontSize: "30px", color: "#7a5200", maxWidth: "900px", lineHeight: 1.3 }}>
+          <div style={{ fontSize: "30px", color: "#0B1A4A", maxWidth: "900px", lineHeight: 1.3 }}>
             {settings.description || "Web services profesional untuk bisnis, startup, dan personal brand."}
           </div>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <div style={{ height: "8px", width: "64px", borderRadius: "999px", background: "#ff8a00" }} />
-          <div style={{ fontSize: "26px", fontWeight: 600, color: "#ff8a00" }}>buildwithreys.tech</div>
+          <div style={{ height: "8px", width: "64px", borderRadius: "999px", background: "#1E6BFF" }} />
+          <div style={{ fontSize: "26px", fontWeight: 600, color: "#1E6BFF" }}>buildwithreys.com</div>
         </div>
       </div>
     ),

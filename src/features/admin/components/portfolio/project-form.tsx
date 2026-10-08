@@ -35,7 +35,7 @@ export function ProjectForm({
               required
               defaultValue={defaultValue?.description}
               placeholder="Jelaskan masalah yang diselesaikan, fitur utama, dan hasil project."
-              className="w-full resize-none rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
+              className="w-full resize-none rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-brand focus:ring-2 focus:ring-brand-tint"
             />
           </div>
 
@@ -53,8 +53,8 @@ export function ProjectForm({
             folder="portfolio"
             hint="Wajib. Upload akan disimpan ke Supabase S3 folder portfolio."
           />
-          <div className="rounded-md border border-[#ffcd80] bg-[#fffcc9] p-4">
-            <p className="text-xs font-bold uppercase tracking-wide text-[#ff8a00]">Tips portfolio bagus</p>
+          <div className="rounded-md border border-brand-soft bg-brand-tint p-4">
+            <p className="text-xs font-bold uppercase tracking-wide text-brand">Tips portfolio bagus</p>
             <ul className="mt-3 space-y-2 text-xs leading-relaxed text-neutral-700">
               <li>• Gunakan cover rasio landscape agar kartu portfolio rapi.</li>
               <li>• Deskripsi sebaiknya menyebut fitur dan outcome.</li>
@@ -65,13 +65,13 @@ export function ProjectForm({
       </div>
 
       <div className="mt-6 flex flex-col gap-3 border-t border-neutral-100 pt-5 sm:flex-row sm:justify-end">
-        <Link href="/admin/portfolio" className="inline-flex items-center justify-center rounded-md border border-neutral-200 px-5 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
+        <Link href="/admin/portfolio" className="inline-flex items-center justify-center rounded-md border border-neutral-200 px-5 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft">
           Batal
         </Link>
         <SubmitButton
           idleIcon={<Save className="h-4 w-4" />}
           pendingLabel="Menyimpan..."
-          className="inline-flex items-center justify-center gap-2 rounded-md bg-[#ff8a00] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80] disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100"
+          className="inline-flex items-center justify-center gap-2 rounded-md bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-deep active:bg-brand-deep active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100"
         >
           {submitLabel}
         </SubmitButton>
@@ -102,7 +102,7 @@ function Field({
         required={required}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        className="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]"
+        className="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-brand focus:ring-2 focus:ring-brand-tint"
       />
     </div>
   );

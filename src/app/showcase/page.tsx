@@ -33,7 +33,7 @@ export default async function ShowcasePage() {
           <div className="mx-auto max-w-7xl">
             <Link
               href="/"
-              className="mb-7 inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-slate-500 transition hover:text-[#ff8a00]"
+              className="mb-7 inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-slate-500 transition hover:text-brand"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               Kembali ke beranda
@@ -41,7 +41,7 @@ export default async function ShowcasePage() {
 
             <div className="flex flex-col gap-8">
               <div className="max-w-4xl">
-                <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-md border border-[#ffcd80] bg-[#fffcc9] px-3 py-1.5 text-[11px] font-bold uppercase text-[#ff8a00]">
+                <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-md border border-brand-soft bg-brand-tint px-3 py-1.5 text-[11px] font-bold uppercase text-brand">
                   <MonitorSmartphone className="h-3.5 w-3.5" />
                   Live Prototype Library
                 </div>
@@ -65,7 +65,7 @@ export default async function ShowcasePage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-md bg-[#ff8a00] text-white">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-md bg-brand text-white">
                     <CheckCircle2 className="h-4 w-4" />
                   </span>
                   <div>
@@ -90,7 +90,7 @@ export default async function ShowcasePage() {
                     <Link
                       key={item.slug}
                       href={`/showcase/${item.slug}`}
-                      className="group overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#ffcd80] hover:shadow-xl hover:shadow-slate-200/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff8a00] focus-visible:ring-offset-2"
+                      className="group overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand-soft hover:shadow-xl hover:shadow-slate-200/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
                     >
                       <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                         <Image
@@ -115,7 +115,7 @@ export default async function ShowcasePage() {
                           <p className="truncate text-sm font-bold text-slate-950">{item.title}</p>
                           <p className="mt-1 text-xs font-medium text-slate-500">Preview #{index + 1}</p>
                         </div>
-                        <ArrowRight className="h-4 w-4 shrink-0 text-slate-400 transition group-hover:translate-x-1 group-hover:text-[#ff8a00]" />
+                        <ArrowRight className="h-4 w-4 shrink-0 text-slate-400 transition group-hover:translate-x-1 group-hover:text-brand" />
                       </div>
                     </Link>
                   ))}
@@ -127,7 +127,7 @@ export default async function ShowcasePage() {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex w-fit items-center justify-center gap-2 rounded-md bg-slate-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-[#ff8a00]"
+                  className="inline-flex w-fit items-center justify-center gap-2 rounded-md bg-slate-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-brand"
                 >
                   <MessageCircle className="h-4 w-4" />
                   Diskusi project serupa

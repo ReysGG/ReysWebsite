@@ -39,7 +39,7 @@ function TogglePublishButton({ id, published }: { id: string; published: boolean
         className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-2 text-xs font-semibold disabled:opacity-50 ${
           published
             ? "border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100"
-            : "border-[#ffcd80] bg-[#fffcc9] text-[#ff8a00] hover:bg-[#fffcc9]"
+            : "border-brand-soft bg-brand-tint text-brand hover:bg-brand-tint"
         }`}
       >
         {published ? <Pencil className="h-3.5 w-3.5" /> : <Send className="h-3.5 w-3.5" />}
@@ -60,13 +60,13 @@ function BulkActions({ selectedIds }: { selectedIds: string[] }) {
       <span className="text-xs font-semibold text-neutral-500">{selectedIds.length} dipilih</span>
       <form action={publishAction}>
         {hiddenInputs}
-        <button type="submit" disabled={disabled} className="rounded-md bg-[#ff8a00] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#f4b738] disabled:cursor-not-allowed disabled:opacity-50 active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
+        <button type="submit" disabled={disabled} className="rounded-md bg-brand px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-deep disabled:cursor-not-allowed disabled:opacity-50 active:bg-brand-deep active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft">
           Bulk Publish
         </button>
       </form>
       <form action={draftAction}>
         {hiddenInputs}
-        <button type="submit" disabled={disabled} className="rounded-md border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
+        <button type="submit" disabled={disabled} className="rounded-md border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft">
           Bulk Draft
         </button>
       </form>
@@ -125,26 +125,26 @@ export function BlogAdminTable({ posts, page, totalPages }: { posts: BlogPost[];
                   <td className="px-4 py-4 align-top"><input type="checkbox" checked={selectedIds.includes(post.id)} onChange={() => toggleOne(post.id)} aria-label={`Pilih ${post.title}`} /></td>
                   <td className="px-4 py-4">
                     <div className="flex items-start gap-3">
-                      <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-md bg-[#fffcc9]">
-                        {post.coverImage ? <Image src={post.coverImage} alt={post.title || "cover"} fill unoptimized className="object-cover" /> : <div className="flex h-full w-full items-center justify-center bg-[#fffcc9]"><FileText size={18} className="text-[#ffcd80]" /></div>}
+                      <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-md bg-brand-tint">
+                        {post.coverImage ? <Image src={post.coverImage} alt={post.title || "cover"} fill unoptimized className="object-cover" /> : <div className="flex h-full w-full items-center justify-center bg-brand-tint"><FileText size={18} className="text-brand-soft" /></div>}
                       </div>
                       <div className="min-w-0">
                         <div className="line-clamp-2 font-semibold text-neutral-900">{post.title || "Untitled"}</div>
                         <div className="mt-1 text-xs text-neutral-500">/{post.slug} · {post.author || "Admin"}</div>
                         <div className="mt-2 flex flex-wrap gap-1">
-                          {post.category && <span className="rounded-md bg-[#fffcc9] px-2 py-0.5 text-[11px] font-semibold text-[#ff8a00]">{post.category}</span>}
-                          {post.featured && <span className="rounded-md bg-[#fffcc9] px-2 py-0.5 text-[11px] font-semibold text-[#ff8a00]">Featured</span>}
+                          {post.category && <span className="rounded-md bg-brand-tint px-2 py-0.5 text-[11px] font-semibold text-brand">{post.category}</span>}
+                          {post.featured && <span className="rounded-md bg-brand-tint px-2 py-0.5 text-[11px] font-semibold text-brand">Featured</span>}
                           {post.tags?.slice(0, 3).map((tag) => <span key={tag} className="rounded-md bg-neutral-100 px-2 py-0.5 text-[11px] text-neutral-600">{tag}</span>)}
                         </div>
                       </div>
                     </div>
                   </td>
                   <td className="px-4 py-4 align-top">
-                    <span className={`rounded-md border px-2.5 py-1 text-xs font-semibold ${post.published ? "border-[#ffcd80] bg-[#fffcc9] text-[#ff8a00]" : "border-neutral-200 bg-neutral-100 text-neutral-600"}`}>{post.published ? "Published" : "Draft"}</span>
+                    <span className={`rounded-md border px-2.5 py-1 text-xs font-semibold ${post.published ? "border-brand-soft bg-brand-tint text-brand" : "border-neutral-200 bg-neutral-100 text-neutral-600"}`}>{post.published ? "Published" : "Draft"}</span>
                   </td>
                   <td className="px-4 py-4 align-top">
                     {issues.length === 0 ? (
-                      <span className="inline-flex items-center gap-1.5 rounded-md bg-[#fffcc9] px-2.5 py-1 text-xs font-semibold text-[#ff8a00]"><CheckCircle2 className="h-3.5 w-3.5" /> OK</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-md bg-brand-tint px-2.5 py-1 text-xs font-semibold text-brand"><CheckCircle2 className="h-3.5 w-3.5" /> OK</span>
                     ) : (
                       <div className="flex flex-wrap gap-1">
                         {issues.map((issue) => <span key={issue} className="inline-flex items-center gap-1 rounded-md bg-amber-50 px-2 py-1 text-[11px] font-semibold text-amber-700"><AlertTriangle className="h-3 w-3" /> Missing {issue}</span>)}
@@ -156,9 +156,9 @@ export function BlogAdminTable({ posts, page, totalPages }: { posts: BlogPost[];
                   <td className="px-4 py-4 align-top text-neutral-500">{post.views || 0}</td>
                   <td className="px-4 py-4 align-top">
                     <div className="flex justify-end gap-2">
-                      <Link href={`/admin/blog/${post.slug}/edit`} className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-700 hover:border-[#ffcd80] hover:bg-[#fffcc9] hover:text-[#ff8a00]"><Edit3 size={13} /> Edit</Link>
+                      <Link href={`/admin/blog/${post.slug}/edit`} className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-700 hover:border-brand-soft hover:bg-brand-tint hover:text-brand"><Edit3 size={13} /> Edit</Link>
                       <TogglePublishButton id={post.id} published={post.published} />
-                      <BlogPreviewModal slug={post.slug} label={<span className="inline-flex items-center gap-1.5"><Eye size={13} /> Preview</span>} className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-700 hover:border-[#ffcd80] hover:bg-[#fffcc9] hover:text-[#ff8a00]" />
+                      <BlogPreviewModal slug={post.slug} label={<span className="inline-flex items-center gap-1.5"><Eye size={13} /> Preview</span>} className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-700 hover:border-brand-soft hover:bg-brand-tint hover:text-brand" />
                       <DeletePostButton id={post.id} />
                     </div>
                   </td>
@@ -175,8 +175,8 @@ export function BlogAdminTable({ posts, page, totalPages }: { posts: BlogPost[];
         <div className="flex items-center justify-between border-t border-neutral-100 px-4 py-3 text-sm text-neutral-500">
           <span>Halaman {page} dari {totalPages}</span>
           <div className="flex gap-2">
-            {page > 1 && <Link href={pagination.prev} className="rounded-md border border-neutral-200 px-3 py-1.5 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">← Prev</Link>}
-            {page < totalPages && <Link href={pagination.next} className="rounded-md border border-neutral-200 px-3 py-1.5 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">Next →</Link>}
+            {page > 1 && <Link href={pagination.prev} className="rounded-md border border-neutral-200 px-3 py-1.5 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft">← Prev</Link>}
+            {page < totalPages && <Link href={pagination.next} className="rounded-md border border-neutral-200 px-3 py-1.5 hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft">Next →</Link>}
           </div>
         </div>
       )}

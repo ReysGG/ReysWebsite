@@ -22,7 +22,7 @@ export default async function EditShowcasePage({ params }: PageProps) {
       <div>
         <Link
           href="/admin/showcase"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-[#ff8a00]"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-brand"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Kembali ke daftar

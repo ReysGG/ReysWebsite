@@ -18,7 +18,7 @@ if (!connectionString) {
 const pool = new Pool({ connectionString });
 const prisma = new PrismaClient({ adapter: new PrismaPg(pool) });
 
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://buildwithreys.tech").replace(/\/$/, "");
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://buildwithreys.com").replace(/\/$/, "");
 
 type SeedPost = Omit<Prisma.PostCreateInput, "comments" | "likes"> & { slug: string };
 

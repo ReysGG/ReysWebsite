@@ -13,7 +13,7 @@ export function ArticleTags({ tags }: { tags: string[] }) {
         <Link
           key={tag}
           href={`/blog?tag=${encodeURIComponent(tag)}`}
-          className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-semibold text-neutral-700 transition-colors hover:border-[#ffcd80] hover:bg-[#fffcc9] hover:text-[#ff8a00]"
+          className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-semibold text-neutral-700 transition-colors hover:border-brand-soft hover:bg-brand-tint hover:text-brand"
         >
           #{tag}
         </Link>

@@ -71,7 +71,7 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
       <div className="rounded-md border border-neutral-200 bg-white p-4 shadow-none">
         <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
-            <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase text-[#ff8a00]">
+            <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase text-brand">
               <Filter className="h-3.5 w-3.5" />
               Inventory Filter
             </div>
@@ -80,7 +80,7 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
             </p>
           </div>
           {hasFilters && (
-            <Link href="/admin/showcase" className="inline-flex w-fit items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-600 transition hover:bg-neutral-50 hover:text-neutral-900 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
+            <Link href="/admin/showcase" className="inline-flex w-fit items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-600 transition hover:bg-neutral-50 hover:text-neutral-900 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft">
               <RotateCcw className="h-3.5 w-3.5" />
               Reset
             </Link>
@@ -95,15 +95,15 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
               type="search"
               defaultValue={filters.q}
               placeholder="Cari judul, slug, kategori, atau deskripsi"
-              className="h-11 w-full rounded-md border border-neutral-200 bg-neutral-50 pl-10 pr-3 text-sm outline-none transition focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]"
+              className="h-11 w-full rounded-md border border-neutral-200 bg-neutral-50 pl-10 pr-3 text-sm outline-none transition focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand-tint"
             />
           </div>
-          <select name="status" defaultValue={filters.status} className="h-11 rounded-md border border-neutral-200 bg-white px-3 text-sm font-medium text-neutral-700 outline-none transition focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]">
+          <select name="status" defaultValue={filters.status} className="h-11 rounded-md border border-neutral-200 bg-white px-3 text-sm font-medium text-neutral-700 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand-tint">
             <option value="all">Semua status</option>
             <option value="published">Published</option>
             <option value="draft">Draft</option>
           </select>
-          <select name="category" defaultValue={filters.category} className="h-11 rounded-md border border-neutral-200 bg-white px-3 text-sm font-medium text-neutral-700 outline-none transition focus:border-[#ff8a00] focus:ring-2 focus:ring-[#fffcc9]">
+          <select name="category" defaultValue={filters.category} className="h-11 rounded-md border border-neutral-200 bg-white px-3 text-sm font-medium text-neutral-700 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand-tint">
             <option value="">Semua kategori</option>
             {categories.map((category) => (
               <option key={category.name} value={category.name}>
@@ -111,7 +111,7 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
               </option>
             ))}
           </select>
-          <button type="submit" className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-neutral-950 px-4 text-sm font-bold text-white transition hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
+          <button type="submit" className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-neutral-950 px-4 text-sm font-bold text-white transition hover:bg-brand-deep active:bg-brand-deep active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft">
             <Search className="h-4 w-4" />
             Terapkan
           </button>
@@ -165,12 +165,12 @@ export function ShowcaseTable({ items: initial, categories, filters, pagination 
           </span>
           <div className="flex gap-2">
             {pagination.hasPreviousPage && (
-              <Link href={paginationHref.prev} className="rounded-md border border-neutral-200 px-3 py-1.5 font-semibold hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
+              <Link href={paginationHref.prev} className="rounded-md border border-neutral-200 px-3 py-1.5 font-semibold hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft">
                 Prev
               </Link>
             )}
             {pagination.hasNextPage && (
-              <Link href={paginationHref.next} className="rounded-md border border-neutral-200 px-3 py-1.5 font-semibold hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]">
+              <Link href={paginationHref.next} className="rounded-md border border-neutral-200 px-3 py-1.5 font-semibold hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft">
                 Next
               </Link>
             )}

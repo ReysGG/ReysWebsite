@@ -25,6 +25,10 @@ import {
   Send,
   AlertTriangle,
   CalendarDays,
+  Bot,
+  KeyRound,
+  ScrollText,
+  CalendarClock,
 } from "lucide-react";
 import type { AdminSidebarNavGroup, AdminSidebarSubItem } from "@/components/admin/admin-sidebar-types";
 
@@ -70,6 +74,23 @@ export const ADMIN_NAV_GROUPS: AdminSidebarNavGroup[] = [
           { label: "SEO Issues", href: "/admin/blog/seo", icon: <AlertTriangle className="h-3.5 w-3.5" /> },
           { label: "Editorial Calendar", href: "/admin/blog/calendar", icon: <CalendarDays className="h-3.5 w-3.5" /> },
           { label: "Tulis Artikel", href: "/admin/blog/create", icon: <Plus className="h-3.5 w-3.5" /> },
+        ],
+      },
+    ],
+  },
+  {
+    title: "AI",
+    items: [
+      {
+        label: "AI Studio",
+        basePath: "/admin/ai",
+        icon: <Sparkles className="h-4 w-4" />,
+        subItems: [
+          { label: "Overview", href: "/admin/ai", icon: <LayoutDashboard className="h-3.5 w-3.5" /> },
+          { label: "Chat", href: "/admin/ai/chat", icon: <Bot className="h-3.5 w-3.5" /> },
+          { label: "Providers", href: "/admin/ai/providers", icon: <KeyRound className="h-3.5 w-3.5" /> },
+          { label: "Writer Rules", href: "/admin/ai/rules", icon: <ScrollText className="h-3.5 w-3.5" /> },
+          { label: "Schedules", href: "/admin/ai/schedules", icon: <CalendarClock className="h-3.5 w-3.5" /> },
         ],
       },
     ],

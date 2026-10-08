@@ -43,13 +43,13 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Redirect www to non-www (canonical domain)
-      {
+      // Canonical domain is buildwithreys.com: redirect www and the legacy .tech domain to it.
+      ...["www.buildwithreys.com", "buildwithreys.tech", "www.buildwithreys.tech"].map((host) => ({
         source: "/:path*",
-        has: [{ type: "host", value: "www.buildwithreys.tech" }],
-        destination: "https://buildwithreys.tech/:path*",
+        has: [{ type: "host" as const, value: host }],
+        destination: "https://buildwithreys.com/:path*",
         permanent: true,
-      },
+      })),
     ];
   },
   async headers() {

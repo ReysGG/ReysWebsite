@@ -1,12 +1,15 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
-import db from "@/lib/db";
 import { requireAdmin } from "@/features/admin/lib/auth";
-import { ensureUniquePostSlug, isValidSlug, buildKeywordSlug, slugifyTitle } from "@/features/blog/lib/slug";
-import { sanitizeRichText } from "@/features/blog/lib/sanitize";
-import { getExcerptFromHtml, calculateReadingTime } from "@/features/blog/lib/reading-time";
-import { BLOG_FILTER_OPTIONS_TAG } from "@/features/blog/data/posts";
+import { revalidateBlogPaths } from "@/features/blog/lib/revalidate-blog";
+import {
+  bulkSetPostsPublished,
+  createPostRecord,
+  deletePostRecord,
+  setPostPublished,
+  updatePostRecord,
+  type PostMutationInput,
+} from "@/features/admin/services/blog-post-mutation-service";
 
 export type BlogActionState = {
   success?: boolean;
@@ -29,83 +32,41 @@ function getBool(formData: FormData, key: string) {
 }
 
 function getTags(formData: FormData) {
-  const values = formData.getAll("tags").flatMap((value) =>
-    typeof value === "string" ? value.split(",") : [],
-  );
-  return Array.from(new Set(values.map((tag) => tag.trim()).filter(Boolean))).slice(0, 12);
-}
-
-function optional(value: string) {
-  return value || null;
+  return formData.getAll("tags").flatMap((value) => (typeof value === "string" ? value.split(",") : []));
 }
 
 function getOptionalDate(formData: FormData, key: string) {
   const value = getString(formData, key);
-  return value ? new Date(value) : null;
+  if (!value) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
 }
 
-async function buildPostInput(formData: FormData, excludePostId?: string) {
-  const title = getString(formData, "title");
-  const rawContent = getString(formData, "content");
-  if (title.length < 3) throw new Error("Judul minimal 3 karakter.");
-  if (rawContent.length < 10) throw new Error("Konten minimal 10 karakter.");
-
-  const content = sanitizeRichText(rawContent);
-  const requestedSlug = getString(formData, "slug");
-  const focusKeyword = getString(formData, "focusKeyword");
-  const baseSlug = requestedSlug ? slugifyTitle(requestedSlug) : buildKeywordSlug(title, focusKeyword);
-  if (!isValidSlug(baseSlug)) throw new Error("Slug hanya boleh huruf kecil, angka, dan tanda hubung.");
-
-  const slug = await ensureUniquePostSlug(baseSlug, excludePostId);
-  const excerpt = getString(formData, "excerpt") || getExcerptFromHtml(content);
-  const readingTime = calculateReadingTime(content);
-
-  const published = getBool(formData, "published");
-  const requestedPublishedAt = getOptionalDate(formData, "publishedAt");
-
+function formToPostInput(formData: FormData): PostMutationInput {
   return {
-    title,
-    slug,
-    content,
-    excerpt: optional(excerpt),
-    readingTime,
-    coverImage: optional(getString(formData, "coverImage")),
-    ogImage: optional(getString(formData, "ogImage")),
-    category: optional(getString(formData, "category")),
-    focusKeyword: optional(focusKeyword),
-    canonicalUrl: optional(getString(formData, "canonicalUrl")),
-    metaTitle: optional(getString(formData, "metaTitle")),
-    metaDesc: optional(getString(formData, "metaDesc")),
+    title: getString(formData, "title"),
+    content: getString(formData, "content"),
+    slug: getString(formData, "slug"),
+    focusKeyword: getString(formData, "focusKeyword"),
+    excerpt: getString(formData, "excerpt"),
+    coverImage: getString(formData, "coverImage"),
+    ogImage: getString(formData, "ogImage"),
+    category: getString(formData, "category"),
+    canonicalUrl: getString(formData, "canonicalUrl"),
+    metaTitle: getString(formData, "metaTitle"),
+    metaDesc: getString(formData, "metaDesc"),
     tags: getTags(formData),
-    published,
+    published: getBool(formData, "published"),
     featured: getBool(formData, "featured"),
-    publishedAt: published ? requestedPublishedAt ?? new Date() : null,
+    publishedAt: getOptionalDate(formData, "publishedAt"),
+    scheduledAt: getOptionalDate(formData, "scheduledAt"),
   };
-}
-
-function revalidateBlogPaths(slug?: string | null) {
-  revalidateTag(BLOG_FILTER_OPTIONS_TAG, "max");
-  revalidatePath("/blog");
-  revalidatePath("/admin/blog");
-  revalidatePath("/admin/blog/published");
-  revalidatePath("/admin/blog/drafts");
-  revalidatePath("/admin/blog/seo");
-  revalidatePath("/admin/blog/calendar");
-  revalidatePath("/sitemap.xml");
-  if (slug) revalidatePath(`/blog/${slug}`);
 }
 
 export async function createPost(_prevState: BlogActionState, formData: FormData): Promise<BlogActionState> {
   try {
     const admin = await requireAdmin();
-    const input = await buildPostInput(formData);
-    const post = await db.post.create({
-      data: {
-        ...input,
-        author: admin.name,
-      },
-      select: { id: true, slug: true },
-    });
+    const post = await createPostRecord(formToPostInput(formData), admin.name);
 
     revalidateBlogPaths(post.slug);
     return { success: true, ok: true, message: "Post berhasil dibuat.", postId: post.id, slug: post.slug };
@@ -122,16 +83,9 @@ export async function updatePost(idOrState: string | BlogActionState, stateOrFor
     const id = typeof idOrState === "string" ? idOrState : getString(formData, "id");
     if (!id) return { success: false, error: "ID post tidak valid." };
 
-    const existing = await db.post.findUnique({ where: { id }, select: { slug: true, publishedAt: true } });
-    if (!existing) return { success: false, error: "Post tidak ditemukan." };
+    const post = await updatePostRecord(id, formToPostInput(formData));
 
-    const input = await buildPostInput(formData, id);
-    if (input.published && existing.publishedAt && !getString(formData, "publishedAt")) {
-      input.publishedAt = existing.publishedAt;
-    }
-    const post = await db.post.update({ where: { id }, data: input, select: { id: true, slug: true } });
-
-    revalidateBlogPaths(existing.slug);
+    revalidateBlogPaths(post.previousSlug);
     revalidateBlogPaths(post.slug);
     return { success: true, ok: true, message: "Post berhasil diperbarui.", postId: post.id, slug: post.slug };
   } catch (error) {
@@ -145,7 +99,7 @@ export async function deletePost(idOrState: string | BlogActionState, maybeFormD
     const id = typeof idOrState === "string" ? idOrState : getString(maybeFormData as FormData, "id");
     if (!id) return { success: false, error: "ID post tidak valid." };
 
-    const post = await db.post.delete({ where: { id }, select: { id: true, slug: true } });
+    const post = await deletePostRecord(id);
     revalidateBlogPaths(post.slug);
     return { success: true, ok: true, message: "Post berhasil dihapus.", postId: post.id };
   } catch {
@@ -159,11 +113,7 @@ async function setPublished(formData: FormData, published: boolean): Promise<Blo
     const id = getString(formData, "id");
     if (!id) return { success: false, error: "ID post tidak valid." };
 
-    const post = await db.post.update({
-      where: { id },
-      data: { published, publishedAt: published ? new Date() : null },
-      select: { id: true, slug: true },
-    });
+    const post = await setPostPublished(id, published);
     revalidateBlogPaths(post.slug);
     return { success: true, ok: true, message: published ? "Post berhasil dipublikasikan." : "Post berhasil dijadikan draft.", postId: post.id, slug: post.slug };
   } catch {
@@ -185,14 +135,10 @@ async function bulkSetPublished(formData: FormData, published: boolean): Promise
     const ids = formData.getAll("postIds").filter((value): value is string => typeof value === "string" && value.length > 0);
     if (ids.length === 0) return { success: false, error: "Pilih minimal satu artikel." };
 
-    const posts = await db.post.findMany({ where: { id: { in: ids } }, select: { slug: true } });
-    await db.post.updateMany({
-      where: { id: { in: ids } },
-      data: { published, publishedAt: published ? new Date() : null },
-    });
+    const slugs = await bulkSetPostsPublished(ids, published);
 
     revalidateBlogPaths();
-    posts.forEach((post) => revalidateBlogPaths(post.slug));
+    slugs.forEach((slug) => revalidateBlogPaths(slug));
     return {
       success: true,
       ok: true,

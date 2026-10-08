@@ -43,7 +43,7 @@ export default async function AdminShowcaseListPage({
       <div className="rounded-md border border-neutral-200 bg-white p-6 shadow-none">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">Prototype Workspace</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-brand">Prototype Workspace</p>
             <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900">Kelola Showcase</h1>
             <p className="mt-1 max-w-2xl text-sm text-neutral-500">
               Upload prototype HTML, atur metadata card, dan kontrol item yang tampil di halaman publik.
@@ -52,7 +52,7 @@ export default async function AdminShowcaseListPage({
           <div className="flex flex-wrap gap-2">
             <Link
               href="/admin/showcase/new"
-              className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"
+              className="inline-flex items-center gap-2 rounded-md bg-brand px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-deep active:bg-brand-deep active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft"
             >
               <Plus className="h-4 w-4" />
               Showcase Baru
@@ -60,7 +60,7 @@ export default async function AdminShowcaseListPage({
             <Link
               href="/showcase"
               target="_blank"
-              className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"
+              className="inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-50 active:bg-neutral-100 active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft"
             >
               <Eye className="h-4 w-4" />
               Lihat Publik
@@ -74,7 +74,7 @@ export default async function AdminShowcaseListPage({
           <div key={label} className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
             <div className="flex items-center justify-between">
               <p className="text-xs font-semibold text-neutral-500">{label}</p>
-              <span className="rounded-md bg-[#fffcc9] p-2 text-[#ff8a00]">
+              <span className="rounded-md bg-brand-tint p-2 text-brand">
                 <Icon className="h-4 w-4" />
               </span>
             </div>

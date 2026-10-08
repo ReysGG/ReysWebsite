@@ -51,22 +51,22 @@ function GlassMetricCard({
         animate={{ y: [0, -7, 0] }}
         transition={{ duration: 5.8 + delay, repeat: Infinity, ease: "easeInOut" }}
         className={cn(
-          "relative overflow-hidden rounded-[18px] border border-white/65 bg-white/45 shadow-[0_24px_60px_rgba(15,23,42,0.12),0_14px_34px_rgba(255,138,0,0.16)] ring-1 ring-white/45 backdrop-blur-2xl",
+          "relative overflow-hidden rounded-[18px] border border-white/65 bg-white/45 shadow-[0_24px_60px_rgba(15,23,42,0.12),0_14px_34px_rgba(30,107,255,0.16)] ring-1 ring-white/45 backdrop-blur-2xl",
           card.compact ? "p-3.5" : "p-4",
         )}
       >
-        <span className="pointer-events-none absolute inset-px rounded-[17px] bg-[linear-gradient(135deg,rgba(255,255,255,0.78),rgba(255,255,255,0.18)_46%,rgba(255,205,128,0.16))]" />
+        <span className="pointer-events-none absolute inset-px rounded-[17px] bg-[linear-gradient(135deg,rgba(255,255,255,0.78),rgba(255,255,255,0.18)_46%,rgba(169,212,255,0.16))]" />
         <span className="pointer-events-none absolute -left-14 -top-10 h-16 w-[150%] rotate-[-9deg] bg-white/45 blur-xl" />
-        <span className="pointer-events-none absolute -bottom-10 right-3 h-20 w-24 rounded-full bg-[#ff8a00]/12 blur-2xl" />
+        <span className="pointer-events-none absolute -bottom-10 right-3 h-20 w-24 rounded-full bg-brand/12 blur-2xl" />
 
         <div className="relative flex items-start gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/70 bg-white/55 text-[#ff8a00] shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_10px_22px_rgba(255,138,0,0.12)] backdrop-blur-xl">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/70 bg-white/55 text-brand shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_10px_22px_rgba(30,107,255,0.12)] backdrop-blur-xl">
             <Icon className="h-4.5 w-4.5 h-[18px] w-[18px]" />
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-start justify-between gap-2">
               <div>
-                <p className="text-[10px] font-bold text-[#ff8a00]">{card.eyebrow}</p>
+                <p className="text-[10px] font-bold text-brand">{card.eyebrow}</p>
                 <p className="mt-0.5 text-xs font-bold leading-snug text-slate-950">{card.title}</p>
               </div>
               <span className="mt-0.5 flex h-4.5 h-[18px] w-[18px] w-4.5 shrink-0 items-center justify-center rounded-full bg-emerald-400 text-white shadow-[0_6px_16px_rgba(16,185,129,0.28)]">
@@ -77,7 +77,7 @@ function GlassMetricCard({
             {card.showProgress && (
               <div className="mt-2 h-1 overflow-hidden rounded-full bg-slate-200/70">
                 <motion.div
-                  className="h-full rounded-full bg-gradient-to-r from-[#fffcc9] via-[#f4b738] to-[#ff8a00]"
+                  className="h-full rounded-full bg-gradient-to-r from-brand-tint via-brand-cyan to-brand"
                   initial={{ width: "24%" }}
                   animate={{ width: ["24%", "92%", "84%"] }}
                   transition={{ duration: 3.8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
@@ -109,11 +109,11 @@ function MiniCard({
     >
       <div className="relative overflow-hidden rounded-[12px] border border-white/70 bg-white/75 p-2 shadow-[0_10px_24px_rgba(15,23,42,0.08)] backdrop-blur-sm">
         <div className="relative flex items-center gap-2">
-          <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-white/70 bg-white/55 text-[#ff8a00] backdrop-blur-xl">
+          <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-white/70 bg-white/55 text-brand backdrop-blur-xl">
             <Icon className="h-3 w-3" />
           </div>
           <div className="min-w-0">
-            <p className="text-[8px] font-bold text-[#ff8a00]">{card.eyebrow}</p>
+            <p className="text-[8px] font-bold text-brand">{card.eyebrow}</p>
             <p className="truncate text-[10px] font-bold leading-tight text-slate-900">{card.title}</p>
           </div>
           <span className="ml-auto flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full bg-emerald-400 text-white">
@@ -165,13 +165,13 @@ export function HeroVisual({ content }: { content: HeroContent }) {
       aria-label="Preview deliverable Build With Reys"
     >
       {/* Glow orbs behind mockups */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[55%] w-[65%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff8a00]/10 blur-[80px] sm:block" />
-      <div className="pointer-events-none absolute right-[8%] top-[8%] hidden h-[38%] w-[38%] rounded-full bg-[#ffcd80]/20 blur-[60px] sm:block" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[55%] w-[65%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/10 blur-[80px] sm:block" />
+      <div className="pointer-events-none absolute right-[8%] top-[8%] hidden h-[38%] w-[38%] rounded-full bg-brand-soft/20 blur-[60px] sm:block" />
 
       {/* Dashed connector lines — desktop only, one per card */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
-        <span className="absolute left-[22%] top-[14%] h-[14%] w-[10%] rounded-tl-[2rem] border-l border-t border-dashed border-[#ffcd80]/70 xl:left-[24%] xl:w-[11%]" />
-        <span className="absolute right-[22%] top-[10%] h-[20%] w-[10%] rounded-tr-[2rem] border-r border-t border-dashed border-[#ffcd80]/70 xl:right-[23%]" />
+        <span className="absolute left-[22%] top-[14%] h-[14%] w-[10%] rounded-tl-[2rem] border-l border-t border-dashed border-brand-soft/70 xl:left-[24%] xl:w-[11%]" />
+        <span className="absolute right-[22%] top-[10%] h-[20%] w-[10%] rounded-tr-[2rem] border-r border-t border-dashed border-brand-soft/70 xl:right-[23%]" />
       </div>
 
       {/* Detached oval shadows are rendered inside each device wrapper so they stay visible above the warm background. */}

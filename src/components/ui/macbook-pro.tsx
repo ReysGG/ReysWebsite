@@ -67,7 +67,7 @@ export function MacbookPro({
       />
 
       <path
-        fill="#ff8a00"
+        fill="#1E6BFF"
         d="M325.11,25.14c-1.99.03-1.99-3.09,0-3.06,1.99-.03,1.99,3.09,0,3.06Z"
       />
 

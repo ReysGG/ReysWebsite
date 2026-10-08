@@ -119,3 +119,35 @@ Atau sudah ada di `.gitattributes`:
 docker-entrypoint.sh text eol=lf
 ```
 
+
+## 8. AI Studio (LLM writer, chatbot, jadwal otomatis)
+
+Menu **Admin → AI Studio** (hanya admin). Wajib isi di `.env.docker`:
+
+| Env | Keterangan |
+|---|---|
+| `AI_ENCRYPTION_KEY` | Enkripsi API key provider di database. `openssl rand -base64 32`. **Jangan diganti** setelah provider disimpan. |
+| `CRON_SECRET` | Proteksi `/api/cron/ai-tick`. `openssl rand -hex 32`. |
+| `UNSPLASH_ACCESS_KEY` / `PEXELS_API_KEY` | Opsional, untuk foto stock artikel. |
+
+Service `cron` di `docker-compose.yml` memanggil `/api/cron/ai-tick` tiap 5 menit untuk:
+1. Mempublish draft yang `scheduledAt`-nya sudah lewat.
+2. Menjalankan jadwal auto-artikel yang jatuh tempo.
+
+Jalankan dengan `docker compose --env-file .env.docker up -d` (service `cron` ikut naik). Cek log:
+
+```bash
+docker compose --env-file .env.docker logs -f cron
+```
+
+Alternatif tanpa sidecar (crontab host VPS):
+
+```bash
+*/5 * * * * curl -fsS -m 60 -H "Authorization: Bearer <CRON_SECRET>" https://buildwithreys.com/api/cron/ai-tick > /dev/null
+```
+
+Test manual:
+
+```bash
+curl -i -H "Authorization: Bearer $CRON_SECRET" http://localhost:3000/api/cron/ai-tick
+```

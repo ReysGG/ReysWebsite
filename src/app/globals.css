@@ -33,6 +33,14 @@
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
 
+  /* Brand palette (Buildwithreys logo) */
+  --color-brand: #1e6bff;
+  --color-brand-cyan: #2ec5ff;
+  --color-brand-deep: #0b3fd9;
+  --color-brand-soft: #a9d4ff;
+  --color-brand-tint: #eaf4ff;
+  --color-brand-navy: #0b1a4a;
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -78,7 +86,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 32.5 100% 50%; /* Orange #ff8a00 */
+    --primary: 219.5 100% 55.9%; /* Brand blue #1E6BFF */
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -95,7 +103,7 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 262.1 83.3% 57.8%;
+    --ring: 219.5 100% 55.9%;
 
     --radius: 0.5rem;
   }
@@ -110,8 +118,8 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 262.1 83.3% 57.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 219.5 100% 55.9%;
+    --primary-foreground: 210 40% 98%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -127,7 +135,7 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 262.1 83.3% 57.8%;
+    --ring: 219.5 100% 55.9%;
   }
 }
 

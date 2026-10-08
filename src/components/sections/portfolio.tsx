@@ -80,7 +80,7 @@ function PortfolioCard({
   actionLabel: string;
 }) {
   const card = (
-    <article className="group flex h-full flex-col rounded-lg border border-slate-200 bg-white p-6 transition-colors duration-300 hover:border-[#ffcd80]">
+    <article className="group flex h-full flex-col rounded-lg border border-slate-200 bg-white p-6 transition-colors duration-300 hover:border-brand-soft">
       <div className="relative mb-7 aspect-video overflow-hidden rounded-lg border border-slate-200 bg-slate-100">
         <Image
           src={project.src}
@@ -92,7 +92,7 @@ function PortfolioCard({
       </div>
 
       <div className="mb-4 flex flex-wrap gap-2">
-        <span className="rounded-md bg-[#fffcc9] px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
+        <span className="rounded-md bg-brand-tint px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-brand">
           {project.category}
         </span>
         {project.tags.slice(0, 2).map((tag) => (
@@ -105,7 +105,7 @@ function PortfolioCard({
       <h3 className="text-xl font-bold leading-snug text-slate-950">{project.title}</h3>
       <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-600">{project.description}</p>
 
-      <span className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-[#ff8a00] transition-colors duration-200 group-hover:text-slate-950">
+      <span className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-brand transition-colors duration-200 group-hover:text-slate-950">
         {actionLabel}
         <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
       </span>
@@ -135,7 +135,7 @@ function SolutionExampleCard({ example, fallback }: { example: SolutionsConfig["
       href="#cta"
       cta="Bahas scope"
       className={[
-        "border border-slate-200 bg-white text-slate-950 [&_svg]:text-[#ff8a00] [&_h3]:font-bold [&_h3]:text-slate-950 [&_p]:text-slate-600 [&_a]:text-[#ff8a00]",
+        "border border-slate-200 bg-white text-slate-950 [&_svg]:text-brand [&_h3]:font-bold [&_h3]:text-slate-950 [&_p]:text-slate-600 [&_a]:text-brand",
         fallback.className,
       ].join(" ")}
       background={
@@ -166,7 +166,7 @@ export const PortfolioSection = ({ intro, projects, solutions }: PortfolioSectio
       <section id="portfolio" className="w-full bg-[#f7f9fb] py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6 md:px-12">
           <div className="mb-12 max-w-3xl">
-            <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
+            <p className="mb-4 text-xs font-bold uppercase tracking-wider text-brand">
               {solutionContent.eyebrow}
             </p>
             <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -194,7 +194,7 @@ export const PortfolioSection = ({ intro, projects, solutions }: PortfolioSectio
     <section id="portfolio" className="w-full bg-[#f7f9fb] py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mb-12 max-w-3xl">
-          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
+          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-brand">
             {intro.eyebrow}
           </p>
           <h2 className="text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
@@ -212,8 +212,8 @@ export const PortfolioSection = ({ intro, projects, solutions }: PortfolioSectio
               type="button"
               className={
                 index === 0
-                  ? "rounded-md border border-[#ff8a00] bg-[#ff8a00] px-5 py-2.5 text-sm font-bold text-white"
-                  : "rounded-md border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-600 transition-colors duration-200 hover:border-[#ffcd80] hover:text-[#ff8a00]"
+                  ? "rounded-md border border-brand bg-brand px-5 py-2.5 text-sm font-bold text-white"
+                  : "rounded-md border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-600 transition-colors duration-200 hover:border-brand-soft hover:text-brand"
               }
             >
               {filter}

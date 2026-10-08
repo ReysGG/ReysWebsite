@@ -18,13 +18,13 @@ export const WorkflowSection = ({ content }: { content: WorkflowContent }) => {
           transition={{ duration: 0.7 }}
           className="mb-12 max-w-3xl"
         >
-          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[#ff8a00]">
+          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-brand">
             {content.eyebrow}
           </p>
           <h2 className="max-w-4xl text-3xl font-bold leading-tight text-slate-950 md:text-5xl">
             {content.headingPrefix}{" "}
-            <span className="text-[#ff8a00]">
-              <FlipWords words={content.rotatingWords} className="px-0 font-bold text-[#ff8a00]" />
+            <span className="text-brand">
+              <FlipWords words={content.rotatingWords} className="px-0 font-bold text-brand" />
             </span>
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg">

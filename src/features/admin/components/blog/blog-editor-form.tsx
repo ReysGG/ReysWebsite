@@ -26,6 +26,8 @@ type BlogEditorData = {
   published: boolean;
   featured: boolean;
   publishedAt: Date | null;
+  scheduledAt: Date | null;
+  aiGenerated: boolean;
   metaTitle: string | null;
   metaDesc: string | null;
   tags: string[];
@@ -47,14 +49,14 @@ export function BlogEditorForm({ initialData }: { initialData?: BlogEditorData }
             name="title"
             defaultValue={initialData?.title || ""}
             placeholder="Judul artikel..."
-            className="w-full border-0 bg-transparent text-4xl tracking-tight leading-[1.1] font-bold text-neutral-900 placeholder:text-neutral-300 outline-none leading-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff8a00]/40 focus-visible:border-[#ffcd80]"
+            className="w-full border-0 bg-transparent text-4xl tracking-tight leading-[1.1] font-bold text-neutral-900 placeholder:text-neutral-300 outline-none leading-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:border-brand-soft"
           />
           <textarea
             name="excerpt"
             defaultValue={initialData?.excerpt || ""}
             rows={2}
             placeholder="Tulis ringkasan singkat artikel..."
-            className="mt-4 w-full resize-none border-0 bg-transparent text-base italic text-neutral-500 placeholder:text-neutral-300 outline-none leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff8a00]/40 focus-visible:border-[#ffcd80]"
+            className="mt-4 w-full resize-none border-0 bg-transparent text-base italic text-neutral-500 placeholder:text-neutral-300 outline-none leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:border-brand-soft"
           />
           <div className="mt-3 border-t border-neutral-100 pt-3">
             <BlogSlugField defaultTitle={initialData?.title} defaultSlug={initialData?.slug} />
@@ -73,6 +75,8 @@ export function BlogEditorForm({ initialData }: { initialData?: BlogEditorData }
           published={initialData?.published}
           featured={initialData?.featured}
           publishedAt={initialData?.publishedAt}
+          scheduledAt={initialData?.scheduledAt}
+          aiGenerated={initialData?.aiGenerated}
           pending={pending}
           isEdit={Boolean(initialData)}
           slug={initialData?.slug}
@@ -80,7 +84,7 @@ export function BlogEditorForm({ initialData }: { initialData?: BlogEditorData }
 
         <section className="rounded-xl border border-neutral-200 bg-white p-5 space-y-4">
           <div className="flex items-center gap-2">
-            <Settings2 size={14} className="text-[#ff8a00]" />
+            <Settings2 size={14} className="text-brand" />
             <h2 className="text-sm font-semibold text-neutral-900">Media & Detail</h2>
           </div>
           <BlogCoverImageField defaultValue={initialData?.coverImage} defaultOgImage={initialData?.ogImage} />
@@ -91,7 +95,7 @@ export function BlogEditorForm({ initialData }: { initialData?: BlogEditorData }
               defaultValue={initialData?.category || ""}
               list="blog-category-options"
               placeholder="Pilih atau tulis kategori"
-              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-[#ff8a00] transition-colors"
+              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-brand transition-colors"
             />
             <datalist id="blog-category-options">
               <option value="Web Development" />
@@ -111,7 +115,7 @@ export function BlogEditorForm({ initialData }: { initialData?: BlogEditorData }
             <input
               name="author"
               defaultValue={initialData?.author || "Admin"}
-              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-[#ff8a00] transition-colors"
+              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-brand transition-colors"
             />
           </label>
           <BlogTagsField defaultValue={initialData?.tags || []} />

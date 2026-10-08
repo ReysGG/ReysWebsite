@@ -104,7 +104,7 @@ export const Footer = async ({ settings }: FooterProps) => {
               <Image
                 src="/BWR.png"
                 alt="Build With Reys"
-                width={140}
+                width={143}
                 height={38}
                 className="h-10 w-auto brightness-0 invert"
               />
@@ -118,7 +118,7 @@ export const Footer = async ({ settings }: FooterProps) => {
                     key={link.label}
                     href={link.href}
                     ariaLabel={link.label}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-800 text-neutral-400 transition-colors hover:border-[#ffcd80] hover:text-[#ffcd80]"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-800 text-neutral-400 transition-colors hover:border-brand-soft hover:text-brand-soft"
                   >
                     {link.icon}
                   </SmartFooterLink>
@@ -130,16 +130,16 @@ export const Footer = async ({ settings }: FooterProps) => {
           <div className="flex flex-col">
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-white">Layanan</h3>
             <div className="flex flex-col gap-3 text-sm text-neutral-400">
-              <Link href="/#services" className="transition-colors hover:text-[#ffcd80]">
+              <Link href="/#services" className="transition-colors hover:text-brand-soft">
                 Company Profile
               </Link>
-              <Link href="/#services" className="transition-colors hover:text-[#ffcd80]">
+              <Link href="/#services" className="transition-colors hover:text-brand-soft">
                 Web Application
               </Link>
-              <Link href="/#services" className="transition-colors hover:text-[#ffcd80]">
+              <Link href="/#services" className="transition-colors hover:text-brand-soft">
                 Sistem E-Commerce
               </Link>
-              <Link href="/#services" className="transition-colors hover:text-[#ffcd80]">
+              <Link href="/#services" className="transition-colors hover:text-brand-soft">
                 SEO &amp; Performa
               </Link>
             </div>
@@ -148,16 +148,16 @@ export const Footer = async ({ settings }: FooterProps) => {
           <div className="flex flex-col">
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-white">Perusahaan</h3>
             <div className="flex flex-col gap-3 text-sm text-neutral-400">
-              <Link href="/#workflow" className="transition-colors hover:text-[#ffcd80]">
+              <Link href="/#workflow" className="transition-colors hover:text-brand-soft">
                 Tentang Kami
               </Link>
-              <Link href="/#portfolio" className="transition-colors hover:text-[#ffcd80]">
+              <Link href="/#portfolio" className="transition-colors hover:text-brand-soft">
                 Portofolio Kerja
               </Link>
-              <Link href="/#testimonials" className="transition-colors hover:text-[#ffcd80]">
+              <Link href="/#testimonials" className="transition-colors hover:text-brand-soft">
                 Testimonial Klien
               </Link>
-              <Link href="/#cta" className="transition-colors hover:text-[#ffcd80]">
+              <Link href="/#cta" className="transition-colors hover:text-brand-soft">
                 Hubungi Kami
               </Link>
             </div>
@@ -166,10 +166,10 @@ export const Footer = async ({ settings }: FooterProps) => {
           <div className="flex flex-col">
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-white">Legal</h3>
             <div className="flex flex-col gap-3 text-sm text-neutral-400">
-              <Link href="/#faq" className="transition-colors hover:text-[#ffcd80]">
+              <Link href="/#faq" className="transition-colors hover:text-brand-soft">
                 Syarat &amp; Ketentuan
               </Link>
-              <Link href="/#faq" className="transition-colors hover:text-[#ffcd80]">
+              <Link href="/#faq" className="transition-colors hover:text-brand-soft">
                 Kebijakan Privasi
               </Link>
             </div>
@@ -183,14 +183,14 @@ export const Footer = async ({ settings }: FooterProps) => {
           <div className="flex gap-6">
             <SmartFooterLink
               href={resolvedSettings.whatsapp || "/#cta"}
-              className="transition-colors hover:text-[#ffcd80]"
+              className="transition-colors hover:text-brand-soft"
             >
               WhatsApp
             </SmartFooterLink>
-            <SmartFooterLink href={emailHref || "/#cta"} className="transition-colors hover:text-[#ffcd80]">
+            <SmartFooterLink href={emailHref || "/#cta"} className="transition-colors hover:text-brand-soft">
               Email
             </SmartFooterLink>
-            <Link href="/blog" className="transition-colors hover:text-[#ffcd80]">
+            <Link href="/blog" className="transition-colors hover:text-brand-soft">
               Blog
             </Link>
           </div>

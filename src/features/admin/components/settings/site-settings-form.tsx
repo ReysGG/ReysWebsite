@@ -4,7 +4,7 @@ import { SubmitButton } from "@/features/admin/components/ui/submit-button";
 import type { SiteSettings } from "@/lib/site-settings";
 
 export function SiteSettingsForm({ settings }: { settings: SiteSettings }) {
-  const inputClass = "w-full rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]";
+  const inputClass = "w-full rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand-tint";
   const labelClass = "text-xs font-semibold uppercase tracking-widest text-neutral-500";
 
   return (
@@ -53,7 +53,7 @@ export function SiteSettingsForm({ settings }: { settings: SiteSettings }) {
         </div>
       </div>
 
-      <p className="mt-4 rounded-md border border-[#ffcd80] bg-[#fffcc9] px-3 py-2 text-xs font-medium leading-relaxed text-neutral-700">
+      <p className="mt-4 rounded-md border border-brand-soft bg-brand-tint px-3 py-2 text-xs font-medium leading-relaxed text-neutral-700">
         Untuk social media, boleh isi username saja. Contoh: <span className="font-bold">@buildwithreys</span> akan otomatis dibuat menjadi link sesuai platform.
       </p>
 
@@ -61,7 +61,7 @@ export function SiteSettingsForm({ settings }: { settings: SiteSettings }) {
         <SubmitButton
           idleIcon={<Save className="h-4 w-4" />}
           pendingLabel="Menyimpan..."
-          className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80] disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100"
+          className="inline-flex items-center gap-2 rounded-md bg-brand px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-deep active:bg-brand-deep active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100"
         >
           Simpan Settings
         </SubmitButton>

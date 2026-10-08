@@ -30,6 +30,8 @@ export async function getBlogPostForEdit(slug: string) {
       published: true,
       featured: true,
       publishedAt: true,
+      scheduledAt: true,
+      aiGenerated: true,
       metaTitle: true,
       metaDesc: true,
       tags: true,

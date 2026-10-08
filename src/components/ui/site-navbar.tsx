@@ -34,7 +34,7 @@ const signUpClass =
   "inline-flex h-9 items-center justify-center rounded-md bg-neutral-950 px-4 text-xs font-semibold text-white transition-colors hover:bg-neutral-800";
 
 const dashboardClass =
-  "inline-flex h-9 items-center justify-center rounded-md border border-[#ffcd80] bg-[#fffcc9] px-4 text-xs font-semibold text-[#ff8a00] transition-colors hover:bg-[#ffcd80]/60";
+  "inline-flex h-9 items-center justify-center rounded-md border border-brand-soft bg-brand-tint px-4 text-xs font-semibold text-brand transition-colors hover:bg-brand-soft/60";
 
 function AuthControls({
   isMobile = false,
@@ -122,7 +122,7 @@ export const SiteNavbar = () => {
             <Image
               src="/BWR.png"
               alt="Build With Reys"
-              width={132}
+              width={135}
               height={36}
               priority
               className="h-9 w-auto transition-transform group-hover:scale-105"
@@ -136,7 +136,7 @@ export const SiteNavbar = () => {
             <NavbarButton
               href="/#cta"
               variant="dark"
-              className="bg-[#ff8a00] hover:bg-[#f4b738] text-white font-semibold border-0 text-xs px-5 py-2 rounded-md transition-all"
+              className="bg-brand hover:bg-brand-deep text-white font-semibold border-0 text-xs px-5 py-2 rounded-md transition-all"
             >
               Konsultasi
             </NavbarButton>
@@ -150,7 +150,7 @@ export const SiteNavbar = () => {
               <Image
                 src="/BWR.png"
                 alt="Build With Reys"
-                width={112}
+                width={117}
                 height={31}
                 priority
                 className="h-8 w-auto"
@@ -178,7 +178,7 @@ export const SiteNavbar = () => {
               <NavbarButton
                 href="/#cta"
                 variant="dark"
-                className="w-full text-center bg-[#ff8a00] text-white hover:bg-[#f4b738] font-semibold border-0 rounded-md"
+                className="w-full text-center bg-brand text-white hover:bg-brand-deep font-semibold border-0 rounded-md"
                 onClick={closeMenu}
               >
                 Konsultasi

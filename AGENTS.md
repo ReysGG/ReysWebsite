@@ -34,15 +34,23 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ### Brand color rules
 
-- Jangan gunakan warna biru atau indigo untuk UI brand, background dekoratif, gradient, border aksen, icon aksen, CTA, badge, dan highlight.
-- Jika menemukan warna biru atau indigo di UI, ganti dengan palet berikut sesuai kebutuhan kontras dan hierarki visual:
-  - `#ffffff` / `rgb(255, 255, 255)`
-  - `#fffcc9` / `rgb(255, 252, 201)`
-  - `#ffcd80` / `rgb(255, 205, 128)`
-  - `#f4b738` / `rgb(244, 183, 56)`
-  - `#ff8a00` / `rgb(255, 138, 0)`
-- Untuk gradient, gunakan kombinasi warna putih, krem, kuning, dan oranye dari palet ini; jangan gunakan `blue-*`, `indigo-*`, atau hex/rgb bernuansa biru/indigo.
-- Warna netral seperti hitam, abu-abu, slate, zinc, dan transparent tetap boleh dipakai untuk teks, shadow, border netral, dan layout selama bukan aksen brand.
+Brand mengikuti logo Buildwithreys (biru). Palet resmi sudah didefinisikan sebagai token Tailwind di `src/app/globals.css` (`@theme`):
+
+| Token class | Hex | Kegunaan |
+|---|---|---|
+| `brand` | `#1E6BFF` | Warna utama: CTA, link, highlight, icon aksen, ring/focus |
+| `brand-deep` | `#0B3FD9` | Hover/pressed, teks aksen kecil yang butuh kontras lebih |
+| `brand-cyan` | `#2EC5FF` | Pasangan gradient (`from-brand-cyan to-brand`), aksen sekunder |
+| `brand-soft` | `#A9D4FF` | Border aksen, ring lembut, divider dekoratif |
+| `brand-tint` | `#EAF4FF` | Background lembut, badge, card highlight |
+| `brand-navy` | `#0B1A4A` | Heading/teks brand gelap (seperti "Buildwith" di logo) |
+
+- Gunakan token class (`bg-brand`, `text-brand-deep`, `border-brand-soft`, `from-brand-cyan`, dst.), jangan hardcode hex di className (`bg-[#1E6BFF]`). Hex literal hanya boleh di tempat yang tidak bisa memakai class (inline style, SVG, chart, OG image, manifest).
+- Jangan gunakan warna oranye/kuning/krem lama (`#ff8a00`, `#f4b738`, `#ffcd80`, `#fffcc9`) maupun `orange-*`/`yellow-*` sebagai aksen brand.
+- Gradient brand: kombinasi putih, `brand-tint`, `brand-soft`, `brand-cyan`, `brand`, `brand-deep`.
+- Teks kecil di atas putih pakai `text-brand` atau `text-brand-deep`; teks di atas `bg-brand` pakai putih.
+- Warna semantik tetap boleh: `amber-*` untuk warning/draft, `emerald-*` untuk sukses, `red-*` untuk error, rating bintang `amber-400`.
+- Warna netral seperti hitam, abu-abu, slate, zinc, dan transparent tetap boleh dipakai untuk teks, shadow, border netral, dan layout.
 
 ## Deployment Safety Rules
 

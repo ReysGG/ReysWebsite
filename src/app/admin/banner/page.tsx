@@ -22,16 +22,16 @@ function formatRange(startAt: string, endAt: string) {
 export default async function AdminBannerPage() {
   const banner = await getPromoBanner();
   const live = isBannerInSchedule(banner);
-  const inputClass = "w-full rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-[#ff8a00] focus:bg-white focus:ring-2 focus:ring-[#fffcc9]";
+  const inputClass = "w-full rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-900 outline-none transition-colors focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand-tint";
   const labelClass = "text-xs font-semibold uppercase tracking-widest text-neutral-500";
-  const previewClass = banner.variant === "amber" ? "bg-[#f4b738] text-neutral-900" : banner.variant === "emerald" ? "bg-[#fffcc9] text-neutral-900" : banner.variant === "neutral" ? "bg-neutral-900 text-white" : "bg-[#ff8a00] text-white";
+  const previewClass = banner.variant === "amber" ? "bg-brand-cyan text-neutral-900" : banner.variant === "emerald" ? "bg-brand-tint text-neutral-900" : banner.variant === "neutral" ? "bg-neutral-900 text-white" : "bg-brand text-white";
 
   return (
     <div className="space-y-6">
-      <div className="relative overflow-hidden rounded-md border border-[#ffcd80] bg-gradient-to-br from-white via-[#fffcc9]/60 to-white p-6 shadow-none">
+      <div className="relative overflow-hidden rounded-md border border-brand-soft bg-gradient-to-br from-white via-brand-tint/60 to-white p-6 shadow-none">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#ff8a00]">Marketing</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-brand">Marketing</p>
             <h1 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900">Promo Banner</h1>
             <p className="mt-1 max-w-2xl text-sm text-neutral-500">Kelola pengumuman di atas navbar public website: status, konten, warna, CTA, dan jadwal tampil.</p>
           </div>
@@ -51,7 +51,7 @@ export default async function AdminBannerPage() {
               </div>
               <label className="flex cursor-pointer items-center gap-3 rounded-md border border-neutral-200 bg-white px-4 py-3">
                 <input id="enabled" name="enabled" type="checkbox" defaultChecked={banner.enabled} className="peer sr-only" />
-                <span className="relative h-6 w-11 rounded-full bg-neutral-300 transition-colors peer-checked:bg-[#ff8a00] after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-transform peer-checked:after:translate-x-5" />
+                <span className="relative h-6 w-11 rounded-full bg-neutral-300 transition-colors peer-checked:bg-brand after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-transform peer-checked:after:translate-x-5" />
                 <span className="text-sm font-semibold text-neutral-800">Tampilkan banner</span>
               </label>
             </div>
@@ -77,15 +77,15 @@ export default async function AdminBannerPage() {
             <div className="space-y-1.5"><label className={labelClass} htmlFor="schedulePreset">Preset Jadwal</label><select id="schedulePreset" name="schedulePreset" defaultValue="custom" className={inputClass}><option value="custom">Custom tanggal</option><option value="always">Tampil terus</option><option value="today">Hari ini</option><option value="7days">7 hari dari sekarang</option><option value="month">1 bulan dari sekarang</option></select></div>
           </section>
 
-          <section className="space-y-4 rounded-md border border-[#ffcd80] bg-[#fffcc9]/40 p-4">
-            <div className="flex items-center gap-2"><Calendar className="h-4 w-4 text-[#ff8a00]" /><h2 className="text-sm font-semibold text-neutral-900">Jadwal Tampil</h2><span className="ml-auto text-xs text-neutral-500">Dipakai jika preset Custom</span></div>
+          <section className="space-y-4 rounded-md border border-brand-soft bg-brand-tint/40 p-4">
+            <div className="flex items-center gap-2"><Calendar className="h-4 w-4 text-brand" /><h2 className="text-sm font-semibold text-neutral-900">Jadwal Tampil</h2><span className="ml-auto text-xs text-neutral-500">Dipakai jika preset Custom</span></div>
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-1.5"><label className={labelClass} htmlFor="startAt">Mulai Tampil</label><input id="startAt" name="startAt" type="datetime-local" defaultValue={toLocalInputValue(banner.startAt)} className={inputClass} /></div>
               <div className="space-y-1.5"><label className={labelClass} htmlFor="endAt">Berakhir</label><input id="endAt" name="endAt" type="datetime-local" defaultValue={toLocalInputValue(banner.endAt)} className={inputClass} /></div>
             </div>
           </section>
 
-          <div className="flex justify-end border-t border-neutral-100 pt-5"><SubmitButton idleIcon={<Save className="h-4 w-4" />} pendingLabel="Menyimpan..." className="inline-flex items-center gap-2 rounded-md bg-[#ff8a00] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80] disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100">Simpan Banner</SubmitButton></div>
+          <div className="flex justify-end border-t border-neutral-100 pt-5"><SubmitButton idleIcon={<Save className="h-4 w-4" />} pendingLabel="Menyimpan..." className="inline-flex items-center gap-2 rounded-md bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-deep active:bg-brand-deep active:scale-[0.98] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100">Simpan Banner</SubmitButton></div>
         </form>
 
         <aside className="space-y-6 xl:sticky xl:top-24 xl:self-start">
@@ -96,7 +96,7 @@ export default async function AdminBannerPage() {
             </div>
           </div>
           <div className="rounded-md border border-neutral-200 bg-white p-5 shadow-none">
-            <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-neutral-900"><Megaphone className="h-4 w-4 text-[#ff8a00]" />Summary</div>
+            <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-neutral-900"><Megaphone className="h-4 w-4 text-brand" />Summary</div>
             <dl className="space-y-3 text-sm"><div className="flex justify-between gap-4"><dt className="text-neutral-500">Status</dt><dd className="font-semibold text-neutral-900">{live ? "Live" : banner.enabled ? "Scheduled" : "Disabled"}</dd></div><div className="flex justify-between gap-4"><dt className="text-neutral-500">Jadwal</dt><dd className="max-w-[190px] text-right font-medium text-neutral-700">{formatRange(banner.startAt, banner.endAt)}</dd></div><div className="flex justify-between gap-4"><dt className="text-neutral-500">CTA</dt><dd className="font-semibold text-neutral-900">{banner.ctaLabel && banner.ctaHref ? "Ada" : "Tidak ada"}</dd></div><div className="flex justify-between gap-4"><dt className="text-neutral-500">Versi</dt><dd className="font-mono text-xs text-neutral-600">{banner.version}</dd></div></dl>
           </div>
         </aside>

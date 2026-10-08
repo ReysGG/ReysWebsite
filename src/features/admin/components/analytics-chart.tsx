@@ -25,7 +25,7 @@ export type ChartDataPoint = {
 const chartConfig = {
   views: {
     label: "Views",
-    color: "#ff8a00",
+    color: "#1E6BFF",
   },
 } satisfies ChartConfig;
 
@@ -47,7 +47,7 @@ export function AnalyticsChart({ data, label }: { data: ChartDataPoint[]; label?
       <CardContent className="flex-1 mt-2">
         {data.length === 0 || totalViews === 0 ? (
           <div className="flex h-[260px] flex-col items-center justify-center gap-3 text-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#fffcc9] text-[#ff8a00]">
+            <div className="flex h-12 w-12 items-center justify-center rounded-md bg-brand-tint text-brand">
               <TrendingUp className="h-5 w-5" />
             </div>
             <div>
@@ -56,7 +56,7 @@ export function AnalyticsChart({ data, label }: { data: ChartDataPoint[]; label?
             </div>
             <Link
               href="/admin/blog/create"
-              className="inline-flex items-center gap-1.5 rounded-md bg-[#ff8a00] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#f4b738] active:bg-[#e07a00] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffcd80]"
+              className="inline-flex items-center gap-1.5 rounded-md bg-brand px-3 py-2 text-xs font-semibold text-white transition hover:bg-brand-deep active:bg-brand-deep active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-soft"
             >
               Tulis artikel pertama
             </Link>
@@ -83,7 +83,7 @@ export function AnalyticsChart({ data, label }: { data: ChartDataPoint[]; label?
                 tick={{ fontSize: 11, fill: "#a3a3a3" }}
               />
               <ChartTooltip
-                cursor={{ stroke: "#ff8a00", strokeWidth: 1, strokeDasharray: "4 4" }}
+                cursor={{ stroke: "#1E6BFF", strokeWidth: 1, strokeDasharray: "4 4" }}
                 content={
                   <ChartTooltipContent
                     indicator="dot"
@@ -93,17 +93,17 @@ export function AnalyticsChart({ data, label }: { data: ChartDataPoint[]; label?
               />
               <defs>
                 <linearGradient id="fillViews" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#ff8a00" stopOpacity={0.18} />
-                  <stop offset="95%" stopColor="#ff8a00" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#1E6BFF" stopOpacity={0.18} />
+                  <stop offset="95%" stopColor="#1E6BFF" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <Area
                 dataKey="views"
                 type="monotone"
                 fill="url(#fillViews)"
-                stroke="#ff8a00"
+                stroke="#1E6BFF"
                 strokeWidth={2.5}
-                activeDot={{ r: 5, strokeWidth: 0, fill: "#ff8a00" }}
+                activeDot={{ r: 5, strokeWidth: 0, fill: "#1E6BFF" }}
               />
             </AreaChart>
           </ChartContainer>

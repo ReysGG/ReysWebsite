@@ -38,29 +38,34 @@ model Testimonial {
 }
 
 model Post {
-  id           String    @id @default(cuid())
-  title        String
-  slug         String    @unique
-  content      String
-  excerpt      String?
-  coverImage   String?
-  ogImage      String?
-  author       String?
-  category     String?
-  focusKeyword String?
-  canonicalUrl String?
-  published    Boolean   @default(false)
-  featured     Boolean   @default(false)
-  publishedAt  DateTime?
-  metaTitle    String?
-  metaDesc     String?
-  tags         String[]
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  views        Int       @default(0)
-  readingTime  Int       @default(1)
-  comments     Comment[]
-  likes        Like[]
+  id               String    @id @default(cuid())
+  title            String
+  slug             String    @unique
+  content          String
+  excerpt          String?
+  coverImage       String?
+  ogImage          String?
+  author           String?
+  category         String?
+  focusKeyword     String?
+  canonicalUrl     String?
+  published        Boolean   @default(false)
+  featured         Boolean   @default(false)
+  publishedAt      DateTime?
+  metaTitle        String?
+  metaDesc         String?
+  tags             String[]
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  views            Int       @default(0)
+  readingTime      Int       @default(1)
+  scheduledAt      DateTime?
+  aiGenerated      Boolean   @default(false)
+  coverImageCredit String?
+  comments         Comment[]
+  likes            Like[]
+
+  @@index([published, scheduledAt])
 }
 
 model Comment {
@@ -119,4 +124,97 @@ model SiteConfig {
   value     Json
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+}
+
+enum AiProviderType {
+  OPENAI
+  ANTHROPIC
+  GOOGLE
+  OPENROUTER
+  OPENAI_COMPATIBLE
+}
+
+model AiProvider {
+  id           String         @id @default(cuid())
+  name         String
+  type         AiProviderType
+  baseUrl      String?
+  apiKeyEnc    String
+  models       String[]
+  defaultModel String
+  imageModel   String?
+  priority     Int            @default(0)
+  enabled      Boolean        @default(true)
+  lastError    String?
+  lastErrorAt  DateTime?
+  lastUsedAt   DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([enabled, priority])
+}
+
+enum AiScheduleMode {
+  DRAFT
+  PUBLISH
+  SCHEDULE
+}
+
+model AiSchedule {
+  id                String         @id @default(cuid())
+  name              String
+  cron              String
+  timezone          String         @default("Asia/Jakarta")
+  topics            String[]
+  category          String?
+  instructions      String?
+  mode              AiScheduleMode @default(DRAFT)
+  publishDelayHours Int            @default(0)
+  enabled           Boolean        @default(true)
+  nextRunAt         DateTime?
+  lastRunAt         DateTime?
+  runs              AiRun[]
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  @@index([enabled, nextRunAt])
+}
+
+enum AiRunStatus {
+  RUNNING
+  SUCCESS
+  FAILED
+}
+
+model AiRun {
+  id           String      @id @default(cuid())
+  trigger      String
+  topic        String?
+  scheduleId   String?
+  schedule     AiSchedule? @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
+  status       AiRunStatus @default(RUNNING)
+  postId       String?
+  providerName String?
+  model        String?
+  steps        Json?
+  summary      String?
+  inputTokens  Int         @default(0)
+  outputTokens Int         @default(0)
+  error        String?
+  createdAt    DateTime    @default(now())
+  finishedAt   DateTime?
+
+  @@index([createdAt])
+  @@index([scheduleId])
+}
+
+model AiChatSession {
+  id        String   @id @default(cuid())
+  title     String
+  adminId   String
+  messages  Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([adminId, updatedAt])
 }
